@@ -11,8 +11,10 @@ const uuidv4 = require('uuid').v4
 const bodyParser = require('body-parser');
 //-----------Server-----------------------//
 
-;
-const server = app.listen(80, () => {
+const port = process.env.PORT || 3000;
+
+
+const server = app.listen(port, "0.0.0.0", () => {
   console.log(`Server is up`)
 });
 socketService.initSocket(server)
