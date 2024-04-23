@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>RbxPro - Earn Your Robux Today!</title>
+    <meta name="description" content="Visit RbxPro and earn your free robux now! Earn robux from completing simple tasks and joining our frequent giveaways! What're you waiting for?">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#17b823">
+    <meta name="author" content="RbxPro">
+    <meta name="keywords" content="free robux,robux,roblox,free roblox">
+    <meta property="og:site_name" content="RbxPro">
+    <meta property="og:url" content="https://rbx.pro/">
+    <meta property="og:image" content="https://media.discordapp.net/attachments/977174147950059541/1197191747156058192/image-removebg-preview2011.png?ex=65ba5eb3&is=65a7e9b3&hm=4afd7aeb0c79c2548754c94586e36bb837a098db89cd750ca164041e56a80093&=&format=webp&quality=lossless">
+    <meta property="og:title" content="RbxPro - Earn Your Robux With Ease!">
+    <meta property="og:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
+    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
+    <link href="./css/main.css" rel="stylesheet" />
+    <link href="./css/bulma.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> <!-- Don't mind this -->
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        footer {
+            background-color: #066ee7;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .footer-nav li a {
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .rbxpro-disclaimer {
+            color: #fff;
+        }
+
+        .logo {
+            margin-left: -50px;
+            font-weight: 700;
+            font-size: 42px;
+            color: #fff;
+        }
+
+        .navbar-item {
+            padding: 0.5rem 1rem; 
+        }
+
+        .navbar-burger {
+            margin-right: 1rem; /* Adjust the margin for the burger icon */
+        }
+
+        .navbar-menu {
+            flex-grow: 1; 
+        }
+
+        .navbar-end {
+            justify-content: flex-end; 
+        }
+
+        .navbar-item.has-addons .button {
+            margin-right: 0.5rem; 
+        }
+
+        button,
+        input[type="text"] {
+            border: none;
+            outline: none;
+        }
+
+        button { /* the "enter" button of the login form */
+            cursor: pointer;
+            background-color: #0288d1;
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #025b9a;
+        }
+
+        .modal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            position: fixed;
+            overflow: auto;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #FFF;
+        }
+
+        .modal-content {
+            min-width: 300px;
+            background-color: #eef5f9;
+            color: #FFF;
+            margin: 10px;
+            border-radius: 10px;
+            padding: 25px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            color: #4a4a4a;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0288d1;
+        }
+
+        .modal-content .description {
+            text-align: center;
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+
+        .modal-content .input-container {
+            margin-bottom: 20px;
+        }
+
+        .modal-content .input-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4a4a4a;
+        }
+
+        .modal-content input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+
+        .modal-content input[type="text"]:focus {
+            border-color: #0288d1;
+            box-shadow: 0 0 3px #0288d1;
+        }
+
+        .modal-content .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .modal-content .actions button {
+            margin-left: 10px;
+            background-color: #0288d1;
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content .actions button:hover {
+            background-color: #025b9a;
+        }
+
+        .navbar-item.is-active {
+            color: #fff; 
+            background-color: #2182f0; 
+        }
+                /* Styled confirmation popup */
+                .confirmation-popup {
+            
+            display: none;
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #0288d1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .confirmation-popup img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .confirmation-popup .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #0288d1;
+        }
+
+        .confirmation-popup .actions button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .confirmation-popup #yesButton {
+            background-color: #4CAF50;
+            color: white;
+            border: 2px solid #1a731d;
+            margin: 0 10px;
+        }
+
+        .confirmation-popup #yesButton:hover {
+            background-color: #45a04983;
+            border: 2px solid rgba(69, 160, 73, 0.574);
+        }
+
+        .confirmation-popup #noButton {
+            background-color: #F44336;
+            color: white;
+            border: 2px solid #c0291f;
+            margin: 0 10px;
+        }
+
+        .confirmation-popup #noButton:hover {
+            background-color: #c51f1fa2;
+            border: 2px solid #a704047d;
+        }
+    </style>
+</head>
+
+<body aria-hidden="false" style="">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div class="logo">RBXPRO</div>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end is-centered">
+                    <a class="navbar-item navbar-s-item" href="#">
+                        Earn
+                    </a>
+                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
+                        Withdraw
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons has-addons">
+                            <a href="" style="background-color: #2182f0 !important;" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
+                                <strong>Login</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <footer>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="/earn">Earn</a></li>
+                <li><a href="/withdraw">Withdraw</a></li>
+            </ul>
+        </div>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
+        <div class="rbxpro-disclaimer">
+            <p>
+               RBXPRO | All Rights Reserved.
+            </p>
+            <p>               RbxPro is not affiliated, associated, or partnered with Roblox Corporation.
+            </p>
+            <p>© Copyright Rbx.Pro 2024</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="title">LOGIN TO RBXPRO!</div>
+            <div class="description">Please enter your ROBLOX Username to start earning Robux! <br>● We will NEVER ask for your password!</div>
+                <div class="input-container">
+                    <label for="username">ROBLOX Username</label>
+                    <input type="text" id="username" name="username" placeholder="ROBLOX Username">
+                </div>
+                <div class="actions">
+                    <button type="submit" id="enterButton">Enter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+            <!-- Confirmation Popup -->
+            <div class="confirmation-popup" id="confirmationPopup">
+                <img src="" id="profileImage" alt="Profile Picture">
+                <div class="title" id="confirmationTitle">Please confirm that this is you</div>
+                <div class="actions">
+                    <button id="yesButton">This is me !</button>
+                    <button id="noButton">This is not me !</button>
+                </div>
+            </div>
+    <div id="resultContainer"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        // Wait for the DOM to be fully loaded
+
+        // Get the enter button element
+        var enterButton = document.getElementById("enterButton");
+        var confirmationPopup = document.getElementById("confirmationPopup");
+        var loginPopup = document.getElementById("loginModal");
+        var profileImage = document.getElementById("profileImage");
+        var confirmationTitle = document.getElementById("confirmationTitle");
+
+        // Add a click event listener to the enter button
+        enterButton.addEventListener("click", function() {
+            // Get the input element for the username
+            var usernameInput = document.getElementById("username");
+
+            // Get the value entered by the user
+            var username = usernameInput.value;
+
+            // Print the username to the console log
+       
+            fetch('/api/user', {
+            method: 'POST',
+            headers: {
+                'Authorization': username
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                confirmationPopup.style.display = "block";
+                loginPopup.style.visibility = "hidden";
+
+            profileImage.src = data.avatarUrl; // Replace "NEW IMAGE LINK" with the actual image link
+            confirmationTitle.textContent = data.username; // Replace "NEW TITLE" with the desired title
+
+            // Add click event listeners to the yes and no buttons in the confirmation popup
+            var yesButton = document.getElementById("yesButton");
+            var noButton = document.getElementById("noButton");
+
+            yesButton.addEventListener("click", function() {
+                console.log("User confirmed: " + username);
+                fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': data.id,
+                        'Username': username
+
+                    }
+                })
+                .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem('sessionToken', data.sessionToken);
+                window.location.href = '/earn'
+            })
+                
+                }); 
+
+            noButton.addEventListener("click", function() {
+                // Hide the confirmation popup
+                confirmationPopup.style.display = "none";
+                loginPopup.style.visibility = "visible";
+                console.log("User denied");
+                // Add any additional actions you want to perform when the user denies
+            });
+            })
+            .catch(error => {
+                console.error('Error:', error.message);
+
+                // Check if the error status is 401 (Unauthorized)
+                if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                    console.error('Network error occurred. Redirecting to login page.');
+                    window.location.href = '/login';
+                } else {
+                    console.error('Unexpected error occurred.');
+                }
+    });
+        })
+        })
+       
+    </script>
+        </body>
+</html>

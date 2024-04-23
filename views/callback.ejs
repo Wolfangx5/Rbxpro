@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect</title>
+</head>
+<style>
+html, body {
+  font-family: Inter;
+   font-size: 16px;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Add this to center align vertically */
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  margin-top: 20px; /* Adjust the margin as desired */
+}
+
+.bar {
+  display: inline-block;
+  width: 10px; /* Adjust the width as desired */
+  height: 60px; /* Adjust the height as desired */
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 10px;
+  animation: scale-up4 1s linear infinite;
+}
+
+.bar:nth-child(2) {
+  height: 100px; /* Adjust the height as desired */
+  margin: 0 16px; /* Adjust the margin as desired */
+  animation-delay: .25s;
+}
+
+.bar:nth-child(3) {
+  animation-delay: .5s;
+}
+
+@keyframes scale-up4 {
+  20% {
+    background-color: #ffff;
+    transform: scaleY(1.5);
+  }
+
+  40% {
+    transform: scaleY(1);
+  }
+}
+
+h1 {
+  color: white;
+  font-size: 24px; /* Adjust the font size as desired */
+  margin-bottom: 10px; /* Adjust the margin as desired */
+}
+</style>
+<body style="background-color: #000000;">
+    <h1>Redirecting you to home page in 5 seconds!</h1>
+    <div class="loader">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    socket.on('sessionToken', function(data) {
+      localStorage.setItem('sessionToken', data);
+      });
+      setTimeout(() => {
+        window.location.href = '/home';
+      }, 5000); // Redirect after 3 seconds (adjust the delay as needed)
+    </script>
+</body>
+</html>
