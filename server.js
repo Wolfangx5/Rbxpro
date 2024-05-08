@@ -200,15 +200,15 @@ app.get('/callback/cpx', async (req, res) => {
 
 app.get('/callback/kiwi', async (req, res) => {
   
-  const { uid, val} = req.query;
-  console.log(uid, val)
+  const { sub_id, val} = req.query;
   
-    const userData = await checkUserExists(uid)
+  
+    const userData = await checkUserExists(sub_id)
   if (userData){
     console.log(userData)
     const newBal = userData.balance + parseFloat(val)
     console.log(newBal)
-    await changeUserBalance(uid, newBal)
+    await changeUserBalance(sub_id, newBal)
     res.status(200).send({
       status: 'success',
       message: 'API request successful',
