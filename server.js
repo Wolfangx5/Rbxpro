@@ -7,40 +7,33 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
 const axios = require('axios');
-const uuidv4 = require('uuid').v4
+const uuidv4 = require('uuid').v4;
 const bodyParser = require('body-parser');
+
 //-----------Server-----------------------//
 
 const port = process.env.PORT || 3000;
 
-
 const server = app.listen(port, "0.0.0.0", () => {
-  console.log(`Server is up`)
+  console.log(`Server is up and running on port ${port}`);
 });
-socketService.initSocket(server)
+socketService.initSocket(server);
 
-//-----------Ultis---------------//
-const { connect,
- 
-    changeUserBalance,
-    getUserData,
-    checkUserExists,
-    addnewUser,
- } = require('./utils/dbChange');
+//-----------Utils---------------//
+const { connect, changeUserBalance, checkUserExists } = require('./utils/dbChange');
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
-//-----------routeLink---------------//
-const loginRoute = require('./routes/login.js')
-const homeRoute = require('./routes/homepage.js')
-const earnRoute = require('./routes/earn.js')
-const walletRoute = require('./routes/wallet.js')
+
+//-----------Route Links---------------//
+const loginRoute = require('./routes/login.js');
+const homeRoute = require('./routes/homepage.js');
+const earnRoute = require('./routes/earn.js');
+const walletRoute = require('./routes/wallet.js');
 const userAPI = require('./api/userAPI.js');
-const { send } = require('express/lib/response');
-const { error } = require('console');
 
-
-//-----------Else---------------//
+//-----------Middleware---------------//
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.set('trust proxy', true);
 app.use(express.static('public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -48,189 +41,146 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-
 //-----------Routes---------------//
 app.get('/404', (req, res) => {
   res.sendFile(path.join(__dirname, './views/404page.html'));
-})
-app.use('/login', loginRoute)
-app.use('/earn', earnRoute)
-app.use('/home', homeRoute)
-app.use('/withdraw', walletRoute)
-app.use('/api', userAPI)
-app.use('/', homeRoute)
+});
+app.use('/login', loginRoute);
+app.use('/earn', earnRoute);
+app.use('/home', homeRoute);
+app.use('/withdraw', walletRoute);
+app.use('/api', userAPI);
+app.use('/', homeRoute);
 
-connect()
+connect();
 
 //--------------Config------------------//
-
-
-//----------IDK---------------//
-
-                                                                                                                     
 
 const clientId = '1122511630123663431';
 const clientSecret = 'Qq9ce92VU9lbrlVXawfsDri6Ze0oQbxS';
 const redirectUri = 'http://127.0.0.1:3000/callback';
 const discordApiBaseUrl = 'https://discord.com/api';
 
-
+//-----------Callback Routes---------------//
 
 app.get('/callback/bitlab', async (req, res) => {
-  
   const { uid, val, usd, type, tx } = req.query;
-  console.log(uid, val, usd, type, tx)
-  if (type === 'COMPLETE'){
-    const userData = await checkUserExists(uid)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance + parseFloat(val)*2
-    console.log(newBal)
-    await changeUserBalance(uid, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
-    });
-  }else{
-    console.log('User doesnt exist')
-  }
-  
-  }else if (type === 'START_BONUS') {
-    const userData = await checkUserExists(uid)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance + parseFloat(val)
-    console.log(newBal)
-    await changeUserBalance(uid, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
-    });
-  }else{
-    console.log('User doesnt exist')
-  }
+  console.log(uid, val, usd, type, tx);
 
-  }else if (type === 'RECONCILIATION'){
-    const userData = await checkUserExists(uid)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance - Math.abs(parseFloat(val)*2);
-    console.log(newBal)
-    await changeUserBalance(uid, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
+  // Handle different types of callbacks
+  if (type === 'COMPLETE' || type === 'START_BONUS' || type === 'RECONCILIATION' || type === 'SCREENOUT') {
+    try {
+      const userData = await checkUserExists(uid);
+      if (userData) {
+        let newBal;
+        if (type === 'RECONCILIATION') {
+          newBal = userData.balance - Math.abs(parseFloat(val) * 2);
+        } else {
+          newBal = userData.balance + parseFloat(val) * 2;
+        }
+        await changeUserBalance(uid, newBal);
+        res.status(200).json({
+          status: 'success',
+          message: 'API request successful',
+          data: {
+            msg: 'Good'
+          },
+        });
+      } else {
+        console.log('User does not exist');
+        res.status(404).json({
+          status: 'error',
+          message: 'User does not exist'
+        });
+      }
+    } catch (error) {
+      console.error('Error processing callback:', error);
+      res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      });
+    }
+  } else {
+    res.status(400).json({
+      status: 'error',
+      message: 'Invalid callback type'
     });
-  }else{
-    console.log('User doesnt exist')
   }
-  }else if (type === 'SCREENOUT'){
-    const userData = await checkUserExists(uid)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance + parseFloat(val)*2
-    console.log(newBal)
-    await changeUserBalance(uid, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
-    });
-  }else{
-    console.log('User doesnt exist')
-  }
-  }
-  
 });
+
 app.get('/callback/cpx', async (req, res) => {
-  
   const { uid, val, type } = req.query;
-  console.log(uid, val, type)
-  if (type === '1'){
-    const userData = await checkUserExists(uid)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance + parseFloat(val)*2
-    console.log(newBal)
-    await changeUserBalance(uid, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
+  console.log(uid, val, type);
+
+  // Handle different types of callbacks
+  if (type === '1' || type === '2') {
+    try {
+      const userData = await checkUserExists(uid);
+      if (userData) {
+        const newBal = type === '1' ? userData.balance + parseFloat(val) * 2 : userData.balance - Math.abs(parseFloat(val) * 2);
+        await changeUserBalance(uid, newBal);
+        res.status(200).json({
+          status: 'success',
+          message: 'API request successful',
+          data: {
+            msg: 'Good'
+          },
+        });
+      } else {
+        console.log('User does not exist');
+        res.status(404).json({
+          status: 'error',
+          message: 'User does not exist'
+        });
+      }
+    } catch (error) {
+      console.error('Error processing callback:', error);
+      res.status(500).json({
+        status: 'error',
+        message: 'Internal server error'
+      });
+    }
+  } else {
+    res.status(400).json({
+      status: 'error',
+      message: 'Invalid callback type'
     });
-  }else{
-    console.log('User doesnt exist')
   }
-  
-  
-  }else if (type === '2'){
-    const userData = await checkUserExists(uid)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance - Math.abs(parseFloat(val)*2);
-    console.log(newBal)
-    await changeUserBalance(uid, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
-    });
-  }else{
-    console.log('User doesnt exist')
-  }
-  
-  }
-  
 });
 
 app.get('/callback/kiwi', async (req, res) => {
-  
-  const { sub_id, val} = req.query;
-  
-  
-    const userData = await checkUserExists(sub_id)
-  if (userData){
-    console.log(userData)
-    const newBal = userData.balance + parseFloat(val)
-    console.log(newBal)
-    await changeUserBalance(sub_id, newBal)
-    res.status(200).send({
-      status: 'success',
-      message: 'API request successful',
-      data: {
-        msg: "Good"
-      },
+  const { uid, val } = req.query;
+  console.log(uid, val);
+
+  try {
+    const userData = await checkUserExists(uid);
+    if (userData) {
+      const newBal = userData.balance + parseFloat(val);
+      await changeUserBalance(uid, newBal);
+      res.status(200).json({
+        status: 'success',
+        message: 'API request successful',
+        data: {
+          msg: 'Good'
+        },
+      });
+    } else {
+      console.log('User does not exist');
+      res.status(404).json({
+        status: 'error',
+        message: 'User does not exist'
+      });
+    }
+  } catch (error) {
+    console.error('Error processing callback:', error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal server error'
     });
-  }else{
-    console.log('User doesnt exist')
   }
-  
-  
-  
-  
-  
-  
 });
-//https:// https://da97-2402-800-63b8-9a6a-81cb-9488-a44f-df8c.ngrok-free.app/callback/cpalead?subid={subid}&payout={payout}&virtual_currency={virtual_currency}
 
-
-  //
-
-
+// Add other callback routes here if needed
 
 //--------------------------------------------------Bot------------------------------------------------//
+
