@@ -287,75 +287,39 @@
     </div>
     <div class="popup" id="notEnoughBalancePopup">
         <div class="popup-content">
-            <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346313806086285/Human-Error.png?ex=66340968&is=6632b7e8&hm=6c0ab668fb85d13f1a114c1497dc7fed1499967f9bb59a31a9b1a00b896b1fe6&">
-            <p>Your balance is not enough.</p>
-            <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
+            <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346313806086285/Human-Error.png?ex=66340968&is=6632b7e8&hm=6c0ab668fb85d13f1a114fb4cb335e619d7e27d6988c88b212c49e8f1f2a4c02&format=webp&quality=lossless">
+            <h2 style="color:#dd2323">Error</h2>
+            <p>You don't have enough ROBUX to purchase this gamepass.</p>
+            <p>You currently have: <span id="currentBalance">0 R$</span></p>
         </div>
+        <button onclick="togglePopup('notEnoughBalancePopup')" style="font-size: 18px;">Close</button>
     </div>
-    <div class="popup" id="somethingWrongPopup">
-        <div class="popup-content">
-            <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346313806086285/Human-Error.png?ex=66340968&is=6632b7e8&hm=6c0ab668fb85d13f1a114c1497dc7fed1499967f9bb59a31a9b1a00b896b1fe6&">
-            <p>There's something wrong. Please make sure to check if everything was done correctly.</p>
-            <button onclick="hidePopup('somethingWrongPopup')">Close</button>
+    <footer class="footer footer-dark">
+        <div class="container fotter">
+            <div class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <h2 class="title is-4 has-text-white">RBXPRO</h2>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <ul class="footer-nav">
+                            <li><a href="https://discord.gg/clear" class="has-text-white">Discord</a></li>
+                            <li><a href="https://twitter.com/clear" class="has-text-white">Twitter</a></li>
+                            <li><a href="https://www.instagram.com/clear" class="has-text-white">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="popup popup-congrats" id="congratsPopup">
-        <div class="popup-content">
-            <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346660696129656/R.png?ex=663409bb&is=6632b83b&hm=5bec127f21045dadcd6c4d0e9d19330a95d9fc1ad8e4bb64e85c7206e0b51b9c&">
-            <p>Congratulations! You have successfully withdrawn <span id="congratsAmount"></span>R$ to your account.</p>
-            <button onclick="hidePopup('congratsPopup')">Close</button>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./js/intro.js"></script>
-    <script>
-        function withDraw() {
-            var amount = document.getElementById("withAmount").value;
-            var gpID = document.getElementById("gpID").value;
-            document.getElementById("displayAmount").innerHTML = amount;
-            document.getElementById("withdrawButton").disabled = true;
-            document.getElementById("withdrawButton").innerHTML = "Loading...";
-            setTimeout(function() {
-                if (amount < {(Balance)}) {
-                    document.getElementById("withdrawButton").disabled = false;
-                    document.getElementById("withdrawButton").innerHTML = "Withdraw";
-                    showPopup('notEnoughBalancePopup');
-                } else {
-                    axios.post('/withdraw', {
-                            amount: amount,
-                            id: gpID
-                        })
-                        .then(function(response) {
-                            document.getElementById("withdrawButton").disabled = false;
-                            document.getElementById("withdrawButton").innerHTML = "Withdraw";
-                            if (response.status == 200) {
-                                if (response.data.success == true) {
-                                    document.getElementById("congratsAmount").innerHTML = amount;
-                                    showPopup('congratsPopup');
-                                } else {
-                                    showPopup('somethingWrongPopup');
-                                }
-                            } else {
-                                showPopup('somethingWrongPopup');
-                            }
-                        })
-                        .catch(function(error) {
-                            document.getElementById("withdrawButton").disabled = false;
-                            document.getElementById("withdrawButton").innerHTML = "Withdraw";
-                            console.log(error);
-                            showPopup('somethingWrongPopup');
-                        });
-                }
-            }, 1500);
-        }
-    </script>
-    <footer>
-        <p>&copy; 2023 RBXPRO - All rights reserved.</p>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
+
 
 
