@@ -1,4 +1,4 @@
-''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="dark-theme">
 
 <head>
@@ -302,138 +302,60 @@
 
     <div class="popup popup-congrats" id="congratsPopup">
         <div class="popup-content">
-            <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346660696129656/R.png?ex=663409bb&is=6632b83b&hm=5bec127f21045dadcd6f30c9d6c321affa4f7dd61963f7dcb83ceababb26e157&">
-            <p>Congratulations! You have succesfully withdrawn, you can check your pending robux in roblox. And ready for you to use in 5 days</p>
+            <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346660696129656/R.png?ex=663409bb&is=6632b83b&hm=5bec127f21045dadcd6c4d0e9d19330a95d9fc1ad8e4bb64e85c7206e0b51b9c&">
+            <p>Congratulations! You have successfully withdrawn <span id="congratsAmount"></span>R$ to your account.</p>
             <button onclick="hidePopup('congratsPopup')">Close</button>
         </div>
     </div>
-<script>
-    function Logout() {
-        localStorage.removeItem('sessionToken');
-        window.location.href = '/login';
-    }
-     document.getElementById("withAmount").addEventListener("input", function() {
-        var amountInput = parseFloat(this.value); // Get the value entered in the input field
-        var displayAmount = document.getElementById("displayAmount");
-
-        if (!isNaN(amountInput)) {
-            var newAmount = Math.round(amountInput / 0.70); // Calculate 30% more than the input value
-            displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
-        } else {
-            displayAmount.textContent = ""; // Clear the display if the input is not a number
-        }
-    });
-    function hidePopup(popupId) {
-        var popup = document.getElementById(popupId);
-        if (popup) {
-            popup.style.display = 'none';
-        }
-    }
-    function showPopup(popupId) {
-        var popup = document.getElementById(popupId);
-        if (popup) {
-            popup.style.display = 'block';
-        }
-    }
-    function withDraw() {
-        document.getElementById("withdrawButton").classList.add("disabled");
-        const token = localStorage.getItem('sessionToken');
-        const withAmount = document.getElementById('withAmount').value
-        const gpID = document.getElementById('gpID').value
-        console.log(withAmount, gpID)
-        if (token){
-           
-                fetch('/api/userdata', {
-                method: 'POST',
-                headers: {
-                'Authorization': token
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/intro.js"></script>
+    <script>
+        function withDraw() {
+            var amount = document.getElementById("withAmount").value;
+            var gpID = document.getElementById("gpID").value;
+            document.getElementById("displayAmount").innerHTML = amount;
+            document.getElementById("withdrawButton").disabled = true;
+            document.getElementById("withdrawButton").innerHTML = "Loading...";
+            setTimeout(function() {
+                if (amount < {(Balance)}) {
+                    document.getElementById("withdrawButton").disabled = false;
+                    document.getElementById("withdrawButton").innerHTML = "Withdraw";
+                    showPopup('notEnoughBalancePopup');
+                } else {
+                    axios.post('/withdraw', {
+                            amount: amount,
+                            id: gpID
+                        })
+                        .then(function(response) {
+                            document.getElementById("withdrawButton").disabled = false;
+                            document.getElementById("withdrawButton").innerHTML = "Withdraw";
+                            if (response.status == 200) {
+                                if (response.data.success == true) {
+                                    document.getElementById("congratsAmount").innerHTML = amount;
+                                    showPopup('congratsPopup');
+                                } else {
+                                    showPopup('somethingWrongPopup');
+                                }
+                            } else {
+                                showPopup('somethingWrongPopup');
+                            }
+                        })
+                        .catch(function(error) {
+                            document.getElementById("withdrawButton").disabled = false;
+                            document.getElementById("withdrawButton").innerHTML = "Withdraw";
+                            console.log(error);
+                            showPopup('somethingWrongPopup');
+                        });
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-              if (withAmount > data.balance){
-                console.log('Not enough balance')
-                showPopup('notEnoughBalancePopup')
-              }else{
-                console.log('Passed checkpoint #0')
-              
-                const queryParams = new URLSearchParams({
-                    gpID: gpID,
-                    withAmount: withAmount
-                });
-
-                fetch(`/api/withdraw?${queryParams}`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-                .then(response => {
-                    console.log(response.status); 
-                    if (response.status == 200){
-                        showPopup('congratsPopup')
-                    }else if(response.status == 400 || response.status == 403){
-                        showPopup('somethingWrongPopup')
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-              }
-            })
+            }, 1500);
         }
-    }
-    function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token){
-                fetch('/api/userdata', {
-                method: 'POST',
-                headers: {
-                'Authorization': token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-              
-                const balance = document.getElementById("rbxbalance");
-                const nameDisplay = document.getElementById("usernameDisplay");
-      
-               
-               
-                balance.textContent = `${data.balance} robux`
-            })
-            .catch(error => {
-                console.log(error)
-              window.location.href = '/login';
-              return;
-            });
-            }else{
-                window.location.href = '/login';
-            }
-
-            
-      }
-      setInterval(loadUserData, 1000)
-</script>
+    </script>
     <footer>
-        <div class="footer-nav">
-            <ul>
-                <li><a href="/earn">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
-                <li><a href="/withdraw">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
-            </ul>
-        </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
-        <div class="rbxpro-disclaimer">
-            <p>
-               RBXPRO | All Rights Reserved.
-            </p>
-            <p>               RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.
-            </p>
-            <p>© Copyright rbxpro.click 2024</p>
-        </div>
-
+        <p>&copy; 2023 RBXPRO - All rights reserved.</p>
     </footer>
+</body>
 
 </html>
+
 
