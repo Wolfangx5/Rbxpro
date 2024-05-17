@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+'<!DOCTYPE html>
 <html lang="en" class="dark-theme">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -23,97 +24,113 @@
     <link href="./css/main.css" rel="stylesheet" />
     <link href="./css/bulma.css" rel="stylesheet" />
     <style>
+
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
         }
         .popup {
-            border: 3px solid #dd2323;
-            border-radius: 5px;
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgb(255, 255, 255);
-            padding: 50px;
-            border-radius: 25px;
-            z-index: 1000;
-            color: #fff;
-            text-align: center;
-        }
-        .popup-content {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .popup button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #dd2323;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        .popup button:hover {
-            background-color: #b12828;
-        }
-        .popup-congrats {
-            border: 3px solid #17b823; 
-            background-color: #fff; 
-            color: #333; 
-        }
-        .popup-congrats button {
-            background-color: #17b823;
-        }
-        .popup-congrats button:hover {
-            background-color: #14821e; 
-        }
-        .popup img {
-            display: block; 
-            margin: 0 auto 20px; 
-            width: auto; 
-            height: 150px; 
-        }
-        .popup-congrats img {
-            display: block; 
-            margin: 0 auto 20px; 
-            width: 150px; 
-            height: 150px; 
-        }
+        border: 3px solid #dd2323;
+        border-radius: 5px;
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(255, 255, 255);
+        padding: 50px;
+        border-radius: 25px;
+        z-index: 1000;
+        color: #fff;
+        text-align: center;
+    }
+    
+    .popup-content {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .popup button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #dd2323;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .popup button:hover {
+        background-color: #b12828;
+    }
+    .popup-congrats {
+        border: 3px solid #17b823; 
+        background-color: #fff; 
+        color: #333; 
+    }
+    
+    .popup-congrats button {
+        background-color: #17b823;
+    }
+    
+    .popup-congrats button:hover {
+        background-color: #14821e; 
+    }
+    .popup img {
+        display: block; 
+        margin: 0 auto 20px; 
+        width: auto; 
+        height: 150px; 
+    }
+    
+    .popup-congrats img {
+        display: block; 
+        margin: 0 auto 20px; 
+        width: 150px; 
+        height: 150px; 
+    }
+    
         .footer.footer-dark {
             position: fixed;
             bottom: 0;
             background-color: #066ee7;
             height: 100px; 
         }
+
         .fotter {
             padding: 0.5% !important; 
         }
+
         .logo {
             margin-left: -50px;
             font-weight: 700;
             font-size: 42px;
             color: #fff;
         }
+
         .navbar-item {
             padding: 0.5rem 1rem; 
         }
+
         .navbar-burger {
             margin-right: 1rem; 
         }
+
         .navbar-menu {
             flex-grow: 1; 
         }
+
         .navbar-end {
             justify-content: flex-end; 
         }
+
         .navbar-item.has-addons .button {
             margin-right: 0.5rem;
         }
+
         .withdraw-container {
             max-width: 400px;
             margin: auto; 
@@ -123,6 +140,7 @@
             border: 3px solid #066ee7 !important;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .withdraw-header {
             background-color: #3498db;
             color: #fff;
@@ -131,9 +149,11 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
+
         .withdraw-form {
             padding: 20px;
         }
+
         .withdraw-input {
             width: 100%;
             padding: 10px;
@@ -145,6 +165,7 @@
             font-size: 16px;
             color: #333;
         }
+
         .withdraw-price {
             background-color: #f2f2f2;
             border: 1.5px solid #ddd;
@@ -155,6 +176,7 @@
             border-color: #066ee7;
             margin-bottom: 20px;
         }
+
         .withdraw-btn {
             background-color: #066ee7;
             color: #fff;
@@ -166,33 +188,42 @@
             font-size: 18px;
             transition: background-color 0.3s ease;
         }
+
         .withdraw-btn:hover {
             background-color: #328df6;
         }
+
         .navbar-item.is-active {
             color: #fff; 
             background-color: #2182f0; 
         }
+        
         footer {
             background-color: #066ee7;
             color: #fff;
             padding: 20px;
             text-align: center;
         }
+
         .footer-nav li {
             display: inline-block;
             margin-right: 10px;
         }
+
         .footer-nav li a {
             font-size: 20px;
             color: #fff;
             text-decoration: none;
         }
+
         .rbxpro-disclaimer {
             color: #fff;
         }
+</style>
+
     </style>
 </head>
+
 <body aria-hidden="false" style="">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
@@ -229,6 +260,7 @@
         </div>
     </nav>
     <div class="container mb-4 mt-4">
+        
     </div>
     <div class="flex items-center justify-center pt-6 withdraw-container">  <!-- Withdrawal form/container where the users do their requests -->
         <div>
@@ -271,7 +303,7 @@
     <div class="popup popup-congrats" id="congratsPopup">
         <div class="popup-content">
             <img src="https://cdn.discordapp.com/attachments/1197577006217433098/1235346660696129656/R.png?ex=663409bb&is=6632b83b&hm=5bec127f21045dadcd6f30c9d6c321affa4f7dd61963f7dcb83ceababb26e157&">
-            <p>Congratulations! You have successfully withdrawn, you can check your pending robux in Roblox. And ready for you to use in 5 days</p>
+            <p>Congratulations! You have succesfully withdrawn, you can check your pending robux in roblox. And ready for you to use in 5 days</p>
             <button onclick="hidePopup('congratsPopup')">Close</button>
         </div>
     </div>
@@ -280,8 +312,7 @@
         localStorage.removeItem('sessionToken');
         window.location.href = '/login';
     }
-
-    document.getElementById("withAmount").addEventListener("input", function() {
+     document.getElementById("withAmount").addEventListener("input", function() {
         var amountInput = parseFloat(this.value); // Get the value entered in the input field
         var displayAmount = document.getElementById("displayAmount");
 
@@ -292,85 +323,118 @@
             displayAmount.textContent = ""; // Clear the display if the input is not a number
         }
     });
-
     function hidePopup(popupId) {
         var popup = document.getElementById(popupId);
         if (popup) {
             popup.style.display = 'none';
         }
     }
-
     function showPopup(popupId) {
         var popup = document.getElementById(popupId);
         if (popup) {
             popup.style.display = 'block';
         }
     }
-
     function withDraw() {
         document.getElementById("withdrawButton").classList.add("disabled");
         const token = localStorage.getItem('sessionToken');
-        const withAmount = document.getElementById('withAmount').value;
-        const gpID = document.getElementById('gpID').value;
-
-        if (token) {
-            fetch('/api/userdata', {
+        const withAmount = document.getElementById('withAmount').value
+        const gpID = document.getElementById('gpID').value
+        console.log(withAmount, gpID)
+        if (token){
+           
+                fetch('/api/userdata', {
                 method: 'POST',
                 headers: {
-                    'Authorization': token
+                'Authorization': token
                 }
             })
             .then(response => response.json())
             .then(data => {
-                if (withAmount > data.balance) {
-                    showPopup('notEnoughBalancePopup');
-                } else {
-                    const queryParams = new URLSearchParams({
-                        gpID: gpID,
-                        withAmount: withAmount
-                    });
+              if (withAmount > data.balance){
+                console.log('Not enough balance')
+                showPopup('notEnoughBalancePopup')
+              }else{
+                console.log('Passed checkpoint #0')
+              
+                const queryParams = new URLSearchParams({
+                    gpID: gpID,
+                    withAmount: withAmount
+                });
 
-                    fetch(`/api/withdraw?${queryParams}`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => {
-                        if (response.status == 200) {
-                            showPopup('congratsPopup');
-                        } else if (response.status == 400 || response.status == 403) {
-                            showPopup('somethingWrongPopup');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
-                }
-            });
+                fetch(`/api/withdraw?${queryParams}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => {
+                    console.log(response.status); 
+                    if (response.status == 200){
+                        showPopup('congratsPopup')
+                    }else if(response.status == 400 || response.status == 403){
+                        showPopup('somethingWrongPopup')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+              }
+            })
         }
     }
-
     function loadUserData() {
-        const token = localStorage.getItem('sessionToken');
-        if (token) {
-            fetch('/api/userdata', {
+            const token = localStorage.getItem('sessionToken');
+            if (token){
+                fetch('/api/userdata', {
                 method: 'POST',
                 headers: {
-                    'Authorization': token
+                'Authorization': token
                 }
             })
             .then(response => response.json())
             .then(data => {
+              
                 const balance = document.getElementById("rbxbalance");
-                balance.textContent = `${data.balance} R$`;
+                const nameDisplay = document.getElementById("usernameDisplay");
+      
+               
+               
+                balance.textContent = `${data.balance} robux`
+            })
+            .catch(error => {
+                console.log(error)
+              window.location.href = '/login';
+              return;
             });
-        }
-    }
+            }else{
+                window.location.href = '/login';
+            }
 
-    loadUserData();
+            
+      }
+      setInterval(loadUserData, 1000)
 </script>
-</body>
+    <footer>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="/earn">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
+                <li><a href="/withdraw">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
+            </ul>
+        </div>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
+        <div class="rbxpro-disclaimer">
+            <p>
+               RBXPRO | All Rights Reserved.
+            </p>
+            <p>               RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.
+            </p>
+            <p>© Copyright rbxpro.click 2024</p>
+        </div>
+
+    </footer>
+
 </html>
 
 
