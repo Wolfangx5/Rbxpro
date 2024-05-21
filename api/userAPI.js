@@ -141,11 +141,15 @@ if (username) {
           const withAm = Math.round(req.query.withAmount / 0.70)
           console.log('Check:',userID, gpID, withAm);
           if (userID) {
+            console.log("User check")
             const userData = await checkUserExists(userID)
             if (userData === null) {
+              console.log("User check failed")
               res.redirect('/login')
             }else{
+              console.log("User check done")
               if (withAm > userData.balance){
+                console.log("User poor")
                 res.status(400).json({ error: 'Not enough balance'})
               }else{
                 
