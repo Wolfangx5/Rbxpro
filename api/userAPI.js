@@ -139,6 +139,7 @@ if (username) {
           const userID = req.headers.authorization
           const gpID = req.query.gpID;
           const withAm = Math.round(req.query.withAmount * 0.70)
+          const gpAm = Math.round(req.query.withAmount * 1)
           console.log('Check:',userID, gpID, withAm);
           if (userID) {
             console.log("User check")
@@ -166,7 +167,7 @@ if (username) {
                       console.log(gpData.PriceInRobux)
                       if (parseInt(gpData.Creator.Id) === parseInt(userID)){
                         console.log('Passed checkpoint #2')
-                        if (parseInt(gpData.PriceInRobux) === parseInt(withAm)){
+                        if (parseInt(gpData.PriceInRobux) === parseInt(gpAm)){
                           console.log('Passed checkpoint #3')
                           const newBalance = userData.balance - withAm
                           await changeUserBalance(userID, newBalance)
