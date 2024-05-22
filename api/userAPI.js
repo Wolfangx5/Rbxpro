@@ -138,9 +138,9 @@ if (username) {
         router.post('/withdraw', async (req, res) => {
           const userID = req.headers.authorization
           const gpID = req.query.gpID;
-          const withAm = Math.round(req.query.withAmount * 0.70)
-          const gpAm = Math.round(req.query.withAmount * 1)
-          console.log('Check:',userID, gpID, withAm);
+          const gpAm = Math.round(req.query.withAmount / 0.70)
+          const withAm = Math.round(req.query.withAmount * 1)
+          console.log('Check:',userID, gpID, withAm, gpAm);
           if (userID) {
             console.log("User check")
             const userData = await checkUserExists(userID)
