@@ -22,61 +22,63 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
     <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
-    <link type="text/css" href="./css/bulma.css" rel="stylesheet"> <!-- Don't mind this -->
-    <link type="text/css" href="./css/main.css" rel="stylesheet"> <!-- Don't mind this -->
+    <link type="text/css" href="./css/bulma.css" rel="stylesheet">
+    <link type="text/css" href="./css/main.css" rel="stylesheet">
     <style>
         body {
-            overflow-x: hidden; /* This hides the horizontal scrollbar */
-            overflow-y: auto; /* This enables vertical scrolling if necessary */
+            overflow-x: hidden;
+            overflow-y: auto;
             width: 100%;
             margin: 0;
             padding: 0;
             height: 100vh;
+            font-family: 'Roboto', sans-serif;
         }
 
         .footer.footer-dark {
             position: fixed;
             bottom: 0;
             background-color: #066ee7;
-            height: 100px; 
-        }
-
-        .fotter {
-            padding: 0.5% !important; 
+            height: 100px;
+            width: 100%;
         }
 
         .logo {
-            margin-left: 50px;
             font-weight: 700;
             font-size: 42px;
             color: #fff;
         }
 
+        .navbar {
+            background-color: #066ee7;
+            padding: 1rem;
+        }
+
         .navbar-item {
-            padding: 0.5rem 1rem; 
-            margin-right: 200px;
+            padding: 0.5rem 1rem;
+            color: #fff;
         }
 
         .navbar-burger {
-            margin-right: 1rem; 
+            margin-right: 1rem;
         }
 
         .navbar-menu {
-            flex-grow: 1; 
+            flex-grow: 1;
         }
 
         .navbar-end {
-            justify-content: flex-end; 
+            justify-content: flex-end;
         }
 
-        .navbar-item.has-addons .button {
+        .button {
             margin-right: 0.5rem;
         }
 
         .withdraw-btn:hover {
             background-color: #328df6;
         }
-        
+
         footer {
             background-color: #066ee7;
             color: #fff;
@@ -105,15 +107,11 @@
             padding-top: 0px;
         }
 
-        .content img {
-            width: 250px;
-            height: auto;
-        }
-
         .big-text {
             font-size: 36px;
             margin-top: 10px;
             color: #fff;
+            font-weight: bold;
         }
 
         .small-text {
@@ -130,136 +128,146 @@
             border: 3px solid #066ee7;
             border-radius: 5px;
             font-size: 24px;
-            font: bolder;
+            font-weight: bolder;
             color: #066ee7;
             background-color: #fff;
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        .start-earning-button:hover {
+            background-color: #066ee7;
+            color: #fff;
+        }
+
+        .info-box {
+            width: 300px;
+            background-color: #2182f0;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .info-box-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .info-box-content {
+            font-size: 18px;
+        }
+
         .robux-icon {
-        position: fixed;
-        top: -10px;
-        width: 20px; 
-        height: 20px;
-        animation: falling linear infinite;
-    }
-
-    @keyframes falling {
-        from {
-            transform: translateY(-10px);
+            position: fixed;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+            animation: falling linear infinite;
         }
-        to {
-            transform: translateY(100vh);
-        }
-    }
-</style>
 
+        @keyframes falling {
+            from {
+                transform: translateY(-10px);
+            }
+            to {
+                transform: translateY(100vh);
+            }
+        }
     </style>
 </head>
 
-<body aria-hidden="false" style="">
+<body aria-hidden="false">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <div class="logo">RBXPRO</div>
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="/login">
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="/login" class="button is-info" style="background-color: #2182f0 !important;">
-                                <strong>Login</strong>
-                            </a>
-                        </div>
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-end is-centered">
+                        <a class="navbar-item navbar-s-item" href="/login">
+                            <div class="navbar-end">
+                                <div class="navbar-item">
+                                    <div class="buttons has-addons">
+                                        <a href="/login" class="button is-info" style="background-color: #2182f0 !important;">
+                                            <strong>Login</strong>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
     <div class="content">
-        <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless&">
         <div class="big-text">Start Earning Robux Now!</div>
         <div class="small-text">Earn robux by playing games and surveys with RBXPRO! What are you waiting for?</div>
         <a href="/login" class="start-earning-button">Start Earning!</a>
-        <div style="display: flex; justify-content: space-around; margin-top: 20px;">
-            <div style="width: 300px; background-color: #2182f0; color: #fff; padding: 20px; border-radius: 10px;">
-                <div style="font-size: 24px; margin-bottom: 10px;">How does this work?</div>
-                <div style="font-size: 18px;">For every survey/offer you complete, we get paid from our survey partners, we then use a % of our winnings to stock up robux and provide free robux for our PROS to withdraw.</div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 20px;">
+            <div class="info-box">
+                <div class="info-box-title">How does this work?</div>
+                <div class="info-box-content">For every survey/offer you complete, we get paid from our survey partners. We then use a percentage of our earnings to stock up robux and provide free robux for our PROS to withdraw.</div>
             </div>
-            <div style="width: 300px; background-color: #2182f0; color: #fff; padding: 20px; border-radius: 10px;">
-                <div style="font-size: 24px; margin-bottom: 10px;">Are we legit?</div>
-                <div style="font-size: 18px;">Yes, we are. Check our server for vouchers and our system to ensure the legitimacy of our services.</div>
+            <div class="info-box">
+                <div class="info-box-title">Are we legit?</div>
+                <div class="info-box-content">Yes, we are. Check our server for vouchers and our system to ensure the legitimacy of our services.</div>
             </div>
-            <div style="width: 300px; background-color: #2182f0; color: #fff; padding: 20px; border-radius: 10px;">
-                <div style="font-size: 24px; margin-bottom: 10px;">Join our server for more R$ and help</div>
-                <div style="font-size: 18px;">Join our server for more ways to earn robux and assistance with any questions or issues you may encounter.</div>
+            <div class="info-box">
+                <div class="info-box-title">Join our server for more R$ and help</div>
+                <div class="info-box-content">Join our server for more ways to earn robux and assistance with any questions or issues you may encounter.</div>
             </div>
         </div>
     </div>
     <script>
-
         function generateRobux() {
             const container = document.body;
-    
             for (let i = 0; i < 50; i++) {
                 const robuxIcon = document.createElement('img');
-                robuxIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Robux_2019_Logo_gold.svg/800px-Robux_2019_Logo_gold.svg.png'; 
+                robuxIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Robux_2019_Logo_gold.svg/800px-Robux_2019_Logo_gold.svg.png';
                 robuxIcon.classList.add('robux-icon');
-                robuxIcon.style.left = `${Math.random() * 100}vw`; 
+                robuxIcon.style.left = `${Math.random() * 100}vw`;
                 robuxIcon.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                robuxIcon.style.animationDelay = `${Math.random() * 2}s`; 
+                robuxIcon.style.animationDelay = `${Math.random() * 2}s`;
                 container.appendChild(robuxIcon);
             }
         }
         function loadUserData() {
             const token = localStorage.getItem('sessionToken');
-            if (token){
+            if (token) {
                 fetch('/api/userdata', {
-                method: 'POST',
-                headers: {
-                'Authorization': token
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/earn';
-      
-               
-               
-                
-            })
-            .catch(error => {
-              
-              return;
-            });
-            }else{
-               
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = '/earn';
+                })
+                .catch(error => {
+                    return;
+                });
             }
-
-            
-      }
-     
-        loadUserData()
-        generateRobux(); 
+        }
+        loadUserData();
+        generateRobux();
     </script>
-    
-    
-<footer>
-    <div class="footer-nav">
-        <ul>
-            <li><a href="/earn">Earn</a></li> 
-            <li><a href="/withdraw">Withdraw</a></li> 
-        </ul>
-    </div>
-    <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
-    <div class="rbxpro-disclaimer">
-        <p>
-           RBXPRO | All Rights Reserved.
-        </p>
-        <p>               RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.
-        </p>
-        <p>© Copyright RBXPRO 2024</p>
-    </div>
-</footer>
+    <footer>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="/earn">Earn</a></li>
+                <li><a href="/withdraw">Withdraw</a></li>
+            </ul>
+        </div>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
+        <div class="rbxpro-disclaimer">
+            <p>RBXPRO | All Rights Reserved.</p>
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
+            <p>© Copyright RBXPRO 2024</p>
+        </div>
+    </footer>
 </body>
 
 </html>
