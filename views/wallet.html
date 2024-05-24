@@ -20,8 +20,6 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
-    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="./css/main.css" rel="stylesheet" />
     <link href="./css/bulma.css" rel="stylesheet" />
     <style>
@@ -29,9 +27,100 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            font-family: 'Poppins', sans-serif;
             background-color: #1a1a1a;
+            color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #066ee7;
+            padding: 1rem;
+        }
+
+        .navbar-brand .logo {
+            font-weight: 700;
+            font-size: 24px;
             color: #fff;
+        }
+
+        .navbar-burger span {
+            background-color: #fff;
+        }
+
+        .navbar-menu {
+            background-color: #066ee7;
+        }
+
+        .navbar-item {
+            color: #fff;
+        }
+
+        .navbar-item.is-active {
+            background-color: #2182f0;
+            border-radius: 5px;
+        }
+
+        .buttons .button {
+            border-radius: 5px;
+        }
+
+        .withdraw-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 120px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .withdraw-header {
+            background-color: #17b823;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .withdraw-form {
+            padding: 20px;
+        }
+
+        .withdraw-price {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .withdraw-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .withdraw-btn {
+            background-color: #066ee7;
+            color: #fff;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .withdraw-btn:hover {
+            background-color: #2182f0;
         }
 
         .popup {
@@ -42,7 +131,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #fff;
+            background-color: #333;
             padding: 50px;
             border-radius: 25px;
             z-index: 1000;
@@ -51,7 +140,6 @@
 
         .popup-content {
             margin-bottom: 20px;
-            color: #333;
         }
 
         .popup button {
@@ -71,9 +159,9 @@
         }
 
         .popup-congrats {
-            border: 3px solid #17b823;
-            background-color: #fff;
-            color: #333;
+            border-color: #17b823;
+            background-color: #333;
+            color: #fff;
         }
 
         .popup-congrats button {
@@ -84,143 +172,35 @@
             background-color: #14821e;
         }
 
-        .popup img {
-            display: block;
-            margin: 0 auto 20px;
-            width: auto;
-            height: 150px;
-        }
-
-        .popup-congrats img {
-            display: block;
-            margin: 0 auto 20px;
-            width: 150px;
-            height: 150px;
-        }
-
-        .navbar {
+        .footer {
             background-color: #066ee7;
-        }
-
-        .navbar .logo {
-            font-weight: 700;
-            font-size: 42px;
-            color: #fff;
-        }
-
-        .navbar-item {
-            padding: 0.5rem 1rem;
-        }
-
-        .navbar-burger {
-            margin-right: 1rem;
-        }
-
-        .navbar-menu {
-            flex-grow: 1;
-        }
-
-        .navbar-end {
-            justify-content: flex-end;
-        }
-
-        .navbar-item.has-addons .button {
-            margin-right: 0.5rem;
-        }
-
-        .withdraw-container {
-            max-width: 400px;
-            margin: 120px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            border: 3px solid #066ee7 !important;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            color: #333;
-        }
-
-        .withdraw-header {
-            background-color: #3498db;
             color: #fff;
             padding: 20px;
             text-align: center;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        .withdraw-form {
-            padding: 20px;
-        }
-
-        .withdraw-input {
+            position: fixed;
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1.5px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            border-color: #066ee7;
-            font-size: 16px;
-            color: #333;
+            bottom: 0;
         }
 
-        .withdraw-price {
-            background-color: #f2f2f2;
-            border: 1.5px solid #ddd;
-            padding: 15px;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 5px;
-            border-color: #066ee7;
-            margin-bottom: 20px;
-        }
-
-        .withdraw-btn {
-            background-color: #066ee7;
-            color: #fff;
-            padding: 15px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-
-        .withdraw-btn:hover {
-            background-color: #328df6;
-        }
-
-        .navbar-item.is-active {
-            color: #fff;
-            background-color: #2182f0;
-        }
-
-        footer {
-            background-color: #066ee7;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
+        .footer-nav {
+            list-style-type: none;
+            padding: 0;
         }
 
         .footer-nav li {
-            display: inline-block;
+            display: inline;
             margin-right: 10px;
         }
 
         .footer-nav li a {
-            font-size: 20px;
+            font-size: 16px;
             color: #fff;
             text-decoration: none;
-        }
-
-        .rbxpro-disclaimer {
-            color: #fff;
         }
     </style>
 </head>
 
-<body>
+<body aria-hidden="false">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -233,75 +213,204 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item" href="/leaderboard">Withdraw</a>
-                    <a class="navbar-item navbar-s-item" href="/profile">Profile</a>
+                    <a class="navbar-item navbar-s-item" href="/earn">
+                        Earn
+                    </a>
+                    <a class="navbar-item navbar-s-item is-active" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
+                        Withdraw
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons has-addons">
+                            <a href="" style="background-color: #2182f0 !important;" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
+                                <strong id="rbxbalance">{(Balance)} R$</strong>
+                            </a>
+                            <a onclick="Logout()" href="" class="button is-info" style="background-color: #2182f0 !important;">
+                                <strong>Logout</strong>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
-    <section class="section">
-        <div class="container withdraw-container">
-            <div class="withdraw-header">
-                <h1 class="title is-4">Withdraw Robux</h1>
-            </div>
-            <div class="withdraw-form">
-                <input class="withdraw-input" type="text" id="username" placeholder="Enter your username">
-                <input class="withdraw-input" type="number" id="amount" placeholder="Enter amount">
-                <input class="withdraw-input" type="text" id="gamepass-id" placeholder="Enter gamepass ID">
-                <div class="withdraw-price">
-                    <span class="price">You will receive: <strong>0.00</strong> R$</span>
+
+    <div class="container mb-4 mt-4"></div>
+    <div class="flex items-center justify-center pt-6 withdraw-container">
+        <div>
+            <div class="h-full bg-white rounded-md ring-2 w-full flex items-center justify-center ring-primary p-3">
+                <div class="px-4">
+                    <div class="mb-4">
+                        <label for="username" class="block mb-2 text-md font-medium text-black">R$ Withdraw Amount:</label>
+                        <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-black" placeholder="Amount" type="number" id="withAmount">
+                    </div>
+                    <div class="mb-4">
+                        <label for="username" class="block mb-2 text-md font-medium text-black">Gamepass ID:</label>
+                        <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-black" placeholder="ID" type="number" id="gpID">
+                    </div>
+                    <p class="text-lg text-center text-black">Change the price of your Gamepass price to:</p>
+                    <p class="withdraw-price font-semibold text-black text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">{(Amount)}</p>
+                    <div class="flex justify-center items-center mt-4">
+                        <button id='withdrawButton' class="withdraw-btn btn btn-md btn-primary w-full text-black font-semibold" onclick="withDraw()">
+                            <p>Withdraw</p>
+                        </button>
+                    </div>
                 </div>
-                <button class="withdraw-btn" id="withdraw-btn">Withdraw</button>
             </div>
         </div>
-    </section>
-    <div class="popup">
-        <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RbxPro Logo">
-        <div class="popup-content">You need to earn more Robux to withdraw!</div>
-        <button onclick="closePopup()">Close</button>
     </div>
-    <div class="popup popup-congrats">
-        <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RbxPro Logo">
-        <div class="popup-content">Congratulations! Your Robux have been sent successfully.</div>
-        <button onclick="closeCongratsPopup()">Close</button>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popup-message">Warning message goes here...</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
     </div>
-    <footer>
-        <ul class="footer-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/terms">Terms</a></li>
-            <li><a href="/privacy">Privacy</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
-        <p class="rbxpro-disclaimer">RBXPRO is not affiliated with Roblox Corporation.</p>
+
+    <div class="popup" id="notEnoughBalancePopup">
+        <div class="popup-content">
+            <p>Your balance is not enough.</p>
+            <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
+        </div>
+    </div>
+    <div class="popup" id="somethingWrongPopup">
+        <div class="popup-content">
+            <p>There's something wrong. Please make sure to check if everything was done correctly.</p>
+            <button onclick="hidePopup('somethingWrongPopup')">Close</button>
+        </div>
+    </div>
+
+    <div id="congratsPopup" class="popup popup-congrats">
+        <div class="popup-content">
+            <p>Congratulations! You withdrew your robux. Check https://roblox.com/transactions to see your R$</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <footer class="footer footer-dark">
+        <div class="content has-text-centered">
+            <p class="rbxpro-disclaimer">
+                RBXPRO is not affiliated with Roblox Corporation. All rights reserved.
+            </p>
+        </div>
     </footer>
     <script>
-        document.querySelector('.navbar-burger').addEventListener('click', function () {
-            var target = document.getElementById(this.dataset.target);
-            target.classList.toggle('is-active');
-        });
-
         function closePopup() {
-            document.querySelector('.popup').style.display = 'none';
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("congratsPopup").style.display = "none";
         }
 
-        function closeCongratsPopup() {
-            document.querySelector('.popup-congrats').style.display = 'none';
+        function hidePopup(popupId) {
+            var popup = document.getElementById(popupId);
+            if (popup) {
+                popup.style.display = 'none';
+            }
         }
 
-        document.querySelector('#withdraw-btn').addEventListener('click', function () {
-            var username = document.querySelector('#username').value;
-            var amount = document.querySelector('#amount').value;
-            var gamepassId = document.querySelector('#gamepass-id').value;
-            var robuxToWithdraw = parseFloat(document.querySelector('.price strong').innerText);
+        function showPopup(popupId) {
+            var popup = document.getElementById(popupId);
+            if (popup) {
+                popup.style.display = 'block';
+            }
+        }
 
-            if (robuxToWithdraw <= 0) {
-                document.querySelector('.popup').style.display = 'block';
+        function Logout() {
+            localStorage.removeItem('sessionToken');
+            window.location.href = '/login';
+        }
+
+        document.getElementById("withAmount").addEventListener("input", function() {
+            var amountInput = parseFloat(this.value); // Get the value entered in the input field
+            var displayAmount = document.getElementById("displayAmount");
+
+            if (!isNaN(amountInput)) {
+                var newAmount = Math.round(amountInput / 0.70); // Calculate 30% more than the input value
+                displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
             } else {
-                document.querySelector('.popup-congrats').style.display = 'block';
+                displayAmount.textContent = ""; // Clear the display if the input is not a number
             }
         });
+
+        function withDraw() {
+            document.getElementById("withdrawButton").classList.add("disabled");
+            const token = localStorage.getItem('sessionToken');
+            const withAmount = document.getElementById('withAmount').value;
+            const gpID = document.getElementById('gpID').value;
+            console.log(withAmount, gpID);
+            if (token) {
+                fetch('/api/userdata', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (withAmount > data.balance) {
+                            console.log('Not enough balance');
+                            showPopup('notEnoughBalancePopup');
+                        } else {
+                            console.log('Passed checkpoint #0');
+
+                            const queryParams = new URLSearchParams({
+                                gpID: gpID,
+                                withAmount: withAmount
+                            });
+
+                            fetch(`/api/withdraw?${queryParams}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Authorization': token
+                                    }
+                                })
+                                .then(response => {
+                                    console.log(response.status);
+                                    if (response.status == 200) {
+                                        showPopup('congratsPopup');
+                                    } else if (response.status == 400 || response.status == 403) {
+                                        showPopup('somethingWrongPopup');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+
+                        }
+                    })
+            }
+        }
+
+        function loadUserData() {
+            const token = localStorage.getItem('sessionToken');
+            if (token) {
+                fetch('/api/userdata', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        const balance = document.getElementById("rbxbalance");
+                        const nameDisplay = document.getElementById("usernameDisplay");
+
+                        balance.textContent = `${data.balance} robux`;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        window.location.href = '/login';
+                        return;
+                    });
+            } else {
+                window.location.href = '/login';
+            }
+        }
+
+        setInterval(loadUserData, 1000);
     </script>
 </body>
 
 </html>
+
