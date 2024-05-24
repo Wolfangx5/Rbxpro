@@ -234,9 +234,8 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
                     <a class="navbar-item navbar-s-item" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item is-active" href="/withdraw" data-sveltekit-prefetch="hover" data-sveltekit-reload="true">Withdraw</a>
+                    <a class="navbar-item navbar-s-item" href="/leaderboard">Withdraw</a>
                     <a class="navbar-item navbar-s-item" href="/profile">Profile</a>
-                    <a class="navbar-item navbar-s-item" href="/leaderboard">Leaderboard</a>
                 </div>
             </div>
         </div>
@@ -248,6 +247,8 @@
             </div>
             <div class="withdraw-form">
                 <input class="withdraw-input" type="text" id="username" placeholder="Enter your username">
+                <input class="withdraw-input" type="number" id="amount" placeholder="Enter amount">
+                <input class="withdraw-input" type="text" id="gamepass-id" placeholder="Enter gamepass ID">
                 <div class="withdraw-price">
                     <span class="price">You will receive: <strong>0.00</strong> R$</span>
                 </div>
@@ -290,7 +291,10 @@
 
         document.querySelector('#withdraw-btn').addEventListener('click', function () {
             var username = document.querySelector('#username').value;
+            var amount = document.querySelector('#amount').value;
+            var gamepassId = document.querySelector('#gamepass-id').value;
             var robuxToWithdraw = parseFloat(document.querySelector('.price strong').innerText);
+
             if (robuxToWithdraw <= 0) {
                 document.querySelector('.popup').style.display = 'block';
             } else {
