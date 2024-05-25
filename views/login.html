@@ -256,23 +256,19 @@
 
         .confirmation-popup #yesButton:hover {
             background-color: #45a04983;
-            border: 2px solid rgba(5, 128, 5, 0.5);
+            border: 2px solid rgba(5, 128, 5, 0.87);
         }
 
         .confirmation-popup #noButton {
             background-color: #f44336;
             color: white;
-            border: 2px solid #871717;
+            border: 2px solid #a52a1c;
             margin: 0 10px;
         }
 
         .confirmation-popup #noButton:hover {
-            background-color: #db2b23a6;
-            border: 2px solid rgba(204, 51, 51, 0.5);
-        }
-
-        .fa-brands {
-            font-size: 20px;
+            background-color: #f14336a6;
+            border: 2px solid #8f2419;
         }
     </style>
 </head>
@@ -280,45 +276,116 @@
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RBXPRO logo" class="logo">
+            <a class="navbar-item" href="https://rbx.pro">
+                <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RbxPro Logo" width="50" height="50">
             </a>
-            <div class="navbar-burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-        <div class="navbar-menu">
+
+        <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-end">
-                <a class="navbar-item" href="#">Home</a>
-                <a class="navbar-item" href="#">Features</a>
-                <a class="navbar-item" href="#">Contact</a>
-                <a class="navbar-item" href="#">About</a>
+                <a class="navbar-item" href="#about">About</a>
+                <a class="navbar-item" href="#earn">Earn</a>
+                <a class="navbar-item" href="#faq">FAQ</a>
+                <div class="navbar-item has-addons">
+                    <button id="openModal">Login</button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <div class="modal">
+    <footer>
+        <p class="logo">RBXPRO</p>
+        <p class="rbxpro-disclaimer">© 2024 RBXPRO. All Rights Reserved.</p>
+        <ul class="footer-nav">
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </footer>
+
+    <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div class="title">Modal Title</div>
-            <div class="description">This is a modal description.</div>
+            <div class="title">Login to RBXPRO</div>
+            <div class="description">Please enter your username to continue.</div>
             <div class="input-container">
-                <label for="modal-input">Input Label:</label>
-                <input type="text" id="modal-input" name="modal-input">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="actions">
-                <button type="button">Enter</button>
+                <button id="loginButton">Login</button>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p class="rbxpro-disclaimer">Disclaimer: RBXPRO is not affiliated with Roblox Corporation.</p>
-    </footer>
+    <div id="confirmationPopup" class="confirmation-popup">
+        <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RBXPRO Logo" width="50" height="50">
+        <div class="title">Login Confirmation</div>
+        <p>Do you want to log in as <span id="usernameDisplay"></span>?</p>
+        <div class="actions">
+            <button id="yesButton">Yes</button>
+            <button id="noButton">No</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById("loginModal");
+            const btn = document.getElementById("openModal");
+            const span = document.getElementsByClassName("close")[0];
+            const loginButton = document.getElementById("loginButton");
+            const confirmationPopup = document.getElementById("confirmationPopup");
+            const usernameDisplay = document.getElementById("usernameDisplay");
+            const yesButton = document.getElementById("yesButton");
+            const noButton = document.getElementById("noButton");
+
+            btn.onclick = function () {
+                modal.style.display = "flex";
+            }
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+                if (event.target == confirmationPopup) {
+                    confirmationPopup.style.display = "none";
+                }
+            }
+
+            loginButton.onclick = function () {
+                const username = document.getElementById("username").value;
+                if (username.trim() !== "") {
+                    usernameDisplay.textContent = username;
+                    modal.style.display = "none";
+                    confirmationPopup.style.display = "block";
+                } else {
+                    alert("Please enter a valid username.");
+                }
+            }
+
+            yesButton.onclick = function () {
+                confirmationPopup.style.display = "none";
+                alert("Logged in successfully!");
+            }
+
+            noButton.onclick = function () {
+                confirmationPopup.style.display = "none";
+                modal.style.display = "flex";
+            }
+        });
+    </script>
 </body>
 
 </html>
+
 
 
