@@ -22,15 +22,16 @@
     <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
     <link href="./css/main.css" rel="stylesheet" />
     <link href="./css/bulma.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> <!-- Don't mind this -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
         }
 
         footer {
@@ -57,17 +58,12 @@
 
         .logo {
             font-weight: 700;
-            font-size: 32px;
+            font-size: 36px;
             color: #fff;
         }
 
         .navbar {
-            background-color: #2182f0;
-            color: #fff;
-        }
-
-        .navbar-menu {
-            align-items: center;
+            background-color: #066ee7;
         }
 
         .navbar-item {
@@ -76,19 +72,38 @@
         }
 
         .navbar-burger {
-            margin-right: 1rem;
+            color: #fff;
+        }
+
+        .navbar-menu {
+            flex-grow: 1;
         }
 
         .navbar-end {
             justify-content: flex-end;
         }
 
-        .button.is-info {
-            background-color: #0288d1;
-            border-radius: 20px;
+        .navbar-item.has-addons .button {
+            margin-right: 0.5rem;
         }
 
-        .button.is-info:hover {
+        button,
+        input[type="text"] {
+            border: none;
+            outline: none;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #0288d1;
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
             background-color: #025b9a;
         }
 
@@ -102,13 +117,11 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
-            color: #fff;
         }
 
         .modal-content {
-            min-width: 300px;
-            background-color: #fff;
-            color: #000;
+            background-color: #eef5f9;
+            color: #333;
             margin: 10px;
             border-radius: 10px;
             padding: 25px;
@@ -116,6 +129,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            min-width: 300px;
         }
 
         .close {
@@ -128,7 +142,6 @@
         .close:hover,
         .close:focus {
             color: #000;
-            text-decoration: none;
             cursor: pointer;
         }
 
@@ -181,7 +194,7 @@
         .modal-content .actions button {
             margin-left: 10px;
             background-color: #0288d1;
-            color: #fff;
+            color: #FFF;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
@@ -194,7 +207,7 @@
 
         .navbar-item.is-active {
             color: #fff;
-            background-color: #025b9a;
+            background-color: #2182f0;
         }
 
         .confirmation-popup {
@@ -207,7 +220,7 @@
             background-color: #fff;
             border: 2px solid #0288d1;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1;
+            z-index: 10000;
             max-width: 400px;
             width: 100%;
             text-align: center;
@@ -243,178 +256,69 @@
 
         .confirmation-popup #yesButton:hover {
             background-color: #45a04983;
-            border: 2px solid rgba(69, 160, 73, 0.574);
+            border: 2px solid rgba(5, 128, 5, 0.5);
         }
 
         .confirmation-popup #noButton {
-            background-color: #F44336;
+            background-color: #f44336;
             color: white;
-            border: 2px solid #c0291f;
+            border: 2px solid #871717;
             margin: 0 10px;
         }
 
         .confirmation-popup #noButton:hover {
-            background-color: #d02e2483;
-            border: 2px solid rgba(192, 41, 31, 0.574);
+            background-color: #db2b23a6;
+            border: 2px solid rgba(204, 51, 51, 0.5);
         }
 
-        .main-content {
-            margin-top: 10%;
-        }
-
-        .button {
-            border-radius: 5px;
-            border: 2px solid #0288d1;
-            color: #fff;
-            background-color: #0288d1;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #025b9a;
-        }
-
-        @media (max-width: 768px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                display: none;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .navbar-item {
-                padding: 1rem;
-                width: 100%;
-                text-align: center;
-            }
-
-            .button {
-                width: 100%;
-                margin: 10px 0;
-            }
-
-            .modal-content {
-                width: 90%;
-            }
+        .fa-brands {
+            font-size: 20px;
         }
     </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.querySelector('.modal');
-            const modalClose = document.querySelector('.close');
-            const showModal = () => {
-                modal.style.display = 'flex';
-            };
-            const hideModal = () => {
-                modal.style.display = 'none';
-            };
-            modalClose.addEventListener('click', hideModal);
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    hideModal();
-                }
-            });
-
-            const confirmationPopup = document.querySelector('.confirmation-popup');
-            const yesButton = document.getElementById('yesButton');
-            const noButton = document.getElementById('noButton');
-            const showConfirmation = () => {
-                confirmationPopup.style.display = 'block';
-            };
-            const hideConfirmation = () => {
-                confirmationPopup.style.display = 'none';
-            };
-            yesButton.addEventListener('click', hideConfirmation);
-            noButton.addEventListener('click', hideConfirmation);
-        });
-    </script>
 </head>
 
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a class="navbar-item" href="#">
-                <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RBXPRO Logo" class="logo">
+            <a class="navbar-item" href="/">
+                <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RBXPRO logo" class="logo">
             </a>
-            <div class="navbar-burger" data-target="navMenu">
+            <div class="navbar-burger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
-        <div id="navMenu" class="navbar-menu">
+        <div class="navbar-menu">
             <div class="navbar-end">
                 <a class="navbar-item" href="#">Home</a>
                 <a class="navbar-item" href="#">Features</a>
-                <a class="navbar-item" href="#">Pricing</a>
                 <a class="navbar-item" href="#">Contact</a>
-                <button class="navbar-item button is-info" onclick="showModal()">Sign Up</button>
+                <a class="navbar-item" href="#">About</a>
             </div>
         </div>
     </nav>
 
-    <div class="main-content">
-        <section class="section">
-            <div class="container">
-                <h1 class="title">Welcome to RBXPRO</h1>
-                <p class="subtitle">Earn free Robux by completing simple tasks and joining our frequent giveaways!</p>
-                <button class="button" onclick="showModal()">Get Started</button>
-            </div>
-        </section>
-    </div>
-
     <div class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2 class="title">Sign Up for RBXPRO</h2>
-            <p class="description">Complete the form below to create your account and start earning Robux!</p>
+            <div class="title">Modal Title</div>
+            <div class="description">This is a modal description.</div>
             <div class="input-container">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Enter your username">
-            </div>
-            <div class="input-container">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Enter your email">
+                <label for="modal-input">Input Label:</label>
+                <input type="text" id="modal-input" name="modal-input">
             </div>
             <div class="actions">
-                <button type="submit">Submit</button>
+                <button type="button">Enter</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="container">
-            <p class="rbxpro-disclaimer">RBXPRO is not affiliated with Roblox Corporation.</p>
-            <ul class="footer-nav">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </div>
+        <p class="rbxpro-disclaimer">Disclaimer: RBXPRO is not affiliated with Roblox Corporation.</p>
     </footer>
-
-    <div class="confirmation-popup">
-        <img src="https://via.placeholder.com/100" alt="Confirmation Image">
-        <h2 class="title">Are you sure?</h2>
-        <p>Do you really want to proceed with this action?</p>
-        <div class="actions">
-            <button id="yesButton">Yes</button>
-            <button id="noButton">No</button>
-        </div>
-    </div>
-
 </body>
 
 </html>
+
 
