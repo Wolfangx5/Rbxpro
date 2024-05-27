@@ -30,6 +30,8 @@
             margin: 0;
             padding: 0;
             height: 100vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
         }
 
         footer {
@@ -48,6 +50,11 @@
             font-size: 20px;
             color: #fff;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #ffeb3b;
         }
 
         .rbxpro-disclaimer {
@@ -59,10 +66,12 @@
             font-weight: 700;
             font-size: 42px;
             color: #fff;
+            font-family: 'Roboto', sans-serif;
         }
 
         .navbar-item {
             padding: 0.5rem 1rem; 
+            font-family: 'Roboto', sans-serif;
         }
 
         .navbar-burger {
@@ -85,6 +94,7 @@
         input[type="text"] {
             border: none;
             outline: none;
+            font-family: 'Roboto', sans-serif;
         }
 
         button { /* the "enter" button of the login form */
@@ -94,11 +104,12 @@
             padding: 10px 20px;
             border-radius: 10px;
             margin-top: 10px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
             background-color: #025b9a;
+            transform: scale(1.05);
         }
 
         .modal {
@@ -112,12 +123,13 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.4);
             color: #FFF;
+            visibility: visible;
         }
 
         .modal-content {
             min-width: 300px;
             background-color: #eef5f9;
-            color: #FFF;
+            color: #333;
             margin: 10px;
             border-radius: 10px;
             padding: 25px;
@@ -125,6 +137,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .close {
@@ -194,20 +207,20 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .modal-content .actions button:hover {
             background-color: #025b9a;
+            transform: scale(1.05);
         }
 
         .navbar-item.is-active {
             color: #fff; 
             background-color: #2182f0; 
         }
-                /* Styled confirmation popup */
-                .confirmation-popup {
-            
+
+        .confirmation-popup {
             display: none;
             position: fixed;
             top: 45%;
@@ -221,106 +234,40 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            border-radius: 10px;
         }
 
         .confirmation-popup img {
             max-width: 100%;
             height: auto;
-            border-radius: 50%;
-            margin-bottom: 15px;
+            border-radius: 10px;
         }
 
         .confirmation-popup .title {
-            font-size: 20px;
+            margin: 10px 0;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 15px;
-            color: #0288d1;
+            color: #333;
         }
 
         .confirmation-popup .actions button {
+            margin-top: 10px;
+            background-color: #0288d1;
+            color: #FFF;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .confirmation-popup #yesButton {
-            background-color: #4CAF50;
-            color: white;
-            border: 2px solid #1a731d;
-            margin: 0 10px;
-        }
-
-        .confirmation-popup #yesButton:hover {
-            background-color: #45a04983;
-            border: 2px solid rgba(69, 160, 73, 0.574);
-        }
-
-        .confirmation-popup #noButton {
-            background-color: #F44336;
-            color: white;
-            border: 2px solid #c0291f;
-            margin: 0 10px;
-        }
-
-        .confirmation-popup #noButton:hover {
-            background-color: #c51f1fa2;
-            border: 2px solid #a704047d;
+        .confirmation-popup .actions button:hover {
+            background-color: #025b9a;
+            transform: scale(1.05);
         }
     </style>
 </head>
 
-<body aria-hidden="false" style="">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="#">
-                        Earn
-                    </a>
-                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
-                        Withdraw
-                    </a>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="" style="background-color: #2182f0 !important;" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
-                                <strong>Login</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <footer>
-        <div class="footer-nav">
-            <ul>
-                <li><a href="/earn">Earn</a></li>
-                <li><a href="/withdraw">Withdraw</a></li>
-            </ul>
-        </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
-        <div class="rbxpro-disclaimer">
-            <p>
-               RBXPRO | All Rights Reserved.
-            </p>
-            <p>               RbxPro is not affiliated, associated, or partnered with Roblox Corporation.
-            </p>
-            <p>© Copyright Rbx.Pro 2024</p>
-        </div>
-    </footer>
-
+<body>
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
@@ -336,107 +283,113 @@
             </form>
         </div>
     </div>
-            <!-- Confirmation Popup -->
-            <div class="confirmation-popup" id="confirmationPopup">
-                <img src="" id="profileImage" alt="Profile Picture">
-                <div class="title" id="confirmationTitle">Please confirm that this is you</div>
-                <div class="actions">
-                    <button id="yesButton">This is me !</button>
-                    <button id="noButton">This is not me !</button>
-                </div>
-            </div>
+
+    <!-- Confirmation Popup -->
+    <div class="confirmation-popup" id="confirmationPopup">
+        <img src="" id="profileImage" alt="Profile Picture">
+        <div class="title" id="confirmationTitle">Please confirm that this is you</div>
+        <div class="actions">
+            <button id="yesButton">This is me!</button>
+            <button id="noButton">This is not me!</button>
+        </div>
+    </div>
+
     <div id="resultContainer"></div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-        // Wait for the DOM to be fully loaded
+            // Get the enter button element
+            var enterButton = document.getElementById("enterButton");
+            var confirmationPopup = document.getElementById("confirmationPopup");
+            var loginPopup = document.getElementById("loginModal");
+            var profileImage = document.getElementById("profileImage");
+            var confirmationTitle = document.getElementById("confirmationTitle");
 
-        // Get the enter button element
-        var enterButton = document.getElementById("enterButton");
-        var confirmationPopup = document.getElementById("confirmationPopup");
-        var loginPopup = document.getElementById("loginModal");
-        var profileImage = document.getElementById("profileImage");
-        var confirmationTitle = document.getElementById("confirmationTitle");
+            // Add a click event listener to the enter button
+            enterButton.addEventListener("click", function() {
+                // Get the input element for the username
+                var usernameInput = document.getElementById("username");
 
-        // Add a click event listener to the enter button
-        enterButton.addEventListener("click", function() {
-            // Get the input element for the username
-            var usernameInput = document.getElementById("username");
+                // Get the value entered by the user
+                var username = usernameInput.value;
 
-            // Get the value entered by the user
-            var username = usernameInput.value;
-
-            // Print the username to the console log
-       
-            fetch('/api/user', {
-            method: 'POST',
-            headers: {
-                'Authorization': username
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                confirmationPopup.style.display = "block";
-                loginPopup.style.visibility = "hidden";
-
-            profileImage.src = data.avatarUrl; // Replace "NEW IMAGE LINK" with the actual image link
-            confirmationTitle.textContent = data.username; // Replace "NEW TITLE" with the desired title
-
-            // Add click event listeners to the yes and no buttons in the confirmation popup
-            var yesButton = document.getElementById("yesButton");
-            var noButton = document.getElementById("noButton");
-
-            yesButton.addEventListener("click", function() {
-                console.log("User confirmed: " + username);
-                fetch('/api/login', {
+                // Print the username to the console log
+                fetch('/api/user', {
                     method: 'POST',
                     headers: {
-                        'Authorization': data.id,
-                        'Username': username
-
+                        'Authorization': username
                     }
                 })
                 .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                localStorage.setItem('sessionToken', data.sessionToken);
-                window.location.href = '/earn'
-            })
-                
-                }); 
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    confirmationPopup.style.display = "block";
+                    loginPopup.style.visibility = "hidden";
 
-            noButton.addEventListener("click", function() {
-                // Hide the confirmation popup
-                confirmationPopup.style.display = "none";
-                loginPopup.style.visibility = "visible";
-                console.log("User denied");
-                // Add any additional actions you want to perform when the user denies
+                    profileImage.src = data.avatarUrl;
+                    confirmationTitle.textContent = data.username;
+
+                    // Add click event listeners to the yes and no buttons in the confirmation popup
+                    var yesButton = document.getElementById("yesButton");
+                    var noButton = document.getElementById("noButton");
+
+                    yesButton.addEventListener("click", function() {
+                        console.log("User confirmed: " + username);
+                        fetch('/api/login', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': data.id,
+                                'Username': username
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            localStorage.setItem('sessionToken', data.sessionToken);
+                            window.location.href = '/earn';
+                        });
+                    });
+
+                    noButton.addEventListener("click", function() {
+                        confirmationPopup.style.display = "none";
+                        loginPopup.style.visibility = "visible";
+                        console.log("User denied");
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error.message);
+
+                    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                        console.error('Network error occurred. Redirecting to login page.');
+                        window.location.href = '/login';
+                    } else {
+                        console.error('Unexpected error occurred.');
+                    }
+                });
             });
-            })
-            .catch(error => {
-                console.error('Error:', error.message);
-
-                // Check if the error status is 401 (Unauthorized)
-                if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-                    console.error('Network error occurred. Redirecting to login page.');
-                    window.location.href = '/login';
-                } else {
-                    console.error('Unexpected error occurred.');
-                }
-    });
-        })
-        })
-       
+        });
     </script>
-        </body>
+
+    <footer>
+        <div class="content has-text-centered">
+            <p>
+                <strong>RbxPro</strong> © 2024 - Earn Your Robux Now!
+            </p>
+            <p class="rbxpro-disclaimer">
+                Disclaimer: RbxPro is not affiliated with or endorsed by Roblox Corporation.
+            </p>
+        </div>
+    </footer>
+</body>
 </html>
+
 
 
