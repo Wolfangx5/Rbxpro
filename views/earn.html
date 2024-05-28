@@ -252,53 +252,59 @@
         </div>
     </footer>
 </body>
-<script src="https://kit.fontawesome.com/11277b4f51.js"></script>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 <script>
     function Logout() {
         localStorage.removeItem('sessionToken');
         window.location.href = '/login';
     }
-
     function openBitlab() {
         const token = localStorage.getItem('sessionToken');
         window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
+    
     }
-
     function openAytS() {
         const token = localStorage.getItem('sessionToken');
         window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
-    }
 
+    }
     function openCPX() {
         const token = localStorage.getItem('sessionToken');
         window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
     }
-
     function loadUserData() {
-        const token = localStorage.getItem('sessionToken');
-        if (token) {
-            fetch('/api/userdata', {
+            const token = localStorage.getItem('sessionToken');
+            if (token){
+                fetch('/api/userdata', {
                 method: 'POST',
                 headers: {
-                    'Authorization': token
+                'Authorization': token
                 }
             })
             .then(response => response.json())
             .then(data => {
+              
                 const balance = document.getElementById("rbxbalance");
                 const nameDisplay = document.getElementById("usernameDisplay");
+      
+               
+               
                 balance.textContent = `${data.balance} robux`
                 nameDisplay.textContent = `Welcome, ${data.username}!`
             })
             .catch(error => {
-                window.location.href = '/login';
-                return;
+              window.location.href = '/login';
+              return;
             });
-        } else {
-            window.location.href = '/login';
-        }
-    }
-    setInterval(loadUserData, 1000)
+            }else{
+                window.location.href = '/login';
+            }
+
+            
+      }
+      setInterval(loadUserData, 1000)
+
 </script>
 </html>
+        
 
