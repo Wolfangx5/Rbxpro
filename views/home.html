@@ -195,13 +195,6 @@
             </div>
         </div>
     </div>
-    <footer>
-        <div class="footer-nav">
-        </div>
-        <div class="rbxpro-disclaimer">
-            © 2024 RBXPRO. All rights reserved. RBXPRO is not affiliated with Roblox Corporation.
-        </div>
-    </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const accordions = document.querySelectorAll('.accordion');
@@ -217,19 +210,6 @@
                 });
             });
         });
-
-        function generateRobux() {
-            const container = document.body;
-    
-            for (let i = 0; i < 50; i++) {
-                const robuxIcon = document.createElement('img');
-                robuxIcon.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Robux_2019_Logo_gold.svg/800px-Robux_2019_Logo_gold.svg.png'; 
-                robuxIcon.classList.add('robux-icon');
-                robuxIcon.style.left = `${Math.random() * 100}vw`; 
-                robuxIcon.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                robuxIcon.style.animationDelay = `${Math.random() * 2}s`; 
-                container.appendChild(robuxIcon);
-            }
         }
         
         function loadUserData() {
@@ -254,7 +234,6 @@
         }
         
         loadUserData();
-        generateRobux();
     </script>
 </body>
 
