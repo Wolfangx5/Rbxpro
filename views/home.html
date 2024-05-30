@@ -16,11 +16,12 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+       
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-color: #1e1e1e;
+            background-color: #2182f0;
             color: #ecf0f1;
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -29,46 +30,61 @@
             justify-content: center;
         }
 
-        .navbar .logo {
+        .navbar {
+            width: 100%;
+            background-color: #d90f77;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: -190px;
+        }
+
+        .logo {
             font-weight: 700;
-            font-size: 20px;
+            font-size: 24px;
             color: #fff;
         }
 
         .content {
             text-align: center;
             padding: 20px;
-            margin-top: 60px;
+            margin-top: 20px;
             width: 100%;
             max-width: 800px;
-        }
-
-        .roblox-character {
-            width: 150px;
-            height: auto;
-            margin-bottom: 20px;
+            position: relative; 
         }
 
         .big-text {
             font-size: 36px;
             margin-top: 20px;
             color: #d90f77;
+            background-color: #2182f0be;
             overflow: hidden;
-            border-right: .15em solid orange;
+            border-right: .15em solid;
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: .15em;
             animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+            border-radius: 10px;
         }
 
         @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
         }
 
         @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: orange }
+            from,
+            to {
+                border-color: transparent
+            }
+
         }
 
         .small-text {
@@ -77,23 +93,35 @@
             color: #bdc3c7;
         }
 
-        .start-earning-button {
-            display: inline-block;
+        .roblox-character {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
             margin-top: 30px;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #e70664;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            margin-left: -350px;
         }
+
+        .start-earning-button {
+    position: absolute; 
+    top: 45%; 
+    transform: translateY(-50%); 
+    margin-left: -100px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #e70664;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
 
         .start-earning-button:hover {
             background-color: #2182f0;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            transform: scale(1.05);
         }
 
         .how-it-works {
@@ -103,7 +131,7 @@
         }
 
         .accordion {
-            background-color: #2c3e50;
+            background-color: #34495e;
             color: #fff;
             cursor: pointer;
             padding: 18px;
@@ -117,27 +145,29 @@
             margin-bottom: 10px;
         }
 
-        .active, .accordion:hover {
+        .active,
+        .accordion:hover {
             background-color: #3e5a72;
         }
 
         .panel {
             padding: 0 18px;
             display: none;
-            background-color: #f1f1f1;
+            background-color: #065bbdc6;
             overflow: hidden;
             border-radius: 10px;
         }
 
         .panel p {
-            color: #2c3e50;
+            color: #18212a;
             font-size: 16px;
+            font: bolder;
         }
 
         footer {
-            background-color: #066ee7;
+            background-color: #e70664;
             color: #fff;
-            padding: 10px;
+            padding: 50px;
             text-align: center;
             width: 100%;
             position: fixed;
@@ -149,7 +179,8 @@
         .footer-nav ul {
             list-style-type: none;
             padding: 0;
-            margin: 0;
+            margin: 1px;
+            margin-top: -20px;
         }
 
         .footer-nav li {
@@ -163,12 +194,15 @@
             text-decoration: none;
         }
 
+        .footer-nav li a:hover {
+            text-decoration: underline;
+        }
+
         .rbxpro-disclaimer {
             color: #fff;
             margin-top: 10px;
             font-size: 10px;
         }
-    </style>
 </head>
 
 <body>
