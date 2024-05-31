@@ -20,21 +20,38 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
     <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
-    <link href="./css/main.css" rel="stylesheet" />
-    <link href="./css/bulma.css" rel="stylesheet" />
+    <link href="main.css" rel="stylesheet" />
+    <link href="bulma.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> <!-- Don't mind this -->
-    
+
     <style>
-        body {
+         body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-color: black;
+            background-color: #2182f0;
         }
 
+
+        .navbar {
+            background-color: #d90f77; /* Couleur rose */
+            padding: 30px; /* Ajout de padding */
+            color: #fff; /* Texte en blanc */
+        }
+
+        .logo {
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -15px;
+}
+
         footer {
-            background-color: #0d0d0d;
+            background-color: #d90f77; /* Garder la même couleur que la navbar */
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -55,40 +72,13 @@
             color: #fff;
         }
 
-        .logo {
-            margin-left: -50px;
-            font-weight: 700;
-            font-size: 42px;
-            color: #fff;
-        }
-
-        .navbar-item {
-            padding: 0.5rem 1rem; 
-        }
-
-        .navbar-burger {
-            margin-right: 1rem; /* Adjust the margin for the burger icon */
-        }
-
-        .navbar-menu {
-            flex-grow: 1; 
-        }
-
-        .navbar-end {
-            justify-content: flex-end; 
-        }
-
-        .navbar-item.has-addons .button {
-            margin-right: 0.5rem; 
-        }
-
         button,
         input[type="text"] {
             border: none;
             outline: none;
         }
 
-        button { /* the "enter" button of the login form */
+        button {
             cursor: pointer;
             background-color: #0288d1;
             color: #FFF;
@@ -118,7 +108,7 @@
         .modal-content {
             min-width: 300px;
             background-color: #eef5f9;
-            color: #FFF;
+            color: #4a4a4a;
             margin: 10px;
             border-radius: 10px;
             padding: 25px;
@@ -203,12 +193,11 @@
         }
 
         .navbar-item.is-active {
-            color: #fff; 
-            background-color: #e706a7; 
+            color: #fff;
+            background-color: #e706a7;
         }
-                /* Styled confirmation popup */
-                .confirmation-popup {
-            
+
+        .confirmation-popup {
             display: none;
             position: fixed;
             top: 45%;
@@ -271,38 +260,9 @@
     </style>
 </head>
 
-<body aria-hidden="false" style="">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="#">
-                        Earn
-                    </a>
-                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
-                        Withdraw
-                    </a>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="" style="background-color: #2182f0 !important;" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
-                                <strong>Login</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar">
+    <div class="logo">RBXPRO</div>
+</nav>
 
     <footer>
         <div class="footer-nav">
@@ -313,133 +273,109 @@
         </div>
         <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
-            <p>
-               RBXPRO | All Rights Reserved.
-            </p>
-            <p>               RbxPro is not affiliated, associated, or partnered with Roblox Corporation.
+            <p>RBXPRO is not affiliated with Roblox Corporation.
             </p>
             <p>© Copyright Rbx.Pro 2024</p>
         </div>
     </footer>
-
+    
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <div class="title">LOGIN TO RBXPRO!</div>
             <div class="description">Please enter your ROBLOX Username to start earning Robux! <br>● We will NEVER ask for your password!</div>
-                <div class="input-container">
-                    <label for="username">ROBLOX Username</label>
-                    <input type="text" id="username" name="username" placeholder="ROBLOX Username">
-                </div>
-                <div class="actions">
-                    <button type="submit" id="enterButton">Enter</button>
-                </div>
-            </form>
+            <div class="input-container">
+                <label for="username">ROBLOX Username</label>
+                <input type="text" id="username" name="username" placeholder="ROBLOX Username">
+            </div>
+            <div class="actions">
+                <button type="submit" id="enterButton">Enter</button>
+            </div>
         </div>
     </div>
-            <!-- Confirmation Popup -->
-            <div class="confirmation-popup" id="confirmationPopup">
-                <img src="" id="profileImage" alt="Profile Picture">
-                <div class="title" id="confirmationTitle">Please confirm that this is you</div>
-                <div class="actions">
-                    <button id="yesButton">This is me !</button>
-                    <button id="noButton">This is not me !</button>
-                </div>
-            </div>
+
+    <!-- Confirmation Popup -->
+    <div class="confirmation-popup" id="confirmationPopup">
+        <img src="" id="profileImage" alt="Profile Picture">
+        <div class="title" id="confirmationTitle">Please confirm that this is you</div>
+        <div class="actions">
+            <button id="yesButton">This is me!</button>
+            <button id="noButton">This is not me!</button>
+        </div>
+    </div>
     <div id="resultContainer"></div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            var enterButton = document.getElementById("enterButton");
+            var confirmationPopup = document.getElementById("confirmationPopup");
+            var loginPopup = document.getElementById("loginModal");
+            var profileImage = document.getElementById("profileImage");
+            var confirmationTitle = document.getElementById("confirmationTitle");
 
-        // Get the enter button element
-        var enterButton = document.getElementById("enterButton");
-        var confirmationPopup = document.getElementById("confirmationPopup");
-        var loginPopup = document.getElementById("loginModal");
-        var profileImage = document.getElementById("profileImage");
-        var confirmationTitle = document.getElementById("confirmationTitle");
+            enterButton.addEventListener("click", function () {
+                var usernameInput = document.getElementById("username");
+                var username = usernameInput.value;
 
-        // Add a click event listener to the enter button
-        enterButton.addEventListener("click", function() {
-            // Get the input element for the username
-            var usernameInput = document.getElementById("username");
-
-            // Get the value entered by the user
-            var username = usernameInput.value;
-
-            // Print the username to the console log
-       
-            fetch('/api/user', {
-            method: 'POST',
-            headers: {
-                'Authorization': username
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                confirmationPopup.style.display = "block";
-                loginPopup.style.visibility = "hidden";
-
-            profileImage.src = data.avatarUrl; // Replace "NEW IMAGE LINK" with the actual image link
-            confirmationTitle.textContent = data.username; // Replace "NEW TITLE" with the desired title
-
-            // Add click event listeners to the yes and no buttons in the confirmation popup
-            var yesButton = document.getElementById("yesButton");
-            var noButton = document.getElementById("noButton");
-
-            yesButton.addEventListener("click", function() {
-                console.log("User confirmed: " + username);
-                fetch('/api/login', {
+                fetch('/api/user', {
                     method: 'POST',
                     headers: {
-                        'Authorization': data.id,
-                        'Username': username
-
+                        'Authorization': username
                     }
                 })
-                .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                localStorage.setItem('sessionToken', data.sessionToken);
-                window.location.href = '/earn'
-            })
-                
-                }); 
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        confirmationPopup.style.display = "block";
+                        loginPopup.style.visibility = "hidden";
 
-            noButton.addEventListener("click", function() {
-                // Hide the confirmation popup
-                confirmationPopup.style.display = "none";
-                loginPopup.style.visibility = "visible";
-                console.log("User denied");
-                // Add any additional actions you want to perform when the user denies
+                        profileImage.src = data.avatarUrl;
+                        confirmationTitle.textContent = data.username;
+
+                        var yesButton = document.getElementById("yesButton");
+                        var noButton = document.getElementById("noButton");
+
+                        yesButton.addEventListener("click", function () {
+                            fetch('/api/login', {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': data.id,
+                                    'Username': username
+                                }
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('Network response was not ok');
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    localStorage.setItem('sessionToken', data.sessionToken);
+                                    window.location.href = '/earn';
+                                });
+                        });
+
+                        noButton.addEventListener("click", function () {
+                            confirmationPopup.style.display = "none";
+                            loginPopup.style.visibility = "visible";
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error:', error.message);
+
+                        if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+                            console.error('Network error occurred. Redirecting to login page.');
+                            window.location.href = '/login';
+                        } else {
+                            console.error('Unexpected error occurred.');
+                        }
+                    });
             });
-            })
-            .catch(error => {
-                console.error('Error:', error.message);
-
-                // Check if the error status is 401 (Unauthorized)
-                if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-                    console.error('Network error occurred. Redirecting to login page.');
-                    window.location.href = '/login';
-                } else {
-                    console.error('Unexpected error occurred.');
-                }
-    });
-        })
-        })
-       
+        });
     </script>
-        </body>
+</body>
+
 </html>
-
-
-
-
