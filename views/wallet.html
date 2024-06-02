@@ -20,62 +20,128 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
-    <link href="./css/main.css" rel="stylesheet" />
-    <link href="./css/bulma.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/bulma.css" rel="stylesheet" />
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #1a1a1a;
-            color: #f5f5f5;
-            font-family: 'Arial', sans-serif;
+        .logo {
+            margin-left: -50px;
+            font-weight: 700;
+            font-size: 42px;
+            color: #fff;
         }
 
         .navbar {
-            background-color: #066ee7;
-            padding: 1rem;
-        }
-
-        .navbar-brand .logo {
-            font-weight: 700;
-            font-size: 24px;
-            color: #fff;
-        }
-
-        .navbar-burger span {
-            background-color: #fff;
-        }
-
-        .navbar-menu {
-            background-color: #066ee7;
+            background-color: #e70664;
         }
 
         .navbar-item {
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-burger {
+            margin-right: 1rem;
             color: #fff;
+            display: none;
+        }
+
+        .navbar-menu {
+            flex-grow: 1;
+            color: #e70664;
+        }
+
+        .navbar-end {
+            justify-content: flex-end;
+            color: #e70664;
+        }
+
+        .navbar-item.has-addons .button {
+            margin-right: 0.5rem;
         }
 
         .navbar-item.is-active {
+            color: #e70664;
+            background-color: #fff;
+        }
+
+        /* Default navbar styles for desktop */
+        .navbar-menu {
+            display: flex;
+        }
+
+        .navbar-menu a {
+            color: #fff;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar-menu a:hover {
+            background-color: #d90f77;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 1024px) {
+            .navbar-burger {
+                display: block;
+            }
+
+            .navbar-menu {
+                background-color: #e70664;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.is-active {
+                display: flex;
+            }
+        }
+
+        footer {
+            background-color: #e70664;
+            color: #fff;
+            padding: -10px;
+            text-align: center;
+        }
+
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .footer-nav li a {
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .rbxpro-disclaimer {
+            color: #fff;
+        }
+
+        body {
             background-color: #2182f0;
-            border-radius: 5px;
+            overflow: hidden; /* Prevent scrolling */
         }
-
-        .buttons .button {
-            border-radius: 5px;
-        }
-
+    
         .withdraw-container {
             max-width: 400px;
             margin: auto;
-            margin-top: 5px; /* Reduced margin-top further */
+            margin-top: -60px;
             background-color: #333;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            margin-bottom: 90px;
         }
 
         .withdraw-header {
-            background-color: #17b823;
+            background-color: #d90f77;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -83,10 +149,11 @@
 
         .withdraw-form {
             padding: 20px;
+            margin-top: -50px;
         }
 
         .withdraw-price {
-            background-color: #444;
+            background-color: #444444;
             color: #fff;
             border: none;
             padding: 15px;
@@ -108,7 +175,7 @@
         }
 
         .withdraw-btn {
-            background-color: #066ee7;
+            background-color: #17b823;
             color: #fff;
             padding: 15px;
             width: 100%;
@@ -120,7 +187,7 @@
         }
 
         .withdraw-btn:hover {
-            background-color: #2182f0;
+            background-color: #14821e;
         }
 
         .popup {
@@ -171,32 +238,11 @@
         .popup-congrats button:hover {
             background-color: #14821e;
         }
-
-        .footer {
-            background-color: #066ee7;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+        earn-link{
+            color: #333;
         }
-
-        .footer-nav {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .footer-nav li {
-            display: inline;
-            margin-right: 10px;
-        }
-
-        .footer-nav li a {
-            font-size: 16px;
-            color: #fff;
-            text-decoration: none;
-        }
+    </style>
+</head>
     </style>
 </head>
 
@@ -216,7 +262,7 @@
                     <a class="navbar-item navbar-s-item" href="/earn">
                         Earn
                     </a>
-                    <a class="navbar-item navbar-s-item is-active" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
+                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
                         Withdraw
                     </a>
                 </div>
@@ -293,124 +339,170 @@
         </div>
     </div>
 
+    <footer class="footer">
+        <ul class="footer-nav">
+            <li><a id="footer-earn-link" href="/earn">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
+            <li><a id="footer-withdraw-link" href="#">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
+        </ul>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
+        <div class="rbxpro-disclaimer">
+            <p>RBXPRO | All Rights Reserved.</p>
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
+            <p>© Copyright RBXPRO 2024</p>
+        </div>
+    </footer>
+</body>
     <script>
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("congratsPopup").style.display = "none";
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all "navbar-burger" elements
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-        function hidePopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'none';
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
+                // Add a click event on each of them
+                $navbarBurgers.forEach(function ($el) {
+                    $el.addEventListener('click', function () {
+                        // Get the target from the "data-target" attribute
+                        var target = $el.dataset.target;
+                        var $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
             }
-        }
 
-        function showPopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'block';
-            }
-        }
-
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
-        }
-
-        document.getElementById("withAmount").addEventListener("input", function() {
-            var amountInput = parseFloat(this.value); // Get the value entered in the input field
-            var displayAmount = document.getElementById("displayAmount");
-
-            if (!isNaN(amountInput)) {
-                var newAmount = Math.round(amountInput / 0.70); // Calculate 30% more than the input value
-                displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
-            } else {
-                displayAmount.textContent = ""; // Clear the display if the input is not a number
+            // Add active class to the current page link
+            var path = window.location.pathname;
+            if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
+                document.getElementById('footer-earn-link').classList.add('is-active');
+            } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
+                document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
         });
+    </script>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
+</body>
+<script>
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("congratsPopup").style.display = "none";
+    }
 
-        function withDraw() {
-            document.getElementById("withdrawButton").classList.add("disabled");
-            const token = localStorage.getItem('sessionToken');
-            const withAmount = document.getElementById('withAmount').value;
-            const gpID = document.getElementById('gpID').value;
-            console.log(withAmount, gpID);
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (withAmount > data.balance) {
-                            console.log('Not enough balance');
-                            showPopup('notEnoughBalancePopup');
-                        } else {
-                            console.log('Passed checkpoint #0');
+    function hidePopup(popupId) {
+        var popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }
 
-                            const queryParams = new URLSearchParams({
-                                gpID: gpID,
-                                withAmount: withAmount
+    function showPopup(popupId) {
+        var popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'block';
+        }
+    }
+
+    function Logout() {
+        localStorage.removeItem('sessionToken');
+        window.location.href = '/login';
+    }
+
+    document.getElementById("withAmount").addEventListener("input", function() {
+        var amountInput = parseFloat(this.value); // Get the value entered in the input field
+        var displayAmount = document.getElementById("displayAmount");
+
+        if (!isNaN(amountInput)) {
+            var newAmount = Math.round(amountInput / 0.70); // Calculate 30% more than the input value
+            displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
+        } else {
+            displayAmount.textContent = ""; // Clear the display if the input is not a number
+        }
+    });
+
+    function withDraw() {
+        document.getElementById("withdrawButton").classList.add("disabled");
+        const token = localStorage.getItem('sessionToken');
+        const withAmount = document.getElementById('withAmount').value;
+        const gpID = document.getElementById('gpID').value;
+        console.log(withAmount, gpID);
+        if (token) {
+            fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (withAmount > data.balance) {
+                        console.log('Not enough balance');
+                        showPopup('notEnoughBalancePopup');
+                    } else {
+                        console.log('Passed checkpoint #0');
+
+                        const queryParams = new URLSearchParams({
+                            gpID: gpID,
+                            withAmount: withAmount
+                        });
+
+                        fetch(`/api/withdraw?${queryParams}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': token
+                                }
+                            })
+                            .then(response => {
+                                console.log(response.status);
+                                if (response.status == 200) {
+                                    showPopup('congratsPopup');
+                                } else if (response.status == 400 || response.status == 403) {
+                                    showPopup('somethingWrongPopup');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
                             });
 
-                            fetch(`/api/withdraw?${queryParams}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': token
-                                    }
-                                })
-                                .then(response => {
-                                    console.log(response.status);
-                                    if (response.status == 200) {
-                                        showPopup('congratsPopup');
-                                    } else if (response.status == 400 || response.status == 403) {
-                                        showPopup('somethingWrongPopup');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-
-                        }
-                    })
-            }
+                    }
+                })
         }
+    }
 
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
+    function loadUserData() {
+        const token = localStorage.getItem('sessionToken');
+        if (token) {
+            fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
 
-                        const balance = document.getElementById("rbxbalance");
-                        const nameDisplay = document.getElementById("usernameDisplay");
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
 
-                        balance.textContent = `${data.balance} robux`;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        window.location.href = '/login';
-                        return;
-                    });
-            } else {
-                window.location.href = '/login';
-            }
+                    balance.textContent = `${data.balance} robux`;
+                })
+                .catch(error => {
+                    console.log(error);
+                    window.location.href = '/login';
+                    return;
+                });
+        } else {
+            window.location.href = '/login';
         }
+    }
 
-        setInterval(loadUserData, 1000);
-    </script>
-</body>
-
+    setInterval(loadUserData, 1000);
+</script>
 </html>
+
 
 
 
