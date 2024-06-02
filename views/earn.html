@@ -21,11 +21,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
     <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
-    <link href="./css/main.css" rel="stylesheet" />
-    <link href="./css/bulma.css" rel="stylesheet" />
+    <link href="/main/css" rel="stylesheet" />
+    <link href="/bulma/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
-
     <style>
         .logo {
             margin-left: -50px;
@@ -34,20 +32,28 @@
             color: #fff;
         }
 
+        .navbar {
+            background-color: #e70664;
+        }
+
         .navbar-item {
             padding: 0.5rem 1rem;
         }
 
         .navbar-burger {
             margin-right: 1rem;
+            color: #fff;
+            display: none;
         }
 
         .navbar-menu {
             flex-grow: 1;
+            color: #e70664;
         }
 
         .navbar-end {
             justify-content: flex-end;
+            color: #e70664;
         }
 
         .navbar-item.has-addons .button {
@@ -55,12 +61,51 @@
         }
 
         .navbar-item.is-active {
+            color: #e70664;
+            background-color: #fff;
+        }
+
+        /* Default navbar styles for desktop */
+        .navbar-menu {
+            display: flex;
+        }
+
+        .navbar-menu a {
             color: #fff;
-            background-color: #2182f0;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar-menu a:hover {
+            background-color: #d90f77;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 1024px) {
+            .navbar-burger {
+                display: block;
+            }
+
+            .navbar-menu {
+                background-color: #e70664;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.is-active {
+                display: flex;
+            }
         }
 
         footer {
-            background-color: #066ee7;
+            background-color: #e70664;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -88,14 +133,19 @@
             text-align: center;
             font-weight: 500;
             font-size: 16px;
-            margin-top: 20px;
+            margin-top: 0px;
+        }
+
+        body {
+            background-color: #2182f0;
+        }
+        earn-link {
+            background-color: #fff;
         }
     </style>
 </head>
 
-</head>
-
-<body aria-hidden="false" style>
+<body aria-hidden="false">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -108,12 +158,8 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item is-active" href="https://rbx.pro">
-                        Earn
-                    </a>
-                    <a class="navbar-item navbar-s-item" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
-                        Withdraw
-                    </a>
+                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="https://rbx.pro">Earn</a>
+                    <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">Withdraw</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -130,7 +176,7 @@
             </div>
         </div>
     </nav>
- <!-- Recommendation Strip -->
+
     <div class="recommendation-strip">
         We recommend trying Bitlabs and CPX for easier surveys! 🏆 (Use desktop to see your balance)
     </div>
@@ -141,52 +187,53 @@
                     <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" style="font-size: 1.7rem; color: white;" id="usernameDisplay">Welcome, {(user)}!</h2>
                     <h3 class="subtitle" style="font-size: 1.1rem; opacity: 0.85;"><span class="has-text-white" style="font-weight: 500; color: white;" data-step="1" data-intro="Complete offers from these offer walls to earn free ROBUX!">Complete these offers to earn ROBUX! 💰 <span class="ec ec-fire"></span></span></h3>
                     <div class="columns is-multiline">
-                       <div class="column is-3">
-                          <a class="popCard adscend" onclick="openAytS()"> <!-- Redirect the user to the offerwall page -->
-                          <span class="fas fa-trophy has-text-white fa-3x mb-3" aria-hidden="true"></span>
-                          <span>KIwiwall</span>
-                          </a>
-                       </div>
-                       <div class="column is-3">
-                          <a class="popCard lootably" onclick="openBitlab()"> <!-- Redirect the user to the offerwall page -->
-                          <span class="fas fa-snowboarding has-text-white fa-3x mb-3" aria-hidden="true"></span>
-                          <span>Bitlabs</span>
-                          </a>
-                       </div>
-                       <div class="column is-3">
-                          <a class="popCard lootably" onclick="openCPX()"> <!-- Redirect the user to the offerwall page -->
-                          <span class="fas fa-clock has-text-white fa-3x mb-3" aria-hidden="true"></span>
-                          <span>CPX Research</span>
-                          </a>
-                       </div>
+                        <div class="column is-3">
+                            <a class="popCard adscend" onclick="openAytS()"> <!-- Redirect the user to the offerwall page -->
+                                <span class="fas fa-trophy has-text-white fa-3x mb-3" aria-hidden="true"></span>
+                                <span>KIwiwall</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openBitlab()"> <!-- Redirect the user to the offerwall page -->
+                                <span class="fas fa-snowboarding has-text-white fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Bitlabs</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openCPX()"> <!-- Redirect the user to the offerwall page -->
+                                <span class="fas fa-clock has-text-white fa-3x mb-3" aria-hidden="true"></span>
+                                <span>CPX Research</span>
+                            </a>
+                        </div>
                     </div>
                     <br>
-                  <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" style="font-size: 1.7rem; color: white;">Social Rewards 📱</h2>
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" style="font-size: 1.7rem; color: white;">Social Rewards 📱</h2>
                     <h3 class="subtitle" style="font-size: 1.1rem; opacity: 0.85;"><span class="has-text-white" style="font-weight: 500;">Follow us to stay updated! <span class="ec ec-fire"></span></span></h3>
                     <div class="columns is-multiline" data-step="2" data-intro="Follow our social media platforms for free ROBUX and daily giveaways!">
-                       <div class="column is-3">
-                          <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank"> <!-- Redirect the user to discord -->
-                          <span class="fab fa-discord has-text-white fa-3x mb-3" aria-hidden="true"></span>
-                          <span>Discord</span>
-                          </a>
-                       </div>
-                       <div class="column is-3">
-                          <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank"> <!-- Redirect the user to instagram -->
-                          <span class="fab fa-instagram has-text-white fa-3x mb-3" aria-hidden="true"></span>
-                          <span>Instagram</span>
-                          </a>
-                       </div>
-                       <div class="column is-3">
-                          <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank"> <!-- Redirect the user to youtube -->
-                          <span class="fab fa-youtube has-text-white fa-3x mb-3" aria-hidden="true"></span>
-                          <span>Subscribe</span>
-                          </a>
-                       </div>
+                        <div class="column is-3">
+                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank"> <!-- Redirect the user to discord -->
+                                <span class="fab fa-discord has-text-white fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Discord</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank"> <!-- Redirect the user to instagram -->
+                                <span class="fab fa-instagram has-text-white fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank"> <!-- Redirect the user to youtube -->
+                                <span class="fab fa-youtube has-text-white fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Subscribe</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Recommendation Strip -->
     <div class="recommendation-strip">
         Join our discord for more R$ and TIPS on how to complete surveys! 🎁
     </div>
@@ -194,20 +241,56 @@
     <footer>
         <div class="footer-nav">
             <ul>
-                <li><a href="/">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
-                <li><a href="/withdraw">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
+                <li><a id="footer-earn-link" href="/">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
+                <li><a id="footer-withdraw-link" href="/withdraw">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
             </ul>
         </div>
         <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>
-               RBXPRO | All Rights Reserved.
+                RBXPRO | All Rights Reserved.
             </p>
-            <p>               RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.
             </p>
             <p>© Copyright RBXPRO 2024</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all "navbar-burger" elements
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
+
+                // Add a click event on each of them
+                $navbarBurgers.forEach(function($el) {
+                    $el.addEventListener('click', function() {
+
+                        // Get the target from the "data-target" attribute
+                        var target = $el.dataset.target;
+                        var $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+
+            // Add active class to the current page link
+            var path = window.location.pathname;
+            if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
+                document.getElementById('footer-earn-link').classList.add('is-active');
+            } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
+                document.getElementById('footer-withdraw-link').classList.add('is-active');
+            }
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 <script>
