@@ -61,6 +61,21 @@ const clientSecret = 'Qq9ce92VU9lbrlVXawfsDri6Ze0oQbxS';
 const redirectUri = 'http://127.0.0.1:3000/callback';
 const discordApiBaseUrl = 'https://discord.com/api';
 
+// Discord webhook URL
+const discordWebhookUrl = 'https://discord.com/api/webhooks/1259268256351649822/3538y4__KKC6z_iwX3s-WFhd3R8N6zNp5CO00ubHvpdrCfo_rzC_MJWb7S8Qclb2UX9J';
+
+// Function to send a message to the Discord webhook
+const sendDiscordWebhook = async (username, amount) => {
+  try {
+    await axios.post(discordWebhookUrl, {
+      content: `${username} completed an offer of ${amount}`
+    });
+    console.log('Discord webhook message sent successfully');
+  } catch (error) {
+    console.error('Error sending Discord webhook message:', error);
+  }
+};
+
 //-----------Callback Routes---------------//
 
 app.get('/callback/bitlab', async (req, res) => {
@@ -79,6 +94,10 @@ app.get('/callback/bitlab', async (req, res) => {
           newBal = userData.balance + parseFloat(val) * 2;
         }
         await changeUserBalance(uid, newBal);
+
+        // Send Discord webhook message
+        await sendDiscordWebhook(userData.username, parseFloat(val) * 2);
+
         res.status(200).json({
           status: 'success',
           message: 'API request successful',
@@ -119,6 +138,10 @@ app.get('/callback/cpx', async (req, res) => {
       if (userData) {
         const newBal = type === '1' ? userData.balance + parseFloat(val) * 2 : userData.balance - Math.abs(parseFloat(val) * 2);
         await changeUserBalance(uid, newBal);
+
+        // Send Discord webhook message
+        await sendDiscordWebhook(userData.username, parseFloat(val) * 2);
+
         res.status(200).json({
           status: 'success',
           message: 'API request successful',
@@ -157,6 +180,10 @@ app.get('/callback/kiwi', async (req, res) => {
     if (userData) {
       const newBal = userData.balance + parseFloat(val);
       await changeUserBalance(uid, newBal);
+
+      // Send Discord webhook message
+      await sendDiscordWebhook(userData.username, parseFloat(val));
+
       res.status(200).json({
         status: 'success',
         message: 'API request successful',
@@ -181,6 +208,3 @@ app.get('/callback/kiwi', async (req, res) => {
 });
 
 // Add other callback routes here if needed
-
-//--------------------------------------------------Bot------------------------------------------------//
-
