@@ -68,7 +68,7 @@ const discordWebhookUrl = 'https://discord.com/api/webhooks/1259268256351649822/
 const sendDiscordWebhook = async (username, amount) => {
   try {
     await axios.post(discordWebhookUrl, {
-      content: `${username} completed an offer of ${amount}`
+      content: `${username} Just earned ${amount} R$! 💸`
     });
     console.log('Discord webhook message sent successfully');
   } catch (error) {
