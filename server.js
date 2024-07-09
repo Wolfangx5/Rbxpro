@@ -20,22 +20,8 @@ const server = app.listen(port, "0.0.0.0", () => {
 socketService.initSocket(server);
 
 //-----------Utils---------------//
-const { connect, checkUserExists } = require('./utils/dbChange');
+const { connect, changeUserBalance, checkUserExists } = require('./utils/dbChange');
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
-
-// Add the changeUserBalance function here
-const changeUserBalance = async (uid, newBalance) => {
-  // Fetch the user data to get the username
-  const userData = await checkUserExists(uid);
-
-  if (userData) {
-    // Update the user's balance in your database (this is a placeholder, implement your own logic)
-    userData.balance = newBalance;
-
-    // Send Discord webhook message
-    await sendDiscordWebhook(userData.username, newBalance);
-  }
-};
 
 //-----------Route Links---------------//
 const loginRoute = require('./routes/login.js');
