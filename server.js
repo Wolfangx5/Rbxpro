@@ -76,6 +76,11 @@ const sendDiscordWebhook = async (username, amount) => {
   }
 };
 
+// Export the sendDiscordWebhook function
+module.exports = {
+  sendDiscordWebhook,
+};
+
 //-----------Callback Routes---------------//
 
 app.get('/callback/bitlab', async (req, res) => {
@@ -208,3 +213,4 @@ app.get('/callback/kiwi', async (req, res) => {
 });
 
 // Add other callback routes here if needed
+
