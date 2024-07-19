@@ -20,7 +20,7 @@ const server = app.listen(port, "0.0.0.0", () => {
 socketService.initSocket(server);
 
 //-----------Utils---------------//
-const { connect, changeUserBalance, checkUserExists } = require('./utils/dbChange');
+const { connect, changeUserBalance, checkUserExists, addOrUpdateDailyUsage, canUseDailyCommand } = require('./utils/dbChange');
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
 
 //-----------Route Links---------------//
@@ -80,10 +80,13 @@ const sendDiscordWebhook = async (username, amount) => {
 
 app.get('/callback/bitlab', async (req, res) => {
   const { uid, val, usd, type, tx } = req.query;
-  console.log(uid, val, usd, type, tx);
+  console.log("Bitlab:" ,uid, val, usd, type, tx);
 
   // Handle different types of callbacks
   if (type === 'COMPLETE' || type === 'START_BONUS' || type === 'RECONCILIATION' || type === 'SCREENOUT') {
+    if (type === "COMPLETE"){
+      await addOrUpdateDailyUsage(uid)
+    }
     try {
       const userData = await checkUserExists(uid);
       if (userData) {
@@ -129,10 +132,13 @@ app.get('/callback/bitlab', async (req, res) => {
 
 app.get('/callback/cpx', async (req, res) => {
   const { uid, val, type } = req.query;
-  console.log(uid, val, type);
+  console.log("CPX", uid, val, type);
 
   // Handle different types of callbacks
   if (type === '1' || type === '2') {
+    if (type === '1'){
+      await addOrUpdateDailyUsage(uid)
+    }
     try {
       const userData = await checkUserExists(uid);
       if (userData) {
@@ -172,8 +178,11 @@ app.get('/callback/cpx', async (req, res) => {
 });
 
 app.get('/callback/kiwi', async (req, res) => {
-  const { uid, val } = req.query;
-  console.log(uid, val);
+  const { uid, val, type } = req.query;
+  console.log("Kiwiwall:" ,uid, val, type);
+  if (type === '1'){
+    await addOrUpdateDailyUsage(uid)
+  }
 
   try {
     const userData = await checkUserExists(uid);

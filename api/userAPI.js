@@ -20,6 +20,8 @@ const { connect,
   getUserData,
   checkUserExists,
   addnewUser,
+  addOrUpdateDailyUsage,
+  canUseDailyCommand
  } = require('../utils/dbChange');
 const { info, error } = require('console');
 async function makePurchase(productId, csrfToken, robloSecurityCookie, expectedPrice, expectedSeller) {
@@ -44,8 +46,10 @@ async function makePurchase(productId, csrfToken, robloSecurityCookie, expectedP
 
     console.log('Response:', response.data);
     console.log('Purchase successful');
+    return true;
   } catch (error) {
     console.error('Error making purchase:', error.message);
+    return false;
   }
 }
 router.post('/user', async (req, res) => {
@@ -154,7 +158,11 @@ if (username) {
                 res.status(400).json({ error: 'Not enough balance'})
               }else{
                 
-                
+                let validSurvey = await canUseDailyCommand(userID) 
+                if (!validSurvey){
+                  res.status(400).json({ error: 'Must complete a survey before withdraw'})
+                  return;
+                }
                 console.log('Passed checkpoint #1')
                 try{
                       const response = await axios.get(`//apis.roblox.com/game-passes/v1/game-passes/${gpID}/product-info`, {
@@ -179,7 +187,12 @@ if (username) {
                           const expectedSeller = parseInt(gpData.Creator.Id)
                           
                           console.log(csrfToken, productId)
-                          await makePurchase(productId, csrfToken, cookies, expectedPrice, expectedSeller);
+                          let purchasestatus = await makePurchase(productId, csrfToken, cookies, expectedPrice, expectedSeller);
+                          if (!purchasestatus){ 
+                          res.status(400).json({ error: 'Low stock! Unable to purchase!' });
+                          return;
+                        }
+                          
                           console.log('Withdrawal completed')
                           res.status(200).json({ message: 'Transaction completed'})
                         }else{

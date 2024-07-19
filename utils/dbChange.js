@@ -30,7 +30,6 @@ async function addnewUser(username, userID, token) {
     console.error('Error writing data', error);
   }
 }
-
 async function changeUserBalance(userID, newBalance) {
  try{
   const database = client.db('UserInfo');
@@ -86,7 +85,54 @@ async function getUserData(sessionToken) {
     return null;
   }
 }
+async function canUseDailyCommand(id) {
+  try {
+    const database = client.db('UserInfo');
+    const collection = database.collection('surveyDailyReset');
+    const user = await collection.findOne({ id: id });
 
+    if (user) {
+      const lastUsage = user.date;
+      const now = new Date();
+      if ((now - new Date(lastUsage)) > 24 * 60 * 60 * 1000) {
+        // More than 24 hours passed
+        return false;
+      }else{
+        return true;
+      }
+    } else {
+      // No record found, user can use the command
+      return false;
+    }
+    return false;
+  } catch (error) {
+    console.error('An error occurred:', error);
+    return false;
+  }
+}
+async function addOrUpdateDailyUsage(id) {
+  try {
+    const database = client.db('UserInfo');
+    const collection = database.collection('surveyDailyReset');
+    const now = new Date();
+
+    const result = await collection.updateOne(
+      { id: id },
+      { $set: { date: now } },
+      { upsert: true } // Create a new document if it doesn't exist
+    );
+
+    if (result.upsertedCount > 0) {
+      console.log('New daily usage record added:', result);
+    } else if (result.modifiedCount > 0) {
+      console.log('Daily usage record updated:', result);
+    } else {
+      console.log('No changes made to the daily usage record.');
+    }
+  } catch (error) {
+    console.error('Error adding or updating daily usage:', error);
+  }
+}
 
 
   module.exports = {
@@ -95,4 +141,6 @@ async function getUserData(sessionToken) {
     getUserData,
     checkUserExists,
     addnewUser,
+    addOrUpdateDailyUsage,
+    canUseDailyCommand
   };
