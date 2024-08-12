@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-theme">
 
 <head>
     <meta charset="utf-8">
@@ -32,23 +32,12 @@
             font-family: 'Inter', sans-serif;
             background-color: #d60bb7;
             color: #333;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
         .navbar {
             background-color: #1a1a2e;
             padding: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
         }
 
         .navbar-brand .logo {
@@ -57,118 +46,72 @@
             color: #fff;
         }
 
-        .content {
-            text-align: center;
-            padding: 3rem 1.5rem;
-            margin-top: 80px; /* Adjusted to account for fixed navbar */
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .big-text {
-            font-size: 2rem;
+        .navbar-menu a {
             color: #fff;
-            background-color: #1a1a2e;
-            overflow: hidden;
-            border-right: .15em solid;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .15em;
-            animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
-            border-radius: 10px;
-        }
-
-        @keyframes typing {
-            from {
-                width: 0
-            }
-
-            to {
-                width: 100%
-            }
-        }
-
-        @keyframes blink-caret {
-            from,
-            to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: #e94560
-            }
-        }
-
-        .small-text {
-            font-size: 1.25rem;
-            color: #fff;
-            margin-top: 10px;
-        }
-
-        .roblox-character {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            margin: 30px auto 20px auto;
-        }
-
-        .start-earning-button {
-            display: inline-block;
-            margin-top: 30px;
             padding: 0.5rem 1.5rem;
-            border-radius: 4px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #fff;
-            background-color: #0f3460;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease, transform 0.2s ease;
             text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .start-earning-button:hover {
+        .navbar-menu a:hover {
+            background-color: #e94560;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .buttons .button {
+            background-color: #0f3460;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 4px;
+            padding: 0.5rem 1.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .buttons .button:hover {
             background-color: #162447;
             transform: translateY(-2px);
         }
 
-        .how-it-works {
-            margin-top: 40px;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .accordion {
-            background-color: #1a1a2e;
+        .recommendation-strip {
+            background-color: #17b823;
             color: #fff;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 1.125rem;
-            transition: 0.4s;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .active,
-        .accordion:hover {
-            background-color: #e94560;
-        }
-
-        .panel {
-            padding: 0 18px;
-            display: none;
-            background-color: #1a1a2e;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-
-        .panel p {
-            color: #fff;
-            font-size: 1rem;
+            padding: 10px 0;
+            text-align: center;
             font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            padding: 3rem 1.5rem;
+        }
+
+        h2.title {
+            font-size: 2rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        h3.subtitle {
+            font-size: 1.25rem;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+
+        .column .popCard {
+            display: block;
+            background-color: #1a1a2e;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .column .popCard:hover {
+            transform: translateY(-5px);
+            background-color: #e94560;
         }
 
         footer {
@@ -176,16 +119,6 @@
             color: #fff;
             padding: 20px;
             text-align: center;
-            width: 100%;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            margin-top: auto;
-        }
-
-        .footer-nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
         }
 
         .footer-nav li {
@@ -231,86 +164,166 @@
             .navbar-menu.is-active {
                 display: flex;
             }
-
-            .navbar-item {
-                color: #fff;
-                padding: 0.5rem 1rem;
-                font-size: 1.2rem;
-            }
-
-            .navbar-item:hover {
-                background-color: #e94560;
-            }
         }
     </style>
 </head>
 
-<body>
-    <header class="navbar">
-        <div class="navbar-brand">
-            <div class="logo">RBXPRO</div>
-        </div>
-    </header>
-
-    <div class="content">
-        <h1 class="big-text">Earn Free Robux Now!</h1>
-        <p class="small-text">Play games and complete surveys to earn your Robux.</p>
-        <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless"
-            alt="Roblox Character" class="roblox-character">
-        <a href="#" class="start-earning-button">Start Earning</a>
-        <div class="how-it-works">
-            <button class="accordion">How it Works</button>
-            <div class="panel">
-                <p>Complete surveys and play games to earn Robux. Follow the steps provided and watch your Robux balance grow!</p>
+<body aria-hidden="false">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div class="logo">RBXPRO</div>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end is-centered">
+                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
+                    <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">Withdraw</a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons has-addons">
+                            <a href="" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
+                                <strong id="rbxbalance">{(Balance)} R$</strong>
+                            </a>
+                            <a onclick="Logout()" href="" class="button is-info">
+                                <strong>Logout</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </nav>
+
+    <div class="recommendation-strip">
+        We recommend trying Bitlabs and CPX for easier surveys! 🏆 
+    </div>
+
+    <section class="section">
+        <div class="container has-text-centered-mobile">
+            <div class="columns is-centered">
+                <div class="column is-11">
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
+                    <h3 class="subtitle" data-step="1" data-intro="Complete offers from these offer walls to earn free ROBUX!">Complete these offers to earn ROBUX! 💰</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard adscend" onclick="openAytS()">
+                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
+                                <span>KIwiwall</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openBitlab()">
+                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Bitlabs</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openCPX()">
+                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
+                                <span>CPX Research</span>
+                            </a>
+                        </div>
+                    </div>
+                    <br>
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Social Rewards 📱</h2>
+                    <h3 class="subtitle">Follow us to stay updated!</h3>
+                    <div class="columns is-multiline" data-step="2" data-intro="Follow our social media platforms for free ROBUX and daily giveaways!">
+                        <div class="column is-3">
+                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Discord</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Subscribe</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="recommendation-strip">
+        Join our discord for more R$ and TIPS on how to complete surveys! 🎁
     </div>
 
     <footer>
-        <nav class="footer-nav">
+        <div class="footer-nav">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a id="footer-earn-link" href="#">Earn</a></li>
+                <li><a id="footer-withdraw-link" href="/withdraw">Withdraw</a></li>
+                <li><a id="footer-terms-link" href="terms.html">Terms and Conditions</a></li>
             </ul>
-        </nav>
+        </div>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
-            &copy; 2024 RbxPro. All rights reserved.
+            <p>RBXPRO | All Rights Reserved.</p>
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
+            <p>© Copyright RBXPRO 2024</p>
         </div>
     </footer>
 
     <script>
-        // Script for Accordion
-        document.querySelectorAll('.accordion').forEach(button => {
-            button.addEventListener('click', () => {
-                button.classList.toggle('active');
-                const panel = button.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(function($el) {
+                    $el.addEventListener('click', function() {
+                        var target = $el.dataset.target;
+                        var $target = document.getElementById(target);
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+
+            var path = window.location.pathname;
+            if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
+                document.getElementById('footer-earn-link').classList.add('is-active');
+            } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
+                document.getElementById('footer-withdraw-link').classList.add('is-active');
+            }
         });
     </script>
-</body>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
+    <script>
+        function Logout() {
+            localStorage.removeItem('sessionToken');
+            window.location.href = '/login';
+        }
 
+        function openBitlab() {
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
+        }
 
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const accordions = document.querySelectorAll('.accordion');
-            accordions.forEach((accordion) => {
-                accordion.addEventListener('click', function () {
-                    this.classList.toggle('active');
-                    const panel = this.nextElementSibling;
-                    if (panel.style.display === 'block') {
-                        panel.style.display = 'none';
-                    } else {
-                        panel.style.display = 'block';
-                    }
-                });
-            });
-        });
+        function openAytS() {
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
+        }
+
+        function openCPX() {
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
+        }
 
         function loadUserData() {
             const token = localStorage.getItem('sessionToken');
@@ -321,18 +334,23 @@
                         'Authorization': token
                     }
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        window.location.href = '/earn';
-                    })
-                    .catch(error => {
-                        return;
-                    });
+                .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
+
+                    balance.textContent = `${data.balance} robux`;
+                    nameDisplay.textContent = `Welcome, ${data.username}!`;
+                })
+                .catch(error => {
+                    window.location.href = '/login';
+                    return;
+                });
+            } else {
+                window.location.href = '/login';
             }
         }
-
-        loadUserData();
+        setInterval(loadUserData, 1000)
     </script>
-
+</body>
 </html>
-
