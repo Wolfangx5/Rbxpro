@@ -1,329 +1,265 @@
 <!DOCTYPE html>
-<html lang="en" class="dark-theme">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>RBXPRO - Earn Free Robux!</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.webp" type="image/webp">
     <link rel="icon" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" type="image/png">
-    <meta name="description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
+    <meta name="google-site-verification" content="aHIjIXuODNDDP2fMpZhb9w_vz5l73NUxdwynD0CRhUU" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>RBXPRO - Earn Free Robux Today!</title>
+    <meta name="description" content="Earn free Robux effortlessly with RBXPRO. Join us and complete simple tasks to receive Robux. Secure and legitimate platform for Robux enthusiasts.">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#17b823">
     <meta name="author" content="RbxPro">
-    <meta name="keywords" content="free robux, robux, roblox, free roblox">
-    <meta name="trustpilot-one-time-domain-verification-id" content="8dcf1b19-c1a9-4c41-8374-07437ed617b2">
-    <meta property="og:site_name" content="RbxPro">
-    <meta property="og:url" content="https://rbx.pro/">
-    <meta property="og:image" content="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
-    <meta property="og:title" content="RbxPro - Earn Your Robux With Ease!">
-    <meta property="og:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
-    <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/bulma.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <meta name="keywords" content="free robux,robux,roblox,earn robux,roblox free robux">
+    <link type="text/css" href="/css/bulma.css" rel="stylesheet">
     <style>
-        /* Updated Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #d60bb7;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #2182f0;
+            color: #ecf0f1;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .navbar {
-            background-color: #1a1a2e;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            background-color: #d90f77;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
         }
 
-        .navbar-brand .logo {
+        .logo {
             font-weight: 700;
-            font-size: 1.8rem;
+            font-size: 24px;
             color: #fff;
         }
 
-        .navbar-menu a {
+        .content {
+            text-align: center;
+            padding: 20px;
+            margin-top: 80px; /* Adjusted to account for fixed navbar */
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .big-text {
+            font-size: 36px;
+            margin-top: 20px;
+            color: #d90f77;
+            background-color: #2182f0be;
+            overflow: hidden;
+            border-right: .15em solid;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+            border-radius: 10px;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #d90f77
+            }
+        }
+
+        .small-text {
+            font-size: 20px;
+            margin-top: 10px;
+            color: #bdc3c7;
+        }
+
+        .roblox-character {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 30px auto 20px auto;
+        }
+
+        .start-earning-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: bold;
             color: #fff;
-            padding: 0.5rem 1.5rem;
+            background-color: #e70664;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .navbar-menu a:hover {
-            background-color: #e94560;
+        .start-earning-button:hover {
+            background-color: #2182f0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .how-it-works {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .accordion {
+            background-color: #34495e;
             color: #fff;
-            border-radius: 4px;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            transition: 0.4s;
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
 
-        .buttons .button {
-            background-color: #0f3460;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 4px;
-            padding: 0.5rem 1.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+        .active,
+        .accordion:hover {
+            background-color: #3e5a72;
         }
 
-        .buttons .button:hover {
-            background-color: #162447;
-            transform: translateY(-2px);
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #065bbdc6;
+            overflow: hidden;
+            border-radius: 10px;
         }
 
-        .recommendation-strip {
-            background-color: #17b823;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .section {
-            padding: 3rem 1.5rem;
-        }
-
-        h2.title {
-            font-size: 2rem;
-            color: #1a1a2e;
-            margin-bottom: 1rem;
-        }
-
-        h3.subtitle {
-            font-size: 1.25rem;
-            color: #444;
-            margin-bottom: 2rem;
-        }
-
-        .column .popCard {
-            display: block;
-            background-color: #1a1a2e;
-            padding: 2rem 1.5rem;
-            border-radius: 8px;
-            color: #fff;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .column .popCard:hover {
-            transform: translateY(-5px);
-            background-color: #e94560;
+        .panel p {
+            color: #18212a;
+            font-size: 16px;
+            font-weight: bolder;
         }
 
         footer {
-            background-color: #1a1a2e;
+            background-color: #e70664;
             color: #fff;
-            padding: 20px;
+            padding: 10px;
             text-align: center;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-top: auto;
+        }
+
+        .footer-nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
 
         .footer-nav li {
             display: inline-block;
-            margin-right: 15px;
+            margin-right: 10px;
         }
 
         .footer-nav li a {
-            font-size: 1rem;
+            font-size: 14px;
             color: #fff;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
         }
 
         .footer-nav li a:hover {
-            color: #e94560;
+            text-decoration: underline;
         }
 
         .rbxpro-disclaimer {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
-
-        @media (max-width: 1024px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                background-color: #1a1a2e;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                padding: 1rem;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-            }
+            color: #fff;
+            margin-top: 10px;
+            font-size: 10px;
         }
     </style>
 </head>
 
-<body aria-hidden="false">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="container">
-            <div class="navbar-brand">
-                <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end is-centered">
-                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
-                    <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">Withdraw</a>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
-                                <strong id="rbxbalance">{(Balance)} R$</strong>
-                            </a>
-                            <a onclick="Logout()" href="" class="button is-info">
-                                <strong>Logout</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body>
+    <nav class="navbar">
+        <div class="logo">RBXPRO</div>
     </nav>
-
-    <div class="recommendation-strip">
-        We recommend trying Bitlabs and CPX for easier surveys! 🏆 
-    </div>
-
-    <section class="section">
-        <div class="container has-text-centered-mobile">
-            <div class="columns is-centered">
-                <div class="column is-11">
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
-                    <h3 class="subtitle" data-step="1" data-intro="Complete offers from these offer walls to earn free ROBUX!">Complete these offers to earn ROBUX! 💰</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard adscend" onclick="openAytS()">
-                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                                <span>KIwiwall</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard lootably" onclick="openBitlab()">
-                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Bitlabs</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard lootably" onclick="openCPX()">
-                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                                <span>CPX Research</span>
-                            </a>
-                        </div>
-                    </div>
-                    <br>
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Social Rewards 📱</h2>
-                    <h3 class="subtitle">Follow us to stay updated!</h3>
-                    <div class="columns is-multiline" data-step="2" data-intro="Follow our social media platforms for free ROBUX and daily giveaways!">
-                        <div class="column is-3">
-                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Discord</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Instagram</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Subscribe</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <div class="content">
+        <div class="big-text">Start Earning Robux Today!</div>
+        <div class="small-text">Join RBXPRO and complete offers and surveys to earn free Robux quickly and easily.</div>
+        <img class="roblox-character" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
+        <a href="/login" class="start-earning-button">Start Earning Robux</a>
+        <div class="how-it-works">
+            <button class="accordion">How It Works</button>
+            <div class="panel">
+                <p>For every survey or offer you complete, we get paid by our partners. We then use a percentage of those earnings to stock up on Robux, which we give to our users as rewards. It’s that simple!</p>
+            </div>
+            <button class="accordion">Why Choose Us?</button>
+            <div class="panel">
+                <p>We are a legitimate and trustworthy platform with numerous satisfied users. Check our server for testimonials and proofs of withdrawals to see for yourself.</p>
+            </div>
+            <button class="accordion">Instant Withdrawals</button>
+            <div class="panel">
+                <p>Once you’ve earned enough points, you can withdraw your Robux instantly. No need to share your Roblox password – just provide your username and enjoy your earnings!</p>
             </div>
         </div>
-    </section>
-
-    <div class="recommendation-strip">
-        Join our discord for more R$ and TIPS on how to complete surveys! 🎁
     </div>
-
+    <footer>
     <footer>
         <div class="footer-nav">
             <ul>
-                <li><a id="footer-earn-link" href="#">Earn</a></li>
-                <li><a id="footer-withdraw-link" href="/withdraw">Withdraw</a></li>
-                <li><a id="footer-terms-link" href="terms.html">Terms and Conditions</a></li>
+                <li><a href="/earn">Earn</a></li>
+                <li><a href="/withdraw">Withdraw</a></li>
             </ul>
         </div>
         <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
-            <p>RBXPRO | All Rights Reserved.</p>
-            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
-            <p>© Copyright RBXPRO 2024</p>
+            <p>
+                RBXPRO | All Rights Reserved.
+            </p>
+            <p>RbxPro is not affiliated, associated, or partnered with Roblox Corporation.
+            </p>
+            <p>© Copyright Rbx.Pro 2024</p>
         </div>
     </footer>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-            if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
-                        var target = $el.dataset.target;
-                        var $target = document.getElementById(target);
-                        $el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
-                    });
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach((accordion) => {
+                accordion.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    if (panel.style.display === 'block') {
+                        panel.style.display = 'none';
+                    } else {
+                        panel.style.display = 'block';
+                    }
                 });
-            }
-
-            var path = window.location.pathname;
-            if (path === '/' || path.includes('earn')) {
-                document.getElementById('earn-link').classList.add('is-active');
-                document.getElementById('footer-earn-link').classList.add('is-active');
-            } else if (path.includes('withdraw')) {
-                document.getElementById('withdraw-link').classList.add('is-active');
-                document.getElementById('footer-withdraw-link').classList.add('is-active');
-            }
+            });
         });
-    </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
-    <script>
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
-        }
-
-        function openBitlab() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
-        }
-
-        function openAytS() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
-        }
-
-        function openCPX() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
-        }
 
         function loadUserData() {
             const token = localStorage.getItem('sessionToken');
@@ -334,23 +270,18 @@
                         'Authorization': token
                     }
                 })
-                .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
-
-                    balance.textContent = `${data.balance} robux`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                    return;
-                });
-            } else {
-                window.location.href = '/login';
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = '/earn';
+                    })
+                    .catch(error => {
+                        return;
+                    });
             }
         }
-        setInterval(loadUserData, 1000)
+
+        loadUserData();
     </script>
 </body>
+
 </html>
