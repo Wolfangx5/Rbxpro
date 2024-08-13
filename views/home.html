@@ -91,61 +91,9 @@
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: .15em;
-            animation: typing 2s steps(40, end), blink-caret .75s step-end infinite, deleting 2s steps(40, end) 4s;
             border-radius: 10px;
             padding: 10px 20px;
             font-family: 'Poppins', sans-serif;
-        }
-
-        @keyframes typing {
-            from {
-                width: 0
-            }
-            to {
-                width: 100%
-            }
-        }
-
-        @keyframes blink-caret {
-            from,
-            to {
-                border-color: transparent
-            }
-            50% {
-                border-color: #e70664;
-            }
-        }
-
-        @keyframes deleting {
-            from {
-                width: 100%
-            }
-            to {
-                width: 0
-            }
-        }
-
-        @keyframes textLoop {
-            0% {
-                content: "Start Earning Robux Today!";
-            }
-            33% {
-                content: "Earn today!";
-            }
-            66% {
-                content: "No human verification!";
-            }
-            100% {
-                content: "Join us now!";
-            }
-        }
-
-        .rotating-text {
-            font-size: 36px;
-            margin-top: 10px;
-            color: #ff3368;
-            font-family: 'Poppins', sans-serif;
-            animation: textLoop 12s infinite;
         }
 
         .small-text {
@@ -235,6 +183,11 @@
             transition: max-height 0.4s ease;
         }
 
+        .panel p {
+            margin: 0;
+            padding: 18px 0;
+        }
+
         footer {
             background-color: #1a1a2e;
             color: #fff;
@@ -289,7 +242,7 @@
         </ul>
     </nav>
     <div class="content">
-        <div class="big-text rotating-text"></div>
+        <div class="big-text" id="typing-text"></div>
         <div class="small-text">Join RBXPRO and complete offers and surveys to earn free Robux quickly and easily.</div>
         <img class="roblox-character" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
         <a href="/login" class="start-earning-button">Start Earning Robux</a>
@@ -326,9 +279,10 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Accordion functionality
             const accordions = document.querySelectorAll('.accordion');
             accordions.forEach((accordion) => {
-                accordion.addEventListener('click', function() {
+                accordion.addEventListener('click', function () {
                     this.classList.toggle('active');
                     const panel = this.nextElementSibling;
                     if (panel.style.maxHeight) {
@@ -338,6 +292,42 @@
                     }
                 });
             });
+
+            // Typing text animation
+            const phrases = ["Start Earning Robux Today!", "Earn Today!", "No Human Verification!", "Instant Withdrawals!"];
+            let currentPhraseIndex = 0;
+            const typingTextElement = document.getElementById("typing-text");
+
+            function typePhrase(phrase) {
+                typingTextElement.textContent = '';
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < phrase.length) {
+                        typingTextElement.textContent += phrase.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                        setTimeout(deletePhrase, 1000); // Wait before deleting the phrase
+                    }
+                }, 100);
+            }
+
+            function deletePhrase() {
+                let phrase = typingTextElement.textContent;
+                let i = phrase.length;
+                const interval = setInterval(() => {
+                    if (i > 0) {
+                        typingTextElement.textContent = phrase.substring(0, i - 1);
+                        i--;
+                    } else {
+                        clearInterval(interval);
+                        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                        setTimeout(() => typePhrase(phrases[currentPhraseIndex]), 200);
+                    }
+                }, 50);
+            }
+
+            typePhrase(phrases[currentPhraseIndex]);
         });
 
         function loadUserData() {
