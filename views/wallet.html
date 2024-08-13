@@ -24,60 +24,59 @@
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/bulma.css" rel="stylesheet" />
     <style>
-        .logo {
-            margin-left: -50px;
-            font-weight: 700;
-            font-size: 42px;
-            color: #fff;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Updated to black */
+            color: #f4f7fc;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         .navbar {
-            background-color: #e70664;
-        }
-
-        .navbar-item {
-            padding: 0.5rem 1rem;
-        }
-
-        .navbar-burger {
-            margin-right: 1rem;
+            background-color: #e70664; /* Updated to pinkish-reddish color */
+            padding: 20px;
             color: #fff;
-            display: none;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-menu {
-            flex-grow: 1;
-            color: #e70664;
-        }
-
-        .navbar-end {
-            justify-content: flex-end;
-            color: #e70664;
-        }
-
-        .navbar-item.has-addons .button {
-            margin-right: 0.5rem;
-        }
-
-        .navbar-item.is-active {
-            color: #e70664;
-            background-color: #fff;
-        }
-
-        /* Default navbar styles for desktop */
-        .navbar-menu {
-            display: flex;
+        .navbar-brand .logo {
+            font-weight: 700;
+            font-size: 24px;
+            color: #fff;
+            text-align: center;
         }
 
         .navbar-menu a {
             color: #fff;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .navbar-menu a:hover {
-            background-color: #d90f77;
+            background-color: #ff3368; /* Slightly lighter hover effect */
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .buttons .button {
+            background-color: #0f3460;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 4px;
+            padding: 0.5rem 1.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .buttons .button:hover {
+            background-color: #162447;
+            transform: translateY(-2px);
         }
 
         /* Mobile styles */
@@ -103,58 +102,33 @@
             }
         }
 
-        footer {
-            background-color: #e70664;
-            color: #fff;
-            padding: -10px;
-            text-align: center;
-        }
-
-        .footer-nav li {
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        .footer-nav li a {
-            font-size: 20px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .rbxpro-disclaimer {
-            color: #fff;
-        }
-
-        body {
-            background-color: #2182f0;
-            overflow: hidden; /* Prevent scrolling */
-        }
-    
         .withdraw-container {
             max-width: 400px;
             margin: auto;
-            margin-top: -60px;
-            background-color: #333;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 100px; /* Adjusted to account for fixed navbar */
+            background-color: #1a1a2e; /* Dark background */
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             margin-bottom: 90px;
         }
 
         .withdraw-header {
-            background-color: #d90f77;
+            background-color: #e70664;
             color: #fff;
             padding: 20px;
             text-align: center;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         .withdraw-form {
             padding: 20px;
-            margin-top: -50px;
+            margin-top: -20px;
         }
 
         .withdraw-price {
-            background-color: #444444;
+            background-color: #333;
             color: #fff;
             border: none;
             padding: 15px;
@@ -162,6 +136,7 @@
             text-align: center;
             border-radius: 5px;
             margin-bottom: 20px;
+            font-size: 18px;
         }
 
         .withdraw-input {
@@ -169,10 +144,11 @@
             padding: 10px;
             margin-bottom: 15px;
             border: none;
-            border-radius: 5px;
-            background-color: #555;
+            border-radius: 10px;
+            background-color: #444;
             color: #fff;
             font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .withdraw-btn {
@@ -181,19 +157,20 @@
             padding: 15px;
             width: 100%;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 18px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .withdraw-btn:hover {
             background-color: #14821e;
+            transform: translateY(-2px);
         }
 
         .popup {
             border: 3px solid #dd2323;
-            border-radius: 5px;
+            border-radius: 10px;
             display: none;
             position: fixed;
             top: 50%;
@@ -201,13 +178,14 @@
             transform: translate(-50%, -50%);
             background-color: #333;
             padding: 50px;
-            border-radius: 25px;
             z-index: 1000;
             text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .popup-content {
             margin-bottom: 20px;
+            color: #fff;
         }
 
         .popup button {
@@ -215,15 +193,16 @@
             padding: 10px 20px;
             background-color: #dd2323;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             color: #fff;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .popup button:hover {
             background-color: #b12828;
+            transform: translateY(-2px);
         }
 
         .popup-congrats {
@@ -239,17 +218,47 @@
         .popup-congrats button:hover {
             background-color: #14821e;
         }
-        earn-link{
-            color: #333;
+
+        footer {
+            background-color: #1a1a2e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-top: auto;
         }
-        p {
-            color: #e5e5e5;
+
+        .footer-nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
-        label {
-            color: #e5e5e5;
+
+        .footer-nav li {
+            display: inline-block;
         }
-    </style>
-</head>
+
+        .footer-nav li a {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #e94560; /* Updated hover color */
+        }
+
+        .rbxpro-disclaimer {
+            color: #aaa;
+            margin-top: 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 
@@ -295,23 +304,22 @@
             <div class="withdraw-container">
                 <div class="withdraw-header">
                     <h2 class="text-2xl">Withdraw R$</h2>
-
-                    <h2 class="text-2xl">You must completed at least one survey to withdraw!</h2>
+                    <h2 class="text-2xl">You must complete at least one survey to withdraw!</h2>
                 </div>
                 <div class="h-full bg-white rounded-md ring-2 w-full flex items-center justify-center ring-primary p-3">
                     <div class="px-4">
                         <div class="mb-4">
-                            <label for="withAmount" class="block mb-2 text-md font-medium text-black">R$ Withdraw Amount:</label>
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-black" placeholder="Amount" type="number" id="withAmount">
+                            <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
+                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="Amount" type="number" id="withAmount">
                         </div>
                         <div class="mb-4">
-                            <label for="gpID" class="block mb-2 text-md font-medium text-black">Gamepass ID:</label>
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-black" placeholder="ID" type="number" id="gpID">
+                            <label for="gpID" class="block mb-2 text-md font-medium text-white">Gamepass ID:</label>
+                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="ID" type="number" id="gpID">
                         </div>
-                        <p class="text-lg text-center text-black">Change the price of your Gamepass price to:</p>
-                        <p class="withdraw-price font-semibold text-black text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">{(Amount)}</p>
+                        <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
+                        <p class="withdraw-price font-semibold text-white text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">{(Amount)}</p>
                         <div class="flex justify-center items-center mt-4">
-                            <button id='withdrawButton' class="withdraw-btn btn btn-md btn-primary w-full text-black font-semibold" onclick="withDraw()">
+                            <button id='withdrawButton' class="withdraw-btn btn btn-md btn-primary w-full text-white font-semibold" onclick="withDraw()">
                                 <p>Withdraw</p>
                             </button>
                         </div>
@@ -348,11 +356,13 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <ul class="footer-nav">
-            <li><a id="footer-earn-link" href="/earn">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
-            <li><a id="footer-withdraw-link" href="#">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
-        </ul>
+    <footer>
+        <div class="footer-nav">
+            <ul>
+                <li><a id="footer-earn-link" href="/earn">Earn</a></li>
+                <li><a id="footer-withdraw-link" href="#">Withdraw</a></li>
+            </ul>
+        </div>
         <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>RBXPRO | All Rights Reserved.</p>
@@ -360,29 +370,22 @@
             <p>© Copyright RBXPRO 2024</p>
         </div>
     </footer>
-</body>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Get all "navbar-burger" elements
+        document.addEventListener('DOMContentLoaded', function() {
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-            // Check if there are any navbar burgers
             if ($navbarBurgers.length > 0) {
-                // Add a click event on each of them
-                $navbarBurgers.forEach(function ($el) {
-                    $el.addEventListener('click', function () {
-                        // Get the target from the "data-target" attribute
+                $navbarBurgers.forEach(function($el) {
+                    $el.addEventListener('click', function() {
                         var target = $el.dataset.target;
                         var $target = document.getElementById(target);
-
-                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                         $el.classList.toggle('is-active');
                         $target.classList.toggle('is-active');
                     });
                 });
             }
 
-            // Add active class to the current page link
             var path = window.location.pathname;
             if (path === '/' || path.includes('earn')) {
                 document.getElementById('earn-link').classList.add('is-active');
@@ -394,120 +397,112 @@
         });
     </script>
     <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
-</body>
-<script>
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-        document.getElementById("congratsPopup").style.display = "none";
-    }
-
-    function hidePopup(popupId) {
-        var popup = document.getElementById(popupId);
-        if (popup) {
-            popup.style.display = 'none';
+    <script>
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("congratsPopup").style.display = "none";
         }
-    }
 
-    function showPopup(popupId) {
-        var popup = document.getElementById(popupId);
-        if (popup) {
-            popup.style.display = 'block';
+        function hidePopup(popupId) {
+            var popup = document.getElementById(popupId);
+            if (popup) {
+                popup.style.display = 'none';
+            }
         }
-    }
 
-    function Logout() {
-        localStorage.removeItem('sessionToken');
-        window.location.href = '/login';
-    }
-
-    document.getElementById("withAmount").addEventListener("input", function() {
-        var amountInput = parseFloat(this.value); // Get the value entered in the input field
-        var displayAmount = document.getElementById("displayAmount");
-
-        if (!isNaN(amountInput)) {
-            var newAmount = Math.round(amountInput / 0.70); // Calculate 30% more than the input value
-            displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
-        } else {
-            displayAmount.textContent = ""; // Clear the display if the input is not a number
+        function showPopup(popupId) {
+            var popup = document.getElementById(popupId);
+            if (popup) {
+                popup.style.display = 'block';
+            }
         }
-    });
 
-    function withDraw() {
-        document.getElementById("withdrawButton").classList.add("disabled");
-        const token = localStorage.getItem('sessionToken');
-        const withAmount = document.getElementById('withAmount').value;
-        const gpID = document.getElementById('gpID').value;
-        console.log(withAmount, gpID);
-        if (token) {
-            fetch('/api/userdata', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (withAmount > data.balance) {
-                        console.log('Not enough balance');
-                        showPopup('notEnoughBalancePopup');
-                    } else {
-                        console.log('Passed checkpoint #0');
-
-                        const queryParams = new URLSearchParams({
-                            gpID: gpID,
-                            withAmount: withAmount
-                        });
-
-                        fetch(`/api/withdraw?${queryParams}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Authorization': token
-                                }
-                            })
-                            .then(response => {
-                                console.log(response.status);
-                                if (response.status == 200) {
-                                    showPopup('congratsPopup');
-                                } else if (response.status == 400 || response.status == 403) {
-                                    showPopup('somethingWrongPopup');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-
-                    }
-                })
-        }
-    }
-
-    function loadUserData() {
-        const token = localStorage.getItem('sessionToken');
-        if (token) {
-            fetch('/api/userdata', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
-
-                    balance.textContent = `${data.balance} robux`;
-                })
-                .catch(error => {
-                    console.log(error);
-                    window.location.href = '/login';
-                    return;
-                });
-        } else {
+        function Logout() {
+            localStorage.removeItem('sessionToken');
             window.location.href = '/login';
         }
-    }
 
-    setInterval(loadUserData, 1000);
-</script>
+        document.getElementById("withAmount").addEventListener("input", function() {
+            var amountInput = parseFloat(this.value);
+            var displayAmount = document.getElementById("displayAmount");
+
+            if (!isNaN(amountInput)) {
+                var newAmount = Math.round(amountInput / 0.70);
+                displayAmount.textContent = newAmount.toFixed(2);
+            } else {
+                displayAmount.textContent = "";
+            }
+        });
+
+        function withDraw() {
+            document.getElementById("withdrawButton").classList.add("disabled");
+            const token = localStorage.getItem('sessionToken');
+            const withAmount = document.getElementById('withAmount').value;
+            const gpID = document.getElementById('gpID').value;
+            if (token) {
+                fetch('/api/userdata', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (withAmount > data.balance) {
+                            showPopup('notEnoughBalancePopup');
+                        } else {
+                            const queryParams = new URLSearchParams({
+                                gpID: gpID,
+                                withAmount: withAmount
+                            });
+
+                            fetch(`/api/withdraw?${queryParams}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Authorization': token
+                                    }
+                                })
+                                .then(response => {
+                                    if (response.status == 200) {
+                                        showPopup('congratsPopup');
+                                    } else if (response.status == 400 || response.status == 403) {
+                                        showPopup('somethingWrongPopup');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        }
+                    })
+            }
+        }
+
+        function loadUserData() {
+            const token = localStorage.getItem('sessionToken');
+            if (token) {
+                fetch('/api/userdata', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const balance = document.getElementById("rbxbalance");
+                        balance.textContent = `${data.balance} robux`;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        window.location.href = '/login';
+                        return;
+                    });
+            } else {
+                window.location.href = '/login';
+            }
+        }
+
+        setInterval(loadUserData, 1000);
+    </script>
+</body>
+
 </html>
