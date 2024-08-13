@@ -28,13 +28,13 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000; /* Updated to black */
+            background-color: #000;
             color: #f4f7fc;
-            overflow: hidden; /* Prevent scrolling */
+            overflow-x: hidden;
         }
 
         .navbar {
-            background-color: #e70664; /* Updated to pinkish-reddish color */
+            background-color: #e70664;
             padding: 20px;
             color: #fff;
             position: fixed;
@@ -60,7 +60,7 @@
         }
 
         .navbar-menu a:hover {
-            background-color: #ff3368; /* Slightly lighter hover effect */
+            background-color: #ff3368;
             color: #fff;
             border-radius: 4px;
         }
@@ -105,12 +105,13 @@
         .withdraw-container {
             max-width: 400px;
             margin: auto;
-            margin-top: 100px; /* Adjusted to account for fixed navbar */
-            background-color: #1a1a2e; /* Dark background */
+            margin-top: 80px; /* Adjusted to account for fixed navbar */
+            background-color: #1a1a2e;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
-            margin-bottom: 90px;
+            margin-bottom: 50px;
+            padding-bottom: 20px; /* Extra padding for spacing */
         }
 
         .withdraw-header {
@@ -251,13 +252,30 @@
         }
 
         .footer-nav li a:hover {
-            color: #e94560; /* Updated hover color */
+            color: #e94560;
         }
 
         .rbxpro-disclaimer {
             color: #aaa;
             margin-top: 10px;
             font-size: 12px;
+        }
+
+        /* Media query for smaller devices */
+        @media (max-width: 600px) {
+            .withdraw-container {
+                margin-top: 60px;
+                padding-bottom: 30px;
+            }
+
+            .withdraw-btn {
+                padding: 12px;
+            }
+
+            .popup {
+                width: 90%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -506,3 +524,5 @@
 </body>
 
 </html>
+
+
