@@ -135,57 +135,44 @@
             transform: translateY(-5px);
         }
 
-        .how-it-works {
+        .box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
             margin-top: 50px;
             width: 100%;
-            max-width: 600px;
-        }
-
-        .accordion {
-            background-color: #34495e;
-            color: #fff;
-            cursor: pointer;
-            padding: 18px;
-            width: 100%;
-            border: none;
+            max-width: 800px;
             text-align: left;
-            outline: none;
-            font-size: 18px;
-            transition: background-color 0.4s ease, transform 0.3s ease;
-            border-radius: 10px;
-            margin-bottom: 10px;
         }
 
-        .accordion:hover {
-            background-color: #3e5a72;
-            transform: translateY(-3px);
-        }
-
-        .accordion:after {
-            content: '\002B';
-            color: #fff;
-            font-weight: bold;
-            float: right;
-            margin-left: 5px;
-        }
-
-        .accordion.active:after {
-            content: "\2212";
-        }
-
-        .panel {
-            padding: 0 18px;
-            display: none;
+        .info-box {
             background-color: #1a1a2e;
+            padding: 20px;
+            border-radius: 15px;
+            position: relative;
             overflow: hidden;
-            border-radius: 10px;
             color: #f4f7fc;
-            transition: max-height 0.4s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .panel p {
-            margin: 0;
-            padding: 18px 0;
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://media.sketchfab.com/models/7251b23287ab4480a162a884f7b48b7f/thumbnails/6674479a617140ab90278ee23b552b33/9f2498777c884f8fbd9e339a61760211.jpeg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+            transform: translate(-50%, -50%);
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         footer {
@@ -246,17 +233,17 @@
         <div class="small-text">Join RBXPRO and complete offers and surveys to earn free Robux quickly and easily.</div>
         <img class="roblox-character" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
         <a href="/login" class="start-earning-button">Start Earning Robux</a>
-        <div class="how-it-works">
-            <button class="accordion">How It Works</button>
-            <div class="panel">
+        <div class="box-container">
+            <div class="info-box">
+                <h3>How It Works</h3>
                 <p>For every survey or offer you complete, we get paid by our partners. We then use a percentage of those earnings to stock up on Robux, which we give to our users as rewards. It’s that simple!</p>
             </div>
-            <button class="accordion">Why Choose Us?</button>
-            <div class="panel">
+            <div class="info-box">
+                <h3>Why Choose Us?</h3>
                 <p>We are a legitimate and trustworthy platform with numerous satisfied users. Check our server for testimonials and proofs of withdrawals to see for yourself.</p>
             </div>
-            <button class="accordion">Instant Withdrawals</button>
-            <div class="panel">
+            <div class="info-box">
+                <h3>Instant Withdrawals</h3>
                 <p>Once you’ve earned enough points, you can withdraw your Robux instantly. No need to share your Roblox password – just provide your username and enjoy your earnings!</p>
             </div>
         </div>
@@ -279,20 +266,6 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Accordion functionality
-            const accordions = document.querySelectorAll('.accordion');
-            accordions.forEach((accordion) => {
-                accordion.addEventListener('click', function () {
-                    this.classList.toggle('active');
-                    const panel = this.nextElementSibling;
-                    if (panel.style.maxHeight) {
-                        panel.style.maxHeight = null;
-                    } else {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    }
-                });
-            });
-
             // Typing text animation
             const phrases = ["Start Earning Robux Today!", "Earn Today!", "No Human Verification!", "Instant Withdrawals!"];
             let currentPhraseIndex = 0;
@@ -354,5 +327,6 @@
 </body>
 
 </html>
+
 
 
