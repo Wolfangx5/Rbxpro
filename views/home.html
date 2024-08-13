@@ -15,15 +15,15 @@
     <meta name="keywords" content="free robux,robux,roblox,earn robux,roblox free robux">
     <link type="text/css" href="/css/bulma.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
         body {
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background-color: #f8f9fa;
-            color: #212529;
-            font-family: 'Roboto', sans-serif;
+            background-color: #000; /* Updated to black */
+            color: #f4f7fc;
+            font-family: 'Inter', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -32,7 +32,7 @@
 
         .navbar {
             width: 100%;
-            background-color: #6c757d;
+            background-color: #e70664; /* Updated to pinkish-reddish color */
             padding: 15px;
             display: flex;
             justify-content: center;
@@ -45,13 +45,13 @@
         .logo {
             font-weight: 700;
             font-size: 24px;
-            color: #ffffff;
+            color: #fff;
         }
 
         .content {
             text-align: center;
             padding: 20px;
-            margin-top: 100px; /* Adjusted to account for fixed navbar */
+            margin-top: 80px; /* Adjusted to account for fixed navbar */
             width: 100%;
             max-width: 800px;
         }
@@ -59,18 +59,43 @@
         .big-text {
             font-size: 36px;
             margin-top: 20px;
-            color: #007bff;
-            background-color: #e9ecef;
-            border: 2px solid #007bff;
-            padding: 10px 20px;
+            color: #f4f7fc; /* Updated to match the new theme */
+            background-color: #1a1a2e; /* Background updated */
+            overflow: hidden;
+            border-right: .15em solid #e70664; /* Updated caret color */
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
             border-radius: 10px;
-            display: inline-block;
+            padding: 10px 20px;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #e70664;
+            }
         }
 
         .small-text {
             font-size: 20px;
             margin-top: 10px;
-            color: #6c757d;
+            color: #bdc3c7;
         }
 
         .roblox-character {
@@ -87,15 +112,15 @@
             border-radius: 50px;
             font-size: 24px;
             font-weight: bold;
-            color: #ffffff;
-            background-color: #28a745;
+            color: #fff;
+            background-color: #e70664; /* Updated to match new theme */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
         }
 
         .start-earning-button:hover {
-            background-color: #218838;
+            background-color: #2182f0; /* Updated hover color */
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -106,8 +131,8 @@
         }
 
         .accordion {
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #34495e;
+            color: #fff;
             cursor: pointer;
             padding: 18px;
             width: 100%;
@@ -122,26 +147,26 @@
 
         .active,
         .accordion:hover {
-            background-color: #0056b3;
+            background-color: #3e5a72;
         }
 
         .panel {
             padding: 0 18px;
             display: none;
-            background-color: #f1f1f1;
+            background-color: #065bbdc6;
             overflow: hidden;
             border-radius: 10px;
         }
 
         .panel p {
-            color: #343a40;
+            color: #f4f7fc;
             font-size: 16px;
             font-weight: bolder;
         }
 
         footer {
-            background-color: #343a40;
-            color: #ffffff;
+            background-color: #1a1a2e;
+            color: #fff;
             padding: 10px;
             text-align: center;
             width: 100%;
@@ -163,16 +188,18 @@
 
         .footer-nav li a {
             font-size: 14px;
-            color: #ffffff;
+            color: #fff;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer-nav li a:hover {
+            color: #e94560; /* Updated hover color */
             text-decoration: underline;
         }
 
         .rbxpro-disclaimer {
-            color: #ffffff;
+            color: #aaa;
             margin-top: 10px;
             font-size: 10px;
         }
@@ -215,9 +242,9 @@
             <p>
                 RBXPRO | All Rights Reserved.
             </p>
-            <p>RbxPro is not affiliated, associated, or partnered with Roblox Corporation.
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.
             </p>
-            <p>© Copyright Rbx.Pro 2024</p>
+            <p>© Copyright RBXPRO 2024</p>
         </div>
     </footer>
     <script>
