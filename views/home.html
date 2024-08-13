@@ -21,7 +21,10 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background-color: #000; /* Dark background */
+            background-color: #000;
+            background-image: url('https://media.sketchfab.com/models/7251b23287ab4480a162a884f7b48b7f/thumbnails/6674479a617140ab90278ee23b552b33/9f2498777c884f8fbd9e339a61760211.jpeg');
+            background-size: 200px;
+            background-repeat: repeat;
             color: #f4f7fc;
             font-family: 'Inter', sans-serif;
             display: flex;
@@ -78,7 +81,7 @@
         .content {
             text-align: center;
             padding: 20px;
-            margin-top: 120px; /* Adjusted to account for fixed navbar */
+            margin-top: 120px;
             width: 100%;
             max-width: 800px;
         }
@@ -266,7 +269,6 @@
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Typing text animation
             const phrases = ["Start Earning Robux Today!", "Earn Today!", "No Human Verification!", "Instant Withdrawals!"];
             let currentPhraseIndex = 0;
             const typingTextElement = document.getElementById("typing-text");
@@ -280,7 +282,7 @@
                         i++;
                     } else {
                         clearInterval(interval);
-                        setTimeout(deletePhrase, 1000); // Wait before deleting the phrase
+                        setTimeout(deletePhrase, 1000);
                     }
                 }, 100);
             }
@@ -327,6 +329,7 @@
 </body>
 
 </html>
+
 
 
 
