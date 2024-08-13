@@ -23,74 +23,106 @@
     <link rel="icon" type="image/png" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=660c0359&is=65f98e59&hm=8c03bf1c0a42ecb36f6f8c01e575d6f2e364296bd601e843e591dd79f59dfd34&=&format=webp&quality=lossless">
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/bulma.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> <!-- Don't mind this -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
-         body {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-color: #2182f0;
+            background-color: #000; /* Updated to black */
+            color: #f4f7fc;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-
         .navbar {
-            background-color: #d90f77; /* Couleur rose */
-            padding: 30px; /* Ajout de padding */
-            color: #fff; /* Texte en blanc */
+            width: 100%;
+            background-color: #e70664; /* Updated to pinkish-reddish color */
+            padding: 20px;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-    font-weight: 700;
-    font-size: 24px;
-    color: #fff;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: -15px;
-}
+            font-weight: 700;
+            font-size: 24px;
+            color: #fff;
+            text-align: center;
+        }
 
         footer {
-            background-color: #d90f77; /* Garder la même couleur que la navbar */
+            background-color: #1a1a2e; /* Updated to dark color */
             color: #fff;
             padding: 20px;
             text-align: center;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-top: auto;
+        }
+
+        .footer-nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         .footer-nav li {
             display: inline-block;
-            margin-right: 10px;
         }
 
         .footer-nav li a {
-            font-size: 20px;
+            font-size: 16px;
             color: #fff;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #e94560; /* Updated hover color */
         }
 
         .rbxpro-disclaimer {
-            color: #fff;
+            color: #aaa;
+            margin-top: 10px;
+            font-size: 12px;
         }
 
         button,
         input[type="text"] {
             border: none;
             outline: none;
+            font-family: 'Inter', sans-serif;
         }
 
         button {
             cursor: pointer;
             background-color: #0288d1;
-            color: #FFF;
-            padding: 10px 20px;
-            border-radius: 10px;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: 600;
         }
 
         button:hover {
             background-color: #025b9a;
+            transform: translateY(-2px);
         }
 
         .modal {
@@ -102,25 +134,26 @@
             overflow: auto;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.8); /* Darkened background */
             color: #FFF;
+            top: 0;
+            left: 0;
         }
 
         .modal-content {
-            min-width: 300px;
-            background-color: #eef5f9;
-            color: #4a4a4a;
+            width: 100%;
+            max-width: 400px;
+            background-color: #1a1a2e;
+            color: #f4f7fc;
             margin: 10px;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 25px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .close {
-            color: #4a4a4a;
+            color: #f4f7fc;
             float: right;
             font-size: 24px;
             font-weight: bold;
@@ -128,7 +161,7 @@
 
         .close:hover,
         .close:focus {
-            color: #000;
+            color: #fff;
             text-decoration: none;
             cursor: pointer;
         }
@@ -144,7 +177,7 @@
         .modal-content .description {
             text-align: center;
             font-size: 14px;
-            color: #4a4a4a;
+            color: #f4f7fc;
             margin-bottom: 20px;
         }
 
@@ -155,22 +188,25 @@
         .modal-content .input-container label {
             display: block;
             margin-bottom: 5px;
-            color: #4a4a4a;
+            color: #f4f7fc;
+            font-size: 16px;
         }
 
         .modal-content input[type="text"] {
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 10px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             margin-top: 5px;
+            background-color: #333;
+            color: #fff;
         }
 
         .modal-content input[type="text"]:focus {
             border-color: #0288d1;
-            box-shadow: 0 0 3px #0288d1;
+            box-shadow: 0 0 5px #0288d1;
         }
 
         .modal-content .actions {
@@ -184,39 +220,37 @@
             background-color: #0288d1;
             color: #FFF;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: 600;
         }
 
         .modal-content .actions button:hover {
             background-color: #025b9a;
-        }
-
-        .navbar-item.is-active {
-            color: #fff;
-            background-color: #e706a7;
+            transform: translateY(-2px);
         }
 
         .confirmation-popup {
             display: none;
             position: fixed;
-            top: 45%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             padding: 20px;
-            background-color: #fff;
+            background-color: #1a1a2e;
             border: 2px solid #0288d1;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 1;
+            z-index: 1001;
             max-width: 400px;
             width: 100%;
             text-align: center;
+            border-radius: 15px;
         }
 
         .confirmation-popup img {
-            max-width: 100%;
-            height: auto;
+            max-width: 100px;
+            height: 100px;
             border-radius: 50%;
             margin-bottom: 15px;
         }
@@ -230,9 +264,10 @@
 
         .confirmation-popup .actions button {
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             font-size: 16px;
+            font-weight: 600;
         }
 
         .confirmation-popup #yesButton {
@@ -240,11 +275,12 @@
             color: white;
             border: 2px solid #1a731d;
             margin: 0 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .confirmation-popup #yesButton:hover {
             background-color: #45a04983;
-            border: 2px solid rgba(69, 160, 73, 0.574);
+            transform: translateY(-2px);
         }
 
         .confirmation-popup #noButton {
@@ -252,18 +288,20 @@
             color: white;
             border: 2px solid #c0291f;
             margin: 0 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .confirmation-popup #noButton:hover {
             background-color: #c51f1fa2;
-            border: 2px solid #a704047d;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 
-<nav class="navbar">
-    <div class="logo">RBXPRO</div>
-</nav>
+<body>
+    <nav class="navbar">
+        <div class="logo">RBXPRO</div>
+    </nav>
 
     <footer>
         <div class="footer-nav">
@@ -274,8 +312,7 @@
         </div>
         <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
-            <p>RBXPRO is not affiliated with Roblox Corporation.
-            </p>
+            <p>RBXPRO is not affiliated with Roblox Corporation.</p>
             <p>© Copyright Rbx.Pro 2024</p>
         </div>
     </footer>
@@ -380,3 +417,4 @@
 </body>
 
 </html>
+
