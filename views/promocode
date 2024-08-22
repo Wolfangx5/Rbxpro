@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>RBXPRO - Redeem Promocodes</title>
+    <link rel="icon" href="https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.webp" type="image/webp">
+    <link rel="icon" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" type="image/png">
+    <meta name="description" content="Redeem your promocodes on RBXPRO to earn free Robux!">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#17b823">
+    <meta name="author" content="RbxPro">
+    <meta name="keywords" content="free robux, promocodes, roblox, free roblox">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/bulma.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #d60bb7;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #1a1a2e;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #fff;
+        }
+
+        .navbar-menu a {
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar-menu a:hover {
+            background-color: #e94560;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .section {
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        h2.title {
+            font-size: 2rem;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        h3.subtitle {
+            font-size: 1.25rem;
+            color: #444;
+            margin-bottom: 2rem;
+        }
+
+        .promocode-container {
+            background-color: #1a1a2e;
+            padding: 2rem;
+            border-radius: 8px;
+            color: #fff;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .promocode-input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #e94560;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .redeem-button {
+            background-color: #17b823;
+            color: #fff;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .redeem-button:hover {
+            background-color: #14821e;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .roblox-character {
+            width: 150px;
+            height: auto;
+            margin: 2rem auto;
+        }
+
+        footer {
+            background-color: #1a1a2e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .footer-nav li a {
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #e94560;
+        }
+
+        .rbxpro-disclaimer {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-burger {
+                display: block;
+            }
+
+            .navbar-menu {
+                background-color: #1a1a2e;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.is-active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body aria-hidden="false">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div class="logo">RBXPRO</div>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end is-centered">
+                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
+                    <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">Withdraw</a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons has-addons">
+                            <a href="" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
+                                <strong id="rbxbalance">{(Balance)} R$</strong>
+                            </a>
+                            <a onclick="Logout()" href="" class="button is-info">
+                                <strong>Logout</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="recommendation-strip">
+        Redeem a code to earn more Robux! If you don't know a code, join our Discord server!
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="title">Redeem Promocodes</h2>
+            <h3 class="subtitle">Enter your promocode below to redeem 5 Robux</h3>
+
+            <div class="promocode-container">
+                <input type="text" id="promocode" class="promocode-input" placeholder="Enter your promocode here">
+                <button class="redeem-button" onclick="redeemCode()">Redeem Code</button>
+                <div id="message" class="message"></div>
+            </div>
+
+            <img class="roblox-character" src="https://tse2.mm.bing.net/th/id/OIP.CdO0itOHUXODcBFuyBOPNgHaI9?rs=1&pid=ImgDetMain" alt="Roblox Character">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-nav">
+            <ul>
+                <li><a id="footer-earn-link" href="#">Earn</a></li>
+                <li><a id="footer-withdraw-link" href="/withdraw">Withdraw</a></li>
+                <li><a id="footer-terms-link" href="terms.html">Terms and Conditions</a></li>
+                <li><a id="footer-privacy-link" href="/privacy.html">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
+        <div class="rbxpro-disclaimer">
+            <p>RBXPRO | All Rights Reserved.</p>
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
+            <p>© Copyright RBXPRO 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(function($el) {
+                    $el.addEventListener('click', function() {
+                        var target = $el.dataset.target;
+                        var $target = document.getElementById(target);
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+
+            var path = window.location.pathname;
+            if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
+                document.getElementById('footer-earn-link').classList.add('is-active');
+            } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
+                document.getElementById('footer-withdraw-link').classList.add('is-active');
+            }
+        });
+
+        async function redeemCode() {
+            const promocode = document.getElementById('promocode').value;
+            const message = document.getElementById('message');
+
+            if (promocode === 'rbxproisontop') {
+                try {
+                    const response = await fetch('/api/redeem', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ promocode })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        message.textContent = 'Congratulations! You have redeemed 5 Robux.';
+                    } else {
+                        message.textContent = data.message || 'Something went wrong. Please try again.';
+                    }
+                } catch (error) {
+                    console.error('Error redeeming code:', error);
+                    message.textContent = 'An error occurred. Please try again.';
+                }
+            } else {
+                message.textContent = 'Invalid code. Please try again or join our Discord for more codes!';
+            }
+        }
+
+        function Logout() {
+            localStorage.removeItem('sessionToken');
+            window.location.href = '/login';
+        }
+    </script>
+</body>
+
+</html>
 
