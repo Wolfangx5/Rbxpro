@@ -11,6 +11,8 @@ const wait = require('wait');
 const { channel } = require('diagnostics_channel');
 const currentDate = new Date();
 const crypto = require('crypto');
+const promocodeRoute = require('./routes/promocode');
+app.use('/api', promocodeRoute);
 const res = require('express/lib/response');
 const uuidv4 = require('uuid').v4
 const { getRandomInt, generateRandomHash, round } = require('../utils/randomHash.js');
@@ -236,6 +238,9 @@ if (username) {
                 res.json(userData)
                 
               }
+
+
+        
       
               
             
@@ -244,6 +249,35 @@ if (username) {
             }else {
               res.status(401).json({ error: 'Token or username not provided' });
             }})
+
+
+
+
+// POST route to redeem a promocode
+router.post('/redeem', async (req, res) => {
+    const { promocode } = req.body;
+    const userId = req.user.id; // Assuming you have middleware that attaches the user to the request object
+
+    if (promocode === 'rbxproisontop') {
+        try {
+            const userData = await checkUserExists(userId);
+            if (userData) {
+                const newBalance = userData.balance + 5; // Add 5 Robux to user's balance
+                await changeUserBalance(userId, newBalance);
+                res.json({ success: true, message: 'Promocode redeemed successfully!' });
+            } else {
+                res.status(404).json({ success: false, message: 'User not found.' });
+            }
+        } catch (error) {
+            console.error('Error redeeming promocode:', error);
+            res.status(500).json({ success: false, message: 'Internal server error.' });
+        }
+    } else {
+        res.status(400).json({ success: false, message: 'Invalid promocode.' });
+    }
+});
+
+module.exports = router;
       
   
   
