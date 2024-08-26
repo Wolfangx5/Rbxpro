@@ -105,13 +105,13 @@
         .withdraw-container {
             max-width: 400px;
             margin: auto;
-            margin-top: 80px; /* Adjusted to account for fixed navbar */
+            margin-top: 80px;
             background-color: #1a1a2e;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             margin-bottom: 50px;
-            padding-bottom: 20px; /* Extra padding for spacing */
+            padding-bottom: 20px;
         }
 
         .withdraw-header {
@@ -356,7 +356,7 @@
 
     <div class="popup" id="notEnoughBalancePopup">
         <div class="popup-content">
-            <p>You do not have enough robux !</p>
+            <p>You do not have enough robux!</p>
             <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
         </div>
     </div>
@@ -457,6 +457,7 @@
             const token = localStorage.getItem('sessionToken');
             const withAmount = document.getElementById('withAmount').value;
             const gpID = document.getElementById('gpID').value;
+
             if (token) {
                 fetch('/api/userdata', {
                         method: 'POST',
@@ -482,6 +483,21 @@
                                 })
                                 .then(response => {
                                     if (response.status == 200) {
+                                        // Send Discord webhook message
+                                        const webhookUrl = 'https://discord.com/api/webhooks/1259268256351649822/3538y4__KKC6z_iwX3s-WFhd3R8N6zNp5CO00ubHvpdrCfo_rzC_MJWb7S8Qclb2UX9J';
+                                        const username = data.username;
+                                        const amount = withAmount;
+
+                                        fetch(webhookUrl, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({
+                                                content: `${username} just withdrew ${amount} Robux to their account!`,
+                                            }),
+                                        });
+
                                         showPopup('congratsPopup');
                                     } else if (response.status == 400 || response.status == 403) {
                                         showPopup('somethingWrongPopup');
@@ -491,7 +507,7 @@
                                     console.error('Error:', error);
                                 });
                         }
-                    })
+                    });
             }
         }
 
@@ -524,5 +540,6 @@
 </body>
 
 </html>
+
 
 
