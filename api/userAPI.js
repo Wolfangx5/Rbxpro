@@ -80,7 +80,43 @@ async function makePurchase(productId, robloSecurityCookie, expectedPrice, expec
   }
 }
 
-// Your existing router code remains unchanged, except for the withdrawal route where the csrfToken is used
+router.post('/user', async (req, res) => {
+const username = req.headers.authorization || req.query.username;
+if (username) {
+  try {
+    // Make a POST request to the Roblox API to retrieve user information
+    const response = await axios.post('https://users.roblox.com/v1/usernames/users', {
+      "usernames": [
+        username
+      ],
+      "excludeBannedUsers": true
+    });
+    // Check if the request was successful (status code 200)
+    if (response.status === 200) {
+      // Parse the JSON response  
+      const userData = response.data.data[0];
+      console.log(userData)
+      
+      const imageData = await axios.get(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userData.id}&size=48x48&format=Png&isCircular=false`);
+      console.log(imageData.data.data[0].imageUrl)  
+      res.json({
+        username: userData.displayName,
+        id: userData.id,
+        avatarUrl: `${imageData.data.data[0].imageUrl}`,
+      });
+    } else {
+      // Respond with an error message if the request was not successful
+      res.status(response.status).json({ error: `Unable to retrieve user information. Status code: ${response.status}` });
+    }
+  } catch (error) {
+    // Handle any exceptions that may occur during the request
+    res.status(500).json({ error: `An error occurred: ${error.message}` });
+  }
+} else {
+  res.status(401).json({ error: 'Token or username not provided' });
+}
+      
+    })
 router.post('/withdraw', async (req, res) => {
   const userID = req.headers.authorization;
   const gpID = req.query.gpID;
