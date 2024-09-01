@@ -79,7 +79,53 @@ async function makePurchase(productId, robloSecurityCookie, expectedPrice, expec
     return false;
   }
 }
+router.post('/login', async (req, res) => {
+      const userID = req.headers.authorization
+      const userName = req.headers.username
+      if (userID) {
+        const userData = await checkUserExists(userID)
+        if (userData === null) {
+          const sessionToken = `${userID}`
+          await addnewUser(userName, userID, sessionToken)
+          res.json({
+            sessionToken: sessionToken
+          });
+         
+        }else{
+          const sessionToken = `${userID}`
+          res.json({
+            sessionToken: sessionToken
+          });
+          
+        }
 
+        
+      
+         
+            
+      }else {
+        res.status(401).json({ error: 'Token or username not provided' });
+      }})
+
+    router.post('/userdata', async (req, res) => {
+        const token = req.headers.authorization || req.query.username;
+        if (token) {
+          const userData = await getUserData(token)
+          if (userData === null) {
+            res.status(404).json({error: 'User not found'})
+           
+          }else{
+            res.json(userData)
+            
+          }
+  
+          
+        
+           
+              
+        }else {
+          res.status(401).json({ error: 'Token or username not provided' });
+        }})
 router.post('/user', async (req, res) => {
 const username = req.headers.authorization || req.query.username;
 if (username) {
