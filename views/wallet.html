@@ -89,152 +89,115 @@
         <!-- Footer content here -->
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    <<script>
+    function Logout() {
+        localStorage.removeItem('sessionToken');
+        window.location.href = '/login';
+    }
+     document.getElementById("withAmount").addEventListener("input", function() {
+        var amountInput = parseFloat(this.value); // Get the value entered in the input field
+        var displayAmount = document.getElementById("displayAmount");
 
-            if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
-                        var target = $el.dataset.target;
-                        var $target = document.getElementById(target);
-                        $el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
-                    });
+        if (!isNaN(amountInput)) {
+            var newAmount = amountInput * 1.3; // Calculate 30% more than the input value
+            displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
+        } else {
+            displayAmount.textContent = ""; // Clear the display if the input is not a number
+        }
+    });
+    function hidePopup(popupId) {
+        var popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }
+    function showPopup(popupId) {
+        var popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'block';
+        }
+    }
+    function withDraw() {
+        document.getElementById("withdrawButton").classList.add("disabled");
+        const token = localStorage.getItem('sessionToken');
+        const withAmount = document.getElementById('withAmount').value
+        const gpID = document.getElementById('gpID').value
+        console.log(withAmount, gpID)
+        if (token){
+           
+                fetch('/api/userdata', {
+                method: 'POST',
+                headers: {
+                'Authorization': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (withAmount > data.balance){
+                console.log('Not enough balance')
+                showPopup('notEnoughBalancePopup')
+              }else{
+                console.log('Passed checkpoint #0')
+              
+                const queryParams = new URLSearchParams({
+                    gpID: gpID,
+                    withAmount: withAmount
                 });
-            }
 
-            var path = window.location.pathname;
-            if (path === '/' || path.includes('earn')) {
-                document.getElementById('earn-link').classList.add('is-active');
-                document.getElementById('footer-earn-link').classList.add('is-active');
-            } else if (path.includes('withdraw')) {
-                document.getElementById('withdraw-link').classList.add('is-active');
-                document.getElementById('footer-withdraw-link').classList.add('is-active');
-            }
-        });
+                fetch(`/api/withdraw?${queryParams}`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => {
+                    console.log(response.status); 
+                    if (response.status == 200){
+                        showPopup('congratsPopup')
+                    }else if(response.status == 400 || response.status == 403){
+                        showPopup('somethingWrongPopup')
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("congratsPopup").style.display = "none";
+              }
+            })
         }
-
-        function hidePopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'none';
-            }
-        }
-
-        function showPopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'block';
-            }
-        }
-
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
-        }
-
-        document.getElementById("withAmount").addEventListener("input", function() {
-            var amountInput = parseFloat(this.value);
-            var displayAmount = document.getElementById("displayAmount");
-
-            if (!isNaN(amountInput)) {
-                var newAmount = Math.round(amountInput / 0.70);
-                displayAmount.textContent = newAmount.toFixed(2);
-            } else {
-                displayAmount.textContent = "";
-            }
-        });
-
-        function withdraw() { // Changed to lowercase 'withdraw'
-            document.getElementById("withdrawButton").classList.add("disabled");
+    }
+    function loadUserData() {
             const token = localStorage.getItem('sessionToken');
-            const withAmount = document.getElementById('withAmount').value;
-            const gpID = document.getElementById('gpID').value;
-
-            if (token) {
+            if (token){
                 fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (withAmount > data.balance) {
-                            showPopup('notEnoughBalancePopup');
-                        } else {
-                            const queryParams = new URLSearchParams({
-                                gpID: gpID,
-                                withAmount: withAmount
-                            });
-
-                            fetch(`/api/withdraw?${queryParams}`, { // Corrected the fetch call here
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': token
-                                    }
-                                })
-                                .then(response => {
-                                    if (response.status == 200) {
-                                        // Send Discord webhook message
-                                        const webhookUrl = 'https://discord.com/api/webhooks/1259268256351649822/3538y4__KKC6z_iwX3s-WFhd3R8N6zNp5CO00ubHvpdrCfo_rzC_MJWb7S8Qclb2UX9J';
-                                        const username = data.username;
-                                        const amount = withAmount;
-
-                                        fetch(webhookUrl, {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify({
-                                                content: `${username} just withdrew ${amount} Robux to their account! ⭐`,
-                                            }),
-                                        });
-
-                                        showPopup('congratsPopup');
-                                    } else if (response.status == 400 || response.status == 403) {
-                                        showPopup('somethingWrongPopup');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                        }
-                    });
-            }
-        }
-
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        const balance = document.getElementById("rbxbalance");
-                        balance.textContent = `${data.balance} robux`;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        window.location.href = '/login';
-                        return;
-                    });
-            } else {
+                method: 'POST',
+                headers: {
+                'Authorization': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+              
+                const balance = document.getElementById("rbxbalance");
+                const nameDisplay = document.getElementById("usernameDisplay");
+      
+               
+               
+                balance.textContent = `${data.balance} robux`
+            })
+            .catch(error => {
+                console.log(error)
+              window.location.href = '/login';
+              return;
+            });
+            }else{
                 window.location.href = '/login';
             }
-        }
 
-        setInterval(loadUserData, 1000);
-    </script>
+            
+      }
+      setInterval(loadUserData, 1000)
+</script>
 </body>
 
 </html>
