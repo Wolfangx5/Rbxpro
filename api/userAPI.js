@@ -29,7 +29,7 @@ async function getGeneralToken(cookie) {
     url: 'https://auth.roblox.com/v2/logout',
     method: 'POST',
     headers: {
-      'Cookie': .ROBLOSECURITY=${cookie}
+      'Cookie': `.ROBLOSECURITY=${cookie}`
     }
   };
 
