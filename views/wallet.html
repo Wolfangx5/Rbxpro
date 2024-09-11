@@ -296,8 +296,12 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">Withdraw</a>
+                    <a class="navbar-item navbar-s-item" href="/earn">
+                        Earn
+                    </a>
+                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
+                        Withdraw
+                    </a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -451,11 +455,7 @@
         });
 
         function withdraw() {
-            const withdrawButton = document.getElementById("withdrawButton");
-            if (withdrawButton) {
-                withdrawButton.classList.add("disabled");
-            }
-
+            document.getElementById("withdrawButton").classList.add("disabled");
             const token = localStorage.getItem('sessionToken');
             const withAmount = document.getElementById('withAmount').value;
             const gpID = document.getElementById('gpID').value;
@@ -477,7 +477,7 @@
                                 withAmount: withAmount
                             });
 
-                            fetch(`/api/withdraw?${queryParams}`, {
+                            fetch(/api/withdraw?${queryParams}, {
                                     method: 'POST',
                                     headers: {
                                         'Authorization': token
@@ -496,7 +496,7 @@
                                                 'Content-Type': 'application/json',
                                             },
                                             body: JSON.stringify({
-                                                content: `${username} just withdrew ${amount} Robux to their account! ⭐`,
+                                                content: ${username} just withdrew ${amount} Robux to their account! ⭐,
                                             }),
                                         });
 
@@ -507,16 +507,9 @@
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
-                                    showPopup('somethingWrongPopup');
                                 });
                         }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        window.location.href = '/login';
                     });
-            } else {
-                window.location.href = '/login';
             }
         }
 
@@ -532,11 +525,12 @@
                     .then(response => response.json())
                     .then(data => {
                         const balance = document.getElementById("rbxbalance");
-                        balance.textContent = `${data.balance} robux`;
+                        balance.textContent = ${data.balance} robux;
                     })
                     .catch(error => {
                         console.log(error);
                         window.location.href = '/login';
+                        return;
                     });
             } else {
                 window.location.href = '/login';
@@ -548,4 +542,3 @@
 </body>
 
 </html>
-
