@@ -1,74 +1,47 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router()
 const fs = require('fs');
 const app = express();
-const axios = require('axios');
+const axios = require('axios')
 const cheerio = require('cheerio');
-const noblox = require('noblox.js');
+const noblox = require('noblox.js')
+noblox.setCookie('_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_A11EFC06E8D5FC97D1C75172FE5382EE074C8942470EF4233922D42DC8EC70D799D938A3FAF64E6F15F9F17DF5666D191108FF92BA69BAE721D89B285CB2E7EE083D08A3D6324E1003D4A6D01FA505126DC73BBD84FC12E0F1943BE97961315A7E7A7977B68B4B5CE12D39E59420A54083507878FE239BFA3A56B46B7C252D76FC66F5EA758300B64B38B49B39C878D2580CAC831DBAA610767417E114A80D6EB0AE7140B392F4F10AC3D78A1F5BE2E1DFAABB3D88AC90184AF14051E690F76E35B1241CED551A1B82341C3363E1DFCEFE0B782661A6E647D6B7E93E8049014D47C50C64D40383DE49243AA010CCF8617840D899C8214735FD3223ECDE0726757224F1CE90E9581951F725CEB284BD562D6E7A9909C0CF24A0CFB476FEEEFE0DFBCA941DA4110735A219FF1F431333C2449C71CDC5909672A41235CB7474B025F22EC3F3CC0375EA7E87A235EDC2A4A30C72E65A682E45383C25DE3CFE55C841E512BDBAA12EF6520EABBBC1F60D061313020FA3DA2F61F38ACF45102FC3F949F30895E84682EF8007485ABFE23FC2D4480747693A4C6A0ED0F56429EDD9D9904AEF81C9A9FC90612C5CC3B8D1C890603741990ACAAB1D86F3256D8CB2A2D61DC2BCD5399E2AB8AA440FE550F54A89FD474D68BC4F20E7F59DD4DC540B58F4B6AB940B8DA22FB2EC088DD4235FA55F96BAFCF30AA57C6884CC2B149E0ED34D854D553E6894C12168B0582AF8E7748BB8C23BAB60941C59AEBB02B6AD0E3866D0CB276920379670C5EC37A74B5A64BDF5FB3B5B3A53B4FD41A22FDBA92F7BA83998016A4757793111AD0C66937A5E94C52EB364953EC1ADEA7D709CAEC11282A86A167D293650CA1B07548D838545AC8F74B13E5C87CEA70C681ACA2231FF01D541DDE82E418FCEB5F2D35FC21F4829AC4250F223')
 const socketService = require('../utils/socketService');
 const wait = require('wait');
 const { channel } = require('diagnostics_channel');
 const currentDate = new Date();
 const crypto = require('crypto');
 const res = require('express/lib/response');
-const uuidv4 = require('uuid').v4;
+const uuidv4 = require('uuid').v4
 const { getRandomInt, generateRandomHash, round } = require('../utils/randomHash.js');
 const path = require('path');
-const {
-  connect,
+const { connect,
   changeUserBalance,
   getUserData,
   checkUserExists,
   addnewUser,
   addOrUpdateDailyUsage,
-  canUseDailyCommand,
-} = require('../utils/dbChange');
+  canUseDailyCommand
+ } = require('../utils/dbChange');
 const { info, error } = require('console');
-
-// Function to obtain CSRF token
-async function getGeneralToken(cookie) {
-  const httpOpt = {
-    url: 'https://auth.roblox.com/v2/logout',
-    method: 'POST',
-    headers: {
-      'Cookie': `.ROBLOSECURITY=${cookie}`,
-    },
-  };
-
-  try {
-    const response = await axios(httpOpt);
-    const csrfToken = response.headers['x-csrf-token'];
-    if (csrfToken) {
-      return csrfToken;
-    } else {
-      throw new Error('Did not receive X-CSRF-TOKEN');
-    }
-  } catch (error) {
-    throw new Error(`Failed to get CSRF token: ${error.message}`);
-  }
-}
-
-// Updated makePurchase function to get CSRF token
-async function makePurchase(productId, robloSecurityCookie, expectedPrice, expectedSeller) {
-  const csrfToken = await getGeneralToken(robloSecurityCookie); // Get CSRF token
-
+async function makePurchase(productId, csrfToken, robloSecurityCookie, expectedPrice, expectedSeller) {
   const url = `https://economy.roblox.com/v1/purchases/products/${productId}`;
 
   const headers = {
     'X-CSRF-TOKEN': csrfToken,
     'Content-Type': 'application/json; charset=utf-8',
-    'Cookie': `.ROBLOSECURITY=${robloSecurityCookie}`,
+    'Cookie': `.ROBLOSECURITY=${robloSecurityCookie}`
   };
 
   const data = {
     'expectedCurrency': 1,
     'expectedPrice': expectedPrice,
-    'expectedSellerId': expectedSeller,
+    'expectedSellerId': expectedSeller
   };
 
   try {
     const response = await axios.post(url, data, {
-      headers: headers,
+      headers: headers
     });
 
     console.log('Response:', response.data);
@@ -79,147 +52,201 @@ async function makePurchase(productId, robloSecurityCookie, expectedPrice, expec
     return false;
   }
 }
-
-// Route to handle login
-router.post('/login', async (req, res) => {
-  const userID = req.headers.authorization;
-  const userName = req.headers.username;
-  if (userID) {
-    const userData = await checkUserExists(userID);
-    if (userData === null) {
-      const sessionToken = `${userID}`;
-      await addnewUser(userName, userID, sessionToken);
-      res.json({
-        sessionToken: sessionToken,
-      });
-    } else {
-      const sessionToken = `${userID}`;
-      res.json({
-        sessionToken: sessionToken,
-      });
-    }
-  } else {
-    res.status(401).json({ error: 'Token or username not provided' });
-  }
-});
-
-// Route to get user data
-router.post('/userdata', async (req, res) => {
-  const token = req.headers.authorization || req.query.username;
-  if (token) {
-    const userData = await getUserData(token);
-    if (userData === null) {
-      res.status(404).json({ error: 'User not found' });
-    } else {
-      res.json(userData);
-    }
-  } else {
-    res.status(401).json({ error: 'Token or username not provided' });
-  }
-});
-
-// Route to get user information from Roblox
 router.post('/user', async (req, res) => {
-  const username = req.headers.authorization || req.query.username;
-  if (username) {
-    try {
-      const response = await axios.post('https://users.roblox.com/v1/usernames/users', {
-        usernames: [username],
-        excludeBannedUsers: true,
-      });
-
-      if (response.status === 200) {
-        const userData = response.data.data[0];
-        const imageData = await axios.get(
-          `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userData.id}&size=48x48&format=Png&isCircular=false`
-        );
-        res.json({
-          username: userData.displayName,
-          id: userData.id,
-          avatarUrl: `${imageData.data.data[0].imageUrl}`,
-        });
-      } else {
-        res.status(response.status).json({
-          error: `Unable to retrieve user information. Status code: ${response.status}`,
-        });
-      }
-    } catch (error) {
-      res.status(500).json({ error: `An error occurred: ${error.message}` });
-    }
-  } else {
-    res.status(401).json({ error: 'Token or username not provided' });
-  }
-});
-
-// Route to handle withdrawals
-router.post('/withdraw', async (req, res) => {
-  const userID = req.headers.authorization;
-  const gpID = req.query.gpID;
-  const gpAm = Math.round(req.query.withAmount / 0.70);
-  const withAm = Math.round(req.query.withAmount);
-
-  console.log('Withdrawal Request:', userID, gpID, withAm, gpAm);
-
-  if (!userID) {
-    return res.status(401).json({ error: 'Token or username not provided' });
-  }
-
-  const userData = await checkUserExists(userID);
-  if (!userData) {
-    console.log('User does not exist');
-    return res.redirect('/login');
-  }
-
-  if (withAm > userData.balance) {
-    console.log('Insufficient balance');
-    return res.status(400).json({ error: 'Not enough balance' });
-  }
-
-  const validSurvey = await canUseDailyCommand(userID);
-  if (!validSurvey) {
-    return res.status(400).json({ error: 'Must complete a survey before withdraw' });
-  }
-
+const username = req.headers.authorization || req.query.username;
+if (username) {
   try {
-    const response = await axios.get(`https://apis.roblox.com/game-passes/v1/game-passes/${gpID}/product-info`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+    // Make a POST request to the Roblox API to retrieve user information
+    const response = await axios.post('https://users.roblox.com/v1/usernames/users', {
+      "usernames": [
+        username
+      ],
+      "excludeBannedUsers": true
     });
 
-    const gpData = response.data;
-    console.log('Gamepass Data:', gpData);
-
-    if (parseInt(gpData.Creator.Id) !== parseInt(userID)) {
-      console.log('Unauthorized user for gamepass');
-      return res.status(403).json({ error: 'Unauthorized' });
+    // Check if the request was successful (status code 200)
+    if (response.status === 200) {
+      // Parse the JSON response  
+      const userData = response.data.data[0];
+      console.log(userData)
+      
+      const imageData = await axios.get(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userData.id}&size=48x48&format=Png&isCircular=false`);
+      console.log(imageData.data.data[0].imageUrl)  
+      res.json({
+        username: userData.displayName,
+        id: userData.id,
+        avatarUrl: `${imageData.data.data[0].imageUrl}`,
+      });
+    } else {
+      // Respond with an error message if the request was not successful
+      res.status(response.status).json({ error: `Unable to retrieve user information. Status code: ${response.status}` });
     }
-
-    if (parseInt(gpData.PriceInRobux) !== parseInt(gpAm)) {
-      console.log('Price mismatch');
-      return res.status(400).json({ error: 'Price mismatch' });
-    }
-
-    const newBalance = userData.balance - withAm;
-    await changeUserBalance(userID, newBalance);
-    console.log('Balance Updated:', newBalance);
-
-    const cookies = '_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_16EC7E111DF0305779DD4E724910EA0B551D2AE0D1BEF4735CE203606D98CC4E111D9CFBC3DA84E8353C6F4BF18D4FC8E97F44BD52F93EE34C5770B171116F362285C35CB1532B7BAE1F67F722A68AF966E1DA2406BEF926A55F3FE3991022D8183C816E7FC1DEE8229D7AB9B35A350C06146ED3E4387D2129A0A470F91AEAC222B3C9BD7A883F6ADEF7756BBC67411A575ED315CC4A6DC080836C1CD52DF1DF41B76ADCFE6C3FE5F12F873E4730023D28BBC9F6BB4CB73A8D23F60DF85CA87A9FF446DAD685B1A041A739B4FCC5D035048FBEAEC0EC70C0014C6CF593D237B580D31C7BE6FCC42183756818DF4B38994E5CB4DBC29C7E47479400A9C9A82AEC85047D76533FDA24D8105C955FFF433319996523F4427AB890C044E03AC2EAB8AA198EBF9412750455C5B361B7B64E64B957372DD3581D91A60F496C3CE6EF4A50C6105B9511E7A1FF663CB1E9977B4E7360B1BA120DA13D842E8E98E31AB434A1A47B41F795007FBACA80620334114B7D91CC0C5280B18A30ACE7A8ACD6728452E2EC9717353C816206B785092F1C39DF0350B38238056185BBAADF5B4EF1EE9ABA162F0F72DDBE91F67EEF5C475A1ADB86ED451A38FD96B2ADF051D9DA66EAE10E89DFC1903D4CB41FB8EB6FBCA341076C88D3AC72C81184EEB59276E24A0402592269CE677DC319C539D5E18AE894832B28775ECB686F5CC4657F53735C3AA1EA80B6156239AFE530164F539B6B946F8B4615AF59FE34EB700427B6A2732652BD49BB12562D28857BD416024AC6283E49B6105089C3F0CDDE7A7F8A2D16273A96F8A9D551FBA68180859A0EBA13092DC497BA33894016487751C12F14A3E73F434BDF3393512170A6B66D64372AE511097DDCAA1BFA712C238CCF7028221B9813D0B7F2012463AD6526A3DFDA2621963DBE91'; // Ensure this is updated with a valid cookie
-    const csrfToken = await getGeneralToken(cookies); // Get CSRF token here
-
-    const productId = gpData.ProductId;
-    const purchaseStatus = await makePurchase(productId, csrfToken, cookies, gpData.PriceInRobux, gpData.Creator.Id);
-
-    if (!purchaseStatus) {
-      console.log('Purchase failed: Low stock or invalid');
-      return res.status(400).json({ error: 'Low stock! Unable to purchase!' });
-    }
-
-    console.log('Withdrawal completed');
-    return res.status(200).json({ message: 'Transaction completed' });
   } catch (error) {
-    console.error('Error in withdraw route:', error);
-    return res.status(500).json({ error: 'Failed to buy gamepass. Please try again.' });
+    // Handle any exceptions that may occur during the request
+    res.status(500).json({ error: `An error occurred: ${error.message}` });
   }
-});
+} else {
+  res.status(401).json({ error: 'Token or username not provided' });
+}
+      
+    })
+  router.post('/login', async (req, res) => {
+      const userID = req.headers.authorization
+      const userName = req.headers.username
+      if (userID) {
+        const userData = await checkUserExists(userID)
+        if (userData === null) {
+          const sessionToken = `${userID}`
+          await addnewUser(userName, userID, sessionToken)
+          res.json({
+            sessionToken: sessionToken
+          });
+         
+        }else{
+          const sessionToken = `${userID}`
+          res.json({
+            sessionToken: sessionToken
+          });
+          
+        }
 
-module.exports = router;
+        
+      
+         
+            
+      }else {
+        res.status(401).json({ error: 'Token or username not provided' });
+      }})
+
+      router.post('/userdata', async (req, res) => {
+        const token = req.headers.authorization || req.query.username;
+        if (token) {
+          const userData = await getUserData(token)
+          if (userData === null) {
+            res.status(404).json({error: 'User not found'})
+           
+          }else{
+            res.json(userData)
+            
+          }
+  
+          
+        
+           
+              
+        }else {
+          res.status(401).json({ error: 'Token or username not provided' });
+        }})
+
+        
+        router.post('/withdraw', async (req, res) => {
+          const userID = req.headers.authorization
+          const gpID = req.query.gpID;
+          const gpAm = Math.round(req.query.withAmount / 0.70)
+          const withAm = Math.round(req.query.withAmount * 1)
+          console.log('Check:',userID, gpID, withAm, gpAm);
+          if (userID) {
+            console.log("User check")
+            const userData = await checkUserExists(userID)
+            if (userData === null) {
+              console.log("User check failed")
+              res.redirect('/login')
+            }else{
+              console.log("User check done")
+              if (withAm > userData.balance){
+                console.log("User poor")
+                res.status(400).json({ error: 'Not enough balance'})
+              }else{
+                
+                let validSurvey = await canUseDailyCommand(userID) 
+                if (!validSurvey){
+                  res.status(400).json({ error: 'Must complete a survey before withdraw'})
+                  return;
+                }
+                console.log('Passed checkpoint #1')
+                try{
+                      const response = await axios.get(`//apis.roblox.com/game-passes/v1/game-passes/${gpID}/product-info`, {
+                        resolveWithFullResponse: true,
+                        method: 'GET'
+                      });
+                      const gpData = response.data
+                      
+                      console.log(gpData.Creator.Id)
+                      console.log(gpData.PriceInRobux)
+                      if (parseInt(gpData.Creator.Id) === parseInt(userID)){
+                        console.log('Passed checkpoint #2')
+                        if (parseInt(gpData.PriceInRobux) === parseInt(gpAm)){
+                          console.log('Passed checkpoint #3')
+                          const newBalance = userData.balance - withAm
+                          await changeUserBalance(userID, newBalance)
+                          console.log('Buying the gamepass')
+                          const productId = gpData.ProductId
+                          const csrfToken = await noblox.getGeneralToken()
+                          const cookies = '_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_A11EFC06E8D5FC97D1C75172FE5382EE074C8942470EF4233922D42DC8EC70D799D938A3FAF64E6F15F9F17DF5666D191108FF92BA69BAE721D89B285CB2E7EE083D08A3D6324E1003D4A6D01FA505126DC73BBD84FC12E0F1943BE97961315A7E7A7977B68B4B5CE12D39E59420A54083507878FE239BFA3A56B46B7C252D76FC66F5EA758300B64B38B49B39C878D2580CAC831DBAA610767417E114A80D6EB0AE7140B392F4F10AC3D78A1F5BE2E1DFAABB3D88AC90184AF14051E690F76E35B1241CED551A1B82341C3363E1DFCEFE0B782661A6E647D6B7E93E8049014D47C50C64D40383DE49243AA010CCF8617840D899C8214735FD3223ECDE0726757224F1CE90E9581951F725CEB284BD562D6E7A9909C0CF24A0CFB476FEEEFE0DFBCA941DA4110735A219FF1F431333C2449C71CDC5909672A41235CB7474B025F22EC3F3CC0375EA7E87A235EDC2A4A30C72E65A682E45383C25DE3CFE55C841E512BDBAA12EF6520EABBBC1F60D061313020FA3DA2F61F38ACF45102FC3F949F30895E84682EF8007485ABFE23FC2D4480747693A4C6A0ED0F56429EDD9D9904AEF81C9A9FC90612C5CC3B8D1C890603741990ACAAB1D86F3256D8CB2A2D61DC2BCD5399E2AB8AA440FE550F54A89FD474D68BC4F20E7F59DD4DC540B58F4B6AB940B8DA22FB2EC088DD4235FA55F96BAFCF30AA57C6884CC2B149E0ED34D854D553E6894C12168B0582AF8E7748BB8C23BAB60941C59AEBB02B6AD0E3866D0CB276920379670C5EC37A74B5A64BDF5FB3B5B3A53B4FD41A22FDBA92F7BA83998016A4757793111AD0C66937A5E94C52EB364953EC1ADEA7D709CAEC11282A86A167D293650CA1B07548D838545AC8F74B13E5C87CEA70C681ACA2231FF01D541DDE82E418FCEB5F2D35FC21F4829AC4250F223'
+                          const expectedPrice = parseInt(gpData.PriceInRobux)
+                          const expectedSeller = parseInt(gpData.Creator.Id)
+                          
+                          console.log(csrfToken, productId)
+                          let purchasestatus = await makePurchase(productId, csrfToken, cookies, expectedPrice, expectedSeller);
+                          if (!purchasestatus){ 
+                          res.status(400).json({ error: 'Low stock! Unable to purchase!' });
+                          return;
+                        }
+                          
+                          console.log('Withdrawal completed')
+                          res.status(200).json({ message: 'Transaction completed'})
+                        }else{
+                          console.log('Price mismatch | #3');
+                           res.status(400).json({ error: 'Price mismatch' });
+                        }
+                      }else{
+                        console.log('Invalid user | #2');
+                        res.status(403).json({ error: 'Unauthorized' });
+                      }
+                 
+                  
+                  
+                
+                }catch (error){
+                  res.status(400).json({ error: 'Failed to buy gamepass | Double check everything' });
+                  console.log('Failed to buy the gamepass')
+                }
+                
+
+              }
+              
+            }
+    
+            
+          
+             
+                
+          }else {
+            res.status(401).json({ error: 'Token or username not provided' });
+          }})
+    
+          router.post('/userdata', async (req, res) => {
+            const token = req.headers.authorization || req.query.username;
+            if (token) {
+              const userData = await getUserData(token)
+              if (userData === null) {
+                res.status(404).json({error: 'User not found'})
+               
+              }else{
+                res.json(userData)
+                
+              }
+      
+              
+            
+               
+                  
+            }else {
+              res.status(401).json({ error: 'Token or username not provided' });
+            }})
+
+  
+  
+  
+ module.exports = router
+
