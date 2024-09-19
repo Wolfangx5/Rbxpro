@@ -21,65 +21,63 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
-
-    <!-- CSS stylesheets -->
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/bulma.css" rel="stylesheet" />
-
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #f4f7fc;
-            overflow-x: hidden;
+        .logo {
+            margin-left: -50px;
+            font-weight: 700;
+            font-size: 42px;
+            color: #fff;
         }
 
         .navbar {
             background-color: #e70664;
-            padding: 20px;
-            color: #fff;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-brand .logo {
-            font-weight: 700;
-            font-size: 24px;
+        .navbar-item {
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-burger {
+            margin-right: 1rem;
             color: #fff;
-            text-align: center;
+            display: none;
+        }
+
+        .navbar-menu {
+            flex-grow: 1;
+            color: #e70664;
+        }
+
+        .navbar-end {
+            justify-content: flex-end;
+            color: #e70664;
+        }
+
+        .navbar-item.has-addons .button {
+            margin-right: 0.5rem;
+        }
+
+        .navbar-item.is-active {
+            color: #e70664;
+            background-color: #fff;
+        }
+
+        /* Default navbar styles for desktop */
+        .navbar-menu {
+            display: flex;
         }
 
         .navbar-menu a {
             color: #fff;
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1rem;
             text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: bold;
         }
 
         .navbar-menu a:hover {
-            background-color: #ff3368;
-            color: #fff;
-            border-radius: 4px;
-        }
-
-        .buttons .button {
-            background-color: #0f3460;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 4px;
-            padding: 0.5rem 1.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .buttons .button:hover {
-            background-color: #162447;
-            transform: translateY(-2px);
+            background-color: #d90f77;
         }
 
         /* Mobile styles */
@@ -105,34 +103,58 @@
             }
         }
 
+        footer {
+            background-color: #e70664;
+            color: #fff;
+            padding: -10px;
+            text-align: center;
+        }
+
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .footer-nav li a {
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .rbxpro-disclaimer {
+            color: #fff;
+        }
+
+        body {
+            background-color: #2182f0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+    
         .withdraw-container {
             max-width: 400px;
             margin: auto;
-            margin-top: 80px;
-            background-color: #1a1a2e;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-top: -60px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             overflow: hidden;
-            margin-bottom: 50px;
-            padding-bottom: 20px;
+            margin-bottom: 90px;
         }
 
         .withdraw-header {
-            background-color: #e70664;
+            background-color: #d90f77;
             color: #fff;
             padding: 20px;
             text-align: center;
-            font-size: 18px;
-            font-weight: bold;
         }
 
         .withdraw-form {
             padding: 20px;
-            margin-top: -20px;
+            margin-top: -50px;
         }
 
         .withdraw-price {
-            background-color: #333;
+            background-color: #444444;
             color: #fff;
             border: none;
             padding: 15px;
@@ -140,7 +162,6 @@
             text-align: center;
             border-radius: 5px;
             margin-bottom: 20px;
-            font-size: 18px;
         }
 
         .withdraw-input {
@@ -148,11 +169,10 @@
             padding: 10px;
             margin-bottom: 15px;
             border: none;
-            border-radius: 10px;
-            background-color: #444;
+            border-radius: 5px;
+            background-color: #555;
             color: #fff;
             font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .withdraw-btn {
@@ -161,20 +181,19 @@
             padding: 15px;
             width: 100%;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 18px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease;
         }
 
         .withdraw-btn:hover {
             background-color: #14821e;
-            transform: translateY(-2px);
         }
 
         .popup {
             border: 3px solid #dd2323;
-            border-radius: 10px;
+            border-radius: 5px;
             display: none;
             position: fixed;
             top: 50%;
@@ -182,14 +201,13 @@
             transform: translate(-50%, -50%);
             background-color: #333;
             padding: 50px;
+            border-radius: 25px;
             z-index: 1000;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .popup-content {
             margin-bottom: 20px;
-            color: #fff;
         }
 
         .popup button {
@@ -197,16 +215,15 @@
             padding: 10px 20px;
             background-color: #dd2323;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
             color: #fff;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease;
         }
 
         .popup button:hover {
             background-color: #b12828;
-            transform: translateY(-2px);
         }
 
         .popup-congrats {
@@ -222,64 +239,17 @@
         .popup-congrats button:hover {
             background-color: #14821e;
         }
-
-        footer {
-            background-color: #1a1a2e;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            margin-top: auto;
+        earn-link{
+            color: #333;
         }
-
-        .footer-nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        p {
+            color: #e5e5e5;
         }
-
-        .footer-nav li {
-            display: inline-block;
+        label {
+            color: #e5e5e5;
         }
-
-        .footer-nav li a {
-            font-size: 16px;
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav li a:hover {
-            color: #e94560;
-        }
-
-        .rbxpro-disclaimer {
-            color: #aaa;
-            margin-top: 10px;
-            font-size: 12px;
-        }
-
-        /* Media query for smaller devices */
-        @media (max-width: 600px) {
-            .withdraw-container {
-                margin-top: 60px;
-                padding-bottom: 30px;
-            }
-
-            .withdraw-btn {
-                padding: 12px;
-            }
-
-            .popup {
-                width: 90%;
-                padding: 20px;
-            }
-        }
+    </style>
+</head>
     </style>
 </head>
 
@@ -296,14 +266,18 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">Withdraw</a>
+                    <a class="navbar-item navbar-s-item" href="/earn">
+                        Earn
+                    </a>
+                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
+                        Withdraw
+                    </a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons has-addons">
                             <a href="" style="background-color: #2182f0 !important;" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
-                                <strong id="rbxbalance">0 R$</strong>
+                                <strong id="rbxbalance">{(Balance)} R$</strong>
                             </a>
                             <a onclick="Logout()" href="" class="button is-info" style="background-color: #2182f0 !important;">
                                 <strong>Logout</strong>
@@ -321,22 +295,21 @@
             <div class="withdraw-container">
                 <div class="withdraw-header">
                     <h2 class="text-2xl">Withdraw R$</h2>
-                    <h2 class="text-2xl">You must complete at least one survey to withdraw!</h2>
                 </div>
                 <div class="h-full bg-white rounded-md ring-2 w-full flex items-center justify-center ring-primary p-3">
                     <div class="px-4">
                         <div class="mb-4">
-                            <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="Amount" type="number" id="withAmount">
+                            <label for="withAmount" class="block mb-2 text-md font-medium text-black">R$ Withdraw Amount:</label>
+                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-black" placeholder="Amount" type="number" id="withAmount">
                         </div>
                         <div class="mb-4">
-                            <label for="gpID" class="block mb-2 text-md font-medium text-white">Gamepass ID:</label>
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="ID" type="number" id="gpID">
+                            <label for="gpID" class="block mb-2 text-md font-medium text-black">Gamepass ID:</label>
+                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-black" placeholder="ID" type="number" id="gpID">
                         </div>
-                        <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
-                        <p class="withdraw-price font-semibold text-white text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">0</p>
+                        <p class="text-lg text-center text-black">Change the price of your Gamepass price to:</p>
+                        <p class="withdraw-price font-semibold text-black text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">{(Amount)}</p>
                         <div class="flex justify-center items-center mt-4">
-                            <button id='withdrawButton' class="withdraw-btn btn btn-md btn-primary w-full text-white font-semibold" onclick="withdraw()">
+                            <button id='withdrawButton' class="withdraw-btn btn btn-md btn-primary w-full text-black font-semibold" onclick="withDraw()">
                                 <p>Withdraw</p>
                             </button>
                         </div>
@@ -355,13 +328,13 @@
 
     <div class="popup" id="notEnoughBalancePopup">
         <div class="popup-content">
-            <p>You do not have enough robux!</p>
+            <p>You do not have enough robux !</p>
             <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
         </div>
     </div>
     <div class="popup" id="somethingWrongPopup">
         <div class="popup-content">
-            <p>There's something wrong. Double check everything or the ROBUX STOCK is low. Please come back later!</p>
+            <p>There's something wrong. Please make sure to check if everything was done correctly.</p>
             <button onclick="hidePopup('somethingWrongPopup')">Close</button>
         </div>
     </div>
@@ -373,13 +346,11 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer-nav">
-            <ul>
-                <li><a id="footer-earn-link" href="/earn">Earn</a></li>
-                <li><a id="footer-withdraw-link" href="#">Withdraw</a></li>
-            </ul>
-        </div>
+    <footer class="footer">
+        <ul class="footer-nav">
+            <li><a id="footer-earn-link" href="/earn">Earn</a></li> <!-- Redirect the user to the earn page if clicked -->
+            <li><a id="footer-withdraw-link" href="#">Withdraw</a></li> <!-- Redirect the user to the withdraw page if clicked -->
+        </ul>
         <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>RBXPRO | All Rights Reserved.</p>
@@ -387,23 +358,29 @@
             <p>© Copyright RBXPRO 2024</p>
         </div>
     </footer>
-
-    <!-- JavaScript -->
+</body>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all "navbar-burger" elements
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
+            // Check if there are any navbar burgers
             if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
+                // Add a click event on each of them
+                $navbarBurgers.forEach(function ($el) {
+                    $el.addEventListener('click', function () {
+                        // Get the target from the "data-target" attribute
                         var target = $el.dataset.target;
                         var $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
                         $el.classList.toggle('is-active');
                         $target.classList.toggle('is-active');
                     });
                 });
             }
 
+            // Add active class to the current page link
             var path = window.location.pathname;
             if (path === '/' || path.includes('earn')) {
                 document.getElementById('earn-link').classList.add('is-active');
@@ -413,138 +390,122 @@
                 document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
         });
+    </script>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
+</body>
+<script>
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("congratsPopup").style.display = "none";
+    }
 
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("congratsPopup").style.display = "none";
+    function hidePopup(popupId) {
+        var popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'none';
         }
+    }
 
-        function hidePopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'none';
-            }
+    function showPopup(popupId) {
+        var popup = document.getElementById(popupId);
+        if (popup) {
+            popup.style.display = 'block';
         }
+    }
 
-        function showPopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'block';
-            }
+    function Logout() {
+        localStorage.removeItem('sessionToken');
+        window.location.href = '/login';
+    }
+
+    document.getElementById("withAmount").addEventListener("input", function() {
+        var amountInput = parseFloat(this.value); // Get the value entered in the input field
+        var displayAmount = document.getElementById("displayAmount");
+
+        if (!isNaN(amountInput)) {
+            var newAmount = Math.round(amountInput / 0.70); // Calculate 30% more than the input value
+            displayAmount.textContent = newAmount.toFixed(2); // Display the new amount with 2 decimal places
+        } else {
+            displayAmount.textContent = ""; // Clear the display if the input is not a number
         }
+    });
 
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
-        }
+    function withDraw() {
+        document.getElementById("withdrawButton").classList.add("disabled");
+        const token = localStorage.getItem('sessionToken');
+        const withAmount = document.getElementById('withAmount').value;
+        const gpID = document.getElementById('gpID').value;
+        console.log(withAmount, gpID);
+        if (token) {
+            fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (withAmount > data.balance) {
+                        console.log('Not enough balance');
+                        showPopup('notEnoughBalancePopup');
+                    } else {
+                        console.log('Passed checkpoint #0');
 
-        document.getElementById("withAmount").addEventListener("input", function() {
-            var amountInput = parseFloat(this.value);
-            var displayAmount = document.getElementById("displayAmount");
+                        const queryParams = new URLSearchParams({
+                            gpID: gpID,
+                            withAmount: withAmount
+                        });
 
-            if (!isNaN(amountInput)) {
-                var newAmount = Math.round(amountInput / 0.70);
-                displayAmount.textContent = newAmount.toFixed(2);
-            } else {
-                displayAmount.textContent = "";
-            }
-        });
-
-        function withdraw() {
-            const withdrawButton = document.getElementById("withdrawButton");
-            if (withdrawButton) {
-                withdrawButton.classList.add("disabled");
-            }
-
-            const token = localStorage.getItem('sessionToken');
-            const withAmount = document.getElementById('withAmount').value;
-            const gpID = document.getElementById('gpID').value;
-
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (withAmount > data.balance) {
-                            showPopup('notEnoughBalancePopup');
-                        } else {
-                            const queryParams = new URLSearchParams({
-                                gpID: gpID,
-                                withAmount: withAmount
+                        fetch(/api/withdraw?${queryParams}, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': token
+                                }
+                            })
+                            .then(response => {
+                                console.log(response.status);
+                                if (response.status == 200) {
+                                    showPopup('congratsPopup');
+                                } else if (response.status == 400 || response.status == 403) {
+                                    showPopup('somethingWrongPopup');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
                             });
 
-                            fetch(`/api/withdraw?${queryParams}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': token
-                                    }
-                                })
-                                .then(response => {
-                                    if (response.status == 200) {
-                                        // Send Discord webhook message
-                                        const webhookUrl = 'https://discord.com/api/webhooks/1259268256351649822/3538y4__KKC6z_iwX3s-WFhd3R8N6zNp5CO00ubHvpdrCfo_rzC_MJWb7S8Qclb2UX9J';
-                                        const username = data.username;
-                                        const amount = withAmount;
-
-                                        fetch(webhookUrl, {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify({
-                                                content: `${username} just withdrew ${amount} Robux to their account! ⭐`,
-                                            }),
-                                        });
-
-                                        showPopup('congratsPopup');
-                                    } else if (response.status == 400 || response.status == 403) {
-                                        showPopup('somethingWrongPopup');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    showPopup('somethingWrongPopup');
-                                });
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        window.location.href = '/login';
-                    });
-            } else {
-                window.location.href = '/login';
-            }
+                    }
+                })
         }
+    }
 
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        const balance = document.getElementById("rbxbalance");
-                        balance.textContent = `${data.balance} robux`;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        window.location.href = '/login';
-                    });
-            } else {
-                window.location.href = '/login';
-            }
+    function loadUserData() {
+        const token = localStorage.getItem('sessionToken');
+        if (token) {
+            fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
+
+                    balance.textContent = ${data.balance} robux;
+                })
+                .catch(error => {
+                    console.log(error);
+                    window.location.href = '/login';
+                    return;
+                });
+        } else {
+            window.location.href = '/login';
         }
+    }
 
-        setInterval(loadUserData, 1000);
-    </script>
-</body>
-
+    setInterval(loadUserData, 1000);
+</script>
 </html>
