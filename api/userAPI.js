@@ -14,16 +14,21 @@ const res = require('express/lib/response');
 const uuidv4 = require('uuid').v4;
 const { getRandomInt, generateRandomHash, round } = require('../utils/randomHash.js');
 const path = require('path');
-const {
-  connect,
-  changeUserBalance,
-  getUserData,
-  checkUserExists,
-  addnewUser,
-  addOrUpdateDailyUsage,
-  canUseDailyCommand,
+const { 
+  connect, 
+  changeUserBalance, 
+  getUserData, 
+  checkUserExists, 
+  addnewUser, 
+  addOrUpdateDailyUsage, 
+  canUseDailyCommand 
 } = require('../utils/dbChange');
 const { info, error } = require('console');
+const { WebhookClient } = require('discord.js');
+const url = require('url');
+
+// Set up your Discord webhook URL
+const webhook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1291782000113356913/XJ-ar4Ee9KuwKDjyGFRxQX7K9i9imttgOhNR-rg1eFk8MVwPVozSsx4yogHp2AvIVIz1' });
 
 // Function to obtain CSRF token
 async function getGeneralToken(cookie) {
@@ -48,29 +53,12 @@ async function getGeneralToken(cookie) {
   }
 }
 
-// Helper function to extract Gamepass ID from a link or accept ID directly
-function extractGamepassId(linkOrId) {
-  const match = linkOrId.match(/game-pass\/(\d+)/); // Match the Gamepass ID from the link
-  return match ? match[1] : linkOrId; // Return the Gamepass ID from the link, or return the input if it's already an ID
-}
-
-// Function to send Discord webhook
-async function sendDiscordWebhook(username, withAm, gamepassLink) {
-  const webhookUrl = 'https://discord.com/api/webhooks/1291759420241477724/-YuVG7R17p1wvG3oqQh_63Bs2x21GNcDUsHkvXmCAASfJ9LFIMkPuLy1vm-ZYbttqV8k'; // Replace with your actual webhook URL
-  const webhookData = {
-    content: `User ${username} has withdrawn ${withAm} Robux for the gamepass: ${gamepassLink}`,
-  };
-
-  try {
-    await axios.post(webhookUrl, webhookData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    console.log('Webhook sent to Discord successfully.');
-  } catch (error) {
-    console.error('Failed to send webhook:', error.message);
-  }
+// Function to extract Gamepass ID from URL
+function extractGamepassId(gamepassUrl) {
+  const parsedUrl = url.parse(gamepassUrl, true);
+  const pathParts = parsedUrl.pathname.split('/');
+  const gamepassId = pathParts[pathParts.length - 1];
+  return gamepassId;
 }
 
 // Route to handle login
@@ -147,12 +135,10 @@ router.post('/user', async (req, res) => {
 // Route to handle withdrawals
 router.post('/withdraw', async (req, res) => {
   const userID = req.headers.authorization;
-  const gpInput = req.query.gpID; // Using `gpID` as the input (can be link or ID)
-  const gamepassID = extractGamepassId(gpInput); // Extract Gamepass ID from the link or use it as-is if it's already an ID
-  const withAm = Math.round(req.query.withAmount); // Withdrawn amount
-  const gpAm = Math.round(withAm / 0.70); // Adjusted gamepass price
+  const gamepassLink = req.query.gamepassLink; // Accept gamepass link from user
+  const withAm = Math.round(req.query.withAmount);
 
-  console.log('Withdrawal Request:', userID, gamepassID, withAm, gpAm);
+  console.log('Withdrawal Request:', userID, gamepassLink, withAm);
 
   if (!userID) {
     return res.status(401).json({ error: 'Token or username not provided' });
@@ -161,7 +147,7 @@ router.post('/withdraw', async (req, res) => {
   const userData = await checkUserExists(userID);
   if (!userData) {
     console.log('User does not exist');
-    return res.status(401).json({ error: 'User does not exist' });
+    return res.redirect('/login');
   }
 
   if (withAm > userData.balance) {
@@ -174,9 +160,10 @@ router.post('/withdraw', async (req, res) => {
     return res.status(400).json({ error: 'Must complete a survey before withdraw' });
   }
 
+  const gamepassId = extractGamepassId(gamepassLink); // Extract Gamepass ID from the link
+
   try {
-    const response = await axios.get(`https://apis.roblox.com/game-passes/v1/game-passes/${gamepassID}/product-info`, {
-      method: 'GET',
+    const response = await axios.get(`https://apis.roblox.com/game-passes/v1/game-passes/${gamepassId}/product-info`, {
       headers: { 'Content-Type': 'application/json' },
     });
 
@@ -188,7 +175,7 @@ router.post('/withdraw', async (req, res) => {
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
-    if (parseInt(gpData.PriceInRobux) !== parseInt(gpAm)) {
+    if (parseInt(gpData.PriceInRobux) !== Math.round(req.query.withAmount / 0.70)) {
       console.log('Price mismatch');
       return res.status(400).json({ error: 'Price mismatch' });
     }
@@ -197,16 +184,17 @@ router.post('/withdraw', async (req, res) => {
     await changeUserBalance(userID, newBalance);
     console.log('Balance Updated:', newBalance);
 
-    // Send webhook to Discord
-    await sendDiscordWebhook(userData.name, withAm, gpInput); // Use the original gpInput (link) in the webhook
+    // Send a webhook to Discord with withdrawal information
+    await webhook.send({
+      content: `**Withdrawal Request**\nUsername: ${userID}\nAmount: ${withAm}\nGamepass Link: ${gamepassLink}`,
+    });
 
-    console.log('Withdrawal completed, webhook sent');
-    return res.status(200).json({ message: `Transaction completed successfully. You have withdrawn ${withAm} Robux for the gamepass: ${gpInput}` });
+    console.log('Withdrawal completed and webhook sent');
+    return res.status(200).json({ message: 'Transaction completed' });
   } catch (error) {
     console.error('Error in withdraw route:', error);
-    return res.status(500).json({ error: 'Failed to process withdrawal. Please try again.' });
+    return res.status(500).json({ error: 'Failed to process the withdrawal. Please try again.' });
   }
 });
 
 module.exports = router;
-
