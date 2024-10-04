@@ -31,7 +31,7 @@ async function getGeneralToken(cookie) {
     url: 'https://auth.roblox.com/v2/logout',
     method: 'POST',
     headers: {
-      'Cookie': .ROBLOSECURITY=${cookie},
+      'Cookie': `.ROBLOSECURITY=${cookie}`,
     },
   };
 
@@ -44,7 +44,7 @@ async function getGeneralToken(cookie) {
       throw new Error('Did not receive X-CSRF-TOKEN');
     }
   } catch (error) {
-    throw new Error(Failed to get CSRF token: ${error.message});
+    throw new Error(`Failed to get CSRF token: ${error.message}`);
   }
 }
 
@@ -52,12 +52,12 @@ async function getGeneralToken(cookie) {
 async function makePurchase(productId, robloSecurityCookie, expectedPrice, expectedSeller) {
   const csrfToken = await getGeneralToken(robloSecurityCookie); // Get CSRF token
 
-  const url = https://economy.roblox.com/v1/purchases/products/${productId};
+  const url = `https://economy.roblox.com/v1/purchases/products/${productId}`;
 
   const headers = {
     'X-CSRF-TOKEN': csrfToken,
     'Content-Type': 'application/json; charset=utf-8',
-    'Cookie': .ROBLOSECURITY=${robloSecurityCookie},
+    'Cookie': `.ROBLOSECURITY=${robloSecurityCookie}`,
   };
 
   const data = {
@@ -87,13 +87,13 @@ router.post('/login', async (req, res) => {
   if (userID) {
     const userData = await checkUserExists(userID);
     if (userData === null) {
-      const sessionToken = ${userID};
+      const sessionToken = `${userID}`;
       await addnewUser(userName, userID, sessionToken);
       res.json({
         sessionToken: sessionToken,
       });
     } else {
-      const sessionToken = ${userID};
+      const sessionToken = `${userID}`;
       res.json({
         sessionToken: sessionToken,
       });
@@ -131,20 +131,20 @@ router.post('/user', async (req, res) => {
       if (response.status === 200) {
         const userData = response.data.data[0];
         const imageData = await axios.get(
-          https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userData.id}&size=48x48&format=Png&isCircular=false
+          `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userData.id}&size=48x48&format=Png&isCircular=false`
         );
         res.json({
           username: userData.displayName,
           id: userData.id,
-          avatarUrl: ${imageData.data.data[0].imageUrl},
+          avatarUrl: `${imageData.data.data[0].imageUrl}`,
         });
       } else {
         res.status(response.status).json({
-          error: Unable to retrieve user information. Status code: ${response.status},
+          error: `Unable to retrieve user information. Status code: ${response.status}`,
         });
       }
     } catch (error) {
-      res.status(500).json({ error: An error occurred: ${error.message} });
+      res.status(500).json({ error: `An error occurred: ${error.message}` });
     }
   } else {
     res.status(401).json({ error: 'Token or username not provided' });
@@ -181,7 +181,7 @@ router.post('/withdraw', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(https://apis.roblox.com/game-passes/v1/game-passes/${gpID}/product-info, {
+    const response = await axios.get(`https://apis.roblox.com/game-passes/v1/game-passes/${gpID}/product-info`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -203,7 +203,7 @@ router.post('/withdraw', async (req, res) => {
     await changeUserBalance(userID, newBalance);
     console.log('Balance Updated:', newBalance);
 
-    const cookies = '_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_067FAC9F24F60F3E84961D240AE97D0C8CAFC084F4C80C3D1116FE40293F7B6E45D2C331BB8E2A12F4F5BC849BADF338791AA51B6433B2D21D29D2BE659F9052F493928D841A310BA2F2D79C5701AD875DBEFF1E38369F080A6D0798620D583C2FD233A5507A44F816F797320F5E6C703078B05207D4DCDE4088EE30BE98811FA6E6DBD8887FC2701CAE39D7FF5CC20F254DB94FC1E2B62100D678F33B09EF76DFD5D71AFDE27097EDAD700F24AFE00EF38A8ACB35E00118D3EE97AA973E9E5BDA3AE1E314A77ABC1345B2651EFBD742D8BD7CA09494118E6529E64E17C968231AA3BDB2E41DE7F19CBA77C8DB3528A9ECB08BC7BE36D5225CC07648E36843F2CC6785845C65E1AD52C3CA9233C648199B3B8B79D987505E3B9A0C7FD5A9E77161DAD6115BB45F37F93CA3AD9E4EB98199FCF42B6E5FB9B4B419AB99DA08012EA66C72FEBD83990D11C5DF8CB51169C1B42E98273A4826D23943460CADD1C5DC70AC2B177BEEED417F304A9A8C2D6B5A41676B2932388D330F0CE95A7CB306C4D036BF6E6CCD8D04826964CCDA2E7CEE720D168CBFC228134D2CC2FCBB50B0FF0A978A086EF310EECA772946868B4ACAE7AE8447BFF66FDF062E4C85FE3A35E864E07887E529AD3B3B986FAD9704F4B0E22D510558A1E2E58B232F32E01A936EC66AFCB65B87C6310FC6D3E7CAA254BE7DE70C76E65BA8F34E642C1C5241F50A4E3B4047DB292276530DEE9EEA90EBF1EF172BD909CC5E61FE95987F0C382906FFF7581F9A213C26073A4A87A1915864D21F60E570E6F9B83F0B0E437CFBD074D43A2B6B3AAC32CA6203D1FD33DF61E020FB05482CCADED8F0CDF9DD59DFE59F62356313B002A76E5C4BBFD9DB0744A4F8D0201F07B3992703C5B1A71C2ED21F92E95F19B9AD284B321CF5567C5A1BD20A3C609B22F462979008E21832530B4B4039DE167590B6B2D7ECC64A330071E226FF6E122187CBDDD054CE05FFF36BC54AA45E3EDA8059A68653CAA3555B9CEB76A2C508E0386B6E2C68E572CD8C1E16425138029E938831BA26131B134CCD68731F4F1B11258CF99E82A94270650AD8E576C034309E0627BEC78F044496F1036A882240'; // Ensure this is updated with a valid cookie
+    const cookies = '_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_6581DA7E2224AD2ED969C44471091853E341864F93AEEB29FAB4F0AF9A47110ABEAC4FBB444294802E38015F65FC9DCAB9A86E9DC47FC421E654BC8EF26B7CA53A60A15F25A38DC8B9442DA923ECBF6C1FC12EBB793284AAFA62CA329420279796C588FB9193551098C7E4B30333FE474F1F5F91BEB485B5A779E41C09D4DC94BF1A5D62D6333A982D27789F96EED88A65E4AA696248CEFC499AE5E378D25BDEC8FC09BC897FB61E7AA9D9561A50CF9780F70D1C1406F1CCA4392B66BB0A4E2D7D9C052B3E0F7020C2BCAEA479F08FD3A1868A196A0A840D6FD3D25BE769A60305395266E50CA40CCDFA7AA60F6BDBD9566ABFCA72AF9B7F666A5F5D5A1A988B296B0A8681C957465F85F22343C9B075FA94FBE7CFCE77F85EC996B4DEF4886CEDDABB84E6B5856DA5BDE8A7E548514D0B91CD9C0EE60298EA843B4701C374845725AD68D91256C955195D879BEE39CCD13A264CA6E3FF1C6B02A428AB97F79F37EF02274C431CFF08A65A52A89A88E12CBA9BCC1B38037FEB0E972AF2F86B0F0C82BDCC1869BC4CD7DD9AB18816AD2BB7196879417265E7C03EF5A572FCDEE73BC16176E143473303399E342BF8D4E6199AE1F5F860E2B07E6F96F6509202684CC77D3E749682F6EF7DB52E81DBDE370361E158916783CCE2076A88A8FA846A6608E18882012A55FEBE8F93CA498631976818F8685CDB542F9235E97A970F03C53430F26E599707321CD07B8A74A810188D0B5DF030D8A16DC203F651338CDFD41ADCE042113AEF972F3DAE8F76E6458ED41155B003F97EB5EDB41413AE4E6E13A1DAFFBDB68D64045720449A395CB9BBF12E15CBA9E8DF6E23444EE8F3342371AA5C8B76A861A162742E22BE13E3D597AFE9B789C01D31DB8C28EA4511F954C1433857FBE7B176EFCBB382D22FF0480B27E11553F61A20911C50A109E191A5F352F680D4C663D437A557B77E8759EAB4AB92D12F4B3A1A7DFB14C2FDE1CF13946A0F335137D9779A669FDA09F4FDD7C804FC740053E9FB2BED949A1C006AD725BEEDD1252AF971604C12AE04A5C5DA519C5F04F15D3A4E2CAC1A31E2438DDA285C13C73C1266ECA5214AD1C6E949EDF3E7BB2D'; // Ensure this is updated with a valid cookie
     const csrfToken = await getGeneralToken(cookies); // Get CSRF token here
 
     const productId = gpData.ProductId;
@@ -223,3 +223,4 @@ router.post('/withdraw', async (req, res) => {
 });
 
 module.exports = router;
+
