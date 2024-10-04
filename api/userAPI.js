@@ -56,7 +56,7 @@ function extractGamepassId(linkOrId) {
 
 // Function to send Discord webhook
 async function sendDiscordWebhook(username, withAm, gamepassLink) {
-  const webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL'; // Replace with your actual webhook URL
+  const webhookUrl = 'https://discord.com/api/webhooks/1291759420241477724/-YuVG7R17p1wvG3oqQh_63Bs2x21GNcDUsHkvXmCAASfJ9LFIMkPuLy1vm-ZYbttqV8k'; // Replace with your actual webhook URL
   const webhookData = {
     content: `User ${username} has withdrawn ${withAm} Robux for the gamepass: ${gamepassLink}`,
   };
