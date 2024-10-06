@@ -12,15 +12,6 @@
     <meta name="theme-color" content="#17b823">
     <meta name="author" content="RbxPro">
     <meta name="keywords" content="free robux,robux,roblox,free roblox">
-    <meta name="trustpilot-one-time-domain-verification-id" content="8dcf1b19-c1a9-4c41-8374-07437ed617b2">
-    <meta property="og:site_name" content="RbxPro">
-    <meta property="og:url" content="https://rbx.pro/">
-    <meta property="og:image" content="https://media.discordapp.net/attachments/977174147950059541/1197191747156058192/image-removebg-preview2011.png?ex=65ba5eb3&is=65a7e9b3&hm=4afd7aeb0c79c2548754c94586e36bb837a098db89cd750ca164041e56a80093&=&format=webp&quality=lossless">
-    <meta property="og:title" content="RBXPRO - Earn Your Robux With Ease!">
-    <meta property="og:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys! What're you waiting for?">
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/bulma.css" rel="stylesheet" />
     <style>
@@ -105,13 +96,13 @@
         .withdraw-container {
             max-width: 400px;
             margin: auto;
-            margin-top: 80px; /* Adjusted to account for fixed navbar */
+            margin-top: 80px;
             background-color: #1a1a2e;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             margin-bottom: 50px;
-            padding-bottom: 20px; /* Extra padding for spacing */
+            padding-bottom: 20px;
         }
 
         .withdraw-header {
@@ -303,7 +294,7 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons has-addons">
-                            <a href="" style="background-color: #2182f0 !important;" class="button is-info" data-step="3" data-intro="Your ROBUX will collect here as you complete offers! This will be ROBUX you can withdraw at any time to your ROBLOX account!">
+                            <a href="" style="background-color: #2182f0 !important;" class="button is-info">
                                 <strong id="rbxbalance">{(Balance)} R$</strong>
                             </a>
                             <a onclick="Logout()" href="" class="button is-info" style="background-color: #2182f0 !important;">
@@ -331,8 +322,8 @@
                             <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="Amount" type="number" id="withAmount">
                         </div>
                         <div class="mb-4">
-                            <label for="gpID" class="block mb-2 text-md font-medium text-white">Gamepass ID:</label>
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="ID" type="number" id="gpID">
+                            <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label> <!-- Updated Field -->
+                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="Paste your Gamepass link" type="url" id="gpLink"> <!-- Input for Gamepass Link -->
                         </div>
                         <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
                         <p class="withdraw-price font-semibold text-white text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">{(Amount)}</p>
@@ -413,9 +404,7 @@
                 document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
         });
-    </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
-    <script>
+
         function closePopup() {
             document.getElementById("popup").style.display = "none";
             document.getElementById("congratsPopup").style.display = "none";
@@ -456,7 +445,8 @@
             document.getElementById("withdrawButton").classList.add("disabled");
             const token = localStorage.getItem('sessionToken');
             const withAmount = document.getElementById('withAmount').value;
-            const gpID = document.getElementById('gpID').value;
+            const gpLink = document.getElementById('gpLink').value; // Updated to use Gamepass Link
+            
             if (token) {
                 fetch('/api/userdata', {
                         method: 'POST',
@@ -470,7 +460,7 @@
                             showPopup('notEnoughBalancePopup');
                         } else {
                             const queryParams = new URLSearchParams({
-                                gpID: gpID,
+                                gpLink: gpLink, // Send Gamepass Link to the API
                                 withAmount: withAmount
                             });
 
@@ -524,3 +514,4 @@
 </body>
 
 </html>
+
