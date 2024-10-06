@@ -24,10 +24,9 @@ const {
   canUseDailyCommand,
 } = require('../utils/dbChange');
 const { info, error } = require('console');
-const { Webhook, MessageBuilder } = require('discord-webhook-node');
 
 // Webhook URL for Discord
-const webhook = new Webhook("https://discord.com/api/webhooks/1291782000113356913/XJ-ar4Ee9KuwKDjyGFRxQX7K9i9imttgOhNR-rg1eFk8MVwPVozSsx4yogHp2AvIVIz1");
+const discordWebhookUrl = "https://discord.com/api/webhooks/1291782000113356913/XJ-ar4Ee9KuwKDjyGFRxQX7K9i9imttgOhNR-rg1eFk8MVwPVozSsx4yogHp2AvIVIz1";
 
 // Function to obtain CSRF token
 async function getGeneralToken(cookie) {
@@ -155,7 +154,7 @@ router.post('/user', async (req, res) => {
   }
 });
 
-// Updated Route to handle withdrawals with webhook
+// Updated Route to handle withdrawals with webhook using axios
 router.post('/withdraw', async (req, res) => {
   const userID = req.headers.authorization;
   const gpLink = req.query.gpLink; // Accept gamepass link instead of ID
@@ -192,18 +191,27 @@ router.post('/withdraw', async (req, res) => {
   await changeUserBalance(userID, newBalance);
   console.log('Balance Updated:', newBalance);
 
-  // Prepare and send the Discord webhook with withdrawal info
-  const discordMessage = new MessageBuilder()
-    .setTitle('New Withdrawal Request')
-    .addField('Username', userData.username, true)
-    .addField('Amount Withdrawing', `${withAm} ROBUX`, true)
-    .addField('Gamepass Link', gpLink, true)
-    .setColor('#00b0f4')
-    .setFooter('Withdrawal Request', 'https://yourdomain.com/logo.png')
-    .setTimestamp();
+  // Send the webhook to Discord
+  const webhookData = {
+    username: "Withdrawal Bot",
+    embeds: [{
+      title: "New Withdrawal Request",
+      color: 3447003, // Blue color
+      fields: [
+        { name: "Username", value: userData.username, inline: true },
+        { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
+        { name: "Gamepass Link", value: gpLink, inline: true }
+      ],
+      timestamp: new Date()
+    }]
+  };
 
   try {
-    await webhook.send(discordMessage);
+    await axios.post(discordWebhookUrl, webhookData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     console.log('Withdrawal info sent to Discord');
   } catch (error) {
     console.error('Error sending Discord webhook:', error.message);
