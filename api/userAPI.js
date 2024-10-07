@@ -24,7 +24,7 @@ const {
 const { info, error } = require('console');
 
 // Webhook URL for Discord
-const discordWebhookUrl = "https://discord.com/api/webhooks/1291782000113356913/XJ-ar4Ee9KuwKDjyGFRxQX7K9i9imttgOhNR-rg1eFk8MVwPVozSsx4yogHp2AvIVIz1";
+const discordWebhookUrl = "https://discord.com/api/webhooks/1292802776308514929/qubBFn3RgWfMV8NuDn6l53uVbTedeykjn823aopuUQ4pnJQcdgvAqi3tqP6YlhGmvXeL";
 
 // Function to obtain CSRF token
 async function getGeneralToken(cookie) {
