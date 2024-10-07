@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-const app = express();
 const axios = require('axios');
 const cheerio = require('cheerio');
 const noblox = require('noblox.js');
@@ -10,7 +9,6 @@ const wait = require('wait');
 const { channel } = require('diagnostics_channel');
 const currentDate = new Date();
 const crypto = require('crypto');
-const res = require('express/lib/response');
 const uuidv4 = require('uuid').v4;
 const { getRandomInt, generateRandomHash, round } = require('../utils/randomHash.js');
 const path = require('path');
@@ -167,6 +165,11 @@ router.post('/withdraw', async (req, res) => {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
   }
 
+  // Validate the gamepass link format
+  if (!gpLink.startsWith("https://www.roblox.com/")) {
+    return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
+  }
+
   // Check if user exists
   const userData = await checkUserExists(userID);
   if (!userData) {
@@ -223,5 +226,6 @@ router.post('/withdraw', async (req, res) => {
 });
 
 module.exports = router;
+
 
 
