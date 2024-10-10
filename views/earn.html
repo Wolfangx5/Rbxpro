@@ -17,17 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #FFFDFF;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* Loading Screen */
+        /* Full-screen loading screen */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -45,6 +35,7 @@
             flex-direction: column;
         }
 
+        /* Glitch text */
         .glitch-text {
             position: relative;
             color: #fff;
@@ -54,7 +45,7 @@
             animation: shine 3s infinite;
         }
 
-        /* Glitch Effect */
+        /* Glitch effect */
         .glitch-text:before,
         .glitch-text:after {
             content: "RBXPRO";
@@ -63,6 +54,7 @@
             top: 0;
             color: #ff3368;
             background: transparent;
+            overflow: hidden;
             clip: rect(0, 900px, 0, 0);
             animation: glitch 2s infinite ease-in-out;
         }
@@ -79,16 +71,62 @@
             animation-duration: 1.5s;
         }
 
+        /* Glitch keyframes */
         @keyframes glitch {
-            0%, 100% { clip: rect(0, 900px, 0, 0); }
-            10% { clip: rect(22px, 900px, 80px, 0); }
-            20% { clip: rect(42px, 900px, 100px, 0); }
-            30% { clip: rect(32px, 900px, 50px, 0); }
-            40% { clip: rect(12px, 900px, 20px, 0); }
-            50% { clip: rect(82px, 900px, 120px, 0); }
+            0%,
+            100% {
+                clip: rect(0, 900px, 0, 0);
+            }
+
+            10% {
+                clip: rect(22px, 900px, 80px, 0);
+            }
+
+            20% {
+                clip: rect(42px, 900px, 100px, 0);
+            }
+
+            30% {
+                clip: rect(32px, 900px, 50px, 0);
+            }
+
+            40% {
+                clip: rect(12px, 900px, 20px, 0);
+            }
+
+            50% {
+                clip: rect(82px, 900px, 120px, 0);
+            }
+
+            60% {
+                clip: rect(92px, 900px, 40px, 0);
+            }
+
+            70% {
+                clip: rect(72px, 900px, 130px, 0);
+            }
+
+            80% {
+                clip: rect(62px, 900px, 70px, 0);
+            }
+
+            90% {
+                clip: rect(42px, 900px, 50px, 0);
+            }
         }
 
-        /* Loading Dots Animation */
+        /* Shine effect */
+        @keyframes shine {
+            0% {
+                background-position: -200%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+        /* Animated dots */
         .dots {
             font-size: 24px;
             margin-top: 10px;
@@ -98,26 +136,46 @@
             animation: blink 1.5s infinite ease-in-out;
         }
 
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.3s; }
-        .dot:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes blink {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+        .dot:nth-child(1) {
+            animation-delay: 0s;
         }
 
-        /* Navbar */
+        .dot:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        /* Blinking dots keyframes */
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #FFFDFF;
+        }
+
         .navbar {
             background-color: #1a1a2e;
             padding: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
-        .navbar .logo {
+        .navbar-brand .logo {
             font-weight: 700;
             font-size: 1.8rem;
             color: #fff;
@@ -151,7 +209,6 @@
             transform: translateY(-2px);
         }
 
-        /* Recommendation Bar */
         .recommendation-strip {
             background-color: #17b823;
             color: #fff;
@@ -159,132 +216,89 @@
             text-align: center;
             font-weight: 600;
             font-size: 1.1rem;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* User Profile */
-        .profile-card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .section {
+            padding: 3rem 1.5rem;
+        }
+
+        h2.title {
+            font-size: 2rem;
+            color: #FEFFFF;
+            margin-bottom: 1rem;
+        }
+
+        h3.subtitle {
+            font-size: 1.25rem;
+            color: #FEFFFF;
+            margin-bottom: 2rem;
+        }
+
+        .column .popCard {
+            display: block;
             background-color: #1a1a2e;
-            padding: 20px;
-            border-radius: 15px;
-            color: #fff;
-            margin: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .profile-avatar {
-            border-radius: 50%;
-            margin-right: 20px;
-            width: 80px;
-            height: 80px;
-        }
-
-        .profile-details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .profile-details h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        .profile-details span {
-            color: #bdc3c7;
-            font-size: 1.1rem;
-        }
-
-        /* Leaderboard */
-        .leaderboard-section {
-            background-color: #162447;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 2rem 1.5rem;
+            border-radius: 8px;
             color: #fff;
             text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .leaderboard-section h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .leaderboard-list {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .leaderboard-item {
-            background-color: #1a1a2e;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
 
-        .leaderboard-item:hover {
+        .column .popCard:hover {
             transform: translateY(-5px);
+            background-color: #e94560;
         }
 
-        .leaderboard-item h4 {
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-            color: #17b823;
-        }
-
-        .leaderboard-item span {
-            color: #bdc3c7;
-        }
-
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 140px;
-            background-color: #000;
+        footer {
+            background-color: #1a1a2e;
             color: #fff;
+            padding: 20px;
             text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; 
-            left: 50%;
-            margin-left: -75px;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 15px;
         }
 
-        /* Floating Action Button */
-        .floating-action-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #17b823;
+        .footer-nav li a {
+            font-size: 1rem;
             color: #fff;
-            border-radius: 50%;
-            padding: 15px;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
         }
 
-        .floating-action-btn:hover {
-            background-color: #2182f0;
+        .footer-nav li a:hover {
+            color: #e94560;
+        }
+
+        .rbxpro-disclaimer {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-burger {
+                display: block;
+            }
+
+            .navbar-menu {
+                background-color: #1a1a2e;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.is-active {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -300,7 +314,6 @@
         </div>
     </div>
 
-    <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -332,50 +345,74 @@
         </div>
     </nav>
 
-    <!-- Recommendation Strip -->
     <div class="recommendation-strip">
         Withdrawals has been fixed, Currently restocking!💎
     </div>
 
-    <!-- Profile Section -->
     <section class="section">
         <div class="container has-text-centered-mobile">
-            <div class="profile-card">
-                <img src="https://www.roblox.com/bust-thumbnail/image?userId={userId}&width=100&height=100&format=png" class="profile-avatar" alt="User Avatar">
-                <div class="profile-details">
-                    <h3>{user}</h3>
-                    <span>{balance} Robux</span>
-                </div>
-            </div>
-
-            <h2 class="title">Top Earners This Week</h2>
-            <div class="leaderboard-section">
-                <h3>Leaderboard</h3>
-                <div class="leaderboard-list">
-                    <div class="leaderboard-item">
-                        <h4>Player1</h4>
-                        <span>1200 R$</span>
+            <div class="columns is-centered">
+                <div class="column is-11">
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
+                    <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard adscend" onclick="openAytS()">
+                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
+                                <span>KIwiwall</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openBitlab()">
+                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Bitlabs</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openCPX()">
+                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
+                                <span>CPX Research</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard soon" href="#">
+                                <span class="fas fa-hourglass-half fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Soon!</span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="leaderboard-item">
-                        <h4>Player2</h4>
-                        <span>1100 R$</span>
-                    </div>
-                    <div class="leaderboard-item">
-                        <h4>Player3</h4>
-                        <span>1000 R$</span>
+                    <br>
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
+                    <h3 class="subtitle">Follow us to stay updated!</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Discord</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Subscribe</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Floating Action Button -->
-    <div class="floating-action-btn tooltip">
-        <i class="fas fa-plus"></i>
-        <span class="tooltiptext">Start Earning Robux</span>
+    <div class="recommendation-strip">
+        Earn rbx by running discord commands, Join our server! 🤑
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-nav">
             <ul>
@@ -393,7 +430,6 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Loading screen timeout
@@ -401,7 +437,6 @@
                 document.getElementById('loading-screen').style.display = 'none';
             }, 2500); // 2.5 seconds for the loading screen
 
-            // Toggle Navbar Menu
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
                 $navbarBurgers.forEach(function($el) {
@@ -414,48 +449,67 @@
                 });
             }
 
-            // Profile Data
-            function loadUserData() {
-                const token = localStorage.getItem('sessionToken');
-                if (token) {
-                    fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`, // Include token
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.balance && data.username) {
-                            const balance = document.getElementById("rbxbalance");
-                            const nameDisplay = document.getElementById("usernameDisplay");
-
-                            balance.textContent = `${data.balance} robux`;
-                            nameDisplay.textContent = `Welcome, ${data.username}!`;
-                        }
-                    })
-                    .catch(error => {
-                        window.location.href = '/login';
-                    });
-                } else {
-                    window.location.href = '/login';
-                }
+            var path = window.location.pathname;
+            if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
+                document.getElementById('footer-earn-link').classList.add('is-active');
+            } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
+                document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
-
-            setInterval(loadUserData, 1000);
         });
 
-        // Logout function
         function Logout() {
             localStorage.removeItem('sessionToken');
             window.location.href = '/login';
         }
-    </script>
 
+        function openBitlab() {
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
+        }
+
+        function openAytS() {
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
+        }
+
+        function openCPX() {
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
+        }
+
+        function loadUserData() {
+            const token = localStorage.getItem('sessionToken');
+            if (token) {
+                fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
+
+                    balance.textContent = `${data.balance} robux`;
+                    nameDisplay.textContent = `Welcome, ${data.username}!`;
+                })
+                .catch(error => {
+                    window.location.href = '/login';
+                    return;
+                });
+            } else {
+                window.location.href = '/login';
+            }
+        }
+        setInterval(loadUserData, 1000)
+    </script>
     <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
+
 
 
