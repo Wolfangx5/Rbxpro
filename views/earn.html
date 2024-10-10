@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #FFFDFF;
+            scroll-behavior: smooth;
+        }
+
         /* Full-screen loading screen */
         #loading-screen {
             position: fixed;
@@ -45,7 +52,6 @@
             animation: shine 3s infinite;
         }
 
-        /* Glitch effect */
         .glitch-text:before,
         .glitch-text:after {
             content: "RBXPRO";
@@ -71,7 +77,6 @@
             animation-duration: 1.5s;
         }
 
-        /* Glitch keyframes */
         @keyframes glitch {
             0%,
             100% {
@@ -148,7 +153,6 @@
             animation-delay: 0.6s;
         }
 
-        /* Blinking dots keyframes */
         @keyframes blink {
             0% {
                 opacity: 0;
@@ -163,36 +167,62 @@
             }
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #FFFDFF;
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('your-background-image.jpg') center/cover no-repeat;
+            position: relative;
         }
 
-        .navbar {
-            background-color: #1a1a2e;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
         }
 
-        .navbar-brand .logo {
-            font-weight: 700;
-            font-size: 1.8rem;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
             color: #fff;
         }
 
-        .navbar-menu a {
-            color: #fff;
-            padding: 0.5rem 1.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease;
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        .navbar-menu a:hover {
+        .hero .cta-button {
+            background-color: #17b823;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero .cta-button:hover {
+            background-color: #13a319;
+            transform: translateY(-3px);
+        }
+
+        .popCard {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .popCard:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             background-color: #e94560;
-            color: #fff;
-            border-radius: 4px;
         }
 
         .buttons .button {
@@ -209,101 +239,18 @@
             transform: translateY(-2px);
         }
 
-        .recommendation-strip {
-            background-color: #17b823;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .section {
-            padding: 3rem 1.5rem;
-        }
-
-        h2.title {
-            font-size: 2rem;
-            color: #FEFFFF;
-            margin-bottom: 1rem;
-        }
-
-        h3.subtitle {
-            font-size: 1.25rem;
-            color: #FEFFFF;
-            margin-bottom: 2rem;
-        }
-
-        .column .popCard {
-            display: block;
+        .navbar {
+            position: sticky;
+            top: 0;
             background-color: #1a1a2e;
-            padding: 2rem 1.5rem;
-            border-radius: 8px;
-            color: #fff;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .column .popCard:hover {
-            transform: translateY(-5px);
-            background-color: #e94560;
-        }
-
-        footer {
-            background-color: #1a1a2e;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .footer-nav li {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .footer-nav li a {
-            font-size: 1rem;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav li a:hover {
-            color: #e94560;
-        }
-
-        .rbxpro-disclaimer {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
-
-        @media (max-width: 1024px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                background-color: #1a1a2e;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                padding: 1rem;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-            }
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
         }
     </style>
 </head>
 
-<body aria-hidden="false">
+<body>
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="glitch-text">RBXPRO</div>
@@ -313,6 +260,15 @@
             <span class="dot">.</span>
         </div>
     </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Earn Free Robux Today!</h1>
+            <a href="#start" class="cta-button">Start Earning</a>
+        </div>
+    </section>
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
@@ -345,11 +301,7 @@
         </div>
     </nav>
 
-    <div class="recommendation-strip">
-        Withdrawals has been fixed, Currently restocking!💎
-    </div>
-
-    <section class="section">
+    <section class="section" id="start">
         <div class="container has-text-centered-mobile">
             <div class="columns is-centered">
                 <div class="column is-11">
@@ -381,37 +333,10 @@
                             </a>
                         </div>
                     </div>
-                    <br>
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
-                    <h3 class="subtitle">Follow us to stay updated!</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Discord</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Instagram</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Subscribe</span>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <div class="recommendation-strip">
-        Earn rbx by running discord commands, Join our server! 🤑
-    </div>
 
     <footer>
         <div class="footer-nav">
@@ -422,25 +347,19 @@
                 <li><a id="footer-privacy-link" href="/privacy.html">Privacy Policy</a></li>
             </ul>
         </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
-        <div class="rbxpro-disclaimer">
-            <p>RBXPRO | All Rights Reserved.</p>
-            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
-            <p>© Copyright RBXPRO 2024</p>
-        </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Loading screen timeout
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
-            }, 2500); // 2.5 seconds for the loading screen
+            }, 2500);
 
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
+                $navbarBurgers.forEach(function ($el) {
+                    $el.addEventListener('click', function () {
                         var target = $el.dataset.target;
                         var $target = document.getElementById(target);
                         $el.classList.toggle('is-active');
@@ -466,17 +385,17 @@
 
         function openBitlab() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
+            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank');
         }
 
         function openAytS() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
+            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank');
         }
 
         function openCPX() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
+            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
         }
 
         function loadUserData() {
@@ -488,28 +407,28 @@
                         'Authorization': token
                     }
                 })
-                .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
+                    .then(response => response.json())
+                    .then(data => {
+                        const balance = document.getElementById("rbxbalance");
+                        const nameDisplay = document.getElementById("usernameDisplay");
 
-                    balance.textContent = `${data.balance} robux`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                    return;
-                });
+                        balance.textContent = `${data.balance} robux`;
+                        nameDisplay.textContent = `Welcome, ${data.username}!`;
+                    })
+                    .catch(error => {
+                        window.location.href = '/login';
+                        return;
+                    });
             } else {
                 window.location.href = '/login';
             }
         }
         setInterval(loadUserData, 1000)
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
+
 
 
 
