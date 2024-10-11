@@ -31,30 +31,30 @@
             z-index: 2000;
             color: #fff;
             font-family: 'Poppins', sans-serif;
-            font-size: 48px;
             flex-direction: column;
         }
 
-        /* Glitch text */
+        /* Glowing neon text */
         .glitch-text {
             position: relative;
-            color: #fff;
-            font-size: 64px;
-            text-transform: uppercase;
+            font-size: 80px; /* Make text bigger */
+            font-weight: bold;
+            color: #00ffcc;
             letter-spacing: 3px;
-            animation: shine 3s infinite;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc, 
+                         0 0 40px #00ffcc, 0 0 50px #ff00cc, 0 0 60px #ff00cc;
+            animation: glow 1.5s ease-in-out infinite alternate, glitch 2s infinite;
         }
 
-        /* Glitch effect */
+        /* Glitch effect for extra flair */
         .glitch-text:before,
         .glitch-text:after {
             content: "RBXPRO";
             position: absolute;
             left: 0;
             top: 0;
-            color: #ff3368;
-            background: transparent;
-            overflow: hidden;
+            color: #ff00cc;
             clip: rect(0, 900px, 0, 0);
             animation: glitch 2s infinite ease-in-out;
         }
@@ -73,67 +73,39 @@
 
         /* Glitch keyframes */
         @keyframes glitch {
-            0%,
-            100% {
-                clip: rect(0, 900px, 0, 0);
-            }
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            10% { clip: rect(22px, 900px, 80px, 0); }
+            20% { clip: rect(42px, 900px, 100px, 0); }
+            30% { clip: rect(32px, 900px, 50px, 0); }
+            40% { clip: rect(12px, 900px, 20px, 0); }
+            50% { clip: rect(82px, 900px, 120px, 0); }
+            60% { clip: rect(92px, 900px, 40px, 0); }
+            70% { clip: rect(72px, 900px, 130px, 0); }
+            80% { clip: rect(62px, 900px, 70px, 0); }
+            90% { clip: rect(42px, 900px, 50px, 0); }
+        }
 
-            10% {
-                clip: rect(22px, 900px, 80px, 0);
+        /* Glow animation for neon effect */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc, 
+                             0 0 20px #ff00cc, 0 0 30px #ff00cc, 0 0 40px #ff00cc;
             }
-
-            20% {
-                clip: rect(42px, 900px, 100px, 0);
-            }
-
-            30% {
-                clip: rect(32px, 900px, 50px, 0);
-            }
-
-            40% {
-                clip: rect(12px, 900px, 20px, 0);
-            }
-
-            50% {
-                clip: rect(82px, 900px, 120px, 0);
-            }
-
-            60% {
-                clip: rect(92px, 900px, 40px, 0);
-            }
-
-            70% {
-                clip: rect(72px, 900px, 130px, 0);
-            }
-
-            80% {
-                clip: rect(62px, 900px, 70px, 0);
-            }
-
-            90% {
-                clip: rect(42px, 900px, 50px, 0);
+            to {
+                text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc, 0 0 40px #00ffcc, 
+                             0 0 50px #ff00cc, 0 0 60px #ff00cc, 0 0 70px #ff00cc;
             }
         }
 
-        /* Shine effect */
-        @keyframes shine {
-            0% {
-                background-position: -200%;
-            }
-
-            100% {
-                background-position: 200%;
-            }
-        }
-
-        /* Animated dots */
+        /* Blinking dots with glowing effect */
         .dots {
-            font-size: 24px;
+            font-size: 30px; /* Increased size */
             margin-top: 10px;
         }
 
         .dot {
-            animation: blink 1.5s infinite ease-in-out;
+            animation: blink 1.5s infinite ease-in-out, glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #ff00cc;
         }
 
         .dot:nth-child(1) {
@@ -148,16 +120,13 @@
             animation-delay: 0.6s;
         }
 
-        /* Blinking dots keyframes */
         @keyframes blink {
             0% {
                 opacity: 0;
             }
-
             50% {
                 opacity: 1;
             }
-
             100% {
                 opacity: 0;
             }
