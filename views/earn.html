@@ -34,78 +34,40 @@
             flex-direction: column;
         }
 
-        /* Glowing neon text */
-        .glitch-text {
-            position: relative;
-            font-size: 80px; /* Make text bigger */
-            font-weight: bold;
-            color: #00ffcc;
-            letter-spacing: 3px;
+        /* Smooth and rounded neon text */
+        .glow-text {
+            font-size: 100px; /* Make the text larger */
+            font-weight: 700;
+            font-family: 'Inter', sans-serif; /* Use Inter for a smooth and round feel */
+            color: #ff0066; /* Change to a reddish glow */
+            letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc, 
-                         0 0 40px #00ffcc, 0 0 50px #ff00cc, 0 0 60px #ff00cc;
-            animation: glow 1.5s ease-in-out infinite alternate, glitch 2s infinite;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
+                         0 0 100px #ff3366, 0 0 150px #ff0033;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        /* Glitch effect for extra flair */
-        .glitch-text:before,
-        .glitch-text:after {
-            content: "RBXPRO";
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #ff00cc;
-            clip: rect(0, 900px, 0, 0);
-            animation: glitch 2s infinite ease-in-out;
-        }
-
-        .glitch-text:before {
-            left: 2px;
-            text-shadow: -2px 0 red;
-            animation-duration: 2.5s;
-        }
-
-        .glitch-text:after {
-            left: -2px;
-            text-shadow: -2px 0 blue;
-            animation-duration: 1.5s;
-        }
-
-        /* Glitch keyframes */
-        @keyframes glitch {
-            0%, 100% { clip: rect(0, 900px, 0, 0); }
-            10% { clip: rect(22px, 900px, 80px, 0); }
-            20% { clip: rect(42px, 900px, 100px, 0); }
-            30% { clip: rect(32px, 900px, 50px, 0); }
-            40% { clip: rect(12px, 900px, 20px, 0); }
-            50% { clip: rect(82px, 900px, 120px, 0); }
-            60% { clip: rect(92px, 900px, 40px, 0); }
-            70% { clip: rect(72px, 900px, 130px, 0); }
-            80% { clip: rect(62px, 900px, 70px, 0); }
-            90% { clip: rect(42px, 900px, 50px, 0); }
-        }
-
-        /* Glow animation for neon effect */
+        /* Glowing effect keyframes */
         @keyframes glow {
             from {
-                text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc, 
-                             0 0 20px #ff00cc, 0 0 30px #ff00cc, 0 0 40px #ff00cc;
+                text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366,
+                             0 0 80px #ff0033, 0 0 100px #ff0033, 0 0 150px #ff0033;
             }
             to {
-                text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc, 0 0 40px #00ffcc, 
-                             0 0 50px #ff00cc, 0 0 60px #ff00cc, 0 0 70px #ff00cc;
+                text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366, 0 0 80px #ff3366,
+                             0 0 100px #ff0033, 0 0 150px #ff0033, 0 0 200px #ff0033;
             }
         }
 
-        /* Blinking dots with glowing effect */
+        /* Blinking dots with reddish glow */
         .dots {
-            font-size: 30px; /* Increased size */
+            font-size: 30px;
             margin-top: 10px;
         }
 
         .dot {
             animation: blink 1.5s infinite ease-in-out, glow 1.5s ease-in-out infinite alternate;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #ff00cc;
+            text-shadow: 0 0 10px #ff3366, 0 0 20px #ff0033, 0 0 30px #ff0033;
         }
 
         .dot:nth-child(1) {
@@ -138,6 +100,7 @@
             color: #FFFDFF;
         }
 
+        /* Other styles remain unchanged */
         .navbar {
             background-color: #1a1a2e;
             padding: 1rem;
@@ -275,7 +238,7 @@
 <body aria-hidden="false">
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glitch-text">RBXPRO</div>
+        <div class="glow-text">RBXPRO</div>
         <div class="dots">
             <span class="dot">.</span>
             <span class="dot">.</span>
@@ -479,7 +442,6 @@
 </body>
 
 </html>
-
 
 
 
