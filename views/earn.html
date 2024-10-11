@@ -36,18 +36,31 @@
 
         /* Smooth and rounded neon text */
         .glow-text {
-            font-size: 100px; /* Make the text larger */
+            font-size: 100px; /* Larger text */
             font-weight: 700;
-            font-family: 'Inter', sans-serif; /* Use Inter for a smooth and round feel */
-            color: #ff0066; /* Change to a reddish glow */
+            font-family: 'Inter', sans-serif; /* Smooth and rounded font */
+            color: #ff0066; /* Reddish glow */
             letter-spacing: 4px;
             text-transform: uppercase;
             text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
                          0 0 100px #ff3366, 0 0 150px #ff0033;
             animation: glow 2s ease-in-out infinite alternate;
+            display: inline-block;
         }
 
-        /* Glowing effect keyframes */
+        /* Dots with same glowing effect */
+        .dots {
+            font-size: 100px; /* Same size as text */
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            color: #ff0066;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
+                         0 0 100px #ff3366, 0 0 150px #ff0033;
+            display: inline-block;
+            animation: blinkDots 1.5s infinite steps(1); /* Animation for dots */
+        }
+
+        /* Glowing effect for the RBXPRO text */
         @keyframes glow {
             from {
                 text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366,
@@ -59,39 +72,12 @@
             }
         }
 
-        /* Blinking dots with reddish glow */
-        .dots {
-            font-size: 30px;
-            margin-top: 10px;
-        }
-
-        .dot {
-            animation: blink 1.5s infinite ease-in-out, glow 1.5s ease-in-out infinite alternate;
-            text-shadow: 0 0 10px #ff3366, 0 0 20px #ff0033, 0 0 30px #ff0033;
-        }
-
-        .dot:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .dot:nth-child(2) {
-            animation-delay: 0.3s;
-        }
-
-        .dot:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        @keyframes blink {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-            }
+        /* Blinking dots appear one after another */
+        @keyframes blinkDots {
+            0% { content: ""; }     /* No dots at first */
+            33% { content: "."; }   /* One dot */
+            66% { content: ".."; }  /* Two dots */
+            100% { content: "..."; } /* Three dots */
         }
 
         body {
@@ -100,7 +86,6 @@
             color: #FFFDFF;
         }
 
-        /* Other styles remain unchanged */
         .navbar {
             background-color: #1a1a2e;
             padding: 1rem;
@@ -238,12 +223,7 @@
 <body aria-hidden="false">
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glow-text">RBXPRO</div>
-        <div class="dots">
-            <span class="dot">.</span>
-            <span class="dot">.</span>
-            <span class="dot">.</span>
-        </div>
+        <div class="glow-text">RBXPRO<span class="dots"></span></div>
     </div>
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
