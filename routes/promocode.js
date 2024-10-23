@@ -18,7 +18,7 @@ const { connect,
   changeUserBalance,
   getUserData,
   checkUserIdExists,
-  addnewUse
+  addnewUser
  } = require('../utils/dbChange');
 const { info } = require('console');
 
