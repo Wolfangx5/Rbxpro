@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promo Code Redemption</title>
+  <style>
+    /* Reset some default margins */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Basic page styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #24292f; /* Dark background for header */
+      padding: 10px 20px;
+      color: #fff;
+    }
+
+    .logo img {
+      height: 50px; /* Adjust the logo size */
+    }
+
+    .balance {
+      font-size: 18px;
+    }
+
+    /* Main promo code container */
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+
+    .promo-code-section {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .promo-code-section h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    /* Promo input field */
+    .promo-input {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    /* Redeem button */
+    .redeem-btn {
+      padding: 10px 20px;
+      background-color: #28a745; /* Success button color */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .redeem-btn:hover {
+      background-color: #218838; /* Darken on hover */
+    }
+
+    /* Status message */
+    .status-message {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #e74c3c; /* Error/Status message color */
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #24292f;
+      color: #fff;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="your-logo.png" alt="Logo"> <!-- Replace with actual logo -->
+    </div>
+    <div class="balance">
+      <span>Balance: $<span id="user-balance">100.00</span></span> <!-- Dynamic balance here -->
+    </div>
+  </header>
+
+  <main class="main-container">
+    <div class="promo-code-section">
+      <h1>Redeem Your Promo Code</h1>
+      <input type="text" id="promo-code" placeholder="Enter your promo code" class="promo-input">
+      <button id="redeem-button" class="redeem-btn">Redeem</button>
+      <p id="promo-status" class="status-message"></p> <!-- Status message placeholder -->
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 Your Company. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Check if the user is logged in
+    function isUserLoggedIn() {
+      // This is an example of how you might check user session.
+      // Replace this with your actual authentication logic (like checking tokens, etc.)
+      const token = localStorage.getItem('authToken'); // or however you store user session
+      return !!token; // Return true if token exists, false otherwise
+    }
+
+    // Redirect to login if not logged in
+    function checkLoginStatus() {
+      if (!isUserLoggedIn()) {
+        window.location.href = '/login'; // Redirect to login page
+      }
+    }
+
+    // Function to handle promo code redemption
+    document.getElementById('redeem-button').addEventListener('click', function() {
+      const promoCode = document.getElementById('promo-code').value.trim();
+      const statusMessage = document.getElementById('promo-status');
+
+      if (promoCode === '') {
+        statusMessage.textContent = 'Please enter a promo code!';
+        statusMessage.style.color = '#e74c3c'; // Error color
+      } else {
+        statusMessage.textContent = `Redeeming promo code: ${promoCode}`;
+        statusMessage.style.color = '#28a745'; // Success color
+
+        // TODO: Call backend API to redeem promo code
+        // Example of sending the promo code to your server:
+        // fetch('/redeem', { method: 'POST', body: JSON.stringify({ code: promoCode }) })
+        //   .then(response => response.json())
+        //   .then(data => handle the response accordingly)
+      }
+    });
+
+    // Run the login check when the page loads
+    window.onload = checkLoginStatus;
+  </script>
+</body>
+</html>
 
