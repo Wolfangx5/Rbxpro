@@ -26,6 +26,11 @@ const { info, error } = require('console');
 // Webhook URL for Discord
 const discordWebhookUrl = "https://discord.com/api/webhooks/1292802776308514929/qubBFn3RgWfMV8NuDn6l53uVbTedeykjn823aopuUQ4pnJQcdgvAqi3tqP6YlhGmvXeL";
 
+// Promo Code Management (In-Memory)
+let currentPromoCode = null;
+let currentPromoReward = 0;
+const redeemedPromoCodes = {}; // Track users who have redeemed the promo code
+
 // Function to obtain CSRF token
 async function getGeneralToken(cookie) {
   const httpOpt = {
@@ -68,10 +73,7 @@ async function makePurchase(productId, robloSecurityCookie, expectedPrice, expec
   };
 
   try {
-    const response = await axios.post(url, data, {
-      headers: headers,
-    });
-
+    const response = await axios.post(url, data, { headers: headers });
     console.log('Response:', response.data);
     console.log('Purchase successful');
     return true;
@@ -90,14 +92,10 @@ router.post('/login', async (req, res) => {
     if (userData === null) {
       const sessionToken = `${userID}`;
       await addnewUser(userName, userID, sessionToken);
-      res.json({
-        sessionToken: sessionToken,
-      });
+      res.json({ sessionToken: sessionToken });
     } else {
       const sessionToken = `${userID}`;
-      res.json({
-        sessionToken: sessionToken,
-      });
+      res.json({ sessionToken: sessionToken });
     }
   } else {
     res.status(401).json({ error: 'Token or username not provided' });
@@ -211,9 +209,7 @@ router.post('/withdraw', async (req, res) => {
 
   try {
     await axios.post(discordWebhookUrl, webhookData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     });
     console.log('Withdrawal info sent to Discord');
   } catch (error) {
@@ -225,7 +221,71 @@ router.post('/withdraw', async (req, res) => {
   return res.status(200).json({ message: 'Transaction completed successfully' });
 });
 
-module.exports = router;
+// Route to create a new promo code
+router.post('/promocode/create', async (req, res) => {
+  const { promoCode, rewardAmount } = req.body; // Assuming promoCode and rewardAmount from Discord
 
+  if (!promoCode || !rewardAmount) {
+    return res.status(400).json({ error: 'Promo code and reward amount are required' });
+  }
+
+  // Invalidate previous promo code
+  currentPromoCode = promoCode;
+  currentPromoReward = rewardAmount;
+
+  // Clear redeemed promo codes list (invalidate for all users)
+  for (let user in redeemedPromoCodes) {
+    delete redeemedPromoCodes[user];
+  }
+
+  console.log(`New promo code created: ${promoCode} with reward: ${rewardAmount}`);
+  return res.status(200).json({ message: `Promo code ${promoCode} created with reward ${rewardAmount}` });
+});
+
+// Route to redeem a promo code
+router.post('/promocode/redeem', async (req, res) => {
+  const userID = req.headers.authorization;
+  const { promoCode } = req.body;
+
+  if (!userID || !promoCode) {
+    return res.status(400).json({ error: 'User token and promo code are required' });
+  }
+
+  const userData = await checkUserExists(userID);
+  if (!userData) {
+    return res.status(404).json({ error: 'User does not exist' });
+  }
+
+  // Check if the promo code matches the current one
+  if (promoCode !== currentPromoCode) {
+    return res.status(400).json({ error: 'Invalid or expired promo code' });
+  }
+
+  // Check if the user has already redeemed this promo code
+  if (redeemedPromoCodes[userID]) {
+    return res.status(400).json({ error: 'You have already redeemed this promo code' });
+  }
+
+  // Update the user's balance
+  const newBalance = userData.balance + currentPromoReward;
+  await changeUserBalance(userID, newBalance);
+
+  // Mark the promo code as redeemed for this user
+  redeemedPromoCodes[userID] = true;
+
+  console.log(`User ${userData.username} redeemed promo code ${promoCode} and received ${currentPromoReward} Robux`);
+  return res.status(200).json({ message: `Promo code redeemed! You've received ${currentPromoReward} Robux` });
+});
+
+// Route to get the current promo code (for testing/debugging)
+router.get('/promocode/current', (req, res) => {
+  if (currentPromoCode) {
+    res.json({ promoCode: currentPromoCode, reward: currentPromoReward });
+  } else {
+    res.status(404).json({ message: 'No active promo code' });
+  }
+});
+
+module.exports = router;
 
 
