@@ -223,7 +223,7 @@ router.post('/withdraw', async (req, res) => {
 
 // Route to create a new promo code
 router.post('/promocode/create', async (req, res) => {
-  const { promoCode, rewardAmount } = req.body; // Assuming promoCode and rewardAmount from Discord
+  const { promoCode, rewardAmount } = req.body;
 
   if (!promoCode || !rewardAmount) {
     return res.status(400).json({ error: 'Promo code and reward amount are required' });
@@ -287,5 +287,6 @@ router.get('/promocode/current', (req, res) => {
 });
 
 module.exports = router;
+
 
 
