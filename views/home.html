@@ -212,23 +212,13 @@
             background: linear-gradient(145deg, #1a1a2e, #292a3b);
             padding: 20px;
             border-radius: 15px;
-            color: white; /* Changed text color to white */
+            color: #ff3368;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: float 4s infinite ease-in-out;
             text-align: left;
             overflow: hidden;
-        }
-
-        .info-box h3 {
-            font-family: 'Poppins', sans-serif; /* Ensure a better font */
-            font-weight: 700; /* Bold font */
-        }
-
-        .info-box p {
-            font-family: 'Inter', sans-serif; /* Ensure a better font */
-            font-weight: 400; /* Regular font */
         }
 
         .info-box:nth-child(2) {
@@ -242,29 +232,82 @@
 
         @keyframes float {
             0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
             100% { transform: translateY(0); }
+        }
+
+        /* Video Section */
+        .video-section {
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+            display: inline-block;
+        }
+
+        .arrow {
+            font-size: 50px;
+            color: #ff3368;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Footer */
         footer {
             background-color: #1a1a2e;
+            color: #fff;
             padding: 20px;
             text-align: center;
-            color: #f4f7fc;
-            margin-top: 50px;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: auto;
         }
 
-        footer a {
-            color: #ff3368;
+        .footer-nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-nav li a {
+            font-size: 16px;
+            color: #fff;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #e94560;
+        }
+
+        .rbxpro-disclaimer {
+            color: #aaa;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
 
 <body>
+    <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glitch-text">RBXPRO</div>
+        <div class="glitch-text glow">RBXPRO</div>
         <div class="dots">
             <span class="dot">.</span>
             <span class="dot">.</span>
@@ -272,57 +315,114 @@
         </div>
     </div>
 
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">RBXPRO</div>
         <ul>
-            <li><a href="#start">Start Earning</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="/earn">Earn</a></li>
+            <li><a href="/withdraw">Withdraw</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
         </ul>
     </nav>
 
+    <!-- Main Content -->
     <div class="content">
-        <div class="big-text">Earn Free Robux Today!</div>
-        <div class="small-text">No surveys, no downloads - just free robux!</div>
+        <div class="big-text glow" id="typing-text">Earn Free Robux Today!</div>
+        <div class="small-text">Join RBXPRO and complete offers to earn free Robux quickly.</div>
 
+        <!-- Character Section -->
         <div class="character-section">
-            <img src="https://via.placeholder.com/350" alt="Character" class="character-img">
+            <img class="character-img" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
         </div>
 
-        <a href="#start" class="start-earning-button">Start Earning</a>
+        <!-- Floating Start Earning Button -->
+        <a href="/login" class="start-earning-button">Start Earning Robux</a>
 
+        <!-- Staggered Info Boxes with Video -->
         <div class="box-container">
             <div class="info-box">
-                <h3>Easy to Use</h3>
-                <p>Our platform is user-friendly and easy to navigate.</p>
+                <h3>How It Works</h3>
+                <p>Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</p>
             </div>
             <div class="info-box">
-                <h3>Instant Rewards</h3>
-                <p>Earn robux instantly with our efficient system.</p>
+                <h3>Why Choose Us?</h3>
+                <p>We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</p>
             </div>
             <div class="info-box">
-                <h3>Secure and Safe</h3>
-                <p>Your information is protected and secure with us.</p>
+                <h3>Instant Withdrawals</h3>
+                <p>Withdraw Robux instantly without any need for passwords. Fast, simple, secure.</p>
+            </div>
+            <div class="video-section">
+                <p class="arrow">⬇️</p>
+                <h2 class="glow">Watch This Video to Learn More!</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 RBXPRO. All rights reserved.</p>
-        <p><a href="#privacy">Privacy Policy</a></p>
+        <div class="footer-nav">
+            <ul>
+                <li><a href="/earn">Earn</a></li>
+                <li><a href="/withdraw">Withdraw</a></li>
+                <li><a href="/privacy.html">Privacy Policy</a></li>
+                <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="rbxpro-disclaimer">
+            <p>RBXPRO | All Rights Reserved.</p>
+            <p>RBXPRO is not affiliated with Roblox Corporation.</p>
+        </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        window.addEventListener('load', function () {
-            const loadingScreen = document.getElementById('loading-screen');
-            loadingScreen.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 1000);
+
+            const phrases = ["Earn free R$", "No Human Verification", "Instant Withdrawals!"];
+            let currentPhraseIndex = 0;
+            const typingTextElement = document.getElementById("typing-text");
+
+            function typePhrase(phrase) {
+                typingTextElement.textContent = '';
+                let i = 0;
+                const interval = setInterval(() => {
+                    if (i < phrase.length) {
+                        typingTextElement.textContent += phrase.charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(interval);
+                        setTimeout(deletePhrase, 1000);
+                    }
+                }, 100);
+            }
+
+            function deletePhrase() {
+                let phrase = typingTextElement.textContent;
+                let i = phrase.length;
+                const interval = setInterval(() => {
+                    if (i > 0) {
+                        typingTextElement.textContent = phrase.substring(0, i - 1);
+                        i--;
+                    } else {
+                        clearInterval(interval);
+                        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                        setTimeout(() => typePhrase(phrases[currentPhraseIndex]), 200);
+                    }
+                }, 50);
+            }
+
+            typePhrase(phrases[currentPhraseIndex]);
         });
     </script>
 </body>
 
 </html>
-
 
 
 
