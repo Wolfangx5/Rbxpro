@@ -212,7 +212,7 @@
             background: linear-gradient(145deg, #1a1a2e, #292a3b);
             padding: 20px;
             border-radius: 15px;
-            color: #ffffff; /* Updated to white */
+            color: white; /* Changed text color to white */
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -222,22 +222,22 @@
         }
 
         .info-box h3 {
-            font-size: 24px; /* Increased font size */
-            font-weight: 700; /* Bold text */
-            color: #ffffff; /* Updated to white */
+            font-family: 'Poppins', sans-serif; /* Ensure a better font */
+            font-weight: 700; /* Bold font */
         }
 
         .info-box p {
-            font-size: 16px; /* Adjusted font size for readability */
-            color: #ffffff; /* Updated to white */
+            font-family: 'Inter', sans-serif; /* Ensure a better font */
+            font-weight: 400; /* Regular font */
         }
 
         .info-box:nth-child(2) {
-            animation-delay: 0.2s;
+            animation-delay: 1s;
+            margin-top: 50px;
         }
 
         .info-box:nth-child(3) {
-            animation-delay: 0.4s;
+            animation-delay: 2s;
         }
 
         @keyframes float {
@@ -246,13 +246,13 @@
             100% { transform: translateY(0); }
         }
 
-        /* Footer styling */
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 20px;
             background-color: #1a1a2e;
-            color: #ffffff;
-            position: relative;
+            padding: 20px;
+            text-align: center;
+            color: #f4f7fc;
+            margin-top: 50px;
         }
 
         footer a {
@@ -263,20 +263,8 @@
 </head>
 
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo glow">RBXPRO</div>
-        <ul>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#why-choose-us">Why Choose Us</a></li>
-            <li><a href="#instant-withdrawals">Instant Withdrawals</a></li>
-        </ul>
-    </nav>
-
-    <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glitch-text">Loading...</div>
+        <div class="glitch-text">RBXPRO</div>
         <div class="dots">
             <span class="dot">.</span>
             <span class="dot">.</span>
@@ -284,47 +272,57 @@
         </div>
     </div>
 
-    <!-- Main Content -->
+    <nav class="navbar">
+        <div class="logo">RBXPRO</div>
+        <ul>
+            <li><a href="#start">Start Earning</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <div class="content">
-        <h1 class="big-text">Earn Free Robux Today!</h1>
-        <p class="small-text">No surveys, no downloads. Just simple tasks!</p>
+        <div class="big-text">Earn Free Robux Today!</div>
+        <div class="small-text">No surveys, no downloads - just free robux!</div>
 
         <div class="character-section">
-            <img src="https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.webp" alt="Character" class="character-img">
+            <img src="https://via.placeholder.com/350" alt="Character" class="character-img">
         </div>
 
         <a href="#start" class="start-earning-button">Start Earning</a>
 
         <div class="box-container">
-            <div class="info-box" id="how-it-works">
-                <h3>How It Works</h3>
-                <p>Complete simple tasks, earn points, and convert them into Robux!</p>
+            <div class="info-box">
+                <h3>Easy to Use</h3>
+                <p>Our platform is user-friendly and easy to navigate.</p>
             </div>
-            <div class="info-box" id="why-choose-us">
-                <h3>Why Choose Us</h3>
-                <p>We offer the best rates and a user-friendly platform.</p>
+            <div class="info-box">
+                <h3>Instant Rewards</h3>
+                <p>Earn robux instantly with our efficient system.</p>
             </div>
-            <div class="info-box" id="instant-withdrawals">
-                <h3>Instant Withdrawals</h3>
-                <p>Get your Robux instantly delivered to your account!</p>
+            <div class="info-box">
+                <h3>Secure and Safe</h3>
+                <p>Your information is protected and secure with us.</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 RBXPRO. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        <p>&copy; 2024 RBXPRO. All rights reserved.</p>
+        <p><a href="#privacy">Privacy Policy</a></p>
     </footer>
 
     <script>
-        // Hide loading screen after 3 seconds
-        setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-        }, 3000);
+        window.addEventListener('load', function () {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.display = 'none';
+        });
     </script>
 </body>
 
 </html>
+
 
 
 
