@@ -127,7 +127,7 @@
             90% { clip: rect(42px, 900px, 50px, 0); }
         }
 
-        /* Content styling */
+        /* Main content styling */
         .content {
             text-align: center;
             padding: 50px 20px;
@@ -150,20 +150,18 @@
             color: #bdc3c7;
         }
 
+        /* Character Section */
         .character-section {
             margin-top: 30px;
             position: relative;
             text-align: center;
         }
 
-        .character-frame {
+        .character-img {
             width: 100%;
-            max-width: 400px;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 20px #ff3368;
+            max-width: 350px;
             animation: floating 4s infinite ease-in-out;
-            transition: transform 0.3s ease;
+            border-radius: 10px;
         }
 
         @keyframes floating {
@@ -172,7 +170,7 @@
             100% { transform: translateY(0px); }
         }
 
-        /* Floating Start Earning Button */
+        /* Start Earning Button */
         .start-earning-button {
             margin: 30px auto;
             display: inline-block;
@@ -198,52 +196,53 @@
             100% { box-shadow: 0 0 15px #ff3368; }
         }
 
-        /* Redesigned Info Boxes */
+        /* Staggered Info Boxes */
         .box-container {
-            margin-top: 50px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 20px;
             max-width: 1200px;
+            margin: 50px auto;
+            justify-content: center;
         }
 
         .info-box {
             flex: 1;
-            min-width: 250px;
+            min-width: 280px;
             background: linear-gradient(145deg, #1a1a2e, #292a3b);
             padding: 20px;
             border-radius: 15px;
             color: #ff3368;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: float 4s infinite ease-in-out;
+            text-align: left;
             overflow: hidden;
         }
 
-        .info-box::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 51, 104, 0.1);
-            z-index: -1;
-            transition: opacity 0.3s ease;
+        .info-box:nth-child(2) {
+            animation-delay: 1s;
+            margin-top: 50px;
         }
 
-        .info-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(255, 0, 72, 0.3);
+        .info-box:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
         }
 
         /* Video Section */
         .video-section {
-            margin-top: 50px;
-            text-align: center;
+            margin-top: 20px;
             padding: 20px;
+            text-align: center;
             animation: fadeIn 1.5s ease;
+            display: inline-block;
         }
 
         .arrow {
@@ -334,13 +333,13 @@
 
         <!-- Character Section -->
         <div class="character-section">
-            <img class="character-frame" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
+            <img class="character-img" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
         </div>
 
         <!-- Floating Start Earning Button -->
         <a href="/login" class="start-earning-button">Start Earning Robux</a>
 
-        <!-- Enhanced Info Boxes -->
+        <!-- Staggered Info Boxes with Video -->
         <div class="box-container">
             <div class="info-box">
                 <h3>How It Works</h3>
@@ -354,14 +353,12 @@
                 <h3>Instant Withdrawals</h3>
                 <p>Withdraw Robux instantly without any need for passwords. Fast, simple, secure.</p>
             </div>
+            <div class="video-section">
+                <p class="arrow">⬇️</p>
+                <h2 class="glow">Watch This Video to Learn More!</h2>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
-    </div>
-
-    <!-- Video Section -->
-    <div class="video-section">
-        <p class="arrow">⬇️</p>
-        <h2 class="glow">Watch This Video to Learn More!</h2>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <!-- Footer -->
