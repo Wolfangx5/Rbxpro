@@ -3,17 +3,75 @@
 
 <head>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.webp" type="image/webp">
-    <link rel="icon" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png" type="image/png">
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#17b823">
     <meta name="keywords" content="free robux, robux, roblox, earn robux, roblox free robux">
     <title>RBXPRO - Earn Free Robux Today!</title>
-    
+
     <!-- External fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap');
+        /* Universal settings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #f4f7fc;
+            background-color: #121212;
+            overflow-x: hidden;
+        }
+
+        /* Glowing effect */
+        .glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 16px #ff3368, 0 0 24px #ff3368, 0 0 32px #ff3368;
+        }
+
+        /* Navbar */
+        .navbar {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(90deg, #ff5e5e, #ff3368);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 2px 2px #000;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .navbar ul li a:hover {
+            color: #ffcccc;
+            background-color: #1a1a2e;
+        }
 
         /* Loading Screen */
         #loading-screen {
@@ -35,40 +93,27 @@
 
         /* Glitch text */
         .glitch-text {
-            position: relative;
-            color: #fff;
             font-size: 64px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            animation: shine 3s infinite;
-        }
-
-        /* Glitch effect */
-        .glitch-text:before, .glitch-text:after {
-            content: "RBXPRO";
-            position: absolute;
-            left: 0;
-            top: 0;
             color: #ff3368;
-            background: transparent;
-            overflow: hidden;
-            clip: rect(0, 900px, 0, 0);
-            animation: glitch 2s infinite ease-in-out;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.1);
+            animation: glitch 2s infinite;
         }
 
-        .glitch-text:before {
-            left: 2px;
-            text-shadow: -2px 0 red;
-            animation-duration: 2.5s;
+        .dots {
+            margin-top: 10px;
+            font-size: 24px;
         }
 
-        .glitch-text:after {
-            left: -2px;
-            text-shadow: -2px 0 blue;
-            animation-duration: 1.5s;
+        .dot {
+            animation: blink 1.5s infinite ease-in-out;
         }
 
-        /* Glitch keyframes */
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.3s; }
+        .dot:nth-child(3) { animation-delay: 0.6s; }
+
         @keyframes glitch {
             0%, 100% { clip: rect(0, 900px, 0, 0); }
             10% { clip: rect(22px, 900px, 80px, 0); }
@@ -82,89 +127,10 @@
             90% { clip: rect(42px, 900px, 50px, 0); }
         }
 
-        /* Shine effect */
-        @keyframes shine {
-            0% { background-position: -200%; }
-            100% { background-position: 200%; }
-        }
-
-        /* Animated dots */
-        .dots {
-            font-size: 24px;
-            margin-top: 10px;
-        }
-
-        .dot {
-            animation: blink 1.5s infinite ease-in-out;
-        }
-
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.3s; }
-        .dot:nth-child(3) { animation-delay: 0.6s; }
-
-        /* Blinking dots keyframes */
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* Dark theme for body */
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background-color: #000;
-            color: #f4f7fc;
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow-x: hidden;
-        }
-
-        /* Navbar styling */
-        .navbar {
-            width: 100%;
-            background-color: #e70664;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 28px;
-            font-family: 'Poppins', sans-serif;
-            color: #fff;
-        }
-
-        .navbar ul {
-            list-style-type: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .navbar ul li a:hover {
-            color: #ff3368;
-        }
-
+        /* Content styling */
         .content {
             text-align: center;
-            padding: 20px;
+            padding: 50px 20px;
             margin-top: 120px;
         }
 
@@ -173,8 +139,9 @@
             background-color: #1a1a2e;
             color: #f4f7fc;
             border-radius: 10px;
-            padding: 10px 20px;
+            padding: 15px 25px;
             animation: fadeIn 2s ease-out;
+            text-shadow: 0px 0px 10px #ff3368;
         }
 
         .small-text {
@@ -183,53 +150,114 @@
             color: #bdc3c7;
         }
 
-        .roblox-character {
+        .character-section {
+            margin-top: 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .character-frame {
             width: 100%;
             max-width: 400px;
             height: auto;
-            margin: 30px auto 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #ff3368;
+            animation: floating 4s infinite ease-in-out;
             transition: transform 0.3s ease;
         }
 
-        .roblox-character:hover {
-            transform: scale(1.05);
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
+        /* Floating Start Earning Button */
         .start-earning-button {
-            margin-top: 30px;
+            margin: 30px auto;
+            display: inline-block;
             padding: 15px 30px;
             border-radius: 50px;
             font-size: 24px;
             color: #fff;
-            background-color: #e70664;
+            background-color: #ff3368;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px #ff3368, 0 0 25px #ff3368, 0 0 35px #ff3368;
+            animation: pulse 2s infinite;
         }
 
         .start-earning-button:hover {
             background-color: #2182f0;
             transform: translateY(-5px);
+            box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
         }
 
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px #ff3368; }
+            50% { box-shadow: 0 0 25px #ff3368; }
+            100% { box-shadow: 0 0 15px #ff3368; }
+        }
+
+        /* Redesigned Info Boxes */
         .box-container {
             margin-top: 50px;
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
-            text-align: left;
+            max-width: 1200px;
         }
 
         .info-box {
-            background-color: #1a1a2e;
+            flex: 1;
+            min-width: 250px;
+            background: linear-gradient(145deg, #1a1a2e, #292a3b);
             padding: 20px;
             border-radius: 15px;
+            color: #ff3368;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 51, 104, 0.1);
+            z-index: -1;
+            transition: opacity 0.3s ease;
         }
 
         .info-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 0, 72, 0.3);
         }
 
+        /* Video Section */
+        .video-section {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .arrow {
+            font-size: 50px;
+            color: #ff3368;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Footer */
         footer {
             background-color: #1a1a2e;
             color: #fff;
@@ -251,6 +279,7 @@
             font-size: 16px;
             color: #fff;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer-nav li a:hover {
@@ -263,20 +292,23 @@
             font-size: 12px;
         }
 
-        /* Fade-in keyframe */
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
 
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
     </style>
 </head>
 
 <body>
-
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glitch-text">RBXPRO</div>
+        <div class="glitch-text glow">RBXPRO</div>
         <div class="dots">
             <span class="dot">.</span>
             <span class="dot">.</span>
@@ -284,6 +316,7 @@
         </div>
     </div>
 
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo">RBXPRO</div>
         <ul>
@@ -294,28 +327,44 @@
         </ul>
     </nav>
 
+    <!-- Main Content -->
     <div class="content">
-        <div class="big-text" id="typing-text">Earn Free Robux Today!</div>
+        <div class="big-text glow" id="typing-text">Earn Free Robux Today!</div>
         <div class="small-text">Join RBXPRO and complete offers to earn free Robux quickly.</div>
-        <img class="roblox-character" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
+
+        <!-- Character Section -->
+        <div class="character-section">
+            <img class="character-frame" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
+        </div>
+
+        <!-- Floating Start Earning Button -->
         <a href="/login" class="start-earning-button">Start Earning Robux</a>
 
+        <!-- Enhanced Info Boxes -->
         <div class="box-container">
             <div class="info-box">
                 <h3>How It Works</h3>
-                <p>Complete tasks to earn Robux!</p>
+                <p>Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</p>
             </div>
             <div class="info-box">
                 <h3>Why Choose Us?</h3>
-                <p>We are a legitimate and trustworthy platform with satisfied users.</p>
+                <p>We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</p>
             </div>
             <div class="info-box">
                 <h3>Instant Withdrawals</h3>
-                <p>Withdraw Robux instantly without needing your password.</p>
+                <p>Withdraw Robux instantly without any need for passwords. Fast, simple, secure.</p>
             </div>
         </div>
     </div>
 
+    <!-- Video Section -->
+    <div class="video-section">
+        <p class="arrow">⬇️</p>
+        <h2 class="glow">Watch This Video to Learn More!</h2>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-nav">
             <ul>
@@ -325,18 +374,18 @@
                 <li><a href="/terms.html">Terms of Service</a></li>
             </ul>
         </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>RBXPRO | All Rights Reserved.</p>
             <p>RBXPRO is not affiliated with Roblox Corporation.</p>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
-            }, 1000); // Loading screen disappears after 4 seconds
+            }, 1000);
 
             const phrases = ["Earn free R$", "No Human Verification", "Instant Withdrawals!"];
             let currentPhraseIndex = 0;
@@ -373,20 +422,6 @@
 
             typePhrase(phrases[currentPhraseIndex]);
         });
-
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                    method: 'POST',
-                    headers: { 'Authorization': token }
-                }).then(response => response.json())
-                  .then(data => window.location.href = '/earn')
-                  .catch(error => {});
-            }
-        }
-
-        loadUserData();
     </script>
 </body>
 
