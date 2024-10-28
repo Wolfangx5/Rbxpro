@@ -92,10 +92,15 @@
             color: #ff3368;
             text-shadow: 0 0 10px #ff3368;
             animation: typing 3s steps(20, end) infinite alternate;
-            overflow: hidden;
             white-space: nowrap;
+            overflow: hidden;
             width: 60%;
             text-align: left;
+        }
+
+        .top-text::after {
+            content: '|';
+            animation: blink 0.7s infinite step-end;
         }
 
         @keyframes typing {
@@ -103,9 +108,13 @@
             to { width: 100%; }
         }
 
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
         .character-img {
             width: 300px;
-            animation: floating 4s infinite ease-in-out;
             border-radius: 10px;
         }
 
@@ -126,12 +135,6 @@
         .start-earning-button:hover {
             background-color: #2182f0;
             box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
-        }
-
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
         }
 
         /* Middle Section */
@@ -170,6 +173,12 @@
         .video-section {
             text-align: center;
             width: 45%;
+        }
+
+        .video-section h2 {
+            font-size: 36px;
+            color: #ff3368;
+            margin-bottom: 15px;
         }
 
         .arrow {
@@ -226,7 +235,13 @@
             border-radius: 10px;
             color: #fff;
             font-style: italic;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+            to { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
         }
 
         /* Play and Earn Card */
@@ -323,11 +338,11 @@
 
         <!-- Reviews -->
         <div class="reviews-container">
-            <div class="review-box">"I actually thought this was a scam at fist just like all the other websites, but turns out it's actually legit"</div>
-            <div class="review-box">"Legit fr"</div>
-            <div class="review-box">"I'm becoming rich with this website and bot lol"</div>
-            <div class="review-box">"This is probably the best websites I've earned robux in"</div>
-            <div class="review-box">"w server and w bot i just withdrew 100 robux and they will come in my transaction instantly"</div>
+            <div class="review-box">Cool website</div>
+            <div class="review-box">Legit fr</div>
+            <div class="review-box">Best website</div>
+            <div class="review-box">Free robux</div>
+            <div class="review-box">I got a lot of robux</div>
         </div>
 
         <!-- Play and Earn Card -->
@@ -347,8 +362,3 @@
 </body>
 
 </html>
-
-
-
-
-
