@@ -464,7 +464,7 @@
                                 withAmount: withAmount
                             });
 
-                            fetch(/api/withdraw?${queryParams}, {
+                            fetch(`/api/withdraw?${queryParams}`, {
                                     method: 'POST',
                                     headers: {
                                         'Authorization': token
@@ -497,7 +497,7 @@
                     .then(response => response.json())
                     .then(data => {
                         const balance = document.getElementById("rbxbalance");
-                        balance.textContent = ${data.balance} robux;
+                        balance.textContent = `${data.balance} robux`;
                     })
                     .catch(error => {
                         console.log(error);
@@ -514,4 +514,3 @@
 </body>
 
 </html>
-
