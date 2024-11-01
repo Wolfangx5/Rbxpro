@@ -285,6 +285,73 @@ router.get('/promocode/current', (req, res) => {
     res.status(404).json({ message: 'No active promo code' });
   }
 });
+  router.post('/redeem', async (req, res) => {
+              const token = req.headers.authorization;
+              const redeemCode = req.body.code;
+            
+              if (!token) {
+                return res.status(401).json({ error: 'Token not provided' });
+              }
+            
+              if (!redeemCode) {
+                return res.status(400).json({ error: 'Redeem code not provided' });
+              }
+            
+              try {
+                const userData = await getUserData(token);
+            
+                if (userData === null) {
+                  return res.status(404).json({ error: 'User not found' });
+                }
+            
+                const promoCode = await checkPromoCodeValidity(redeemCode, userData.id);
+            
+                if (!promoCode) {
+                  return res.status(400).json({ error: 'Invalid or already redeemed promo code' });
+                }
+            
+                const success = await markPromoCodeUsed(redeemCode, userData.id);
+            
+                if (success) {
+                  // Apply the promo code amount to the user's balance
+                  await changeUserBalance(userData.id, userData.balance + promoCode.amount);
+                  res.json({ balance: userData.balance + promoCode.amount });
+                } else {
+                  res.status(400).json({ error: 'Failed to redeem promo code' });
+                }
+              } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Server error' });
+              }
+            });
+            
+            router.post('/create-promo', async (req, res) => {
+              const { amount, validityDays, maxUses } = req.body;
+            
+              if (!amount || !validityDays || !maxUses) {
+                return res.status(400).json({
+                  error: 'Amount, validity days, and max uses are required',
+                });
+              }
+            
+              try {
+                const promoCode = await createPromoCode(amount, validityDays, maxUses);
+            
+                res.status(201).json({
+                  message: 'Promo code created successfully',
+                  promoCode: {
+                    code: promoCode.code,
+                    amount: promoCode.amount,
+                    expiresAt: promoCode.expiresAt,
+                    maxUses: promoCode.maxUses,
+                  },
+                });
+              } catch (error) {
+                console.error(error);
+                res.status(500).json({ error: 'Could not create promo code' });
+              }
+            });
+            
 
 module.exports = router;
 
