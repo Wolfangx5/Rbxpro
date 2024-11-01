@@ -258,10 +258,33 @@
                 if (promoCode === '') {
                     statusMessage.textContent = 'Please enter a promo code!';
                     statusMessage.style.color = '#e74c3c'; // Error color
+                    return;
                 } else {
                     statusMessage.textContent = `Redeeming promo code: ${promoCode}`;
                     statusMessage.style.color = '#28a745'; // Success color
                 }
+
+                // Replace with the actual redeem code or get it dynamically
+
+                fetch('/api/redeem', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ code: promoCode }) // Send the redeem code as JSON
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    balance.textContent = `${data.balance} R$`;
+                })
+                .catch(error => {
+  
+                    window.location.href = '/login';
+                    return;
+                });
+
             });
 
             // Check user authentication and load user data
@@ -280,11 +303,11 @@
                         balance.textContent = `${data.balance} R$`;
                     })
                     .catch(error => {
-                        window.location.href = '/login';
+                       window.location.href = '/login';
                         return;
                     });
                 } else {
-                    window.location.href = '/login';
+                   window.location.href = '/login';
                 }
             }
             loadUserData(); // Call the function to load user data
