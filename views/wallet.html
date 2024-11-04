@@ -70,39 +70,16 @@
             transform: translateY(-2px);
         }
 
-        /* Mobile styles */
-        @media (max-width: 1024px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                background-color: #e70664;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                padding: 1rem;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-            }
-        }
-
         .withdraw-container {
-            max-width: 400px;
+            max-width: 600px;
             margin: auto;
-            margin-top: 80px;
+            margin-top: 100px;
             background-color: #1a1a2e;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             margin-bottom: 50px;
-            padding-bottom: 20px;
+            padding: 30px;
         }
 
         .withdraw-header {
@@ -110,13 +87,24 @@
             color: #fff;
             padding: 20px;
             text-align: center;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
         }
 
         .withdraw-form {
             padding: 20px;
-            margin-top: -20px;
+        }
+
+        .withdraw-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 12px;
+            background-color: #444;
+            color: #fff;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .withdraw-price {
@@ -126,21 +114,11 @@
             padding: 15px;
             font-weight: bold;
             text-align: center;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-
-        .withdraw-input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
             border-radius: 10px;
-            background-color: #444;
-            color: #fff;
-            font-size: 16px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            font-size: 20px;
+            width: 80%;
+            margin: 10px auto;
         }
 
         .withdraw-btn {
@@ -149,15 +127,37 @@
             padding: 15px;
             width: 100%;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .withdraw-btn:hover {
             background-color: #14821e;
             transform: translateY(-2px);
+        }
+
+        .instructions {
+            margin-top: 30px;
+            color: #f4f7fc;
+            font-size: 16px;
+        }
+
+        .instructions h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #e70664;
+        }
+
+        .instructions ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
         }
 
         .popup {
@@ -252,11 +252,10 @@
             font-size: 12px;
         }
 
-        /* Media query for smaller devices */
         @media (max-width: 600px) {
             .withdraw-container {
                 margin-top: 60px;
-                padding-bottom: 30px;
+                padding: 20px;
             }
 
             .withdraw-btn {
@@ -287,17 +286,15 @@
                     <a class="navbar-item navbar-s-item" href="/earn">
                         Earn
                     </a>
-                    <a class="navbar-item navbar-s-item is-active" href="#" data-step="4" data-intro="This is where you go when you would like to withdraw your ROBUX!">
-                        Withdraw
-                    </a>
+                    <a class="navbar-item navbar-s-item is-active" href="#">Withdraw</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons has-addons">
-                            <a href="" style="background-color: #2182f0 !important;" class="button is-info">
+                            <a href="" class="button is-info">
                                 <strong id="rbxbalance">{(Balance)} R$</strong>
                             </a>
-                            <a onclick="Logout()" href="" class="button is-info" style="background-color: #2182f0 !important;">
+                            <a onclick="Logout()" href="" class="button is-info">
                                 <strong>Logout</strong>
                             </a>
                         </div>
@@ -312,55 +309,63 @@
         <div class="column is-half">
             <div class="withdraw-container">
                 <div class="withdraw-header">
-                    <h2 class="text-2xl">Withdraw Your Robux!</h2>
-                    <h2 class="text-2xl">You must complete at least one survey to withdraw!</h2>
+                    <h2>Withdraw Your Robux!</h2>
+                    <h2>You must complete at least one survey to withdraw!</h2>
                 </div>
-                <div class="h-full bg-white rounded-md ring-2 w-full flex items-center justify-center ring-primary p-3">
-                    <div class="px-4">
-                        <div class="mb-4">
-                            <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="Amount" type="number" id="withAmount">
-                        </div>
-                        <div class="mb-4">
-                            <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label> <!-- Updated Field -->
-                            <input class="withdraw-input input input-primary bg-secondary focus:outline-none text-base w-full text-white" placeholder="Paste your Gamepass link" type="url" id="gpLink"> <!-- Input for Gamepass Link -->
-                        </div>
-                        <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
-                        <p class="withdraw-price font-semibold text-white text-xl py-1 rounded-md bg-secondary border-2 border-primary text-center w-1/2 justify-center items-center mx-auto mt-1" id="displayAmount">{(Amount)}</p>
-                        <div class="flex justify-center items-center mt-4">
-                            <button id='withdrawButton' class="withdraw-btn btn btn-md btn-primary w-full text-white font-semibold" onclick="withDraw()">
-                                <p>Withdraw</p>
-                            </button>
-                        </div>
+                <div class="withdraw-form">
+                    <div class="mb-4">
+                        <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
+                        <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
                     </div>
+                    <div class="mb-4">
+                        <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label>
+                        <input class="withdraw-input" placeholder="Paste your Gamepass link" type="url" id="gpLink">
+                    </div>
+                    <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
+                    <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
+                    <div class="flex justify-center items-center mt-4">
+                        <button id='withdrawButton' class="withdraw-btn" onclick="withDraw()">
+                            <p>Withdraw</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Instructions Section -->
+                <div class="instructions">
+                    <h3>How do I withdraw?</h3>
+                    <ul>
+                        <li>First, complete a survey or offer on our Earn page.</li>
+                        <li>Input the amount of Robux you want to withdraw in the amount input above.</li>
+                        <li>Enter your Gamepass link with the correct price as indicated.</li>
+                        <li>Wait 1-2 days for our bot to process your Gamepass purchase and add it to your pending Robux.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Popup Elements -->
     <div id="popup" class="popup">
         <div class="popup-content">
             <p id="popup-message">Warning message goes here...</p>
             <button onclick="closePopup()">Close</button>
         </div>
     </div>
-
     <div class="popup" id="notEnoughBalancePopup">
         <div class="popup-content">
-            <p>You do not have enough robux !</p>
+            <p>You do not have enough Robux!</p>
             <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
         </div>
     </div>
     <div class="popup" id="somethingWrongPopup">
         <div class="popup-content">
-            <p>There's something wrong. Double check everything and that survey is completed. Please come back later!</p>
+            <p>There's something wrong. Double-check everything, ensure the survey is completed, and try again later!</p>
             <button onclick="hidePopup('somethingWrongPopup')">Close</button>
         </div>
     </div>
-
     <div id="congratsPopup" class="popup popup-congrats">
         <div class="popup-content">
-            <p>Congratulations! You withdrew your robux. Your withdrawal will be processed and you will be paid out as soon as we can. Check our discord for info.</p>
+            <p>Congratulations! Your withdrawal request is in process. Please check our Discord for updates.</p>
             <button onclick="closePopup()">Close</button>
         </div>
     </div>
@@ -372,10 +377,9 @@
                 <li><a id="footer-withdraw-link" href="#">Withdraw</a></li>
             </ul>
         </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>RBXPRO | All Rights Reserved.</p>
-            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
+            <p>RBXPRO is not affiliated with Roblox Corporation.</p>
             <p>© Copyright RBXPRO 2024</p>
         </div>
     </footer>
@@ -445,7 +449,7 @@
             document.getElementById("withdrawButton").classList.add("disabled");
             const token = localStorage.getItem('sessionToken');
             const withAmount = document.getElementById('withAmount').value;
-            const gpLink = document.getElementById('gpLink').value; // Updated to use Gamepass Link
+            const gpLink = document.getElementById('gpLink').value;
             
             if (token) {
                 fetch('/api/userdata', {
@@ -460,7 +464,7 @@
                             showPopup('notEnoughBalancePopup');
                         } else {
                             const queryParams = new URLSearchParams({
-                                gpLink: gpLink, // Send Gamepass Link to the API
+                                gpLink: gpLink,
                                 withAmount: withAmount
                             });
 
