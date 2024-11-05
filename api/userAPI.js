@@ -285,7 +285,7 @@ router.get('/promocode/current', (req, res) => {
     res.status(404).json({ message: 'No active promo code' });
   }
 });
-  router.post('/redeem', async (req, res) => {
+router.post('/redeem', async (req, res) => {
               const token = req.headers.authorization;
               const redeemCode = req.body.code;
             
@@ -326,22 +326,24 @@ router.get('/promocode/current', (req, res) => {
             });
             
             router.post('/create-promo', async (req, res) => {
-              const { amount, validityDays, maxUses } = req.body;
+              const { code, reward, duration, maxUses } = req.body;
             
-              if (!amount || !validityDays || !maxUses) {
+              if (!code || !reward || !duration || !maxUses) {
                 return res.status(400).json({
-                  error: 'Amount, validity days, and max uses are required',
+                  error: 'Code, amount, reward, duration, and max uses are required',
                 });
               }
             
               try {
-                const promoCode = await createPromoCode(amount, validityDays, maxUses);
+                // Create promo code with given parameters
+                const promoCode = await createPromoCode(reward, duration, maxUses ,code, );
             
                 res.status(201).json({
+                  success: true,
                   message: 'Promo code created successfully',
                   promoCode: {
                     code: promoCode.code,
-                    amount: promoCode.amount,
+                    reward: promoCode.reward,
                     expiresAt: promoCode.expiresAt,
                     maxUses: promoCode.maxUses,
                   },
@@ -351,7 +353,6 @@ router.get('/promocode/current', (req, res) => {
                 res.status(500).json({ error: 'Could not create promo code' });
               }
             });
-            
 
 module.exports = router;
 
