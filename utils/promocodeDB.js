@@ -15,14 +15,35 @@ async function connect() {
 
 connect();
 
-async function createPromoCode(amount, validityDays, maxUses, code = null) {
+// Create Promo Code Function
+async function createPromoCode(amount, durationInput, maxUses, code = null) {
   try {
     const database = client.db('UserInfo');
     const collection = database.collection('promoCodes');
 
     const promoCode = code || crypto.randomBytes(6).toString('hex');
+
+    // Parse the duration input
+    let durationInHours;
+    const durationValue = parseInt(durationInput.slice(0, -1));
+    const durationUnit = durationInput.slice(-1).toUpperCase();
+    
+    switch (durationUnit) {
+      case 'H':
+        durationInHours = durationValue;
+        break;
+      case 'D':
+        durationInHours = durationValue * 24;
+        break;
+      case 'W':
+        durationInHours = durationValue * 24 * 7;
+        break;
+      default:
+        throw new Error('Invalid duration format. Use H, D, or W.');
+    }
+
     const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + validityDays);
+    expiresAt.setHours(expiresAt.getHours() + durationInHours);
 
     const newPromoCode = {
       code: promoCode,
@@ -44,6 +65,7 @@ async function createPromoCode(amount, validityDays, maxUses, code = null) {
   }
 }
 
+// Check Promo Code Validity Function
 async function checkPromoCodeValidity(code, userId) {
   try {
     const database = client.db('UserInfo');
@@ -69,6 +91,7 @@ async function checkPromoCodeValidity(code, userId) {
   }
 }
 
+// Mark Promo Code as Used Function
 async function markPromoCodeUsed(code, userId) {
   try {
     const database = client.db('UserInfo');
