@@ -23,11 +23,20 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
 
     const promoCode = code || crypto.randomBytes(6).toString('hex');
 
+    // Ensure durationInput is a string
+    if (typeof durationInput !== 'string') {
+      throw new TypeError('durationInput must be a string in the format of "<number><H|D|W>"');
+    }
+
     // Parse the duration input
     let durationInHours;
     const durationValue = parseInt(durationInput.slice(0, -1));
     const durationUnit = durationInput.slice(-1).toUpperCase();
-    
+
+    if (isNaN(durationValue)) {
+      throw new Error('Invalid duration format. Ensure the duration value is a number followed by H, D, or W.');
+    }
+
     switch (durationUnit) {
       case 'H':
         durationInHours = durationValue;
@@ -64,7 +73,6 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
     throw new Error('Could not create promo code');
   }
 }
-
 // Check Promo Code Validity Function
 async function checkPromoCodeValidity(code, userId) {
   try {
