@@ -21,7 +21,7 @@ const {
   addOrUpdateDailyUsage,
   canUseDailyCommand,
 } = require('../utils/dbChange');
-const { createPromoCode, checkPromoCodeValidity, markPromoCodeUsed } = require('../utils/dbChange');
+const { createPromoCode, checkPromoCodeValidity, markPromoCodeUsed } = require('../utils/promocodeDB.js');
 
 const { info, error } = require('console');
 
