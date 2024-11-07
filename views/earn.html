@@ -126,6 +126,31 @@
             align-items: center;
         }
 
+        /* Large Welcome Text */
+        .welcome-text {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff3366;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 2rem;
+            color: #ff3366;
+            margin: 2rem 0 1.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
         /* Main Card Grid */
         .card-grid {
             display: grid;
@@ -274,43 +299,48 @@
 
     <!-- Main Content Section -->
     <section class="section">
-        <div class="container has-text-centered-mobile">
-            <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-4" id="usernameDisplay">Welcome, {(user)}!</h2>
-            <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+        <h1 class="welcome-text" id="usernameDisplay">Welcome, {(user)}!</h1>
+        <p class="subtitle">Complete these offers to earn ROBUX! 💰</p>
 
-            <!-- Card Grid -->
-            <div class="card-grid">
-                <!-- Offer Cards -->
-                <div class="offer-card" onclick="openAytS()">
-                    <span class="fas fa-trophy icon" aria-hidden="true"></span>
-                    <h4>Kiwiwall</h4>
-                </div>
-                <div class="offer-card" onclick="openBitlab()">
-                    <span class="fas fa-snowboarding icon" aria-hidden="true"></span>
-                    <h4>Bitlabs</h4>
-                </div>
-                <div class="offer-card" onclick="openCPX()">
-                    <span class="fas fa-clock icon" aria-hidden="true"></span>
-                    <h4>CPX Research</h4>
-                </div>
-                <div class="offer-card">
-                    <span class="fas fa-hourglass-half icon" aria-hidden="true"></span>
-                    <h4>Coming Soon!</h4>
-                </div>
+        <!-- Earn Robux Section -->
+        <h2 class="section-header">Earn Robux</h2>
+        <div class="card-grid">
+            <!-- Offer Cards -->
+            <div class="offer-card" onclick="openAytS()">
+                <span class="fas fa-trophy icon" aria-hidden="true"></span>
+                <h4>Kiwiwall</h4>
+            </div>
+            <div class="offer-card" onclick="openBitlab()">
+                <span class="fas fa-snowboarding icon" aria-hidden="true"></span>
+                <h4>Bitlabs</h4>
+            </div>
+            <div class="offer-card" onclick="openCPX()">
+                <span class="fas fa-clock icon" aria-hidden="true"></span>
+                <h4>CPX Research</h4>
+            </div>
+            <div class="offer-card">
+                <span class="fas fa-hourglass-half icon" aria-hidden="true"></span>
+                <h4>Coming Soon!</h4>
+            </div>
+        </div>
+    </section>
 
-                <!-- Social Cards -->
-                <div class="social-card" onclick="window.open('https://discord.gg/rs9Yvsg2Hu', '_blank')">
-                    <span class="fab fa-discord icon" aria-hidden="true"></span>
-                    <h4>Discord</h4>
-                </div>
-                <div class="social-card" onclick="window.open('https://www.instagram.com/rbxpro_/', '_blank')">
-                    <span class="fab fa-instagram icon" aria-hidden="true"></span>
-                    <h4>Instagram</h4>
-                </div>
-                <div class="social-card" onclick="window.open('https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA', '_blank')">
-                    <span class="fab fa-youtube icon" aria-hidden="true"></span>
-                    <h4>YouTube</h4>
-                </div>
+    <!-- Social Section -->
+    <section class="section">
+        <h2 class="section-header">Socials</h2>
+        <div class="card-grid">
+            <!-- Social Cards -->
+            <div class="social-card" onclick="window.open('https://discord.gg/rs9Yvsg2Hu', '_blank')">
+                <span class="fab fa-discord icon" aria-hidden="true"></span>
+                <h4>Discord</h4>
+            </div>
+            <div class="social-card" onclick="window.open('https://www.instagram.com/rbxpro_/', '_blank')">
+                <span class="fab fa-instagram icon" aria-hidden="true"></span>
+                <h4>Instagram</h4>
+            </div>
+            <div class="social-card" onclick="window.open('https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA', '_blank')">
+                <span class="fab fa-youtube icon" aria-hidden="true"></span>
+                <h4>YouTube</h4>
             </div>
         </div>
     </section>
