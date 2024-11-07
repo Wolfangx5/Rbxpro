@@ -30,54 +30,45 @@
             align-items: center;
             z-index: 2000;
             color: #fff;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             flex-direction: column;
         }
 
         /* Smooth and rounded neon text */
         .glow-text {
-            font-size: 100px; /* Larger text */
+            font-size: 80px;
             font-weight: 700;
-            font-family: 'Inter', sans-serif; /* Smooth and rounded font */
-            color: #ff0066; /* Reddish glow */
+            font-family: 'Inter', sans-serif;
+            color: #ff0066;
             letter-spacing: 4px;
             text-transform: uppercase;
             text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
                          0 0 100px #ff3366, 0 0 150px #ff0033;
             animation: glow 2s ease-in-out infinite alternate;
-            display: inline-block;
         }
 
-        /* Dots with same glowing effect */
+        /* Dots with glowing effect */
         .dots {
-            font-size: 100px; /* Same size as text */
+            font-size: 80px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             color: #ff0066;
             text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
                          0 0 100px #ff3366, 0 0 150px #ff0033;
             display: inline-block;
-            animation: blinkDots 1.5s infinite steps(1); /* Animation for dots */
+            animation: blinkDots 1.5s infinite steps(1);
         }
 
-        /* Glowing effect for the RBXPRO text */
         @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366,
-                             0 0 80px #ff0033, 0 0 100px #ff0033, 0 0 150px #ff0033;
-            }
-            to {
-                text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366, 0 0 80px #ff3366,
-                             0 0 100px #ff0033, 0 0 150px #ff0033, 0 0 200px #ff0033;
-            }
+            from { text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366; }
+            to { text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366, 0 0 80px #ff3366; }
         }
 
-        /* Blinking dots appear one after another */
         @keyframes blinkDots {
-            0% { content: ""; }     /* No dots at first */
-            33% { content: "."; }   /* One dot */
-            66% { content: ".."; }  /* Two dots */
-            100% { content: "..."; } /* Three dots */
+            0% { content: ""; }
+            33% { content: "."; }
+            66% { content: ".."; }
+            100% { content: "..."; }
         }
 
         body {
@@ -139,31 +130,37 @@
             padding: 3rem 1.5rem;
         }
 
-        h2.title {
-            font-size: 2rem;
-            color: #FEFFFF;
-            margin-bottom: 1rem;
-        }
-
-        h3.subtitle {
-            font-size: 1.25rem;
-            color: #FEFFFF;
-            margin-bottom: 2rem;
-        }
-
-        .column .popCard {
-            display: block;
+        .card {
+            display: flex;
+            align-items: center;
             background-color: #1a1a2e;
-            padding: 2rem 1.5rem;
-            border-radius: 8px;
+            padding: 2rem;
+            border-radius: 12px;
             color: #fff;
             text-align: center;
             transition: transform 0.3s ease;
+            flex-direction: column;
+            flex-basis: 45%;
+            margin: 10px;
         }
 
-        .column .popCard:hover {
+        .card:hover {
             transform: translateY(-5px);
             background-color: #e94560;
+        }
+
+        .card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: auto;
         }
 
         footer {
@@ -196,25 +193,15 @@
             margin-top: 15px;
         }
 
-        @media (max-width: 1024px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                background-color: #1a1a2e;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                padding: 1rem;
-                display: none;
+        @media (max-width: 768px) {
+            .card-container {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
             }
 
-            .navbar-menu.is-active {
-                display: flex;
+            .card {
+                flex-basis: 90%;
+                margin: 1rem 0;
             }
         }
     </style>
@@ -263,59 +250,41 @@
 
     <section class="section">
         <div class="container has-text-centered-mobile">
-            <div class="columns is-centered">
-                <div class="column is-11">
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
-                    <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard adscend" onclick="openAytS()">
-                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                                <span>KIwiwall</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard lootably" onclick="openBitlab()">
-                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Bitlabs</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard lootably" onclick="openCPX()">
-                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                                <span>CPX Research</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard soon" href="#">
-                                <span class="fas fa-hourglass-half fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Soon!</span>
-                            </a>
-                        </div>
-                    </div>
-                    <br>
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
-                    <h3 class="subtitle">Follow us to stay updated!</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Discord</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Instagram</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Subscribe</span>
-                            </a>
-                        </div>
-                    </div>
+            <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-4" id="usernameDisplay">Welcome, {(user)}!</h2>
+            <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+
+            <!-- Offers and Socials in a Card Container -->
+            <div class="card-container">
+                <!-- Offers Section -->
+                <div class="card" onclick="openAytS()">
+                    <span class="fas fa-trophy icon" aria-hidden="true"></span>
+                    <span>Kiwiwall</span>
+                </div>
+                <div class="card" onclick="openBitlab()">
+                    <span class="fas fa-snowboarding icon" aria-hidden="true"></span>
+                    <span>Bitlabs</span>
+                </div>
+                <div class="card" onclick="openCPX()">
+                    <span class="fas fa-clock icon" aria-hidden="true"></span>
+                    <span>CPX Research</span>
+                </div>
+                <div class="card">
+                    <span class="fas fa-hourglass-half icon" aria-hidden="true"></span>
+                    <span>Coming Soon!</span>
+                </div>
+
+                <!-- Socials Section -->
+                <div class="card" onclick="window.open('https://discord.gg/rs9Yvsg2Hu', '_blank')">
+                    <span class="fab fa-discord icon" aria-hidden="true"></span>
+                    <span>Discord</span>
+                </div>
+                <div class="card" onclick="window.open('https://www.instagram.com/rbxpro_/', '_blank')">
+                    <span class="fab fa-instagram icon" aria-hidden="true"></span>
+                    <span>Instagram</span>
+                </div>
+                <div class="card" onclick="window.open('https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA', '_blank')">
+                    <span class="fab fa-youtube icon" aria-hidden="true"></span>
+                    <span>YouTube</span>
                 </div>
             </div>
         </div>
@@ -334,7 +303,6 @@
                 <li><a id="footer-privacy-link" href="/privacy.html">Privacy Policy</a></li>
             </ul>
         </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>RBXPRO | All Rights Reserved.</p>
             <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
@@ -344,10 +312,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Loading screen timeout
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
-            }, 1500); // 1.5 seconds for the loading screen
+            }, 1500);
 
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
@@ -418,7 +385,6 @@
         }
         setInterval(loadUserData, 1000)
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
