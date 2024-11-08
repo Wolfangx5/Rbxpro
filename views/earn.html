@@ -34,56 +34,43 @@
             flex-direction: column;
         }
 
-        /* Smooth and rounded neon text */
         .glow-text {
-            font-size: 100px; /* Larger text */
-            font-weight: 700;
-            font-family: 'Inter', sans-serif; /* Smooth and rounded font */
-            color: #ff0066; /* Reddish glow */
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
-                         0 0 100px #ff3366, 0 0 150px #ff0033;
-            animation: glow 2s ease-in-out infinite alternate;
-            display: inline-block;
-        }
-
-        /* Dots with same glowing effect */
-        .dots {
-            font-size: 100px; /* Same size as text */
+            font-size: 100px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             color: #ff0066;
-            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
-                         0 0 100px #ff3366, 0 0 150px #ff0033;
-            display: inline-block;
-            animation: blinkDots 1.5s infinite steps(1); /* Animation for dots */
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
-        /* Glowing effect for the RBXPRO text */
+        .dots {
+            font-size: 100px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            color: #ff0066;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366;
+            animation: blinkDots 1.5s infinite steps(1);
+        }
+
         @keyframes glow {
-            from {
-                text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366,
-                             0 0 80px #ff0033, 0 0 100px #ff0033, 0 0 150px #ff0033;
-            }
-            to {
-                text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366, 0 0 80px #ff3366,
-                             0 0 100px #ff0033, 0 0 150px #ff0033, 0 0 200px #ff0033;
-            }
+            from { text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366; }
+            to { text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366; }
         }
 
-        /* Blinking dots appear one after another */
         @keyframes blinkDots {
-            0% { content: ""; }     /* No dots at first */
-            33% { content: "."; }   /* One dot */
-            66% { content: ".."; }  /* Two dots */
-            100% { content: "..."; } /* Three dots */
+            0% { content: ""; }
+            33% { content: "."; }
+            66% { content: ".."; }
+            100% { content: "..."; }
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: #000;
             color: #FFFDFF;
+            overflow-x: hidden;
         }
 
         .navbar {
@@ -126,44 +113,57 @@
             transform: translateY(-2px);
         }
 
-        .recommendation-strip {
-            background-color: #17b823;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
         .section {
             padding: 3rem 1.5rem;
         }
 
-        h2.title {
+        .section-header {
             font-size: 2rem;
-            color: #FEFFFF;
-            margin-bottom: 1rem;
-        }
-
-        h3.subtitle {
-            font-size: 1.25rem;
-            color: #FEFFFF;
+            color: #fff;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid #ff3366;
             margin-bottom: 2rem;
         }
 
-        .column .popCard {
-            display: block;
-            background-color: #1a1a2e;
-            padding: 2rem 1.5rem;
-            border-radius: 8px;
-            color: #fff;
-            text-align: center;
-            transition: transform 0.3s ease;
+        /* Divider for sections */
+        .divider {
+            height: 2px;
+            background: #ff3366;
+            margin: 2rem 0;
         }
 
-        .column .popCard:hover {
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Pop Card */
+        .popCard {
+            background-color: #1a1a2e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            color: #fff;
+            text-align: center;
+            width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .popCard:hover {
             transform: translateY(-5px);
-            background-color: #e94560;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background-color: #ff3366;
+        }
+
+        .popCard img, .popCard .icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 1rem;
         }
 
         footer {
@@ -195,28 +195,6 @@
             font-size: 0.9rem;
             margin-top: 15px;
         }
-
-        @media (max-width: 1024px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                background-color: #1a1a2e;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                padding: 1rem;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-            }
-        }
     </style>
 </head>
 
@@ -226,15 +204,11 @@
         <div class="glow-text">RBXPRO<span class="dots"></span></div>
     </div>
 
+    <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
@@ -257,74 +231,73 @@
         </div>
     </nav>
 
-    <div class="recommendation-strip">
-        Promocodes coming soon!💎
-    </div>
-
+    <!-- Hot Surveys Section -->
     <section class="section">
-        <div class="container has-text-centered-mobile">
-            <div class="columns is-centered">
-                <div class="column is-11">
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
-                    <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard adscend" onclick="openAytS()">
-                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                                <span>KIwiwall</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard lootably" onclick="openBitlab()">
-                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Bitlabs</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard lootably" onclick="openCPX()">
-                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                                <span>CPX Research</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard soon" href="#">
-                                <span class="fas fa-hourglass-half fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Soon!</span>
-                            </a>
-                        </div>
-                    </div>
-                    <br>
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
-                    <h3 class="subtitle">Follow us to stay updated!</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Discord</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Instagram</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Subscribe</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <h2 class="section-header">Hot Surveys 💸</h2>
+        <div class="card-grid">
+            <a class="popCard" onclick="openCPX()">
+                <span class="fas fa-clock icon" aria-hidden="true"></span>
+                <h4>CPX Research</h4>
+            </a>
         </div>
     </section>
 
-    <div class="recommendation-strip">
-        Earn rbx by running discord commands, Join our server! 🤑
-    </div>
+    <div class="divider"></div>
 
+    <!-- Offerwalls Section -->
+    <section class="section">
+        <h2 class="section-header">Offerwalls</h2>
+        <div class="card-grid">
+            <a class="popCard" onclick="openAytS()">
+                <span class="fas fa-trophy icon" aria-hidden="true"></span>
+                <h4>Kiwiwall</h4>
+            </a>
+            <a class="popCard" onclick="openBitlab()">
+                <span class="fas fa-snowboarding icon" aria-hidden="true"></span>
+                <h4>Bitlabs</h4>
+            </a>
+            <a class="popCard" onclick="openCPX()">
+                <span class="fas fa-clock icon" aria-hidden="true"></span>
+                <h4>CPX Research</h4>
+            </a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Withdraw Section -->
+    <section class="section">
+        <h2 class="section-header">Ready to Withdraw to Roblox?</h2>
+        <div class="card-grid">
+            <a class="popCard" href="/withdraw">
+                <img src="https://img.icons8.com/plasticine/2x/robux.png" alt="Robux Icon">
+                <h4>Withdraw to Roblox</h4>
+            </a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Social Section -->
+    <section class="section">
+        <h2 class="section-header">Socials ⭐</h2>
+        <div class="card-grid">
+            <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                <span class="fab fa-discord icon" aria-hidden="true"></span>
+                <h4>Discord</h4>
+            </a>
+            <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                <span class="fab fa-instagram icon" aria-hidden="true"></span>
+                <h4>Instagram</h4>
+            </a>
+            <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                <span class="fab fa-youtube icon" aria-hidden="true"></span>
+                <h4>Subscribe</h4>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-nav">
             <ul>
@@ -334,7 +307,6 @@
                 <li><a id="footer-privacy-link" href="/privacy.html">Privacy Policy</a></li>
             </ul>
         </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
         <div class="rbxpro-disclaimer">
             <p>RBXPRO | All Rights Reserved.</p>
             <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
@@ -342,12 +314,12 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Loading screen timeout
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
-            }, 1500); // 1.5 seconds for the loading screen
+            }, 1500);
 
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
@@ -418,7 +390,6 @@
         }
         setInterval(loadUserData, 1000)
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
