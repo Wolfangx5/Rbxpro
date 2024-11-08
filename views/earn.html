@@ -36,44 +36,48 @@
 
         /* Smooth and rounded neon text */
         .glow-text {
-            font-size: 100px;
+            font-size: 100px; /* Larger text */
             font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            color: #ff0066;
+            font-family: 'Inter', sans-serif; /* Smooth and rounded font */
+            color: #ff0066; /* Reddish glow */
             letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366, 0 0 100px #ff3366, 0 0 150px #ff0033;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
+                         0 0 100px #ff3366, 0 0 150px #ff0033;
             animation: glow 2s ease-in-out infinite alternate;
             display: inline-block;
         }
 
         /* Dots with same glowing effect */
         .dots {
-            font-size: 100px;
+            font-size: 100px; /* Same size as text */
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             color: #ff0066;
-            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366, 0 0 100px #ff3366, 0 0 150px #ff0033;
+            text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
+                         0 0 100px #ff3366, 0 0 150px #ff0033;
             display: inline-block;
-            animation: blinkDots 1.5s infinite steps(1);
+            animation: blinkDots 1.5s infinite steps(1); /* Animation for dots */
         }
 
         /* Glowing effect for the RBXPRO text */
         @keyframes glow {
             from {
-                text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366, 0 0 80px #ff0033, 0 0 100px #ff0033, 0 0 150px #ff0033;
+                text-shadow: 0 0 10px #ff0066, 0 0 30px #ff3366, 0 0 50px #ff3366,
+                             0 0 80px #ff0033, 0 0 100px #ff0033, 0 0 150px #ff0033;
             }
             to {
-                text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366, 0 0 80px #ff3366, 0 0 100px #ff0033, 0 0 150px #ff0033, 0 0 200px #ff0033;
+                text-shadow: 0 0 30px #ff0066, 0 0 50px #ff3366, 0 0 80px #ff3366,
+                             0 0 100px #ff0033, 0 0 150px #ff0033, 0 0 200px #ff0033;
             }
         }
 
         /* Blinking dots appear one after another */
         @keyframes blinkDots {
-            0% { content: ""; }
-            33% { content: "."; }
-            66% { content: ".."; }
-            100% { content: "..."; }
+            0% { content: ""; }     /* No dots at first */
+            33% { content: "."; }   /* One dot */
+            66% { content: ".."; }  /* Two dots */
+            100% { content: "..."; } /* Three dots */
         }
 
         body {
@@ -108,15 +112,46 @@
             border-radius: 4px;
         }
 
-        .section-divider {
-            width: 80%;
-            margin: 40px auto;
-            height: 3px;
-            background: linear-gradient(to right, #e94560, #17b823, #162447);
-            border-radius: 2px;
+        .buttons .button {
+            background-color: #0f3460;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 4px;
+            padding: 0.5rem 1.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        .popCard {
+        .buttons .button:hover {
+            background-color: #162447;
+            transform: translateY(-2px);
+        }
+
+        .recommendation-strip {
+            background-color: #17b823;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            padding: 3rem 1.5rem;
+        }
+
+        h2.title {
+            font-size: 2rem;
+            color: #FEFFFF;
+            margin-bottom: 1rem;
+        }
+
+        h3.subtitle {
+            font-size: 1.25rem;
+            color: #FEFFFF;
+            margin-bottom: 2rem;
+        }
+
+        .column .popCard {
             display: block;
             background-color: #1a1a2e;
             padding: 2rem 1.5rem;
@@ -126,7 +161,7 @@
             transition: transform 0.3s ease;
         }
 
-        .popCard:hover {
+        .column .popCard:hover {
             transform: translateY(-5px);
             background-color: #e94560;
         }
@@ -159,6 +194,28 @@
             color: #aaa;
             font-size: 0.9rem;
             margin-top: 15px;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-burger {
+                display: block;
+            }
+
+            .navbar-menu {
+                background-color: #1a1a2e;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar-menu.is-active {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -200,91 +257,73 @@
         </div>
     </nav>
 
-    <!-- Hot Surveys Section -->
+    <div class="recommendation-strip">
+        Promocodes coming soon!💎
+    </div>
+
     <section class="section">
-        <h2 class="title is-spaced has-text-weight-bold mb-2">Hot Surveys 💸</h2>
-        <h3 class="subtitle">Earn Robux by completing popular surveys!</h3>
-        <div class="columns is-centered">
-            <div class="column is-3">
-                <a class="popCard" onclick="openCPX()">
-                    <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                    <span>CPX Research</span>
-                </a>
+        <div class="container has-text-centered-mobile">
+            <div class="columns is-centered">
+                <div class="column is-11">
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
+                    <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard adscend" onclick="openAytS()">
+                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
+                                <span>KIwiwall</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openBitlab()">
+                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Bitlabs</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard lootably" onclick="openCPX()">
+                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
+                                <span>CPX Research</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard soon" href="#">
+                                <span class="fas fa-hourglass-half fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Soon!</span>
+                            </a>
+                        </div>
+                    </div>
+                    <br>
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
+                    <h3 class="subtitle">Follow us to stay updated!</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Discord</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Subscribe</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="section-divider"></div>
-
-    <!-- Offerwalls Section -->
-    <section class="section">
-        <h2 class="title is-spaced has-text-weight-bold mb-2">Offerwalls</h2>
-        <h3 class="subtitle">Choose from multiple offerwalls to earn even more!</h3>
-        <div class="columns is-multiline is-centered">
-            <div class="column is-3">
-                <a class="popCard" onclick="openCPX()">
-                    <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                    <span>CPX Research</span>
-                </a>
-            </div>
-            <div class="column is-3">
-                <a class="popCard" onclick="openBitlab()">
-                    <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
-                    <span>Bitlabs</span>
-                </a>
-            </div>
-            <div class="column is-3">
-                <a class="popCard" onclick="openAytS()">
-                    <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                    <span>Kiwiwall</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Ready to Withdraw Section -->
-    <section class="section">
-        <h2 class="title is-spaced has-text-weight-bold mb-2">Ready to Withdraw to Roblox?</h2>
-        <h3 class="subtitle">Transfer your earned Robux easily!</h3>
-        <div class="columns is-centered">
-            <div class="column is-3">
-                <a class="popCard" href="/withdraw">
-                    <img src="https://img.icons8.com/plasticine/2x/robux.png" class="fa-3x mb-3" alt="Withdraw Icon" style="width: 50px;">
-                    <span>Withdraw</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Socials Section -->
-    <section class="section">
-        <h2 class="title is-spaced has-text-weight-bold mb-2">Socials ⭐</h2>
-        <h3 class="subtitle">Follow us to stay updated!</h3>
-        <div class="columns is-multiline is-centered">
-            <div class="column is-3">
-                <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                    <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
-                    <span>Discord</span>
-                </a>
-            </div>
-            <div class="column is-3">
-                <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                    <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
-                    <span>Instagram</span>
-                </a>
-            </div>
-            <div class="column is-3">
-                <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                    <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
-                    <span>Subscribe</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    <div class="recommendation-strip">
+        Earn rbx by running discord commands, Join our server! 🤑
+    </div>
 
     <footer>
         <div class="footer-nav">
@@ -305,9 +344,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen timeout
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
-            }, 1500);
+            }, 1500); // 1.5 seconds for the loading screen
 
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
@@ -338,17 +378,17 @@
 
         function openBitlab() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
+            window.open(https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04, '_blank')
         }
 
         function openAytS() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
+            window.open(https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}, '_blank')
         }
 
         function openCPX() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
+            window.open(https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}, '_blank')
         }
 
         function loadUserData() {
@@ -365,8 +405,8 @@
                     const balance = document.getElementById("rbxbalance");
                     const nameDisplay = document.getElementById("usernameDisplay");
 
-                    balance.textContent = `${data.balance} robux`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
+                    balance.textContent = ${data.balance} robux;
+                    nameDisplay.textContent = Welcome, ${data.username}!;
                 })
                 .catch(error => {
                     window.location.href = '/login';
@@ -380,8 +420,8 @@
     </script>
     <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
-</html>
 
+</html>
 
 
 
