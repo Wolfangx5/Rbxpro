@@ -258,7 +258,7 @@
     </nav>
 
     <div class="recommendation-strip">
-        Promocodes coming soon!💎
+        Withdrawals has been fixed, Currently restocking!💎
     </div>
 
     <section class="section">
@@ -378,17 +378,17 @@
 
         function openBitlab() {
             const token = localStorage.getItem('sessionToken');
-            window.open(https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04, '_blank')
+            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
         }
 
         function openAytS() {
             const token = localStorage.getItem('sessionToken');
-            window.open(https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}, '_blank')
+            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
         }
 
         function openCPX() {
             const token = localStorage.getItem('sessionToken');
-            window.open(https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}, '_blank')
+            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
         }
 
         function loadUserData() {
@@ -405,8 +405,8 @@
                     const balance = document.getElementById("rbxbalance");
                     const nameDisplay = document.getElementById("usernameDisplay");
 
-                    balance.textContent = ${data.balance} robux;
-                    nameDisplay.textContent = Welcome, ${data.username}!;
+                    balance.textContent = `${data.balance} robux`;
+                    nameDisplay.textContent = `Welcome, ${data.username}!`;
                 })
                 .catch(error => {
                     window.location.href = '/login';
@@ -422,6 +422,5 @@
 </body>
 
 </html>
-
 
 
