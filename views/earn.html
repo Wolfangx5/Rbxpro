@@ -36,10 +36,10 @@
 
         /* Smooth and rounded neon text */
         .glow-text {
-            font-size: 100px; /* Larger text */
+            font-size: 100px;
             font-weight: 700;
-            font-family: 'Inter', sans-serif; /* Smooth and rounded font */
-            color: #ff0066; /* Reddish glow */
+            font-family: 'Inter', sans-serif;
+            color: #ff0066;
             letter-spacing: 4px;
             text-transform: uppercase;
             text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
@@ -50,14 +50,14 @@
 
         /* Dots with same glowing effect */
         .dots {
-            font-size: 100px; /* Same size as text */
+            font-size: 100px;
             font-weight: 700;
             font-family: 'Inter', sans-serif;
             color: #ff0066;
             text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066, 0 0 60px #ff3366,
                          0 0 100px #ff3366, 0 0 150px #ff0033;
             display: inline-block;
-            animation: blinkDots 1.5s infinite steps(1); /* Animation for dots */
+            animation: blinkDots 1.5s infinite steps(1);
         }
 
         /* Glowing effect for the RBXPRO text */
@@ -74,10 +74,10 @@
 
         /* Blinking dots appear one after another */
         @keyframes blinkDots {
-            0% { content: ""; }     /* No dots at first */
-            33% { content: "."; }   /* One dot */
-            66% { content: ".."; }  /* Two dots */
-            100% { content: "..."; } /* Three dots */
+            0% { content: ""; }
+            33% { content: "."; }
+            66% { content: ".."; }
+            100% { content: "..."; }
         }
 
         body {
@@ -226,6 +226,7 @@
         <div class="glow-text">RBXPRO<span class="dots"></span></div>
     </div>
 
+    <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -267,50 +268,59 @@
                 <div class="column is-11">
                     <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
                     <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+
+                    <!-- Hot Surveys Section -->
+                    <h2 class="title is-size-4-mobile has-text-weight-bold mb-2">Hot Surveys 💸</h2>
                     <div class="columns is-multiline">
                         <div class="column is-3">
-                            <a class="popCard adscend" onclick="openAytS()">
+                            <a class="popCard" onclick="openCPX()">
+                                <span class="fas fa-chart-line fa-3x mb-3" aria-hidden="true"></span>
+                                <span>CPX Research</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Offerwalls Section -->
+                    <h2 class="title is-size-4-mobile has-text-weight-bold mb-2">Offerwalls</h2>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openAytS()">
                                 <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                                <span>KIwiwall</span>
+                                <span>Kiwiwall</span>
                             </a>
                         </div>
                         <div class="column is-3">
-                            <a class="popCard lootably" onclick="openBitlab()">
+                            <a class="popCard" onclick="openBitlab()">
                                 <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
                                 <span>Bitlabs</span>
                             </a>
                         </div>
                         <div class="column is-3">
-                            <a class="popCard lootably" onclick="openCPX()">
+                            <a class="popCard" onclick="openCPX()">
                                 <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
                                 <span>CPX Research</span>
                             </a>
                         </div>
-                        <div class="column is-3">
-                            <a class="popCard soon" href="#">
-                                <span class="fas fa-hourglass-half fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Soon!</span>
-                            </a>
-                        </div>
                     </div>
-                    <br>
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
+
+                    <!-- Socials Section -->
+                    <h2 class="title is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
                     <h3 class="subtitle">Follow us to stay updated!</h3>
                     <div class="columns is-multiline">
                         <div class="column is-3">
-                            <a class="popCard discord" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                            <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
                                 <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
                                 <span>Discord</span>
                             </a>
                         </div>
                         <div class="column is-3">
-                            <a class="popCard instagram" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                            <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
                                 <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
                                 <span>Instagram</span>
                             </a>
                         </div>
                         <div class="column is-3">
-                            <a class="popCard youtube" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                            <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
                                 <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
                                 <span>Subscribe</span>
                             </a>
