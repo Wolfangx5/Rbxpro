@@ -10,16 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#17b823">
     <meta name="keywords" content="free robux, robux, roblox, free roblox">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/bulma.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
-        /* Dark red to black gradient background */
+        /* Dark blue to black gradient background */
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #2e0000, #000000);
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #1a1a80, #000000);
             color: #FFFDFF;
             overflow-x: hidden;
             padding-bottom: 20px;
@@ -29,6 +29,7 @@
         .navbar, .recommendation-strip {
             background-color: #1a1a2e;
             color: #fff;
+            font-family: 'Nunito', sans-serif;
         }
 
         .recommendation-strip {
@@ -36,19 +37,32 @@
             font-weight: 600;
             text-align: center;
             font-size: 1.1rem;
-            border-bottom: 3px solid #17b823;
+            border-bottom: 3px solid #e94560;
         }
 
-        /* Section Headers with Divider Line */
+        /* Larger Welcome and Subtitle Text */
+        #usernameDisplay, .subtitle {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff79b0; /* Reddish-pink color */
+            text-align: center;
+            text-shadow: 1px 1px 3px #ff79b0;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+        }
+
+        /* Section Headers with Reddish-Pink Divider */
         .section-header {
             font-size: 2.2rem;
             font-weight: 700;
-            color: #ffda79;
+            color: #ff79b0;
             margin-bottom: 1rem;
             padding: 1rem 0;
-            border-bottom: 3px solid #e94560;
+            border-bottom: 3px solid #ff79b0;
             text-align: center;
-            text-shadow: 0 0 10px #ffda79;
+            text-shadow: 0 0 10px #ff79b0;
             position: relative;
         }
 
@@ -78,6 +92,22 @@
             transform: translateY(-8px) scale(1.05);
             background-color: #e94560;
             box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Navbar and Footer Buttons */
+        .button, .navbar-menu a.navbar-item {
+            color: #fff !important;
+            background-color: #3a3a55;
+            font-family: 'Nunito', sans-serif;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .button:hover, .navbar-menu a.navbar-item:hover {
+            background-color: #e94560;
+            color: #fff;
         }
 
         /* Animated pulsing icons */
@@ -126,6 +156,13 @@
             border-top: 3px solid #17b823;
         }
 
+        /* Footer links */
+        .footer-nav li a {
+            color: #fff;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
         /* Hover effect for footer links */
         .footer-nav li a:hover {
             color: #e94560;
@@ -157,7 +194,7 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
+                    <a id="earn-link" class="navbar-item navbar-s-item" href="#">Earn</a>
                     <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw">Withdraw</a>
                 </div>
                 <div class="navbar-end">
@@ -324,5 +361,6 @@
 </body>
 
 </html>
+
 
 
