@@ -48,7 +48,7 @@
             display: inline-block;
         }
 
-        /* Dots with same glowing effect */
+        /* Blinking dots appear one after another */
         .dots {
             font-size: 100px;
             font-weight: 700;
@@ -72,7 +72,7 @@
             }
         }
 
-        /* Blinking dots appear one after another */
+        /* Blinking dots animation */
         @keyframes blinkDots {
             0% { content: ""; }
             33% { content: "."; }
@@ -86,72 +86,25 @@
             color: #FFFDFF;
         }
 
-        .navbar {
+        /* Navbar and Button Styling */
+        .navbar, .recommendation-strip, footer {
             background-color: #1a1a2e;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-brand .logo {
-            font-weight: 700;
-            font-size: 1.8rem;
             color: #fff;
         }
 
-        .navbar-menu a {
+        .navbar-menu a, .footer-nav li a {
             color: #fff;
-            padding: 0.5rem 1.5rem;
             text-decoration: none;
             font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .navbar-menu a:hover {
-            background-color: #e94560;
-            color: #fff;
+        .navbar-menu a:hover, .footer-nav li a:hover {
+            color: #e94560;
             border-radius: 4px;
         }
 
-        .buttons .button {
-            background-color: #0f3460;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 4px;
-            padding: 0.5rem 1.5rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .buttons .button:hover {
-            background-color: #162447;
-            transform: translateY(-2px);
-        }
-
-        .recommendation-strip {
-            background-color: #17b823;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .section {
-            padding: 3rem 1.5rem;
-        }
-
-        h2.title {
-            font-size: 2rem;
-            color: #FEFFFF;
-            margin-bottom: 1rem;
-        }
-
-        h3.subtitle {
-            font-size: 1.25rem;
-            color: #FEFFFF;
-            margin-bottom: 2rem;
-        }
-
-        .column .popCard {
+        /* Pop card styling */
+        .popCard {
             display: block;
             background-color: #1a1a2e;
             padding: 2rem 1.5rem;
@@ -159,63 +112,43 @@
             color: #fff;
             text-align: center;
             transition: transform 0.3s ease;
+            position: relative;
         }
 
-        .column .popCard:hover {
+        .popCard:hover {
             transform: translateY(-5px);
             background-color: #e94560;
         }
 
+        /* Animated icon styling */
+        .popCard .icon {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Section headers */
+        h2.section-header {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffda79;
+            text-shadow: 0 0 10px #ffda79;
+        }
+
+        .section {
+            padding: 3rem 1.5rem;
+        }
+
         footer {
-            background-color: #1a1a2e;
-            color: #fff;
             padding: 20px;
             text-align: center;
-        }
-
-        .footer-nav li {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .footer-nav li a {
-            font-size: 1rem;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav li a:hover {
-            color: #e94560;
-        }
-
-        .rbxpro-disclaimer {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
-
-        @media (max-width: 1024px) {
-            .navbar-burger {
-                display: block;
-            }
-
-            .navbar-menu {
-                background-color: #1a1a2e;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                padding: 1rem;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-            }
         }
     </style>
 </head>
@@ -270,59 +203,70 @@
                     <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
 
                     <!-- Hot Surveys Section -->
-                    <h2 class="title is-size-4-mobile has-text-weight-bold mb-2">Hot Surveys 💸</h2>
+                    <h2 class="section-header">Hot Surveys 💸</h2>
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
-                                <span class="fas fa-chart-line fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fas fa-chart-line fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>CPX Research</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- Offerwalls Section -->
-                    <h2 class="title is-size-4-mobile has-text-weight-bold mb-2">Offerwalls</h2>
+                    <h2 class="section-header">Offerwalls 🌐</h2>
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
-                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fas fa-trophy fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" onclick="openBitlab()">
-                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fas fa-snowboarding fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>Bitlabs</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
-                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fas fa-clock fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>CPX Research</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- Socials Section -->
-                    <h2 class="title is-size-4-mobile has-text-weight-bold mb-2">Socials ⭐</h2>
+                    <h2 class="section-header">Socials ⭐</h2>
                     <h3 class="subtitle">Follow us to stay updated!</h3>
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fab fa-discord fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>Discord</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fab fa-instagram fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>Instagram</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
+                                <span class="fab fa-youtube fa-3x icon mb-3" aria-hidden="true"></span>
                                 <span>Subscribe</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ready to Withdraw Section -->
+                    <h2 class="section-header">Ready to withdraw to Roblox? 🎁</h2>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" href="/withdraw">
+                                <span class="fas fa-gift fa-3x icon mb-3" aria-hidden="true"></span>
+                                <span>Withdraw Now</span>
                             </a>
                         </div>
                     </div>
@@ -354,7 +298,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Loading screen timeout
             setTimeout(() => {
                 document.getElementById('loading-screen').style.display = 'none';
             }, 1500); // 1.5 seconds for the loading screen
@@ -388,17 +331,17 @@
 
         function openBitlab() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank')
+            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank');
         }
 
         function openAytS() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank')
+            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank');
         }
 
         function openCPX() {
             const token = localStorage.getItem('sessionToken');
-            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank')
+            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
         }
 
         function loadUserData() {
@@ -426,7 +369,7 @@
                 window.location.href = '/login';
             }
         }
-        setInterval(loadUserData, 1000)
+        setInterval(loadUserData, 1000);
     </script>
     <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
