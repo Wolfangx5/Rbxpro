@@ -19,7 +19,7 @@
         /* Background gradient */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #000000, #000000);
+            background: linear-gradient(135deg, #ED0E63, #000000);
             color: #FFFDFF;
             overflow-x: hidden;
             padding-bottom: 20px;
@@ -38,7 +38,7 @@
         }
 
         .navbar-menu a {
-            color: #ffffff !important; /* White text for visibility */
+            color: #ffffff !important;
         }
 
         .recommendation-strip {
@@ -49,72 +49,95 @@
             font-size: 1.1rem;
         }
 
-        /* Section and subtitle styling */
-        .section {
-            padding: 3rem 1.5rem;
+        /* Main layout with sidebar */
+        .content-wrapper {
+            display: flex;
+            gap: 2rem;
         }
 
-        h2.title {
-            font-size: 2rem;
-            color: #FEFFFF;
-            margin-bottom: 0.5rem;
+        /* Sidebar styling */
+        .sidebar {
+            width: 300px;
+            background-color: #1a1a2e;
+            padding: 1.5rem;
+            border-radius: 8px;
         }
 
-        h3.subtitle {
-            font-size: 1.25rem;
-            color: #FEFFFF;
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #222;
+            text-align: center;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #e94560;
+            color: #ffffff;
+        }
+
+        /* Main content styling */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background-color: #111;
+            border-radius: 8px;
+        }
+
+        /* Hero section */
+        .hero {
+            text-align: center;
             margin-bottom: 2rem;
+            color: #ff79b0;
+            font-size: 2rem;
         }
 
-        /* Separator styling */
-        .separator {
-            width: 100%;
+        /* Section dividers */
+        .section-divider {
+            border: 0;
             height: 2px;
-            background-color: #555;
-            margin: 1rem 0 2rem;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 2rem 0;
+            box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.1);
         }
 
-        /* Pop card styling - neon shine effect */
-        .column .popCard {
+        /* Neon effect for key buttons */
+        .popCard {
             display: block;
             background-color: #1a1a2e;
             padding: 2.5rem 2rem;
             border-radius: 12px;
             color: #fff;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 20px rgba(212, 9, 60, 0.8), 0 0 40px rgba(212, 9, 60, 0.6), 0 0 60px rgba(212, 9, 60, 0.4);
         }
 
-        .column .popCard:hover {
+        .popCard:hover {
             transform: translateY(-5px);
             background-color: #e94560;
             box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
         }
 
-        /* FAQ Section styling */
-        .faq-section {
-            margin-top: 2rem;
-            color: #FEFFFF;
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
+        /* FAQ accordion */
+        .faq-section .faq-item {
             background-color: #1a1a2e;
+            margin: 1rem 0;
             padding: 1rem;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
 
         .faq-item:hover {
             background-color: #2a2a3e;
         }
 
-        .faq-item-content {
+        .faq-content {
             display: none;
             color: #ddd;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
         }
 
         /* Footer styling */
@@ -124,268 +147,91 @@
             padding: 20px;
             text-align: center;
         }
-
-        .footer-nav li {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .footer-nav li a {
-            font-size: 1rem;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav li a:hover {
-            color: #e94560;
-        }
-
-        .rbxpro-disclaimer {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
     </style>
 </head>
 
 <body aria-hidden="false">
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="glow-text">RBXPRO<span class="dots"></span></div>
-    </div>
-
-    <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
             </div>
-            <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
-                    <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw">Withdraw</a>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="" class="button is-info">
-                                <strong id="rbxbalance">{(Balance)} R$</strong>
-                            </a>
-                            <a onclick="Logout()" href="" class="button is-info">
-                                <strong>Logout</strong>
-                            </a>
-                        </div>
-                    </div>
+                    <a id="earn-link" class="navbar-item" href="#">Earn</a>
+                    <a id="withdraw-link" class="navbar-item" href="/withdraw">Withdraw</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="recommendation-strip">
-        promocodes coming soon!💎
-    </div>
+    <div class="recommendation-strip">Promocodes coming soon! 💎</div>
 
-    <!-- Main Content -->
     <section class="section">
-        <div class="container has-text-centered-mobile">
-            <div class="columns is-centered">
-                <div class="column is-11">
-                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
-                    <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+        <div class="container">
+            <div class="hero">
+                Welcome, <span id="usernameDisplay">{(user)}!</span> Complete these offers to earn ROBUX!
+            </div>
 
-                    <!-- Offerwalls Section -->
-                    <div class="separator"></div>
+            <div class="content-wrapper">
+                <!-- Sidebar for Offerwalls -->
+                <aside class="sidebar">
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard" onclick="openAytS()">
-                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Kiwiwall</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard" onclick="openBitlab()">
-                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Bitlabs</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard" onclick="openCPX()">
-                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                                <span>CPX Research</span>
-                            </a>
-                        </div>
-                    </div>
+                    <a onclick="openAytS()">Kiwiwall</a>
+                    <a onclick="openBitlab()">Bitlabs</a>
+                    <a onclick="openCPX()">CPX Research</a>
+                </aside>
 
+                <!-- Main content area -->
+                <div class="main-content">
                     <!-- Withdraw Section -->
-                    <div class="separator"></div>
-                    <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
-                    <div class="column is-3">
+                    <div>
+                        <h2 class="title">Withdraw Robux</h2>
                         <a class="popCard" href="/withdraw">
-                            <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
-                            <span>Withdraw Now</span>
+                            <span class="fas fa-gift fa-3x mb-3"></span>
+                            <p>Withdraw Now</p>
                         </a>
                     </div>
 
+                    <hr class="section-divider">
+
                     <!-- Socials Section -->
-                    <div class="separator"></div>
-                    <h2 class="title is-size-4-mobile has-text-weight-bold">Socials ⭐</h2>
-                    <h3 class="subtitle">Follow us to stay updated!</h3>
-                    <div class="columns is-multiline">
-                        <div class="column is-3">
-                            <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Discord</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Instagram</span>
-                            </a>
-                        </div>
-                        <div class="column is-3">
-                            <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
-                                <span>Subscribe</span>
-                            </a>
-                        </div>
+                    <div>
+                        <h2 class="title">Socials ⭐</h2>
+                        <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">Discord</a>
+                        <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">Instagram</a>
+                        <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">YouTube</a>
                     </div>
+
+                    <hr class="section-divider">
 
                     <!-- FAQ Section -->
-                    <div class="separator"></div>
                     <div class="faq-section">
-                        <h2 class="title is-size-4-mobile has-text-weight-bold">Frequently Asked Questions</h2>
+                        <h2 class="title">FAQ</h2>
                         <div class="faq-item" onclick="toggleFaq(this)">
                             <h3>How do I complete surveys?</h3>
-                            <div class="faq-item-content">To complete surveys you must click on one of our offerwalls and complete any survey for robux. Check our discord, we have a channel for tips on how to qualify for surveys.</div>
-                        </div>
-                        <div class="faq-item" onclick="toggleFaq(this)">
-                            <h3>Why did I get disqualified?</h3>
-                            <div class="faq-item-content">You might have been disqualified for speeding, not paying attention, using a VPN, or you were not the target our partners were looking for; surveys are usually looking for targets under the age of 29-30.</div>
-                        </div>
-                        <div class="faq-item" onclick="toggleFaq(this)">
-                            <h3>Is this actually legit?</h3>
-                            <div class="faq-item-content">Yes, RBXPRO is legit. We have hundreds of happy users throughout our platform. Check our server for all our testimonials.</div>
+                            <div class="faq-content">Click on an offerwall and follow instructions.</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="recommendation-strip">
-        Earn rbx by running discord commands, Join our server! 🤑
-    </div>
-
     <footer>
-        <div class="footer-nav">
-            <ul>
-                <li><a id="footer-earn-link" href="#">Earn</a></li>
-                <li><a id="footer-withdraw-link" href="/withdraw">Withdraw</a></li>
-                <li><a id="footer-terms-link" href="terms.html">Terms and Conditions</a></li>
-                <li><a id="footer-privacy-link" href="/privacy.html">Privacy Policy</a></li>
-            </ul>
-        </div>
-        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
-        <div class="rbxpro-disclaimer">
-            <p>RBXPRO | All Rights Reserved.</p>
-            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
-        </div>
+        <p>RBXPRO | All Rights Reserved.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.display = 'none';
-            }, 1500);
-
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-            if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
-                        var target = $el.dataset.target;
-                        var $target = document.getElementById(target);
-                        $el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
-                    });
-                });
-            }
-
-            var path = window.location.pathname;
-            if (path === '/' || path.includes('earn')) {
-                document.getElementById('earn-link').classList.add('is-active');
-                document.getElementById('footer-earn-link').classList.add('is-active');
-            } else if (path.includes('withdraw')) {
-                document.getElementById('withdraw-link').classList.add('is-active');
-                document.getElementById('footer-withdraw-link').classList.add('is-active');
-            }
-        });
-
         function toggleFaq(element) {
-            const content = element.querySelector('.faq-item-content');
+            const content = element.querySelector('.faq-content');
             content.style.display = content.style.display === 'block' ? 'none' : 'block';
         }
-
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
-        }
-
-        function openBitlab() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank');
-        }
-
-        function openAytS() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank');
-        }
-
-        function openCPX() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
-        }
-
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
-
-                    balance.textContent = `${data.balance} robux`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                    return;
-                });
-            } else {
-                window.location.href = '/login';
-            }
-        }
-        setInterval(loadUserData, 1000);
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
+
 
 
 
