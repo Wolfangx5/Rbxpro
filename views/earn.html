@@ -16,87 +16,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
-        /* Background gradient and glowing dots */
+        /* Background gradient */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #000000, #000000);
             color: #FFFDFF;
             overflow-x: hidden;
             padding-bottom: 20px;
-            position: relative;
-        }
-
-        /* Glowing dots */
-        .background-dots {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        .dot {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: rgba(212, 9, 60, 0.7);
-            border-radius: 50%;
-            animation: glow 8s infinite ease-in-out alternate;
-        }
-
-        @keyframes glow {
-            from {
-                opacity: 0.3;
-                transform: translateY(0px) scale(1);
-            }
-            to {
-                opacity: 0.7;
-                transform: translateY(-15px) scale(1.2);
-            }
-        }
-
-        /* Loading screen with spinning text */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            color: #17b823;
-            font-size: 2rem;
-            font-weight: bold;
-            animation: fadeOut 1.5s ease forwards;
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        .glow-text {
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         /* Navbar and promo strip */
@@ -112,7 +38,7 @@
         }
 
         .navbar-menu a {
-            color: #ffffff !important;
+            color: #ffffff !important; /* White text for visibility */
         }
 
         .recommendation-strip {
@@ -123,51 +49,47 @@
             font-size: 1.1rem;
         }
 
-        /* Responsive Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+        /* Section and subtitle styling */
+        .section {
+            padding: 3rem 1.5rem;
         }
 
-        .popCard {
+        h2.title {
+            font-size: 2rem;
+            color: #FEFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        h3.subtitle {
+            font-size: 1.25rem;
+            color: #FEFFFF;
+            margin-bottom: 2rem;
+        }
+
+        /* Separator styling */
+        .separator {
+            width: 100%;
+            height: 2px;
+            background-color: #555;
+            margin: 1rem 0 2rem;
+        }
+
+        /* Pop card styling - neon shine effect */
+        .column .popCard {
+            display: block;
             background-color: #1a1a2e;
             padding: 2.5rem 2rem;
             border-radius: 12px;
             color: #fff;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0 20px rgba(212, 9, 60, 0.8);
+            box-shadow: 0 0 20px rgba(212, 9, 60, 0.8), 0 0 40px rgba(212, 9, 60, 0.6), 0 0 60px rgba(212, 9, 60, 0.4);
         }
 
-        .popCard:hover {
+        .column .popCard:hover {
             transform: translateY(-5px);
             background-color: #e94560;
-            box-shadow: 0 0 30px rgba(212, 9, 60, 0.9);
-        }
-
-        /* FAQ Section */
-        .faq {
-            margin-top: 2rem;
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
-            background-color: #1a1a2e;
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .faq-item:hover {
-            background-color: #2a2a3e;
-        }
-
-        .faq-item-content {
-            display: none;
-            color: #ddd;
-            margin-top: 0.5rem;
+            box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
         }
 
         /* Footer styling */
@@ -206,18 +128,7 @@
 <body aria-hidden="false">
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glow-text">RBXPRO</div>
-    </div>
-
-    <!-- Background Dots -->
-    <div class="background-dots">
-        <!-- Multiple dots positioned randomly for subtle background effect -->
-        <div class="dot" style="top: 20%; left: 10%; animation-delay: 1s;"></div>
-        <div class="dot" style="top: 40%; left: 30%; animation-delay: 2s;"></div>
-        <div class="dot" style="top: 60%; left: 20%; animation-delay: 3s;"></div>
-        <div class="dot" style="top: 10%; left: 50%; animation-delay: 4s;"></div>
-        <div class="dot" style="top: 30%; left: 70%; animation-delay: 5s;"></div>
-        <div class="dot" style="top: 80%; left: 90%; animation-delay: 6s;"></div>
+        <div class="glow-text">RBXPRO<span class="dots"></span></div>
     </div>
 
     <!-- Navbar -->
@@ -265,39 +176,61 @@
                     <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
 
                     <!-- Offerwalls Section -->
-                    <div class="grid">
-                        <div class="popCard" onclick="openAytS()">
-                            <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
-                            <span>Kiwiwall</span>
+                    <div class="separator"></div>
+                    <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openAytS()">
+                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Kiwiwall</span>
+                            </a>
                         </div>
-                        <div class="popCard" onclick="openBitlab()">
-                            <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
-                            <span>Bitlabs</span>
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openBitlab()">
+                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Bitlabs</span>
+                            </a>
                         </div>
-                        <div class="popCard" onclick="openCPX()">
-                            <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
-                            <span>CPX Research</span>
-                        </div>
-                        <div class="popCard" href="/withdraw">
-                            <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
-                            <span>Withdraw Now</span>
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openCPX()">
+                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
+                                <span>CPX Research</span>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- FAQ Section -->
-                    <div class="faq">
-                        <h2 class="title is-size-4-mobile has-text-weight-bold mt-5">Frequently Asked Questions</h2>
-                        <div class="faq-item" onclick="toggleFaq(this)">
-                            <h3>How do I complete surveys?</h3>
-                            <div class="faq-item-content">To complete surveys you must click on one of our offerwalls and complete any survey for roux. Check our discord, we have a channel for tips on how to qualify for surveys.</div>
+                    <!-- Withdraw Section -->
+                    <div class="separator"></div>
+                    <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
+                    <div class="column is-3">
+                        <a class="popCard" href="/withdraw">
+                            <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
+                            <span>Withdraw Now</span>
+                        </a>
+                    </div>
+
+                    <!-- Socials Section -->
+                    <div class="separator"></div>
+                    <h2 class="title is-size-4-mobile has-text-weight-bold">Socials ⭐</h2>
+                    <h3 class="subtitle">Follow us to stay updated!</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Discord</span>
+                            </a>
                         </div>
-                        <div class="faq-item" onclick="toggleFaq(this)">
-                            <h3>Why did I get disqualified?</h3>
-                            <div class="faq-item-content">You might have been disqualified for speeding, not putting attention, using a vpn, or you were not the target our partners were looking for, surveys are usually looking for targets under the age of 29-30.</div>
+                        <div class="column is-3">
+                            <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Instagram</span>
+                            </a>
                         </div>
-                        <div class="faq-item" onclick="toggleFaq(this)">
-                            <h3>Is this actually legit?</h3>
-                            <div class="faq-item-content">Yes, RBXPRO is legit, hundreds of happy users throughout our platform. Check our server for all our testimonials.</div>
+                        <div class="column is-3">
+                            <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Subscribe</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -352,11 +285,6 @@
                 document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
         });
-
-        function toggleFaq(element) {
-            const content = element.querySelector('.faq-item-content');
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-        }
 
         function Logout() {
             localStorage.removeItem('sessionToken');
