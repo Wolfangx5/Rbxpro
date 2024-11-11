@@ -94,21 +94,21 @@
 
         /* Walkthrough styling */
         .walkthrough-step {
-            position: fixed;
+            position: absolute;
             width: 250px;
             padding: 1rem;
             background: rgba(0, 0, 0, 0.8);
             color: #fff;
             border-radius: 8px;
             text-align: center;
-            z-index: 1000;
+            z-index: 1001;
             display: none;
         }
 
         /* Position for each step */
-        #step1 { top: 15%; left: 50%; transform: translateX(-50%); }
-        #step2 { top: 30%; left: 20%; }
-        #step3 { top: 30%; right: 20%; }
+        #step1 { top: 10%; left: 50%; transform: translateX(-50%); }
+        #step2 { top: 40%; left: 25%; transform: translateX(-50%); }
+        #step3 { top: 45%; right: 25%; transform: translateX(50%); }
 
         /* Walkthrough button styling */
         .walkthrough-btn {
@@ -230,19 +230,19 @@
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
                     <div class="columns is-multiline" id="offerwalls">
-                        <div class="column is-3">
+                        <div class="column is-3 highlight" id="offerwall-cards">
                             <a class="popCard" onclick="openAytS()">
                                 <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
-                        <div class="column is-3">
+                        <div class="column is-3 highlight">
                             <a class="popCard" onclick="openBitlab()">
                                 <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
                                 <span>Bitlabs</span>
                             </a>
                         </div>
-                        <div class="column is-3">
+                        <div class="column is-3 highlight">
                             <a class="popCard" onclick="openCPX()">
                                 <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
                                 <span>CPX Research</span>
@@ -253,7 +253,7 @@
                     <!-- Withdraw Section -->
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
-                    <div class="column is-3" id="withdraw">
+                    <div class="column is-3 highlight" id="withdraw-card">
                         <a class="popCard" href="/withdraw">
                             <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
                             <span>Withdraw Now</span>
@@ -355,21 +355,23 @@
                 document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
 
-            // Check if user is new and show walkthrough
             const user = localStorage.getItem('currentUser') || 'user';
             if (!localStorage.getItem(`${user}_walkthroughComplete`)) {
-                document.getElementById("step1").style.display = "block";
-                document.getElementById("main-content").classList.add("blurred");
+                startWalkthrough();
             }
         });
+
+        function startWalkthrough() {
+            document.getElementById("step1").style.display = "block";
+            document.getElementById("main-content").classList.add("blurred");
+            document.getElementById("step1").classList.add("highlight");
+        }
 
         function nextStep(step) {
             document.querySelectorAll('.walkthrough-step').forEach(step => step.style.display = 'none');
             document.getElementById(`step${step}`).style.display = 'block';
-
-            // Highlight elements based on step
-            if (step === 2) highlightElement('offerwalls');
-            else if (step === 3) highlightElement('withdraw');
+            if (step === 2) highlightElement('offerwall-cards');
+            else if (step === 3) highlightElement('withdraw-card');
             else removeHighlights();
         }
 
@@ -441,6 +443,7 @@
 </body>
 
 </html>
+
 
 
 
