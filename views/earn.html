@@ -66,12 +66,21 @@
             margin-bottom: 2rem;
         }
 
-        /* Separator styling */
+        /* Enhanced separator styling */
         .separator {
-            width: 100%;
-            height: 2px;
-            background-color: #555;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #bbb;
             margin: 1rem 0 2rem;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 3px solid #555;
+            margin: 0 1rem;
         }
 
         /* Pop card styling - neon shine effect */
@@ -94,21 +103,22 @@
 
         /* Walkthrough styling */
         .walkthrough-step {
-            position: absolute;
-            width: 250px;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 300px;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.85);
             color: #fff;
             border-radius: 8px;
             text-align: center;
             z-index: 1001;
+            font-size: 1.2rem;
             display: none;
         }
 
         /* Position for each step */
         #step1 { top: 10%; left: 50%; transform: translateX(-50%); }
-        #step2 { top: 40%; left: 25%; transform: translateX(-50%); }
-        #step3 { top: 45%; right: 25%; transform: translateX(50%); }
+        #step2 { top: 35%; left: 25%; transform: translateX(-50%); }
+        #step3 { top: 40%; right: 25%; transform: translateX(50%); }
 
         /* Walkthrough button styling */
         .walkthrough-btn {
@@ -116,9 +126,9 @@
             color: #fff;
             border: none;
             padding: 0.5rem 1rem;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 1rem;
             border-radius: 5px;
             transition: background 0.3s ease;
         }
@@ -132,7 +142,7 @@
             color: #e94560;
             margin-top: 1rem;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 1rem;
             text-decoration: underline;
             border: none;
         }
@@ -227,8 +237,7 @@
                     <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
 
                     <!-- Offerwalls Section -->
-                    <div class="separator"></div>
-                    <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
+                    <div class="separator">Offerwalls</div>
                     <div class="columns is-multiline" id="offerwalls">
                         <div class="column is-3 highlight" id="offerwall-cards">
                             <a class="popCard" onclick="openAytS()">
@@ -251,8 +260,7 @@
                     </div>
 
                     <!-- Withdraw Section -->
-                    <div class="separator"></div>
-                    <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
+                    <div class="separator">Withdraw</div>
                     <div class="column is-3 highlight" id="withdraw-card">
                         <a class="popCard" href="/withdraw">
                             <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
@@ -261,8 +269,7 @@
                     </div>
 
                     <!-- Socials Section -->
-                    <div class="separator"></div>
-                    <h2 class="title is-size-4-mobile has-text-weight-bold">Socials ⭐</h2>
+                    <div class="separator">Socials ⭐</div>
                     <h3 class="subtitle">Follow us to stay updated!</h3>
                     <div class="columns is-multiline">
                         <div class="column is-3">
@@ -334,27 +341,6 @@
                 document.getElementById('loading-screen').style.display = 'none';
             }, 1500);
 
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-            if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
-                        var target = $el.dataset.target;
-                        var $target = document.getElementById(target);
-                        $el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
-                    });
-                });
-            }
-
-            var path = window.location.pathname;
-            if (path === '/' || path.includes('earn')) {
-                document.getElementById('earn-link').classList.add('is-active');
-                document.getElementById('footer-earn-link').classList.add('is-active');
-            } else if (path.includes('withdraw')) {
-                document.getElementById('withdraw-link').classList.add('is-active');
-                document.getElementById('footer-withdraw-link').classList.add('is-active');
-            }
-
             const user = localStorage.getItem('currentUser') || 'user';
             if (!localStorage.getItem(`${user}_walkthroughComplete`)) {
                 startWalkthrough();
@@ -364,12 +350,12 @@
         function startWalkthrough() {
             document.getElementById("step1").style.display = "block";
             document.getElementById("main-content").classList.add("blurred");
-            document.getElementById("step1").classList.add("highlight");
         }
 
         function nextStep(step) {
             document.querySelectorAll('.walkthrough-step').forEach(step => step.style.display = 'none');
             document.getElementById(`step${step}`).style.display = 'block';
+
             if (step === 2) highlightElement('offerwall-cards');
             else if (step === 3) highlightElement('withdraw-card');
             else removeHighlights();
@@ -395,53 +381,7 @@
             localStorage.removeItem('sessionToken');
             window.location.href = '/login';
         }
-
-        function openBitlab() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank');
-        }
-
-        function openAytS() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank');
-        }
-
-        function openCPX() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
-        }
-
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
-
-                    balance.textContent = `${data.balance} robux`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
-                    localStorage.setItem('currentUser', data.username);
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                    return;
-                });
-            } else {
-                window.location.href = '/login';
-            }
-        }
-        setInterval(loadUserData, 1000);
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
-
-
