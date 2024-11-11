@@ -38,7 +38,7 @@
         }
 
         .navbar-menu a {
-            color: #ffffff !important; /* White text for visibility */
+            color: #ffffff !important;
         }
 
         .recommendation-strip {
@@ -92,60 +92,12 @@
             box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
         }
 
-        /* FAQ Section styling */
-        .faq-section {
-            margin-top: 2rem;
-            color: #FEFFFF;
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
-            background-color: #1a1a2e;
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .faq-item:hover {
-            background-color: #2a2a3e;
-        }
-
-        .faq-item-content {
-            display: none;
-            color: #ddd;
-            margin-top: 0.5rem;
-        }
-
-        /* Footer styling */
-        footer {
-            background-color: #1a1a2e;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .footer-nav li {
-            display: inline-block;
-            margin-right: 15px;
-        }
-
-        .footer-nav li a {
-            font-size: 1rem;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer-nav li a:hover {
-            color: #e94560;
-        }
-
-        .rbxpro-disclaimer {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 15px;
+        /* Custom icon styling for Withdraw */
+        .withdraw-icon {
+            width: 50px;
+            height: auto;
+            display: block;
+            margin: 0 auto 1rem;
         }
     </style>
 </head>
@@ -227,11 +179,19 @@
                     <!-- Withdraw Section -->
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
-                    <div class="column is-3">
-                        <a class="popCard" href="/withdraw">
-                            <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
-                            <span>Withdraw Now</span>
-                        </a>
+                    <div class="columns is-centered">
+                        <div class="column is-3">
+                            <a class="popCard" href="/withdraw">
+                                <img class="withdraw-icon" src="https://img.icons8.com/?size=100&id=foK4jpDCReGX&format=png&color=000000" alt="Withdraw Icon">
+                                <span>Withdraw Now</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" href="/bet">
+                                <span class="fas fa-dice fa-3x mb-3" aria-hidden="true"></span>
+                                <span>Bet R$</span>
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Socials Section -->
@@ -386,6 +346,7 @@
 </body>
 
 </html>
+
 
 
 
