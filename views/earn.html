@@ -137,6 +137,12 @@
             border: none;
         }
 
+        /* Blur background styling */
+        .blurred {
+            filter: blur(6px);
+            pointer-events: none;
+        }
+
         /* Footer styling */
         footer {
             background-color: #1a1a2e;
@@ -213,7 +219,7 @@
     </div>
 
     <!-- Main Content -->
-    <section class="section">
+    <section class="section" id="main-content">
         <div class="container has-text-centered-mobile">
             <div class="columns is-centered">
                 <div class="column is-11">
@@ -223,7 +229,7 @@
                     <!-- Offerwalls Section -->
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
-                    <div class="columns is-multiline">
+                    <div class="columns is-multiline" id="offerwalls">
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
                                 <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
@@ -247,7 +253,7 @@
                     <!-- Withdraw Section -->
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
-                    <div class="column is-3">
+                    <div class="column is-3" id="withdraw">
                         <a class="popCard" href="/withdraw">
                             <span class="fas fa-gift fa-3x mb-3" aria-hidden="true"></span>
                             <span>Withdraw Now</span>
@@ -349,20 +355,38 @@
                 document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
 
-            // Display first walkthrough step if first visit
-            if (!localStorage.getItem('walkthroughComplete')) {
+            // Check if user is new and show walkthrough
+            const user = localStorage.getItem('currentUser') || 'user';
+            if (!localStorage.getItem(`${user}_walkthroughComplete`)) {
                 document.getElementById("step1").style.display = "block";
+                document.getElementById("main-content").classList.add("blurred");
             }
         });
 
         function nextStep(step) {
             document.querySelectorAll('.walkthrough-step').forEach(step => step.style.display = 'none');
             document.getElementById(`step${step}`).style.display = 'block';
+
+            // Highlight elements based on step
+            if (step === 2) highlightElement('offerwalls');
+            else if (step === 3) highlightElement('withdraw');
+            else removeHighlights();
         }
 
         function endWalkthrough() {
             document.querySelectorAll('.walkthrough-step').forEach(step => step.style.display = 'none');
-            localStorage.setItem('walkthroughComplete', true);
+            removeHighlights();
+            const user = localStorage.getItem('currentUser') || 'user';
+            localStorage.setItem(`${user}_walkthroughComplete`, true);
+        }
+
+        function highlightElement(elementId) {
+            document.getElementById("main-content").classList.add("blurred");
+            document.getElementById(elementId).classList.remove("blurred");
+        }
+
+        function removeHighlights() {
+            document.getElementById("main-content").classList.remove("blurred");
         }
 
         function Logout() {
@@ -401,6 +425,7 @@
 
                     balance.textContent = `${data.balance} robux`;
                     nameDisplay.textContent = `Welcome, ${data.username}!`;
+                    localStorage.setItem('currentUser', data.username);
                 })
                 .catch(error => {
                     window.location.href = '/login';
@@ -416,5 +441,6 @@
 </body>
 
 </html>
+
 
 
