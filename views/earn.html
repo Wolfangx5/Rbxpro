@@ -25,6 +25,51 @@
             padding-bottom: 20px;
         }
 
+        /* Loading Screen Styling */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .neon-text {
+            font-size: 3rem;
+            color: #17b823;
+            text-shadow: 
+                0 0 5px #17b823, 
+                0 0 10px #17b823, 
+                0 0 20px #17b823, 
+                0 0 40px #17b823, 
+                0 0 80px #17b823, 
+                0 0 90px #17b823, 
+                0 0 100px #17b823, 
+                0 0 150px #17b823;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
+            }
+        }
+
         /* Navbar and promo strip */
         .navbar, .recommendation-strip {
             background-color: #1a1a2e;
@@ -161,7 +206,7 @@
 <body aria-hidden="false">
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glow-text">RBXPRO<span class="dots"></span></div>
+        <div class="neon-text">RBXPRO</div>
     </div>
 
     <!-- Navbar -->
@@ -214,25 +259,25 @@
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
-                                <span class="fas fa-trophy fa-3x mb-3" aria-hidden="true"></span>
+                                <img src="https://img.icons8.com/?size=100&id=43666&format=png&color=000000" class="custom-icon" alt="Kiwiwall Icon">
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" onclick="openBitlab()">
-                                <span class="fas fa-snowboarding fa-3x mb-3" aria-hidden="true"></span>
+                                <img src="https://img.icons8.com/?size=100&id=43668&format=png&color=000000" class="custom-icon" alt="Bitlabs Icon">
                                 <span>Bitlabs</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
-                                <span class="fas fa-clock fa-3x mb-3" aria-hidden="true"></span>
+                                <img src="https://img.icons8.com/?size=100&id=5smUaoTyBo7e&format=png&color=000000" class="custom-icon" alt="CPX Icon">
                                 <span>CPX Research</span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Withdraw Section -->
+                    <!-- Withdraw and Bet Section -->
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
                     <div class="columns is-multiline">
@@ -321,8 +366,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
-                document.getElementById('loading-screen').style.display = 'none';
-            }, 1500);
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 3000);
 
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
@@ -398,9 +443,11 @@
         }
         setInterval(loadUserData, 1000);
     </script>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
+
 
 
 
