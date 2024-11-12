@@ -25,7 +25,8 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
 
     // Ensure durationInput is a string
     
-    // Parse the duration input
+    // Parse the duration input.
+    console.log(durationInput)
     let durationInHours;
     const durationValue = durationInput.toString().slice(0, -1)
     const durationUnit = durationInput.toString().slice(-1).toUpperCase();
