@@ -26,29 +26,9 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
     // Ensure durationInput is a string
     
     // Parse the duration input.
-    console.log(durationInput)
-    let durationInHours;
-    const durationValue = durationInput.toString().slice(0, -1)
-    const durationUnit = durationInput.toString().slice(-1).toUpperCase();
-
-    if (isNaN(parseInt(durationValue))) {
-      throw new Error('Invalid duration format. Ensure the duration value is a number followed by H, D, or W.');
-    }
-
-    switch (durationUnit) {
-      case 'H':
-        durationInHours = durationValue;
-        break;
-      case 'D':
-        durationInHours = durationValue * 24;
-        break;
-      case 'W':
-        durationInHours = durationValue * 24 * 7;
-        break;
-    }
-
+   
     const expiresAt = new Date();
-    expiresAt.setHours(expiresAt.getHours() + durationInHours);
+    expiresAt.setHours(expiresAt.getHours() + durationInput);
 
     const newPromoCode = {
       code: promoCode,
