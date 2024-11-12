@@ -262,7 +262,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Navbar toggle logic
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
                 $navbarBurgers.forEach(function($el) {
@@ -278,14 +277,10 @@
             // Promo code redeem button logic
             document.getElementById('redeem-button').addEventListener('click', function() {
                 const promoCode = document.getElementById('promo-code').value.trim();
-                const statusMessage = document.getElementById('promo-status');
 
                 if (promoCode === '') {
                     showModal("Please enter a promo code!");
                     return;
-                } else {
-                    statusMessage.textContent = `Redeeming promo code: ${promoCode}`;
-                    statusMessage.style.color = '#28a745';
                 }
 
                 const token = localStorage.getItem('sessionToken');
@@ -342,5 +337,7 @@
 </body>
 
 </html>
+
+
 
 
