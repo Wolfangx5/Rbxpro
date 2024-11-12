@@ -265,7 +265,7 @@
                 }
 
                 // Replace with the actual redeem code or get it dynamically
-
+                const token = localStorage.getItem('sessionToken');
                 fetch('/api/redeem', {
                     method: 'POST',
                     headers: {
