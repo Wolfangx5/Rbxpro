@@ -25,6 +25,7 @@ const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.
 
 //-----------Route Links---------------//
 const loginRoute = require('./routes/login.js');
+const promoRoute = require('./routes/promocode.js');
 const homeRoute = require('./routes/homepage.js');
 const earnRoute = require('./routes/earn.js');
 const walletRoute = require('./routes/wallet.js');
@@ -46,6 +47,7 @@ app.get('/404', (req, res) => {
   res.sendFile(path.join(__dirname, './views/404page.html'));
 });
 app.use('/login', loginRoute);
+app.use('/promocode', promoRoute);
 app.use('/earn', earnRoute);
 app.use('/home', homeRoute);
 app.use('/withdraw', walletRoute);
