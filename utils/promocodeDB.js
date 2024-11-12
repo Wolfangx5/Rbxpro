@@ -28,7 +28,7 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
     // Parse the duration input
     let durationInHours;
     const durationValue = durationInput.toString().slice(0, -1)
-    const durationUnit = durationInput.slice(-1).toUpperCase();
+    const durationUnit = durationInput.toString().slice(-1).toUpperCase();
 
     if (isNaN(durationValue)) {
       throw new Error('Invalid duration format. Ensure the duration value is a number followed by H, D, or W.');
