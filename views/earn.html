@@ -25,6 +25,51 @@
             padding-bottom: 20px;
         }
 
+        /* Loading Screen Styling */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .neon-text {
+            font-size: 3rem;
+            color: #17b823;
+            text-shadow: 
+                0 0 5px #17b823, 
+                0 0 10px #17b823, 
+                0 0 20px #17b823, 
+                0 0 40px #17b823, 
+                0 0 80px #17b823, 
+                0 0 90px #17b823, 
+                0 0 100px #17b823, 
+                0 0 150px #17b823;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                opacity: 0;
+            }
+        }
+
         /* Navbar and promo strip */
         .navbar, .recommendation-strip {
             background-color: #1a1a2e;
@@ -47,46 +92,6 @@
             text-align: center;
             font-weight: 600;
             font-size: 1.1rem;
-        }
-
-        /* Loading screen styles */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            transition: opacity 0.5s ease;
-        }
-
-        .glow-text {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #e94560;
-            text-align: center;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(233, 69, 96, 0.9), 0 0 20px rgba(233, 69, 96, 0.8), 0 0 30px rgba(233, 69, 96, 0.7);
-            animation: pulse 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        #loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
         }
 
         /* Section and subtitle styling */
@@ -132,11 +137,12 @@
             box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
         }
 
-        /* Icons inside pop cards */
+        /* Custom icon styling */
         .custom-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 15px;
+            width: 70px;
+            height: auto;
+            display: block;
+            margin: 0 auto 1rem;
         }
 
         /* FAQ Section styling */
@@ -200,7 +206,7 @@
 <body aria-hidden="false">
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div class="glow-text">RBXPRO</div>
+        <div class="neon-text">RBXPRO</div>
     </div>
 
     <!-- Navbar -->
@@ -253,37 +259,37 @@
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
-                                <img src="https://img.icons8.com/?size=100&id=43666&format=png&color=000000" class="custom-icon" alt="Kiwiwall icon">
+                                <img src="https://img.icons8.com/?size=100&id=43666&format=png&color=000000" class="custom-icon" alt="Kiwiwall Icon">
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" onclick="openBitlab()">
-                                <img src="https://img.icons8.com/?size=100&id=43668&format=png&color=000000" class="custom-icon" alt="Bitlabs icon">
+                                <img src="https://img.icons8.com/?size=100&id=43668&format=png&color=000000" class="custom-icon" alt="Bitlabs Icon">
                                 <span>Bitlabs</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
-                                <img src="https://img.icons8.com/?size=100&id=5smUaoTyBo7e&format=png&color=000000" class="custom-icon" alt="CPX Research icon">
+                                <img src="https://img.icons8.com/?size=100&id=5smUaoTyBo7e&format=png&color=000000" class="custom-icon" alt="CPX Icon">
                                 <span>CPX Research</span>
                             </a>
                         </div>
                     </div>
 
-                    <!-- Withdraw Section -->
+                    <!-- Withdraw and Bet Section -->
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" href="/withdraw">
-                                <img src="https://img.icons8.com/?size=100&id=B64JszEfoQXX&format=png&color=000000" class="custom-icon" alt="Withdraw icon">
+                                <img src="https://img.icons8.com/?size=100&id=B64JszEfoQXX&format=png&color=000000" class="custom-icon" alt="Withdraw Icon">
                                 <span>Withdraw Now</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="/bet">
-                                <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" class="custom-icon" alt="Bet icon">
+                                <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" class="custom-icon" alt="Bet Icon">
                                 <span>Bet R$</span>
                             </a>
                         </div>
@@ -296,19 +302,19 @@
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <img src="https://img.icons8.com/?size=100&id=FLVl6on2GRz4&format=png&color=000000" class="custom-icon" alt="Discord icon">
+                                <img src="https://img.icons8.com/?size=100&id=FLVl6on2GRz4&format=png&color=000000" class="custom-icon" alt="Discord Icon">
                                 <span>Discord</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <img src="https://img.icons8.com/?size=100&id=7QPcOVZoGlmf&format=png&color=000000" class="custom-icon" alt="Instagram icon">
+                                <img src="https://img.icons8.com/?size=100&id=7QPcOVZoGlmf&format=png&color=000000" class="custom-icon" alt="Instagram Icon">
                                 <span>Instagram</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <img src="https://img.icons8.com/?size=100&id=3tuajqTRBEqf&format=png&color=000000" class="custom-icon" alt="YouTube icon">
+                                <img src="https://img.icons8.com/?size=100&id=3tuajqTRBEqf&format=png&color=000000" class="custom-icon" alt="YouTube Icon">
                                 <span>Subscribe</span>
                             </a>
                         </div>
@@ -437,6 +443,8 @@
         }
         setInterval(loadUserData, 1000);
     </script>
+    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
+
