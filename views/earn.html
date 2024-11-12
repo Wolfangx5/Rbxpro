@@ -94,10 +94,66 @@
 
         /* Custom icon styling */
         .custom-icon {
-            width: 50px;
+            width: 70px;
             height: auto;
             display: block;
             margin: 0 auto 1rem;
+        }
+
+        /* FAQ Section styling */
+        .faq-section {
+            margin-top: 2rem;
+            color: #FEFFFF;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            background-color: #1a1a2e;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .faq-item:hover {
+            background-color: #2a2a3e;
+        }
+
+        .faq-item-content {
+            display: none;
+            color: #ddd;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #1a1a2e;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .footer-nav li a {
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #e94560;
+        }
+
+        .rbxpro-disclaimer {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -182,13 +238,13 @@
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" href="/withdraw">
-                                <img class="custom-icon" src="https://img.icons8.com/?size=100&id=B64JszEfoQXX&format=png&color=000000" alt="Withdraw Icon">
+                                <img src="https://img.icons8.com/?size=100&id=B64JszEfoQXX&format=png&color=000000" class="custom-icon" alt="Withdraw Icon">
                                 <span>Withdraw Now</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="/bet">
-                                <img class="custom-icon" src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" alt="Bet Icon">
+                                <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" class="custom-icon" alt="Bet Icon">
                                 <span>Bet R$</span>
                             </a>
                         </div>
@@ -201,23 +257,42 @@
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
-                                <span class="fab fa-discord fa-3x mb-3" aria-hidden="true"></span>
+                                <img src="https://img.icons8.com/?size=100&id=FLVl6on2GRz4&format=png&color=000000" class="custom-icon" alt="Discord Icon">
                                 <span>Discord</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
-                                <span class="fab fa-instagram fa-3x mb-3" aria-hidden="true"></span>
+                                <img src="https://img.icons8.com/?size=100&id=7QPcOVZoGlmf&format=png&color=000000" class="custom-icon" alt="Instagram Icon">
                                 <span>Instagram</span>
                             </a>
                         </div>
                         <div class="column is-3">
                             <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
-                                <span class="fab fa-youtube fa-3x mb-3" aria-hidden="true"></span>
+                                <img src="https://img.icons8.com/?size=100&id=3tuajqTRBEqf&format=png&color=000000" class="custom-icon" alt="YouTube Icon">
                                 <span>Subscribe</span>
                             </a>
                         </div>
                     </div>
+
+                    <!-- FAQ Section -->
+                    <div class="separator"></div>
+                    <div class="faq-section">
+                        <h2 class="title is-size-4-mobile has-text-weight-bold">Frequently Asked Questions</h2>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <h3>How do I complete surveys?</h3>
+                            <div class="faq-item-content">To complete surveys you must click on one of our offerwalls and complete any survey for robux. Check our discord, we have a channel for tips on how to qualify for surveys.</div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <h3>Why did I get disqualified?</h3>
+                            <div class="faq-item-content">You might have been disqualified for speeding, not paying attention, using a VPN, or you were not the target our partners were looking for; surveys are usually looking for targets under the age of 29-30.</div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <h3>Is this actually legit?</h3>
+                            <div class="faq-item-content">Yes, RBXPRO is legit. We have hundreds of happy users throughout our platform. Check our server for all our testimonials.</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -323,10 +398,10 @@
         }
         setInterval(loadUserData, 1000);
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
+
 
 
 
