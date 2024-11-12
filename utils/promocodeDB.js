@@ -45,8 +45,6 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
       case 'W':
         durationInHours = durationValue * 24 * 7;
         break;
-      default:
-        throw new Error('Invalid duration format. Use H, D, or W.');
     }
 
     const expiresAt = new Date();
