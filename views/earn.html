@@ -38,7 +38,7 @@
         }
 
         .navbar-menu a {
-            color: #ffffff !important; /* White text for visibility */
+            color: #ffffff !important;
         }
 
         .recommendation-strip {
@@ -56,7 +56,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Dark overlay with transparency */
+            background-color: rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -67,7 +67,7 @@
         .glow-text {
             font-size: 4rem;
             font-weight: 700;
-            color: #e94560; /* Reddish pink color */
+            color: #e94560;
             text-align: center;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(233, 69, 96, 0.9), 0 0 20px rgba(233, 69, 96, 0.8), 0 0 30px rgba(233, 69, 96, 0.7);
@@ -203,7 +203,159 @@
         <div class="glow-text">RBXPRO</div>
     </div>
 
-    <!-- Rest of the HTML content... (as provided in your initial HTML structure) -->
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <div class="logo">RBXPRO</div>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end is-centered">
+                    <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
+                    <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw">Withdraw</a>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons has-addons">
+                            <a href="" class="button is-info">
+                                <strong id="rbxbalance">{(Balance)} R$</strong>
+                            </a>
+                            <a onclick="Logout()" href="" class="button is-info">
+                                <strong>Logout</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="recommendation-strip">
+        promocodes coming soon!💎
+    </div>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container has-text-centered-mobile">
+            <div class="columns is-centered">
+                <div class="column is-11">
+                    <h2 class="title is-spaced is-size-4-mobile has-text-weight-bold mb-2" id="usernameDisplay">Welcome, {(user)}!</h2>
+                    <h3 class="subtitle">Complete these offers to earn ROBUX! 💰</h3>
+
+                    <!-- Offerwalls Section -->
+                    <div class="separator"></div>
+                    <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openAytS()">
+                                <img src="https://img.icons8.com/?size=100&id=43666&format=png&color=000000" class="custom-icon" alt="Kiwiwall icon">
+                                <span>Kiwiwall</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openBitlab()">
+                                <img src="https://img.icons8.com/?size=100&id=43668&format=png&color=000000" class="custom-icon" alt="Bitlabs icon">
+                                <span>Bitlabs</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" onclick="openCPX()">
+                                <img src="https://img.icons8.com/?size=100&id=5smUaoTyBo7e&format=png&color=000000" class="custom-icon" alt="CPX Research icon">
+                                <span>CPX Research</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Withdraw Section -->
+                    <div class="separator"></div>
+                    <h2 class="title is-size-4-mobile has-text-weight-bold">Withdraw Robux</h2>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" href="/withdraw">
+                                <img src="https://img.icons8.com/?size=100&id=B64JszEfoQXX&format=png&color=000000" class="custom-icon" alt="Withdraw icon">
+                                <span>Withdraw Now</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" href="/bet">
+                                <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" class="custom-icon" alt="Bet icon">
+                                <span>Bet R$</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Socials Section -->
+                    <div class="separator"></div>
+                    <h2 class="title is-size-4-mobile has-text-weight-bold">Socials ⭐</h2>
+                    <h3 class="subtitle">Follow us to stay updated!</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <a class="popCard" href="https://discord.gg/rs9Yvsg2Hu" target="_blank">
+                                <img src="https://img.icons8.com/?size=100&id=FLVl6on2GRz4&format=png&color=000000" class="custom-icon" alt="Discord icon">
+                                <span>Discord</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" href="https://www.instagram.com/rbxpro_/" target="_blank">
+                                <img src="https://img.icons8.com/?size=100&id=7QPcOVZoGlmf&format=png&color=000000" class="custom-icon" alt="Instagram icon">
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" href="https://www.youtube.com/channel/UChmISuYNLEQxzWhizP43FMA" target="_blank">
+                                <img src="https://img.icons8.com/?size=100&id=3tuajqTRBEqf&format=png&color=000000" class="custom-icon" alt="YouTube icon">
+                                <span>Subscribe</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="separator"></div>
+                    <div class="faq-section">
+                        <h2 class="title is-size-4-mobile has-text-weight-bold">Frequently Asked Questions</h2>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <h3>How do I complete surveys?</h3>
+                            <div class="faq-item-content">To complete surveys you must click on one of our offerwalls and complete any survey for robux. Check our discord, we have a channel for tips on how to qualify for surveys.</div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <h3>Why did I get disqualified?</h3>
+                            <div class="faq-item-content">You might have been disqualified for speeding, not paying attention, using a VPN, or you were not the target our partners were looking for; surveys are usually looking for targets under the age of 29-30.</div>
+                        </div>
+                        <div class="faq-item" onclick="toggleFaq(this)">
+                            <h3>Is this actually legit?</h3>
+                            <div class="faq-item-content">Yes, RBXPRO is legit. We have hundreds of happy users throughout our platform. Check our server for all our testimonials.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="recommendation-strip">
+        Earn rbx by running discord commands, Join our server! 🤑
+    </div>
+
+    <footer>
+        <div class="footer-nav">
+            <ul>
+                <li><a id="footer-earn-link" href="#">Earn</a></li>
+                <li><a id="footer-withdraw-link" href="/withdraw">Withdraw</a></li>
+                <li><a id="footer-terms-link" href="terms.html">Terms and Conditions</a></li>
+                <li><a id="footer-privacy-link" href="/privacy.html">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <hr style="border: 1px solid #fff; width: 30%; opacity: 0;">
+        <div class="rbxpro-disclaimer">
+            <p>RBXPRO | All Rights Reserved.</p>
+            <p>RBXPRO is not affiliated, associated, or partnered with Roblox Corporation.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -285,16 +437,6 @@
         }
         setInterval(loadUserData, 1000);
     </script>
-    <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
