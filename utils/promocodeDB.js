@@ -30,7 +30,7 @@ async function createPromoCode(amount, durationInput, maxUses, code = null) {
     const durationValue = durationInput.toString().slice(0, -1)
     const durationUnit = durationInput.toString().slice(-1).toUpperCase();
 
-    if (isNaN(durationValue)) {
+    if (isNaN(parseInt(durationValue))) {
       throw new Error('Invalid duration format. Ensure the duration value is a number followed by H, D, or W.');
     }
 
