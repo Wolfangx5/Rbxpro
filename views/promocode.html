@@ -298,7 +298,7 @@
                         showModal("Promo code redeemed successfully!");
                         document.getElementById("rbxbalance").textContent = `${data.balance} R$`;
                     } else {
-                        showModal("There is a problem with the code you entered.");
+                        showModal("Reresh page to see your balance! If balance is still the same it might be because: Invalid, Maxxed out, or username does not exsit.");
                     }
                 })
                 .catch(error => {
