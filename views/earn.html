@@ -83,6 +83,11 @@
 
         .navbar-menu a {
             color: #ffffff !important;
+            transition: color 0.3s;
+        }
+
+        .navbar-menu a:hover {
+            color: #D70F45 !important;
         }
 
         .recommendation-strip {
@@ -223,6 +228,7 @@
                 <div class="navbar-end is-centered">
                     <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
                     <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw">Withdraw</a>
+                    <a id="promocode-link" class="navbar-item navbar-s-item" href="/promocode">Promocodes</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -290,6 +296,12 @@
                             <a class="popCard" href="https://discord.gg/9YFavvmJKc">
                                 <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" class="custom-icon" alt="Bet Icon">
                                 <span>Bet R$</span>
+                            </a>
+                        </div>
+                        <div class="column is-3">
+                            <a class="popCard" href="/promocode">
+                                <img src="https://img.icons8.com/?size=100&id=113863&format=png&color=000000" class="custom-icon" alt="Promocode Icon">
+                                <span>Promocode</span>
                             </a>
                         </div>
                     </div>
