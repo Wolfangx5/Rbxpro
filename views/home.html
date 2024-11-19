@@ -78,27 +78,34 @@
             border-bottom: 1px solid #444;
         }
 
-        /* Top Section */
-        .top-section {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
+        /* Typing Animation */
         .top-text {
             font-size: 54px;
             font-weight: 700;
             text-transform: uppercase;
             color: #ff3368;
             text-shadow: 0 0 10px #ff3368;
+            animation: typing 3s steps(30, end) infinite, blink 0.6s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 60%;
+            margin: 0 auto;
         }
 
-        .character-img {
+        @keyframes typing {
+            0%, 25% { content: "Start earning Robux today!"; width: 100%; }
+            26%, 50% { content: "No password required"; width: 100%; }
+            51%, 75% { content: "No verification needed"; width: 100%; }
+        }
+
+        @keyframes blink {
+            from { border-right: 2px solid transparent; }
+            to { border-right: 2px solid white; }
+        }
+
+        .top-image {
             width: 300px;
             border-radius: 10px;
-        }
-
-        .button-container {
             margin-top: 20px;
         }
 
@@ -110,6 +117,8 @@
             border-radius: 50px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 15px #ff3368, 0 0 25px #ff3368;
+            display: inline-block;
+            margin-top: 20px;
         }
 
         .start-earning-button:hover {
@@ -117,40 +126,24 @@
             box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
         }
 
-        /* Middle Section */
-        .middle-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .dropdown-container {
-            text-align: left;
-            width: 50%;
-        }
-
-        .dropdown {
+        /* Satisfaction Card */
+        .satisfaction-card {
             background-color: #1a1a2e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 10px;
+            color: #f4f7fc;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .satisfaction-card i {
+            color: #ff3368;
+            font-size: 50px;
             margin-bottom: 10px;
-            cursor: pointer;
-            color: #ffffff;
         }
 
-        .dropdown:hover {
-            background-color: #292a3b;
-        }
-
-        .dropdown-content {
-            display: none;
-            padding: 10px 20px;
-            color: #ccc;
-        }
-
-        /* Bet Pop Card */
+        /* Bet and Earn Box */
         .bet-card {
             background-color: #1a1a2e;
             color: #f4f7fc;
@@ -161,6 +154,12 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             max-width: 400px;
             margin: 30px auto;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .bet-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 51, 104, 0.4);
         }
 
         .bet-card img {
@@ -168,15 +167,38 @@
             margin-bottom: 15px;
         }
 
-        .bet-card h3 {
-            color: #ff3368;
-            font-size: 24px;
-            margin-bottom: 10px;
+        .bet-card a {
+            color: #f4f7fc;
+            text-decoration: none;
         }
 
-        .bet-card p {
-            color: #ccc;
-            font-size: 16px;
+        .bet-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Reviews Section */
+        .reviews-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .review-box {
+            background: linear-gradient(135deg, #ff5e5e, #ff3368);
+            color: #fff;
+            width: 200px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 25px rgba(255, 51, 104, 0.5);
         }
     </style>
 </head>
@@ -195,46 +217,39 @@
 
     <!-- Top Section -->
     <div class="section">
-        <div class="top-section">
-            <div class="top-text">Earn Free Robux Today!</div>
-            <div>
-                <img class="character-img" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
-                <div class="button-container">
-                    <a href="/login" class="start-earning-button">Start Earning Robux</a>
-                </div>
-            </div>
-        </div>
+        <h1 class="top-text"></h1>
+        <img src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox" class="top-image">
+        <a href="/login" class="start-earning-button">Start Earning Robux</a>
     </div>
 
     <!-- Middle Section -->
     <div class="section">
-        <div class="middle-section">
-            <div class="dropdown-container">
-                <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
-                <div id="dropdown1" class="dropdown-content">Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</div>
+        <!-- Satisfaction -->
+        <div class="satisfaction-card">
+            <i class="fas fa-heart"></i>
+            <h3>100% Satisfaction</h3>
+            <p>We aim to provide the best experience for our users in earning Robux on our website and Discord server.</p>
+        </div>
 
-                <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
-                <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
-
-                <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
-                <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
-            </div>
-
-            <!-- Bet and Earn Pop Card -->
-            <div class="bet-card">
+        <!-- Bet and Earn Box -->
+        <div class="bet-card">
+            <a href="/bet">
                 <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" alt="Bet Icon">
                 <h3>Bet and Earn More Robux!</h3>
                 <p>Run commands and place bets to multiply your Robux. Join the fun and see how much you can win!</p>
-            </div>
+            </a>
         </div>
     </div>
 
-    <script>
-        function toggleDropdown(id) {
-            const dropdownContent = document.getElementById(`dropdown${id}`);
-            dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-        }
-    </script>
+    <!-- Reviews Section -->
+    <div class="section">
+        <div class="reviews-container">
+            <div class="review-box">"Paid out fast, most sites take days!"</div>
+            <div class="review-box">"I got my dream outfit from this!"</div>
+            <div class="review-box">"The best platform to earn Robux!"</div>
+            <div class="review-box">"I thought it was fake, but it's real!"</div>
+        </div>
+    </div>
 </body>
 
 </html>
