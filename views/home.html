@@ -15,18 +15,10 @@
     <!-- External fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap">
     <style>
-        /* Universal settings */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
             color: #f4f7fc;
             background-color: #121212;
-            overflow-x: hidden;
         }
 
         /* Navbar */
@@ -69,13 +61,11 @@
             background-color: #1a1a2e;
         }
 
-        /* Section styling */
         .section {
             padding: 60px 20px;
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
-            border-bottom: 1px solid #444;
         }
 
         /* Bet Pop Card */
@@ -85,10 +75,10 @@
             padding: 20px;
             border-radius: 12px;
             text-align: center;
-            margin: 30px auto;
+            margin-top: 30px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-out;
             max-width: 400px;
+            margin: 30px auto;
         }
 
         .bet-card img {
@@ -106,6 +96,33 @@
             color: #ccc;
             font-size: 16px;
         }
+
+        /* Dropdown styling */
+        .dropdown-container {
+            text-align: left;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .dropdown {
+            background-color: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .dropdown:hover {
+            background-color: #292a3b;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 10px 20px;
+            color: #ccc;
+        }
     </style>
 </head>
 
@@ -122,68 +139,24 @@
         </ul>
     </nav>
 
-    <!-- Top Section -->
+    <!-- Info Section -->
     <div class="section">
-        <div class="top-section">
-            <div class="top-text">Earn Free Robux Today!</div>
-            <div>
-                <img class="character-img" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
-                <div class="button-container">
-                    <a href="/login" class="start-earning-button">Start Earning Robux</a>
-                </div>
-            </div>
+        <div class="dropdown-container">
+            <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
+            <div id="dropdown1" class="dropdown-content">Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</div>
+
+            <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
+            <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
+
+            <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
+            <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
         </div>
-    </div>
 
-    <!-- Middle Section -->
-    <div class="section">
-        <div class="middle-section">
-            <!-- Dropdowns -->
-            <div class="dropdown-container">
-                <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
-                <div id="dropdown1" class="dropdown-content">Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</div>
-
-                <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
-                <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
-
-                <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
-                <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
-            </div>
-
-            <!-- Video -->
-            <div class="video-section">
-                <p class="arrow">⬇️</p>
-                <h2 class="glow">Watch This Video to Learn More!</h2>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bet and Earn Pop Card -->
-    <div class="section">
+        <!-- Bet and Earn Pop Card -->
         <div class="bet-card">
             <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" alt="Bet Icon">
             <h3>Bet and Earn More Robux!</h3>
             <p>Run commands and place bets to multiply your Robux. Join the fun and see how much you can win!</p>
-        </div>
-    </div>
-
-    <!-- Bottom Section -->
-    <div class="section">
-        <div class="discord-section">
-            Want more Robux? Join our Discord!
-            <a href="https://discord.gg/y2NRXnNN">
-                <img src="https://cdn3.emoji.gg/emojis/4544-rainbow-discord-logo.gif" alt="Discord">
-            </a>
-        </div>
-
-        <!-- Reviews -->
-        <div class="reviews-container">
-            <div class="review-box">"I got paid out so fast, most sites take days."</div>
-            <div class="review-box">"I am so happy I found this server and website, I got my dream outfit!"</div>
-            <div class="review-box">"I feel like I'm actually becoming rich with the RBXBOT."</div>
-            <div class="review-box">"One of the best websites I've earned Robux with."</div>
-            <div class="review-box">"I thought this was fake, but it's actually real, and I got like 100 Robux so far!"</div>
         </div>
     </div>
 
@@ -196,4 +169,5 @@
 </body>
 
 </html>
+
 
