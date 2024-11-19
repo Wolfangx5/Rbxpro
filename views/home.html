@@ -198,9 +198,10 @@
             animation: bounce 1.5s infinite;
         }
 
-        /* Satisfaction and Bet Cards */
+        /* Satisfaction, Bet, and Invite Cards */
         .satisfaction-card,
-        .bet-card {
+        .bet-card,
+        .invite-card {
             background-color: #1a1a2e;
             color: #f4f7fc;
             padding: 20px;
@@ -209,16 +210,27 @@
             margin-top: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             animation: fadeIn 1s ease-out;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .satisfaction-card:hover,
+        .bet-card:hover,
+        .invite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .satisfaction-card i,
-        .bet-card i {
+        .bet-card i,
+        .invite-card i {
             color: #ff3368;
             font-size: 50px;
             margin-bottom: 10px;
         }
 
-        .bet-card img {
+        .bet-card img,
+        .invite-card img {
             width: 64px;
             margin-bottom: 15px;
         }
@@ -284,11 +296,22 @@
                 </div>
 
                 <!-- Bet and Earn Card -->
-                <div class="bet-card">
-                    <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Bet and Earn">
-                    <h3>Bet and Earn</h3>
-                    <p>You can earn Robux by running commands in our Discord server and betting against other members.</p>
-                </div>
+                <a href="https://discord.gg/9YFavvmJKc">
+                    <div class="bet-card">
+                        <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Bet and Earn">
+                        <h3>Bet and Earn</h3>
+                        <p>You can earn Robux by running commands in our Discord server and betting against other members.</p>
+                    </div>
+                </a>
+
+                <!-- Invite Rewards Card -->
+                <a href="https://discord.gg/9YFavvmJKc">
+                    <div class="invite-card">
+                        <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Invite Rewards">
+                        <h3>Invite Rewards</h3>
+                        <p>Earn Robux by inviting new users to our Discord server. The more you invite, the more you earn!</p>
+                    </div>
+                </a>
             </div>
 
             <!-- Video -->
@@ -309,6 +332,7 @@
 </body>
 
 </html>
+
 
 
 
