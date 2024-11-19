@@ -15,10 +15,18 @@
     <!-- External fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap">
     <style>
+        /* Universal settings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #f4f7fc;
             background-color: #121212;
+            overflow-x: hidden;
         }
 
         /* Navbar */
@@ -61,11 +69,85 @@
             background-color: #1a1a2e;
         }
 
+        /* Section styling */
         .section {
             padding: 60px 20px;
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
+            border-bottom: 1px solid #444;
+        }
+
+        /* Top Section */
+        .top-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .top-text {
+            font-size: 54px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #ff3368;
+            text-shadow: 0 0 10px #ff3368;
+        }
+
+        .character-img {
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .start-earning-button {
+            font-size: 24px;
+            color: #fff;
+            background-color: #ff3368;
+            padding: 15px 30px;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 15px #ff3368, 0 0 25px #ff3368;
+        }
+
+        .start-earning-button:hover {
+            background-color: #2182f0;
+            box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
+        }
+
+        /* Middle Section */
+        .middle-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .dropdown-container {
+            text-align: left;
+            width: 50%;
+        }
+
+        .dropdown {
+            background-color: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .dropdown:hover {
+            background-color: #292a3b;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 10px 20px;
+            color: #ccc;
         }
 
         /* Bet Pop Card */
@@ -96,33 +178,6 @@
             color: #ccc;
             font-size: 16px;
         }
-
-        /* Dropdown styling */
-        .dropdown-container {
-            text-align: left;
-            width: 60%;
-            margin: 0 auto;
-        }
-
-        .dropdown {
-            background-color: #1a1a2e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            color: #ffffff;
-        }
-
-        .dropdown:hover {
-            background-color: #292a3b;
-        }
-
-        .dropdown-content {
-            display: none;
-            padding: 10px 20px;
-            color: #ccc;
-        }
     </style>
 </head>
 
@@ -133,30 +188,44 @@
         <ul>
             <li><a href="/earn">Earn</a></li>
             <li><a href="/withdraw">Withdraw</a></li>
-            <li><a href="/promocode">Promocodes</a></li>
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="/terms.html">Terms of Service</a></li>
         </ul>
     </nav>
 
-    <!-- Info Section -->
+    <!-- Top Section -->
     <div class="section">
-        <div class="dropdown-container">
-            <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
-            <div id="dropdown1" class="dropdown-content">Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</div>
-
-            <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
-            <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
-
-            <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
-            <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
+        <div class="top-section">
+            <div class="top-text">Earn Free Robux Today!</div>
+            <div>
+                <img class="character-img" src="https://devforum-uploads.s3.dualstack.us-east-2.amazonaws.com/uploads/original/4X/5/b/5/5b5489729a85b02c21c9ebda2a886f86ad7bbf7d.png" alt="Roblox">
+                <div class="button-container">
+                    <a href="/login" class="start-earning-button">Start Earning Robux</a>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <!-- Bet and Earn Pop Card -->
-        <div class="bet-card">
-            <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" alt="Bet Icon">
-            <h3>Bet and Earn More Robux!</h3>
-            <p>Run commands and place bets to multiply your Robux. Join the fun and see how much you can win!</p>
+    <!-- Middle Section -->
+    <div class="section">
+        <div class="middle-section">
+            <div class="dropdown-container">
+                <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
+                <div id="dropdown1" class="dropdown-content">Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</div>
+
+                <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
+                <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
+
+                <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
+                <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
+            </div>
+
+            <!-- Bet and Earn Pop Card -->
+            <div class="bet-card">
+                <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" alt="Bet Icon">
+                <h3>Bet and Earn More Robux!</h3>
+                <p>Run commands and place bets to multiply your Robux. Join the fun and see how much you can win!</p>
+            </div>
         </div>
     </div>
 
@@ -169,5 +238,6 @@
 </body>
 
 </html>
+
 
 
