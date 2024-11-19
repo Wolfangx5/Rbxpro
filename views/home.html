@@ -78,196 +78,34 @@
             border-bottom: 1px solid #444;
         }
 
-        /* Top Section */
-        .top-section {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .top-text {
-            font-size: 54px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #ff3368;
-            text-shadow: 0 0 10px #ff3368;
-            animation: typing 3s steps(20, end) infinite alternate;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 60%;
-            text-align: left;
-        }
-
-        .top-text::after {
-            content: '|';
-            animation: blink 0.7s infinite step-end;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .character-img {
-            width: 300px;
-            border-radius: 10px;
-        }
-
-        .button-container {
-            margin-top: 20px;
-        }
-
-        .start-earning-button {
-            font-size: 24px;
-            color: #fff;
-            background-color: #ff3368;
-            padding: 15px 30px;
-            border-radius: 50px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 0 15px #ff3368, 0 0 25px #ff3368;
-        }
-
-        .start-earning-button:hover {
-            background-color: #2182f0;
-            box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
-        }
-
-        /* Middle Section */
-        .middle-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .dropdown-container {
-            text-align: left;
-            width: 50%;
-        }
-
-        .dropdown {
+        /* Bet Pop Card */
+        .bet-card {
             background-color: #1a1a2e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            color: #ffffff;
-        }
-
-        .dropdown:hover {
-            background-color: #292a3b;
-        }
-
-        .dropdown-content {
-            display: none;
-            padding: 10px 20px;
-            color: #ccc;
-        }
-
-        .video-section {
+            color: #f4f7fc;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            width: 45%;
+            margin: 30px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            max-width: 400px;
         }
 
-        .video-section h2 {
-            font-size: 36px;
-            color: #ff3368;
+        .bet-card img {
+            width: 70px;
             margin-bottom: 15px;
         }
 
-        .arrow {
-            font-size: 30px;
+        .bet-card h3 {
             color: #ff3368;
-            animation: bounce 1.5s infinite;
-        }
-
-        /* Satisfaction Card */
-        .satisfaction-card {
-            background-color: #1a1a2e;
-            color: #f4f7fc;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .satisfaction-card i {
-            color: #ff3368;
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
-
-        /* Bottom Section */
-        .discord-section {
-            text-align: center;
-            margin-top: 30px;
             font-size: 24px;
-            color: #ff3368;
-        }
-
-        .discord-section img {
-            width: 64px;
-            cursor: pointer;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        .reviews-container {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .review-box {
-            width: 180px;
-            padding: 15px;
-            background-color: #1a1a2e;
-            border-radius: 10px;
-            color: #fff;
-            font-style: italic;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
-            to { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
-        }
-
-        /* Play and Earn Card */
-        .play-card {
-            background-color: #1a1a2e;
-            color: #f4f7fc;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin-top: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-out;
-        }
-
-        .play-card i {
-            color: #ff3368;
-            font-size: 50px;
             margin-bottom: 10px;
         }
 
-        /* Bounce Animation */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .bet-card p {
+            color: #ccc;
+            font-size: 16px;
         }
-
     </style>
 </head>
 
@@ -278,6 +116,7 @@
         <ul>
             <li><a href="/earn">Earn</a></li>
             <li><a href="/withdraw">Withdraw</a></li>
+            <li><a href="/promocode">Promocodes</a></li>
             <li><a href="/privacy.html">Privacy Policy</a></li>
             <li><a href="/terms.html">Terms of Service</a></li>
         </ul>
@@ -309,13 +148,6 @@
 
                 <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
                 <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
-
-                <!-- Satisfaction Card -->
-                <div class="satisfaction-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>100% Satisfaction</h3>
-                    <p>We aim to provide the best experience for our users in earning Robux on our website and Discord server.</p>
-                </div>
             </div>
 
             <!-- Video -->
@@ -324,6 +156,15 @@
                 <h2 class="glow">Watch This Video to Learn More!</h2>
                 <iframe width="100%" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+        </div>
+    </div>
+
+    <!-- Bet and Earn Pop Card -->
+    <div class="section">
+        <div class="bet-card">
+            <img src="https://img.icons8.com/?size=100&id=CzitHMglNGvu&format=png&color=000000" alt="Bet Icon">
+            <h3>Bet and Earn More Robux!</h3>
+            <p>Run commands and place bets to multiply your Robux. Join the fun and see how much you can win!</p>
         </div>
     </div>
 
@@ -338,18 +179,11 @@
 
         <!-- Reviews -->
         <div class="reviews-container">
-            <div class="review-box">"I got paid out paid out so fast, most sites take days"</div>
-            <div class="review-box">"I am so happy I found this server and website I got my dream outfit"</div>
-            <div class="review-box">"I feel like I'm actually becoming rich with the RBXBOT"</div>
-            <div class="review-box">"One of the best websites I've earned robux with"</div>
-            <div class="review-box">"I thought this was fake but it's actually real, and I got like 100 robux so far"</div>
-        </div>
-
-        <!-- Play and Earn Card -->
-        <div class="play-card">
-            <i class="fas fa-dice"></i>
-            <h3>Play and Earn!</h3>
-            <p>You can earn Robux by playing games and betting against others with our RBXPRO bot on Discord. Earn even more with daily commands!</p>
+            <div class="review-box">"I got paid out so fast, most sites take days."</div>
+            <div class="review-box">"I am so happy I found this server and website, I got my dream outfit!"</div>
+            <div class="review-box">"I feel like I'm actually becoming rich with the RBXBOT."</div>
+            <div class="review-box">"One of the best websites I've earned Robux with."</div>
+            <div class="review-box">"I thought this was fake, but it's actually real, and I got like 100 Robux so far!"</div>
         </div>
     </div>
 
@@ -362,3 +196,4 @@
 </body>
 
 </html>
+
