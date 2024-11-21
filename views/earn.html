@@ -133,12 +133,34 @@
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 20px rgba(212, 9, 60, 0.8), 0 0 40px rgba(212, 9, 60, 0.6), 0 0 60px rgba(212, 9, 60, 0.4);
+            position: relative;
         }
 
         .column .popCard:hover {
             transform: translateY(-5px);
             background-color: #e94560;
             box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
+        }
+
+        /* Bubble Styling */
+        .bubble {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 999px;
+            text-transform: uppercase;
+        }
+
+        .bubble.red {
+            background-color: #D70F45;
+        }
+
+        .bubble.green {
+            background-color: #17b823;
         }
 
         /* Custom icon styling */
@@ -262,20 +284,26 @@
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
                     <div class="columns is-multiline">
+                        <!-- Kiwiwall -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
+                                <span class="bubble red">Hard</span>
                                 <img src="https://img.icons8.com/?size=100&id=43666&format=png&color=000000" class="custom-icon" alt="Kiwiwall Icon">
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
+                        <!-- Bitlabs -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openBitlab()">
+                                <span class="bubble green">Short</span>
                                 <img src="https://img.icons8.com/?size=100&id=43668&format=png&color=000000" class="custom-icon" alt="Bitlabs Icon">
                                 <span>Bitlabs</span>
                             </a>
                         </div>
+                        <!-- CPX Research -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
+                                <span class="bubble green">Fast</span>
                                 <img src="https://img.icons8.com/?size=100&id=48306&format=png&color=000000" class="custom-icon" alt="CPX Icon">
                                 <span>CPX Research</span>
                             </a>
