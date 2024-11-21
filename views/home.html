@@ -10,7 +10,7 @@
     <title>RBXPRO - Earn Free Robux Today!</title>
 
     <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTUcVAcT06IL9C3r3Eg4n3G1uZy1l1nD+5Jb9S8q5BxfX/KQ3rRNG5kdqK5+F5+lpGr6ll1ZzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTUcVAcT06IL9C3r3Eg4n3G1uZy1l1N+5Jb9S8q5BxfX/KQ3rRNG5kdqK5+F5+lpGr6ll1ZzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- External fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap">
@@ -235,6 +235,55 @@
             margin-bottom: 15px;
         }
 
+        /* Carousel styling */
+        .carousel-container {
+            position: relative;
+            max-width: 80%;
+            margin: 2rem auto;
+            overflow: hidden;
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-image {
+            min-width: 100%;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .carousel-arrow {
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            padding: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-arrow:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
         /* Bounce Animation */
         @keyframes bounce {
             0%,
@@ -323,15 +372,49 @@
         </div>
     </div>
 
+    <!-- Partner Section -->
+    <div class="section">
+        <h2>Our Partners</h2>
+        <div class="carousel-container">
+            <div class="carousel-images" id="carousel-images">
+                <img src="https://www.kiwiwall.com/img/logo.png" alt="Kiwiwall Logo" class="carousel-image">
+                <img src="https://th.bing.com/th/id/R.3f8cf43d1318ffdece67c2b3dfa4b05b?rik=xALLeESrpGbJVQ&pid=ImgRaw&r=0" alt="Bitlabs Logo" class="carousel-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.oew2PNNOxj2-Rx5OEnpFtAAAAA?rs=1&pid=ImgDetMain" alt="CPX Surveys Logo" class="carousel-image">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.H8c7bTiBtCVbhutB7Lb1KAHaHa?rs=1&pid=ImgDetMain" alt="RevToo Logo" class="carousel-image">
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-arrow" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-arrow" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function toggleDropdown(id) {
             const dropdownContent = document.getElementById(`dropdown${id}`);
             dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
         }
+
+        let currentSlide = 0;
+
+        function nextSlide() {
+            const carousel = document.getElementById('carousel-images');
+            const slides = carousel.children.length;
+            currentSlide = (currentSlide + 1) % slides;
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function prevSlide() {
+            const carousel = document.getElementById('carousel-images');
+            const slides = carousel.children.length;
+            currentSlide = (currentSlide - 1 + slides) % slides;
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
     </script>
 </body>
 
 </html>
+
 
 
 
