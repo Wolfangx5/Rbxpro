@@ -75,21 +75,7 @@
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #ff3368;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 51, 104, 0.5);
-        }
-
-        p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #ddd;
+            border-bottom: 1px solid #444;
         }
 
         /* Top Section */
@@ -162,11 +148,98 @@
             box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
         }
 
+        /* Middle Section */
+        .middle-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .dropdown-container {
+            text-align: left;
+            width: 50%;
+        }
+
+        .dropdown {
+            background-color: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .dropdown:hover {
+            background-color: #292a3b;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 10px 20px;
+            color: #ccc;
+        }
+
+        .video-section {
+            text-align: center;
+            width: 45%;
+        }
+
+        .video-section h2 {
+            font-size: 36px;
+            color: #ff3368;
+            margin-bottom: 15px;
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: #ff3368;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Satisfaction, Bet, and Invite Cards */
+        .satisfaction-card,
+        .bet-card,
+        .invite-card {
+            background-color: #1a1a2e;
+            color: #f4f7fc;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .satisfaction-card:hover,
+        .bet-card:hover,
+        .invite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .satisfaction-card i,
+        .bet-card i,
+        .invite-card i {
+            color: #ff3368;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .bet-card img,
+        .invite-card img {
+            width: 64px;
+            margin-bottom: 15px;
+        }
+
         /* Carousel styling */
         .carousel-container {
             position: relative;
             max-width: 80%;
-            margin: 3rem auto;
+            margin: 2rem auto;
             overflow: hidden;
             background-color: #1a1a2e;
             border-radius: 8px;
@@ -197,23 +270,30 @@
         }
 
         .carousel-arrow {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #fff;
             cursor: pointer;
             background-color: rgba(0, 0, 0, 0.5);
             border: none;
             border-radius: 50%;
-            padding: 10px;
-            transition: background-color 0.3s ease, transform 0.2s;
+            padding: 0.5rem;
+            transition: background-color 0.3s ease;
         }
 
         .carousel-arrow:hover {
-            background-color: rgba(255, 51, 104, 0.8);
-            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
-        .carousel-arrow i {
-            vertical-align: middle;
+        /* Bounce Animation */
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
@@ -243,6 +323,55 @@
         </div>
     </div>
 
+    <!-- Middle Section -->
+    <div class="section">
+        <div class="middle-section">
+            <!-- Dropdowns -->
+            <div class="dropdown-container">
+                <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
+                <div id="dropdown1" class="dropdown-content">Complete tasks to earn Robux quickly and easily. Watch your Robux grow!</div>
+
+                <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
+                <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
+
+                <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
+                <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
+
+                <!-- Satisfaction Card -->
+                <div class="satisfaction-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>100% Satisfaction</h3>
+                    <p>We aim to provide the best experience for our users in earning Robux on our website and Discord server.</p>
+                </div>
+
+                <!-- Bet and Earn Card -->
+                <a href="https://discord.gg/9YFavvmJKc">
+                    <div class="bet-card">
+                        <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Bet and Earn">
+                        <h3>Bet and Earn</h3>
+                        <p>You can earn Robux by running commands in our Discord server and betting against other members.</p>
+                    </div>
+                </a>
+
+                <!-- Invite Rewards Card -->
+                <a href="https://discord.gg/9YFavvmJKc">
+                    <div class="invite-card">
+                        <img src="https://img.icons8.com/?size=100&id=V4ZP9rL1H1hw&format=png&color=000000" alt="Invite Rewards">
+                        <h3>Invite Rewards</h3>
+                        <p>Earn Robux by inviting new users to our Discord server. The more you invite, the more you earn!</p>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Video -->
+            <div class="video-section">
+                <p class="arrow">⬇️</p>
+                <h2 class="glow">Watch This Video to Learn More!</h2>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Partner Section -->
     <div class="section">
         <h2>Our Partners</h2>
@@ -254,13 +383,18 @@
                 <img src="https://tse4.mm.bing.net/th/id/OIP.H8c7bTiBtCVbhutB7Lb1KAHaHa?rs=1&pid=ImgDetMain" alt="RevToo Logo" class="carousel-image">
             </div>
             <div class="carousel-nav">
-                <button class="carousel-arrow" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-arrow" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+                <button class="carousel-arrow" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-arrow" onclick="nextSlide()">&#10095;</button>
             </div>
         </div>
     </div>
 
     <script>
+        function toggleDropdown(id) {
+            const dropdownContent = document.getElementById(`dropdown${id}`);
+            dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+        }
+
         let currentSlide = 0;
 
         function nextSlide() {
