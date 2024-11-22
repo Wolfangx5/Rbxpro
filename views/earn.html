@@ -171,97 +171,60 @@
             margin: 0 auto 1rem;
         }
 
-        /* Sidebar Styling */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
+        /* FAQ Section styling */
+        .faq-section {
+            margin-top: 2rem;
+            color: #FEFFFF;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
             background-color: #1a1a2e;
-            z-index: 2000;
-            transition: all 0.3s ease;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
-            padding: 20px;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar-header {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #D70F45;
-            margin-bottom: 1rem;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 1rem;
-        }
-
-        .sidebar ul li a {
-            display: flex;
-            align-items: center;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar ul li a:hover {
+        .faq-item:hover {
             background-color: #2a2a3e;
         }
 
-        .sidebar ul li img {
-            width: 25px;
-            height: 25px;
-            margin-right: 10px;
+        .faq-item-content {
+            display: none;
+            color: #ddd;
+            margin-top: 0.5rem;
         }
 
-        .sidebar .more-ways {
-            margin-top: 2rem;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #17b823;
-        }
-
-        .sidebar .more-ways img {
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        .sidebar .more-ways a {
-            color: #17b823;
-            text-decoration: none;
-        }
-
-        .sidebar .more-ways a:hover {
-            text-decoration: underline;
-        }
-
-        /* Sidebar toggle button */
-        .menu-toggle {
-            font-size: 1.5rem;
-            cursor: pointer;
+        /* Footer styling */
+        footer {
+            background-color: #1a1a2e;
             color: #fff;
-            background: none;
-            border: none;
-            margin-left: 10px;
-            transition: transform 0.3s ease;
+            padding: 20px;
+            text-align: center;
         }
 
-        .menu-toggle:hover {
-            transform: scale(1.1);
+        .footer-nav li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .footer-nav li a {
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav li a:hover {
+            color: #e94560;
+        }
+
+        .rbxpro-disclaimer {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -277,7 +240,11 @@
         <div class="container">
             <div class="navbar-brand">
                 <div class="logo">RBXPRO</div>
-                <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
@@ -302,40 +269,8 @@
         </div>
     </nav>
 
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar">
-        <div class="sidebar-header">Navigation</div>
-        <ul>
-            <li>
-                <a href="/withdraw">
-                    <img src="https://img.icons8.com/?size=100&id=76943&format=png&color=000000" alt="Withdraw Icon">
-                    Withdraw
-                </a>
-            </li>
-            <li>
-                <a href="/promocode">
-                    <img src="https://img.icons8.com/?size=100&id=48175&format=png&color=000000" alt="Promocode Icon">
-                    Promocodes
-                </a>
-            </li>
-            <li>
-                <a href="/tips.html">
-                    <img src="https://img.icons8.com/?size=100&id=qNCea0FAtw6n&format=png&color=000000" alt="Tips Icon">
-                    Survey Tips
-                </a>
-            </li>
-        </ul>
-        <div class="more-ways">
-            <p>More ways to earn:</p>
-            <a href="https://discord.gg/rbxpro" target="_blank">
-                <img src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000" alt="Discord Icon">
-                Join our Discord
-            </a>
-        </div>
-    </div>
-
     <div class="recommendation-strip">
-        Join our discord for 1k rbx invite competition!🏆
+        join our discord for 1k rbx invite competition!🏆
     </div>
 
     <!-- Main Content -->
@@ -469,104 +404,81 @@
     </footer>
 
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById("sidebar");
-            sidebar.classList.toggle("active");
-        }
-
-        function toggleFaq(element) {
-            const content = element.querySelector(".faq-item-content");
-            content.style.display = content.style.display === "block" ? "none" : "block";
-        }
-
-        function Logout() {
-            localStorage.removeItem("sessionToken");
-            window.location.href = "/login";
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
-                document.getElementById("loading-screen").classList.add("hidden");
+                document.getElementById('loading-screen').classList.add('hidden');
             }, 3000);
 
-            var $navbarBurgers = Array.prototype.slice.call(
-                document.querySelectorAll(".navbar-burger"),
-                0
-            );
+            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function ($el) {
-                    $el.addEventListener("click", function () {
+                $navbarBurgers.forEach(function($el) {
+                    $el.addEventListener('click', function() {
                         var target = $el.dataset.target;
                         var $target = document.getElementById(target);
-                        $el.classList.toggle("is-active");
-                        $target.classList.toggle("is-active");
+                        $el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
                     });
                 });
             }
 
             var path = window.location.pathname;
-            if (path === "/" || path.includes("earn")) {
-                document.getElementById("earn-link").classList.add("is-active");
-                document
-                    .getElementById("footer-earn-link")
-                    .classList.add("is-active");
-            } else if (path.includes("withdraw")) {
-                document
-                    .getElementById("withdraw-link")
-                    .classList.add("is-active");
-                document
-                    .getElementById("footer-withdraw-link")
-                    .classList.add("is-active");
+            if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
+                document.getElementById('footer-earn-link').classList.add('is-active');
+            } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
+                document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
         });
 
+        function toggleFaq(element) {
+            const content = element.querySelector('.faq-item-content');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function Logout() {
+            localStorage.removeItem('sessionToken');
+            window.location.href = '/login';
+        }
+
         function openBitlab() {
-            const token = localStorage.getItem("sessionToken");
-            window.open(
-                `https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`,
-                "_blank"
-            );
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank');
         }
 
         function openAytS() {
-            const token = localStorage.getItem("sessionToken");
-            window.open(
-                `https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`,
-                "_blank"
-            );
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://www.kiwiwall.com/wall/8gxnIY9Rac77vzHDSpPOe9DJL1AfNsY0/${token}`, '_blank');
         }
 
         function openCPX() {
-            const token = localStorage.getItem("sessionToken");
-            window.open(
-                `https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`,
-                "_blank"
-            );
+            const token = localStorage.getItem('sessionToken');
+            window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
         }
 
         function loadUserData() {
-            const token = localStorage.getItem("sessionToken");
+            const token = localStorage.getItem('sessionToken');
             if (token) {
-                fetch("/api/userdata", {
-                    method: "POST",
+                fetch('/api/userdata', {
+                    method: 'POST',
                     headers: {
-                        Authorization: token,
-                    },
+                        'Authorization': token
+                    }
                 })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        const balance = document.getElementById("rbxbalance");
-                        const nameDisplay = document.getElementById("usernameDisplay");
+                .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
 
-                        balance.textContent = `${data.balance} robux`;
-                        nameDisplay.textContent = `Welcome, ${data.username}!`;
-                    })
-                    .catch((error) => {
-                        window.location.href = "/login";
-                        return;
-                    });
+                    balance.textContent = `${data.balance} robux`;
+                    nameDisplay.textContent = `Welcome, ${data.username}!`;
+                })
+                .catch(error => {
+                    window.location.href = '/login';
+                    return;
+                });
             } else {
-                window.location.href = "/login";
+                window.location.href = '/login';
             }
         }
         setInterval(loadUserData, 1000);
@@ -575,6 +487,7 @@
 </body>
 
 </html>
+
 
 
 
