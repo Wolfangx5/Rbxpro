@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <style>
-        /* Background gradient */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #000000, #000000);
@@ -25,7 +24,6 @@
             padding-bottom: 20px;
         }
 
-        /* Loading Screen Styling */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -49,14 +47,7 @@
         .neon-text {
             font-size: 3rem;
             color: #D70F45;
-            text-shadow: 
-                0 0 5px #D70F45, 
-                0 0 10px #D70F45, 
-                0 0 20px #D70F45, 
-                0 0 40px #D70F45, 
-                0 0 80px #D70F45, 
-                0 0 90px #D70F45, 
-                0 0 150px #17b823;
+            text-shadow: 0 0 5px #D70F45, 0 0 10px #D70F45, 0 0 20px #D70F45, 0 0 40px #D70F45, 0 0 80px #D70F45, 0 0 90px #D70F45, 0 0 150px #17b823;
             animation: flicker 2s infinite;
         }
 
@@ -69,7 +60,6 @@
             }
         }
 
-        /* Navbar and promo strip */
         .navbar, .recommendation-strip {
             background-color: #1a1a2e;
             color: #fff;
@@ -98,7 +88,6 @@
             font-size: 1.1rem;
         }
 
-        /* Section and subtitle styling */
         .section {
             padding: 3rem 1.5rem;
         }
@@ -115,7 +104,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Separator styling */
         .separator {
             width: 100%;
             height: 2px;
@@ -123,7 +111,6 @@
             margin: 1rem 0 2rem;
         }
 
-        /* Pop card styling - neon shine effect */
         .column .popCard {
             display: block;
             background-color: #1a1a2e;
@@ -142,36 +129,6 @@
             box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
         }
 
-        /* Bubble Styling */
-        .bubble {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            padding: 5px 10px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: #fff;
-            border-radius: 999px;
-            text-transform: uppercase;
-        }
-
-        .bubble.red {
-            background-color: #D70F45;
-        }
-
-        .bubble.green {
-            background-color: #17b823;
-        }
-
-        /* Custom icon styling */
-        .custom-icon {
-            width: 70px;
-            height: auto;
-            display: block;
-            margin: 0 auto 1rem;
-        }
-
-        /* FAQ Section styling */
         .faq-section {
             margin-top: 2rem;
             color: #FEFFFF;
@@ -196,7 +153,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Footer styling */
         footer {
             background-color: #1a1a2e;
             color: #fff;
@@ -226,14 +182,125 @@
             font-size: 0.9rem;
             margin-top: 15px;
         }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            height: 100%;
+            width: 250px;
+            background-color: #1a1a2e;
+            color: #fff;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .sidebar .nav-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar .nav-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .sidebar .nav-item a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar .nav-item a:hover {
+            color: #D70F45;
+        }
+
+        .sidebar .more-ways {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #FEFFFF;
+            font-weight: bold;
+        }
+
+        .nav-toggle-button {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            color: #fff;
+            background-color: #1a1a2e;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-toggle-button:hover {
+            background-color: #D70F45;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 900;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
     </style>
 </head>
 
-<body aria-hidden="false">
+<body>
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="neon-text">RBXPRO</div>
     </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">Navigation</div>
+        <div class="nav-item">
+            <img src="https://img.icons8.com/?size=100&id=76943&format=png&color=000000" alt="Withdraw Icon">
+            <a href="/withdraw">Withdraw</a>
+        </div>
+        <div class="nav-item">
+            <img src="https://img.icons8.com/?size=100&id=48175&format=png&color=000000" alt="Promocode Icon">
+            <a href="/promocode">Promocode</a>
+        </div>
+        <div class="nav-item">
+            <img src="https://img.icons8.com/?size=100&id=qNCea0FAtw6n&format=png&color=000000" alt="Tips Icon">
+            <a href="/tips.html">Survey Tips</a>
+        </div>
+        <div class="more-ways">More ways to earn:</div>
+        <div class="nav-item">
+            <img src="https://img.icons8.com/?size=100&id=61604&format=png&color=000000" alt="Discord Icon">
+            <a href="https://discord.gg/rbxpro" target="_blank">Join Discord</a>
+        </div>
+    </div>
+
+    <!-- Dark overlay -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -249,6 +316,7 @@
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
                     <a id="earn-link" class="navbar-item navbar-s-item is-active" href="#">Earn</a>
+                    <button class="nav-toggle-button" onclick="toggleSidebar()">Navigation</button>
                     <a id="withdraw-link" class="navbar-item navbar-s-item" href="/withdraw">Withdraw</a>
                     <a id="promocode-link" class="navbar-item navbar-s-item" href="/promocode">Promocodes</a>
                     <a id="tips-link" class="navbar-item navbar-s-item" href="/tips.html">Survey tips</a>
@@ -285,7 +353,6 @@
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
                     <div class="columns is-multiline">
-                        <!-- Kiwiwall -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
                                 <span class="bubble red">Hard</span>
@@ -293,7 +360,6 @@
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
-                        <!-- Bitlabs -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openBitlab()">
                                 <span class="bubble green">Short</span>
@@ -301,7 +367,6 @@
                                 <span>Bitlabs</span>
                             </a>
                         </div>
-                        <!-- CPX Research -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
                                 <span class="bubble green">Fast</span>
@@ -404,15 +469,15 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => {
                 document.getElementById('loading-screen').classList.add('hidden');
             }, 3000);
 
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
             if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
+                $navbarBurgers.forEach(function ($el) {
+                    $el.addEventListener('click', function () {
                         var target = $el.dataset.target;
                         var $target = document.getElementById(target);
                         $el.classList.toggle('is-active');
@@ -465,29 +530,37 @@
                         'Authorization': token
                     }
                 })
-                .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
+                    .then(response => response.json())
+                    .then(data => {
+                        const balance = document.getElementById("rbxbalance");
+                        const nameDisplay = document.getElementById("usernameDisplay");
 
-                    balance.textContent = `${data.balance} robux`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                    return;
-                });
+                        balance.textContent = `${data.balance} robux`;
+                        nameDisplay.textContent = `Welcome, ${data.username}!`;
+                    })
+                    .catch(error => {
+                        window.location.href = '/login';
+                        return;
+                    });
             } else {
                 window.location.href = '/login';
             }
         }
+
         setInterval(loadUserData, 1000);
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        document.getElementById('overlay').addEventListener('click', toggleSidebar);
     </script>
     <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
 </body>
 
 </html>
-
-
 
 
