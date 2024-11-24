@@ -88,6 +88,22 @@
             font-size: 1.1rem;
         }
 
+        .nav-toggle-button {
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            color: #fff;
+            background-color: #1a1a2e;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-toggle-button:hover {
+            background-color: #D70F45;
+        }
+
         .section {
             padding: 3rem 1.5rem;
         }
@@ -127,6 +143,24 @@
             transform: translateY(-5px);
             background-color: #e94560;
             box-shadow: 0 0 25px rgba(212, 9, 60, 0.9), 0 0 50px rgba(212, 9, 60, 0.7), 0 0 80px rgba(212, 9, 60, 0.5);
+        }
+
+        .bubble {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 999px;
+            text-transform: uppercase;
+            background-color: #D70F45;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .bubble.green {
+            background-color: #17b823;
         }
 
         .faq-section {
@@ -237,20 +271,6 @@
             font-weight: bold;
         }
 
-        .nav-toggle-button {
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            color: #fff;
-            background-color: #1a1a2e;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-toggle-button:hover {
-            background-color: #D70F45;
-        }
-
         .overlay {
             position: fixed;
             top: 0;
@@ -353,6 +373,7 @@
                     <div class="separator"></div>
                     <h2 class="title is-size-4-mobile has-text-weight-bold">Offerwalls</h2>
                     <div class="columns is-multiline">
+                        <!-- Kiwiwall -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openAytS()">
                                 <span class="bubble red">Hard</span>
@@ -360,6 +381,7 @@
                                 <span>Kiwiwall</span>
                             </a>
                         </div>
+                        <!-- Bitlabs -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openBitlab()">
                                 <span class="bubble green">Short</span>
@@ -367,6 +389,7 @@
                                 <span>Bitlabs</span>
                             </a>
                         </div>
+                        <!-- CPX Research -->
                         <div class="column is-3">
                             <a class="popCard" onclick="openCPX()">
                                 <span class="bubble green">Fast</span>
@@ -562,5 +585,6 @@
 </body>
 
 </html>
+
 
 
