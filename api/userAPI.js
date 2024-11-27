@@ -165,41 +165,30 @@ router.post('/withdraw', async (req, res) => {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
   }
 
-  // Validate the gamepass link format
   if (!gpLink.startsWith("https://www.roblox.com/")) {
-    return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
+    return res.status(400).json({ error: 'Invalid Gamepass link.' });
   }
 
-  // Check if user exists
   const userData = await checkUserExists(userID);
-  if (!userData) {
-    console.log('User does not exist');
-    return res.redirect('/login');
-  }
+  if (!userData) return res.redirect('/login');
 
-  // Check if user has sufficient balance
   if (withAm > userData.balance) {
-    console.log('Insufficient balance');
     return res.status(400).json({ error: 'Not enough balance' });
   }
 
-  // Check if user completed the survey
   const validSurvey = await canUseDailyCommand(userID);
   if (!validSurvey) {
     return res.status(400).json({ error: 'Must complete a survey before withdraw' });
   }
 
-  // Deduct the amount from user's balance
   const newBalance = userData.balance - withAm;
   await changeUserBalance(userID, newBalance);
-  console.log('Balance Updated:', newBalance);
 
-  // Send the webhook to Discord
   const webhookData = {
     username: "Withdrawal Bot",
     embeds: [{
       title: "New Withdrawal Request",
-      color: 3447003, // Blue color
+      color: 3447003,
       fields: [
         { name: "Username", value: userData.username, inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
@@ -213,87 +202,89 @@ router.post('/withdraw', async (req, res) => {
     await axios.post(discordWebhookUrl, webhookData, {
       headers: { 'Content-Type': 'application/json' },
     });
-    console.log('Withdrawal info sent to Discord');
   } catch (error) {
-    console.error('Error sending Discord webhook:', error.message);
-    return res.status(500).json({ error: 'Failed to send webhook. Please try again.' });
+    return res.status(500).json({ error: 'Failed to send webhook.' });
   }
 
-  // Return success response to the user
   return res.status(200).json({ message: 'Transaction completed successfully' });
 });
 
-// Route to create a new promo code
-
+// Route to redeem a promo code
 router.post('/redeem', async (req, res) => {
-              const token = req.headers.authorization;
-              const redeemCode = req.body.code;
-            
-              if (!token) {
-                return res.status(401).json({ error: 'Token not provided' });
-              }
-            
-              if (!redeemCode) {
-                return res.status(400).json({ error: 'Redeem code not provided' });
-              }
-            
-              try {
-                const userData = await getUserData(token);
-            
-                if (userData === null) {
-                  return res.status(404).json({ error: 'User not found' });
-                }
-            
-                const promoCode = await checkPromoCodeValidity(redeemCode, userData.id);
-            
-                if (!promoCode) {
-                  return res.status(400).json({ error: 'Invalid or already redeemed promo code' });
-                }
-            
-                const success = await markPromoCodeUsed(redeemCode, userData.id);
-            
-                if (success) {
-                  // Apply the promo code amount to the user's balance
-                  await changeUserBalance(userData.id, userData.balance + promoCode.amount);
-                  res.json({ balance: userData.balance + promoCode.amount });
-                } else {
-                  res.status(400).json({ error: 'Failed to redeem promo code' });
-                }
-              } catch (error) {
-                console.error(error);
-                res.status(500).json({ error: 'Server error' });
-              }
-            });
-            
-            router.post('/create-promo', async (req, res) => {
-              const { code, reward, duration, maxUses } = req.body;
-            
-              if (!code || !reward || !duration || !maxUses) {
-                return res.status(400).json({
-                  error: 'Code, amount, reward, duration, and max uses are required',
-                });
-              }
-            
-              try {
-                // Create promo code with given parameters
-                const promoCode = await createPromoCode(reward, duration, maxUses ,code);
-            
-                res.status(201).json({
-                  success: true,
-                  message: 'Promo code created successfully',
-                  promoCode: {
-                    code: promoCode.code,
-                    reward: promoCode.reward,
-                    expiresAt: promoCode.expiresAt,
-                    maxUses: promoCode.maxUses,
-                  },
-                });
-              } catch (error) {
-                console.error(error);
-                res.status(500).json({ error: 'Could not create promo code' });
-              }
-            });
+  const token = req.headers.authorization;
+  const redeemCode = req.body.code;
+
+  if (!token || !redeemCode) {
+    return res.status(400).json({ error: 'Missing required fields.' });
+  }
+
+  try {
+    const userData = await getUserData(token);
+
+    if (!userData) return res.status(404).json({ error: 'User not found' });
+
+    const promoCode = await checkPromoCodeValidity(redeemCode, userData.id);
+
+    if (!promoCode) return res.status(400).json({ error: 'Invalid promo code.' });
+
+    const success = await markPromoCodeUsed(redeemCode, userData.id);
+
+    if (success) {
+      const newBalance = userData.balance + promoCode.amount;
+      await changeUserBalance(userData.id, newBalance);
+
+      const webhookData = {
+        username: "Promo Bot",
+        embeds: [{
+          title: "Promo Code Redeemed",
+          color: 3066993,
+          fields: [
+            { name: "Username", value: userData.username, inline: true },
+            { name: "Amount", value: `${promoCode.amount} ROBUX`, inline: true },
+          ],
+          timestamp: new Date()
+        }]
+      };
+
+      try {
+        await axios.post(discordWebhookUrl, webhookData, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+      } catch (error) {
+        console.error('Error sending webhook:', error.message);
+      }
+
+      return res.json({ balance: newBalance });
+    } else {
+      return res.status(400).json({ error: 'Failed to redeem promo code.' });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: 'Server error.' });
+  }
+});
+
+// Route to create a new promo code
+router.post('/create-promo', async (req, res) => {
+  const { code, reward, duration, maxUses } = req.body;
+
+  if (!code || !reward || !duration || !maxUses) {
+    return res.status(400).json({ error: 'Missing required fields.' });
+  }
+
+  try {
+    const promoCode = await createPromoCode(reward, duration, maxUses, code);
+
+    res.status(201).json({
+      success: true,
+      message: 'Promo code created successfully.',
+      promoCode,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: 'Could not create promo code.' });
+  }
+});
 
 module.exports = router;
+
 
 
