@@ -217,6 +217,33 @@ app.get('/callback/kiwi', async (req, res) => {
     });
   }
 });
+app.get('/callback/revtoo', async (req, res) => {
+    const { uid, val } = req.query;
 
+    // Validate required parameters
+    if (!uid || !val) {
+        return res.status(400).send('ERROR: Missing parameters');
+    }
+
+    try {
+        // Check if user exists
+        const userData = await checkUserExists(uid);
+        if (!userData) {
+            console.log('User does not exist');
+            return res.status(404).send('ERROR: User not found');
+        }
+
+        // Update user balance
+        const newBal = userData.balance + parseFloat(val);
+        console.log(`New balance for UID ${uid}: ${newBal}`);
+        await changeUserBalance(uid, newBal);
+
+        // Respond with success
+        return res.status(200).send('ok');
+    } catch (error) {
+        console.error('Error processing postback:', error);
+        return res.status(500).send('ERROR: Server error');
+    }
+});
 // Add other callback routes here if needed
 
