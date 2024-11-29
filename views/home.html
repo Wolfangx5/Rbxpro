@@ -148,54 +148,40 @@
             box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
         }
 
-        /* Middle Section */
-        .middle-section {
+        /* Live Stats Section */
+        .live-stats {
             display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .dropdown-container {
-            text-align: left;
-            width: 50%;
-        }
-
-        .dropdown {
+            justify-content: space-around;
+            text-align: center;
+            padding: 40px 0;
             background-color: #1a1a2e;
-            border: 1px solid #333;
             border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            color: #ffffff;
+            margin-top: 40px;
+            color: #f4f7fc;
         }
 
-        .dropdown:hover {
-            background-color: #292a3b;
+        .stat {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ff3368;
         }
 
-        .dropdown-content {
-            display: none;
-            padding: 10px 20px;
+        .stat-label {
+            margin-top: 10px;
+            font-size: 18px;
             color: #ccc;
         }
 
-        .video-section {
-            text-align: center;
-            width: 45%;
-        }
+        /* Bounce Animation */
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
 
-        .video-section h2 {
-            font-size: 36px;
-            color: #ff3368;
-            margin-bottom: 15px;
-        }
-
-        .arrow {
-            font-size: 30px;
-            color: #ff3368;
-            animation: bounce 1.5s infinite;
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         /* Satisfaction, Bet, and Invite Cards */
@@ -234,67 +220,6 @@
             width: 64px;
             margin-bottom: 15px;
         }
-
-        /* Carousel styling */
-        .carousel-container {
-            position: relative;
-            max-width: 80%;
-            margin: 2rem auto;
-            overflow: hidden;
-            background-color: #1a1a2e;
-            border-radius: 8px;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .carousel-images {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-image {
-            min-width: 100%;
-            height: 180px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-
-        .carousel-arrow {
-            font-size: 2rem;
-            color: #fff;
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 50%;
-            padding: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .carousel-arrow:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Bounce Animation */
-        @keyframes bounce {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
     </style>
 </head>
 
@@ -323,93 +248,43 @@
         </div>
     </div>
 
-    <!-- Middle Section -->
-    <div class="section">
-        <div class="middle-section">
-            <!-- Dropdowns -->
-            <div class="dropdown-container">
-                <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
-                <div id="dropdown1" class="dropdown-content">Complete surveys, offers or play games to earn robux. All we need is your time!</div>
-
-                <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
-                <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
-
-                <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
-                <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
-
-                <!-- Satisfaction Card -->
-                <div class="satisfaction-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>100% Satisfaction</h3>
-                    <p>We aim to provide the best experience for our users in earning Robux on our website and Discord server.</p>
-                </div>
-
-                <!-- Bet and Earn Card -->
-                <a href="https://discord.gg/9YFavvmJKc">
-                    <div class="bet-card">
-                        <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Bet and Earn">
-                        <h3>Bet and Earn</h3>
-                        <p>You can earn Robux by running commands in our Discord server and betting against other members.</p>
-                    </div>
-                </a>
-
-                <!-- Invite Rewards Card -->
-                <a href="https://discord.gg/9YFavvmJKc">
-                    <div class="invite-card">
-                        <img src="https://img.icons8.com/?size=100&id=V4ZP9rL1H1hw&format=png&color=000000" alt="Invite Rewards">
-                        <h3>Invite Rewards</h3>
-                        <p>Earn Robux by inviting new users to our Discord server. The more you invite, the more you earn!</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Video -->
-            <div class="video-section">
-                <p class="arrow">⬇️</p>
-                <h2 class="glow">Watch This Video to Learn More!</h2>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+    <!-- Live Stats Section -->
+    <div class="live-stats section">
+        <div>
+            <div class="stat" id="robux-paid">0</div>
+            <div class="stat-label">Robux Paid Out</div>
         </div>
-    </div>
-
-    <!-- Partner Section -->
-    <div class="section">
-        <h2>Our Partners</h2>
-        <div class="carousel-container">
-            <div class="carousel-images" id="carousel-images">
-                <img src="https://www.kiwiwall.com/img/logo.png" alt="Kiwiwall Logo" class="carousel-image">
-                <img src="https://th.bing.com/th/id/R.3f8cf43d1318ffdece67c2b3dfa4b05b?rik=xALLeESrpGbJVQ&pid=ImgRaw&r=0" alt="Bitlabs Logo" class="carousel-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.oew2PNNOxj2-Rx5OEnpFtAAAAA?rs=1&pid=ImgDetMain" alt="CPX Surveys Logo" class="carousel-image">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.H8c7bTiBtCVbhutB7Lb1KAHaHa?rs=1&pid=ImgDetMain" alt="RevToo Logo" class="carousel-image">
-            </div>
-            <div class="carousel-nav">
-                <button class="carousel-arrow" onclick="prevSlide()">&#10094;</button>
-                <button class="carousel-arrow" onclick="nextSlide()">&#10095;</button>
-            </div>
+        <div>
+            <div class="stat" id="users-online">0</div>
+            <div class="stat-label">Users Online</div>
+        </div>
+        <div>
+            <div class="stat" id="surveys-completed">0</div>
+            <div class="stat-label">Surveys Completed</div>
         </div>
     </div>
 
     <script>
-        function toggleDropdown(id) {
-            const dropdownContent = document.getElementById(`dropdown${id}`);
-            dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+        function animateStat(id, endValue, duration) {
+            const statElement = document.getElementById(id);
+            let startValue = 0;
+            const increment = Math.ceil(endValue / (duration / 20));
+            const interval = setInterval(() => {
+                startValue += increment;
+                if (startValue >= endValue) {
+                    statElement.textContent = endValue.toLocaleString();
+                    clearInterval(interval);
+                } else {
+                    statElement.textContent = startValue.toLocaleString();
+                }
+            }, 20);
         }
 
-        let currentSlide = 0;
-
-        function nextSlide() {
-            const carousel = document.getElementById('carousel-images');
-            const slides = carousel.children.length;
-            currentSlide = (currentSlide + 1) % slides;
-            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
-
-        function prevSlide() {
-            const carousel = document.getElementById('carousel-images');
-            const slides = carousel.children.length;
-            currentSlide = (currentSlide - 1 + slides) % slides;
-            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            animateStat("robux-paid", 20000, 2000);
+            animateStat("users-online", 600, 2000);
+            animateStat("surveys-completed", 3000, 2000);
+        });
     </script>
 </body>
 
