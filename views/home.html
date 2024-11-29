@@ -198,6 +198,45 @@
             animation: bounce 1.5s infinite;
         }
 
+
+        .live-stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            padding: 40px 0;
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            margin-top: 40px;
+            color: #f4f7fc;
+        }
+
+        .stat {
+            font-size: 50px;
+            font-weight: 700;
+            color: #ff3368;
+            animation: pulse 1.5s infinite;
+        }
+
+        .stat-label {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #ccc;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
         /* Satisfaction, Bet, and Invite Cards */
         .satisfaction-card,
         .bet-card,
@@ -362,7 +401,20 @@
                     </div>
                 </a>
             </div>
-
+            <div class="live-stats section">
+        <div>
+            <div class="stat" id="robux-paid">0</div>
+            <div class="stat-label">Robux Paid Out</div>
+        </div>
+        <div>
+            <div class="stat" id="users-online">0</div>
+            <div class="stat-label">Users Online</div>
+        </div>
+        <div>
+            <div class="stat" id="surveys-completed">0</div>
+            <div class="stat-label">Surveys Completed</div>
+        </div>
+    </div>
             <!-- Video -->
             <div class="video-section">
                 <p class="arrow">⬇️</p>
@@ -390,6 +442,27 @@
     </div>
 
     <script>
+         function animateStat(id, endValue, duration) {
+            const statElement = document.getElementById(id);
+            let startValue = 0;
+            const increment = Math.ceil(endValue / (duration / 20));
+            const interval = setInterval(() => {
+                startValue += increment;
+                if (startValue >= endValue) {
+                    statElement.textContent = endValue.toLocaleString();
+                    clearInterval(interval);
+                } else {
+                    statElement.textContent = startValue.toLocaleString();
+                }
+            }, 20);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            animateStat("robux-paid", 20000, 2000);
+            animateStat("users-online", 600, 2000);
+            animateStat("surveys-completed", 3000, 2000);
+        });
+
         function toggleDropdown(id) {
             const dropdownContent = document.getElementById(`dropdown${id}`);
             dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
