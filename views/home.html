@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -148,97 +148,27 @@
             box-shadow: 0 0 20px #2182f0, 0 0 30px #2182f0;
         }
 
-        /* Live Stats Section */
-        .live-stats {
+        /* Middle Section */
+        .middle-section {
             display: flex;
-            justify-content: space-around;
-            text-align: center;
-            padding: 40px 0;
-            background-color: #1a1a2e;
-            border-radius: 8px;
-            margin-top: 40px;
-            color: #f4f7fc;
+            align-items: flex-start;
+            gap: 30px;
+            justify-content: center;
         }
 
-        .stat {
-            font-size: 50px;
-            font-weight: 700;
-            color: #ff3368;
-            animation: pulse 1.5s infinite;
-        }
-
-        .stat-label {
-            margin-top: 10px;
-            font-size: 20px;
-            color: #ccc;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Cards Section */
-        .cards-section {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .card {
-            flex: 1 1 calc(33.33% - 20px);
-            background-color: #1a1a2e;
-            color: #f4f7fc;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .card i {
-            font-size: 40px;
-            color: #ff3368;
-            margin-bottom: 10px;
-        }
-
-        .card img {
-            width: 50px;
-            margin-bottom: 15px;
-        }
-
-        /* Dropdowns */
         .dropdown-container {
-            width: 100%;
             text-align: left;
-            margin: 40px 0;
+            width: 50%;
         }
 
         .dropdown {
             background-color: #1a1a2e;
-            color: #ffffff;
-            padding: 15px 20px;
-            margin-bottom: 10px;
+            border: 1px solid #333;
             border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            color: #ffffff;
         }
 
         .dropdown:hover {
@@ -249,13 +179,67 @@
             display: none;
             padding: 10px 20px;
             color: #ccc;
-            border-left: 4px solid #ff3368;
+        }
+
+        .video-section {
+            text-align: center;
+            width: 45%;
+        }
+
+        .video-section h2 {
+            font-size: 36px;
+            color: #ff3368;
+            margin-bottom: 15px;
+        }
+
+        .arrow {
+            font-size: 30px;
+            color: #ff3368;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Satisfaction, Bet, and Invite Cards */
+        .satisfaction-card,
+        .bet-card,
+        .invite-card {
+            background-color: #1a1a2e;
+            color: #f4f7fc;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .satisfaction-card:hover,
+        .bet-card:hover,
+        .invite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .satisfaction-card i,
+        .bet-card i,
+        .invite-card i {
+            color: #ff3368;
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .bet-card img,
+        .invite-card img {
+            width: 64px;
+            margin-bottom: 15px;
         }
 
         /* Carousel styling */
         .carousel-container {
             position: relative;
-            margin: 40px auto;
+            max-width: 80%;
+            margin: 2rem auto;
             overflow: hidden;
             background-color: #1a1a2e;
             border-radius: 8px;
@@ -282,6 +266,7 @@
             display: flex;
             justify-content: space-between;
             transform: translateY(-50%);
+            z-index: 10;
         }
 
         .carousel-arrow {
@@ -297,6 +282,18 @@
 
         .carousel-arrow:hover {
             background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Bounce Animation */
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
@@ -326,58 +323,56 @@
         </div>
     </div>
 
-    <!-- Live Stats Section -->
-    <div class="live-stats section">
-        <div>
-            <div class="stat" id="robux-paid">0</div>
-            <div class="stat-label">Robux Paid Out</div>
-        </div>
-        <div>
-            <div class="stat" id="users-online">0</div>
-            <div class="stat-label">Users Online</div>
-        </div>
-        <div>
-            <div class="stat" id="surveys-completed">0</div>
-            <div class="stat-label">Surveys Completed</div>
-        </div>
-    </div>
+    <!-- Middle Section -->
+    <div class="section">
+        <div class="middle-section">
+            <!-- Dropdowns -->
+            <div class="dropdown-container">
+                <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
+                <div id="dropdown1" class="dropdown-content">Complete surveys, offers or play games to earn robux. All we need is your time!</div>
 
-    <!-- Cards Section -->
-    <div class="section cards-section">
-        <div class="card">
-            <i class="fas fa-heart"></i>
-            <h3>100% Satisfaction</h3>
-            <p>We aim to provide the best experience for our users in earning Robux on our website and Discord server.</p>
-        </div>
-        <a href="https://discord.gg/9YFavvmJKc">
-            <div class="card">
-                <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Bet and Earn">
-                <h3>Bet and Earn</h3>
-                <p>You can earn Robux by running commands in our Discord server and betting against other members.</p>
+                <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
+                <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
+
+                <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
+                <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
+
+                <!-- Satisfaction Card -->
+                <div class="satisfaction-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>100% Satisfaction</h3>
+                    <p>We aim to provide the best experience for our users in earning Robux on our website and Discord server.</p>
+                </div>
+
+                <!-- Bet and Earn Card -->
+                <a href="https://discord.gg/9YFavvmJKc">
+                    <div class="bet-card">
+                        <img src="https://img.icons8.com/?size=100&id=N4VuU_HmGhBq&format=png&color=000000" alt="Bet and Earn">
+                        <h3>Bet and Earn</h3>
+                        <p>You can earn Robux by running commands in our Discord server and betting against other members.</p>
+                    </div>
+                </a>
+
+                <!-- Invite Rewards Card -->
+                <a href="https://discord.gg/9YFavvmJKc">
+                    <div class="invite-card">
+                        <img src="https://img.icons8.com/?size=100&id=V4ZP9rL1H1hw&format=png&color=000000" alt="Invite Rewards">
+                        <h3>Invite Rewards</h3>
+                        <p>Earn Robux by inviting new users to our Discord server. The more you invite, the more you earn!</p>
+                    </div>
+                </a>
             </div>
-        </a>
-        <a href="https://discord.gg/9YFavvmJKc">
-            <div class="card">
-                <img src="https://img.icons8.com/?size=100&id=V4ZP9rL1H1hw&format=png&color=000000" alt="Invite Rewards">
-                <h3>Invite Rewards</h3>
-                <p>Earn Robux by inviting new users to our Discord server. The more you invite, the more you earn!</p>
+
+            <!-- Video -->
+            <div class="video-section">
+                <p class="arrow">⬇️</p>
+                <h2 class="glow">Watch This Video to Learn More!</h2>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/YgkJoZ6c5cQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-        </a>
+        </div>
     </div>
 
-    <!-- Dropdown Section -->
-    <div class="section dropdown-container">
-        <div class="dropdown" onclick="toggleDropdown(1)">How It Works</div>
-        <div id="dropdown1" class="dropdown-content">Complete surveys, offers or play games to earn robux. All we need is your time!</div>
-
-        <div class="dropdown" onclick="toggleDropdown(2)">Why Choose Us?</div>
-        <div id="dropdown2" class="dropdown-content">We are a legitimate and trustworthy platform with thousands of satisfied users worldwide.</div>
-
-        <div class="dropdown" onclick="toggleDropdown(3)">Instant Withdrawals</div>
-        <div id="dropdown3" class="dropdown-content">Withdraw Robux instantly without needing any password. Fast, simple, secure.</div>
-    </div>
-
-    <!-- Partners Section -->
+    <!-- Partner Section -->
     <div class="section">
         <h2>Our Partners</h2>
         <div class="carousel-container">
@@ -395,27 +390,6 @@
     </div>
 
     <script>
-        function animateStat(id, endValue, duration) {
-            const statElement = document.getElementById(id);
-            let startValue = 0;
-            const increment = Math.ceil(endValue / (duration / 20));
-            const interval = setInterval(() => {
-                startValue += increment;
-                if (startValue >= endValue) {
-                    statElement.textContent = endValue.toLocaleString();
-                    clearInterval(interval);
-                } else {
-                    statElement.textContent = startValue.toLocaleString();
-                }
-            }, 20);
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            animateStat("robux-paid", 20000, 2000);
-            animateStat("users-online", 600, 2000);
-            animateStat("surveys-completed", 3000, 2000);
-        });
-
         function toggleDropdown(id) {
             const dropdownContent = document.getElementById(`dropdown${id}`);
             dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
