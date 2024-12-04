@@ -15,6 +15,59 @@
     <link href="/css/bulma.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
+
+    <!-- Styles for revtoo warning pop up -->
+<style>
+    .popup-modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-content {
+        background: #fff;
+        color: #000;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 400px;
+        width: 80%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .popup-content h3 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: #e9174d;
+    }
+
+    .popup-content p {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .close-btn {
+        background: #e9174d;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .close-btn:hover {
+        background: #b31539;
+    }
+</style>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -394,13 +447,25 @@
                             </a>
                         </div>
                         <div class="column is-3">
-                          <a class="popCard lootably" onclick="openRevtoo()"> <!-- Redirect the user to the offerwall page -->
+                          <a class="popCard lootably" onclick="showPopup()"> <!-- Redirect the user to the offerwall page -->
                               <span class="bubble green">Surveys</span>
                           <img src="https://img.icons8.com/?size=100&id=48164&format=png&color=000000" class="custom-icon" alt="Revtoo Icon">
                           <span>Revtoo (SOON!)</span>
                           </a>
                        </div>
                     </div>
+                    <!-- Popup Modal -->
+    <div id="popupModal" class="popup-modal">
+        <div class="popup-content">
+            <h3>Important!</h3>
+        <p>
+            Revtoo has a history of not rewarding users after some offers. 
+            To check if you have completed a survey, click on "History" in the Revtoo page. 
+            Then head over to our Discord and create a ticket; we will reward you for the offer manually.
+        </p>
+        <button class="close-btn" onclick="proceedToRevtoo()">Ok, I understand</button>
+        </div>
+    </div>
 
                     <!-- Withdraw and Bet Section -->
                     <div class="separator"></div>
@@ -589,6 +654,19 @@
         document.getElementById('overlay').addEventListener('click', toggleSidebar);
     </script>
     <script src="https://kit.fontawesome.com/11277b4f51.js"></script>
+    
+    <script>
+    function showPopup() {
+        // Show the popup modal
+        document.getElementById('popupModal').style.display = 'flex';
+    }
+
+    function proceedToRevtoo() {
+        // Hide the popup modal and open the offerwall
+        document.getElementById('popupModal').style.display = 'none';
+        openRevtoo();
+    }
+</script>   
 </body>
 
 </html>
