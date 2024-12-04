@@ -16,38 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap">
     <style>
     body {
-        background: #1a1a1a;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .logo {
-        position: absolute;
-        width: 50px; /* Adjust size as needed */
-        height: 50px;
-        background: url('https://img.icons8.com/?size=100&id=foK4jpDCReGX&format=png&color=1A1A1A') no-repeat center;
-        background-size: contain;
-        animation: float 10s linear infinite;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .logo:hover {
-        transform: scale(1.5) rotate(360deg);
-    }
-
-    @keyframes float {
-        0% {
-            transform: translateY(100vh) translateX(calc(100vw * var(--x)));
-        }
-        100% {
-            transform: translateY(-10vh) translateX(calc(100vw * var(--x)));
-          }
-      }
-  </style>
-
-
-    <style>
-    body {
         background: linear-gradient(90deg, #d3182f, black);
         background-size: 200% 200%;
         animation: backgroundFade 2s infinite alternate;
@@ -492,18 +460,6 @@
     </div>
 
     <script>
-         // Dynamically create moving logos
-    document.addEventListener("DOMContentLoaded", () => {
-        const body = document.body;
-        for (let i = 0; i < 15; i++) { // Adjust the number of logos
-            const logo = document.createElement("div");
-            logo.className = "logo";
-            logo.style.setProperty("--x", Math.random()); // Random horizontal position
-            logo.style.animationDuration = `${10 + Math.random() * 10}s`; // Random speed
-            body.appendChild(logo);
-         }
-     });
-        
          function animateStat(id, endValue, duration) {
             const statElement = document.getElementById(id);
             let startValue = 0;
