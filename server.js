@@ -217,7 +217,7 @@ app.get('/callback/kiwi', async (req, res) => {
     });
   }
 });
-app.post('/callback/revtoo', async (req, res) => {
+app.get('/callback/revtoo', async (req, res) => {
     const { uid, val } = req.query;
 
     // Validate required parameters
