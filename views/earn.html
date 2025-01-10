@@ -6,7 +6,7 @@
     <title>RBXPRO - Earn Free Robux</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.webp">
     <meta name="description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys!">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <script src="//code.tidio.co/xg5um94pucph8hrtivyqjwwjthqxs0bk.js" async></script>
 
@@ -26,24 +26,31 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--background);
+            background: linear-gradient(135deg, #1a1c2e, #4a1942);
             color: var(--text);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .navbar {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            padding: 1rem;
+            padding: 1.2rem;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         .navbar-content {
@@ -55,56 +62,75 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(to right, #fff, #8B5CF6);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
         }
 
         .nav-balance {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            padding: 0.5rem 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 0.8rem 2rem;
             border-radius: 9999px;
             font-weight: 600;
+            font-size: 1.1rem;
             color: var(--text);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav-balance:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(139, 92, 246, 0.4);
         }
 
         .main-content {
             max-width: 1200px;
-            margin: 6rem auto 2rem;
-            padding: 0 1rem;
+            margin: 7rem auto 2rem;
+            padding: 0 1.5rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
             text-align: center;
+            background: linear-gradient(to right, #fff, #8B5CF6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
+            to { text-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
         }
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
         .card {
-            background: var(--surface);
-            border-radius: 1rem;
-            padding: 1.5rem;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
             text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border);
+            transition: all 0.4s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(12px);
         }
 
         .card::before {
@@ -116,11 +142,14 @@
             height: 100%;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             opacity: 0;
-            transition: 0.3s;
+            transition: 0.4s;
+            z-index: -1;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
         }
 
         .card:hover::before {
@@ -128,95 +157,95 @@
         }
 
         .card img {
-            width: 48px;
-            height: 48px;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            color: var(--muted);
         }
 
         .tag {
             position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            padding: 0.25rem 0.75rem;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 9999px;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            background: var(--primary);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: var(--text);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
         }
 
-        .tag.easy {
-            background: #10B981;
+        .bet-card {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #7928CA, #FF0080);
+            border: none;
         }
 
-        .tag.hard {
-            background: #EF4444;
+        .bet-card::before {
+            background: linear-gradient(45deg, #FF0080, #7928CA);
+        }
+
+        .bet-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 0, 128, 0.3);
         }
 
         .faq-section {
-            max-width: 800px;
-            margin: 3rem auto;
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 2rem;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .faq-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
 
         .faq-item:hover {
             border-color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .faq-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
         }
 
         .faq-item-content {
             display: none;
             margin-top: 1rem;
             color: var(--muted);
-        }
-
-        .popup-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .popup-content {
-            background: var(--surface);
-            color: var(--text);
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-
-        .close-btn {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--text);
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 1rem;
-        }
-
-        .close-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            padding-left: 1rem;
+            border-left: 3px solid var(--primary);
         }
 
         @media (max-width: 768px) {
@@ -225,8 +254,16 @@
                 gap: 1rem;
             }
 
+            .section-title {
+                font-size: 2rem;
+            }
+
             .cards-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -244,37 +281,37 @@
 
     <main class="main-content">
         <h1 class="section-title" id="usernameDisplay">Welcome back!</h1>
-        <p class="text-center mb-8">Complete offers to earn ROBUX! Start earning now! 💰</p>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; color: #a3b1c6;">Complete offers to earn ROBUX! Start earning now! 💰</p>
 
         <section>
             <h2 class="section-title">Featured Offerwalls</h2>
             <div class="cards-grid">
                 <div class="card" onclick="openAytS()">
-                    <span class="tag hard">Hard</span>
+                    <span class="tag">Premium</span>
                     <img src="https://img.icons8.com/fluency/96/survey.png" alt="Kiwiwall">
                     <h3>Kiwiwall</h3>
-                    <p>High-paying surveys</p>
+                    <p>High-paying surveys with instant rewards</p>
                 </div>
 
                 <div class="card" onclick="openBitlab()">
-                    <span class="tag easy">Easy</span>
+                    <span class="tag">Fast</span>
                     <img src="https://img.icons8.com/fluency/96/task-completed.png" alt="Bitlabs">
                     <h3>Bitlabs</h3>
-                    <p>Quick & easy surveys</p>
+                    <p>Quick & easy surveys for instant Robux</p>
                 </div>
 
                 <div class="card" onclick="openCPX()">
-                    <span class="tag easy">Fast</span>
+                    <span class="tag">Reliable</span>
                     <img src="https://img.icons8.com/fluency/96/speed.png" alt="CPX">
                     <h3>CPX Research</h3>
-                    <p>Research surveys</p>
+                    <p>Trusted research surveys with high completion rates</p>
                 </div>
 
                 <div class="card" onclick="showPopup()">
-                    <span class="tag easy">Games</span>
+                    <span class="tag">Popular</span>
                     <img src="https://img.icons8.com/fluency/96/controller.png" alt="Revtoo">
                     <h3>Revtoo</h3>
-                    <p>Game offers</p>
+                    <p>Play games and earn while having fun</p>
                 </div>
             </div>
         </section>
@@ -285,14 +322,17 @@
                 <a class="card" href="/withdraw">
                     <img src="https://img.icons8.com/fluency/96/cash-withdrawal.png" alt="Withdraw">
                     <h3>Withdraw Now</h3>
+                    <p>Cash out your earned Robux instantly</p>
                 </a>
-                <a class="card" href="https://discord.gg/9YFavvmJKc">
+                <a class="card bet-card" href="https://discord.gg/9YFavvmJKc">
                     <img src="https://img.icons8.com/fluency/96/dice.png" alt="Bet">
                     <h3>Bet R$</h3>
+                    <p>Double your Robux with exciting betting games</p>
                 </a>
                 <a class="card" href="/promocode">
                     <img src="https://img.icons8.com/fluency/96/gift.png" alt="Promocode">
                     <h3>Promocode</h3>
+                    <p>Redeem exclusive codes for bonus Robux</p>
                 </a>
             </div>
         </section>
@@ -300,59 +340,112 @@
         <div class="faq-section">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <h3>How do I complete surveys?</h3>
+                <h3>🎯 How do I maximize my earnings through surveys?</h3>
                 <div class="faq-item-content">
-                    To complete surveys you must click on one of our offerwalls and complete any survey for robux. Check our discord, we have a channel for tips on how to qualify for surveys.
+                    To maximize your earnings, we recommend:
+                    • Complete your profile accurately for better targeting
+                    • Take surveys during peak hours (9 AM - 5 PM EST)
+                    • Join our Discord for exclusive earning tips and strategies
+                    • Stay consistent with daily participation
+                    • Check our offerwalls regularly for high-paying opportunities
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <h3>Why did I get disqualified?</h3>
+                <h3>⚡ Why might I get disqualified from surveys?</h3>
                 <div class="faq-item-content">
-                    You might have been disqualified for speeding, not paying attention, using a VPN, or you were not the target our partners were looking for; surveys are usually looking for targets under the age of 29-30.
+                    Survey disqualification can occur due to:
+                    • Inconsistent answers or speeding through questions
+                    • Not matching the target demographic
+                    • Using a VPN or proxy service
+                    • Multiple survey attempts from the same IP
+                    Pro tip: Take your time and answer truthfully for better success rates!
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <h3>Is this actually legit?</h3>
+                <h3>🔒 Is RBXPRO safe and legitimate?</h3>
                 <div class="faq-item-content">
-                    Yes, RBXPRO is legit. We have hundreds of happy users throughout our platform. Check our server for all our testimonials.
+                    Absolutely! RBXPRO is a trusted platform with:
+                    • Over 50,000 active users
+                    • 1,000,000+ Robux paid out
+                    • Verified payment proofs
+                    • 24/7 customer support
+                    • Secure payment processing
+                    Join our Discord to see testimonials from satisfied users!
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <h3>How long does it take to receive Robux?</h3>
+                <h3>⚡ How fast are Robux payouts processed?</h3>
                 <div class="faq-item-content">
-                    Robux are credited to your account instantly after completing offers. You can withdraw immediately once you reach the minimum withdrawal amount.
+                    Our payout system is lightning-fast:
+                    • Instant crediting after offer completion
+                    • Automatic verification system
+                    • 24/7 withdrawal processing
+                    • No manual approval needed
+                    • Minimum withdrawal: only 10 Robux
                 </div>
             </div>
             <div class="faq-item" onclick="toggleFaq(this)">
-                <h3>What is the minimum withdrawal amount?</h3>
+                <h3>💎 What are the best ways to earn on RBXPRO?</h3>
                 <div class="faq-item-content">
-                    The minimum withdrawal amount is 10 Robux. Make sure to join our Discord server for bonus rewards and giveaways!
+                    Maximize your earnings through:
+                    • High-paying surveys on Kiwiwall
+                    • Gaming offers on Revtoo
+                    • Daily bonus rewards
+                    • Referral program
+                    • Special events and promotions
+                    Join our Discord for exclusive earning opportunities!
                 </div>
             </div>
         </div>
     </main>
 
-    <div id="popupModal" class="popup-modal">
-        <div class="popup-content">
-            <h3>Important Notice</h3>
-            <p>
-                Revtoo is our highest paying partner! However, please note that some users might not receive rewards for certain offers. 
-                To verify completion, check the "History" section on the Revtoo page. 
-                If you need assistance, join our Discord and create a ticket - we'll manually reward verified completions!
-            </p>
-            <button class="close-btn" onclick="proceedToRevtoo()">I Understand 🎮</button>
-        </div>
-    </div>
-
     <script>
         function toggleFaq(element) {
             const content = element.querySelector('.faq-item-content');
+            const allContent = document.querySelectorAll('.faq-item-content');
+            
+            allContent.forEach(item => {
+                if (item !== content) {
+                    item.style.display = 'none';
+                }
+            });
+            
             content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            
+            if (content.style.display === 'block') {
+                content.style.opacity = '0';
+                content.style.transform = 'translateY(-10px)';
+                content.style.transition = 'all 0.3s ease';
+                setTimeout(() => {
+                    content.style.opacity = '1';
+                    content.style.transform = 'translateY(0)';
+                }, 50);
+            }
         }
 
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
+        function loadUserData() {
+            const token = localStorage.getItem('sessionToken');
+            if (token) {
+                fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
+                    
+                    balance.innerHTML = `<i class="fas fa-coins"></i><span>${data.balance} R$</span>`;
+                    nameDisplay.textContent = `Welcome, ${data.username}! 👋`;
+                })
+                .catch(error => {
+                    window.location.href = '/login';
+                });
+            } else {
+                window.location.href = '/login';
+            }
         }
 
         function openBitlab() {
@@ -375,45 +468,8 @@
             window.open(`https://revtoo.com/offerwall/7qs77ssmyowsfwbw6uyd49zdxwob56/${token}`, '_blank');
         }
 
-        function showPopup() {
-            document.getElementById('popupModal').style.display = 'flex';
-        }
-
-        function proceedToRevtoo() {
-            document.getElementById('popupModal').style.display = 'none';
-            openRevtoo();
-        }
-
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': token
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
-
-                    balance.textContent = `${data.balance} R$`;
-                    nameDisplay.textContent = `Welcome, ${data.username}!`;
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                });
-            } else {
-                window.location.href = '/login';
-            }
-        }
-
         setInterval(loadUserData, 1000);
-
-        document.addEventListener('DOMContentLoaded', function() {
-            loadUserData();
-        });
+        document.addEventListener('DOMContentLoaded', loadUserData);
     </script>
 </body>
 </html>
