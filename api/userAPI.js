@@ -165,11 +165,6 @@ router.post('/withdraw', async (req, res) => {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
   }
 
-  // Validate the gamepass link format
-  if (!gpLink.startsWith("https://www.roblox.com/")) {
-    return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
-  }
-
   // Check if user exists
   const userData = await checkUserExists(userID);
   if (!userData) {
