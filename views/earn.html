@@ -537,10 +537,13 @@
             const token = localStorage.getItem('sessionToken');
             window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
         }
-        function openRevtoo() {
-            const token = localStorage.getItem('sessionToken');
-            window.open(`https://revtoo.com/offerwall/7qs77ssmyowsfwbw6uyd49zdxwob56/${token}`, '_blank');
-        }
+function openRevtoo() {
+    const token = localStorage.getItem('sessionToken');
+    const userConfirmed = confirm("If you do not get rewarded, please join our Discord. Press OK to continue.");
+    if (userConfirmed) {
+        window.open(`https://revtoo.com/offerwall/7qs77ssmyowsfwbw6uyd49zdxwob56/${token}`, '_blank');
+    }
+}
         setInterval(loadUserData, 1000);
         document.addEventListener('DOMContentLoaded', loadUserData);      
     </script>
