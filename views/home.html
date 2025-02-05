@@ -47,16 +47,28 @@
     
     
     
-    .hero {
+  .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     padding-top: 80px;
-    background-image: url('https://i.pinimg.com/736x/89/a0/9d/89a09d41838a9dd3235fc5c4aefca79b.jpg'); /* Add your image URL */
-    background-size: cover; /* Cover the entire section */
-    background-position: center; /* Center the image */
+    background-image: url('https://i.pinimg.com/736x/89/a0/9d/89a09d41838a9dd3235fc5c4aefca79b.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+    z-index: 1; /* Ensure it's above the background but below the content */
+    filter: blur(5px); /* Optional: blur effect for softer edges */
 }
     
     
@@ -558,12 +570,12 @@
           <p>Challenge others in thrilling betting games with massive payouts!</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">💎</div>
+          <div class="feature-icon">💰</div>
           <h3>Coin Flip Pro</h3>
           <p>Double your earnings instantly with our premium coin flip game!</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🏆</div>
+          <div class="feature-icon">🔥</div>
           <h3>Survey Rewards</h3>
           <p>Complete quick surveys for instant Robux rewards.</p>
         </div>
@@ -576,15 +588,15 @@
 
       <div class="stats-container">
         <div class="stat-box">
-          <div class="stat-number">$1.2M+</div>
+          <div class="stat-number">40k R$</div>
           <div class="stat-label">Total Paid Out</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number">50K+</div>
+          <div class="stat-number">1k+</div>
           <div class="stat-label">Active Users</div>
         </div>
         <div class="stat-box">
-          <div class="stat-number">$25K+</div>
+          <div class="stat-number">200 R$</div>
           <div class="stat-label">Daily Earnings</div>
         </div>
       </div>
@@ -593,7 +605,7 @@
         <h2 class="testimonials-title">What Our Users Say</h2>
         <div class="testimonials-grid">
           <div class="testimonial-card">
-            <p class="testimonial-content">"Won like 200 Robux in my first day! The betting system is super easy to use and payouts are instant!"</p>
+            <p class="testimonial-content">"Won like 200 Robux in my first day! The surveys are super easy to do and payouts are instant!"</p>
             <div class="testimonial-author">@Dadawgonefr34</div>
             <div class="testimonial-rating">★★★★★</div>
           </div>
@@ -603,7 +615,7 @@
             <div class="testimonial-rating">★★★★★</div>
           </div>
           <div class="testimonial-card">
-            <p class="testimonial-content">"Started with free points and turned them into real Robux. thing is legit"</p>
+            <p class="testimonial-content">"Started with free points and withdrew them into real Robux. thing is legit"</p>
             <div class="testimonial-author">@Red label1</div>
             <div class="testimonial-rating">★★★★★</div>
           </div>
@@ -684,3 +696,5 @@
     </script>
   </body>
 </html>
+
+
