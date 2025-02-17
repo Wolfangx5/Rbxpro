@@ -3,50 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RBXPRO - Earn Free Robux</title>
+    <title>RBXPRO - Premium Earning Platform</title>
     <link rel="icon" href="https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.webp">
-    <meta name="description" content="Visit RbxPro and earn your free robux now! Earn robux by playing games and surveys!">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Earn rewards on RbxPro - The premier platform for earning through engaging activities and surveys.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <script src="//code.tidio.co/xg5um94pucph8hrtivyqjwwjthqxs0bk.js" async></script>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <style>
         :root {
-            --primary: #8B5CF6;
-            --primary-dark: #7C3AED;
-            --secondary: #EC4899;
-            --background: #0F172A;
-            --surface: #1E293B;
-            --text: #F8FAFC;
-            --muted: #64748B;
-            --border: #334155;
+            --primary: #9b87f5;
+            --primary-light: #b8a4ff;
+            --primary-dark: #7E69AB;
+            --accent: #E5DEFF;
+            --background: #0a0b0f;
+            --surface: #151722;
+            --text: #ffffff;
+            --text-muted: #a0a5b1;
+            --border: rgba(255, 255, 255, 0.1);
+            --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #1a1c2e, #4a1942);
+            background: var(--background);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
         }
         .navbar {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 11, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            padding: 1.2rem;
-            animation: slideDown 0.5s ease;
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+            padding: 1rem;
         }
         .navbar-content {
             max-width: 1200px;
@@ -54,15 +51,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 1.5rem;
         }
         .logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(to right, #fff, #8B5CF6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
         }
         .nav-links {
             display: flex;
@@ -70,35 +66,35 @@
             align-items: center;
         }
         .nav-button {
-            padding: 0.8rem 1.5rem;
-            border-radius: 9999px;
+            padding: 0.7rem 1.4rem;
+            border-radius: 12px;
             font-weight: 600;
+            font-size: 0.95rem;
             color: var(--text);
             text-decoration: none;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
         }
         .nav-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
         }
         .nav-balance {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            padding: 0.8rem 2rem;
-            border-radius: 9999px;
+            background: var(--card-gradient);
+            padding: 0.7rem 1.4rem;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 1.1rem;
             color: var(--text);
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
         .nav-balance:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(139, 92, 246, 0.4);
+            transform: translateY(-1px);
+            border-color: var(--primary);
         }
         .main-content {
             max-width: 1200px;
@@ -106,96 +102,76 @@
             padding: 0 1.5rem;
         }
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 2rem;
             text-align: center;
-            background: linear-gradient(to right, #fff, #8B5CF6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(139, 92, 246, 0.5); }
-            to { text-shadow: 0 0 30px rgba(139, 92, 246, 0.8); }
+            color: var(--text);
+            letter-spacing: -0.5px;
         }
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 4rem;
         }
         .card {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem;
-            padding: 2rem;
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem;
             text-align: center;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(12px);
         }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            opacity: 0;
-            transition: 0.4s;
-            z-index: -1;
-        }
         .card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(139, 92, 246, 0.5);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2);
-        }
-        .card:hover::before {
-            opacity: 0.1;
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+            box-shadow: 0 8px 30px rgba(155, 135, 245, 0.1);
         }
         .card img {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             margin-bottom: 1.5rem;
             transition: transform 0.3s ease;
+            filter: invert(1);
         }
         .card:hover img {
             transform: scale(1.1);
         }
         .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            font-weight: 600;
         }
         .card p {
-            font-size: 1.1rem;
-            color: var(--muted);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
         }
         .tag {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: var(--primary);
             color: var(--text);
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            letter-spacing: 0.2px;
         }
         .bet-section {
             width: 100%;
-            margin: 2rem 0 4rem;
-            padding: 4rem;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS72Z1FUInhu0pG5oF5J7aVBA8fYPCSNc4eLQ&s');
-            background-size: cover;
-            background-position: center;
-            border-radius: 1rem;
+            margin: 3rem 0;
+            padding: 4rem 2rem;
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -205,82 +181,77 @@
             z-index: 2;
         }
         .bet-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            color: var(--text);
+            letter-spacing: -0.5px;
         }
         .bet-description {
-            font-size: 1.5rem;
-            color: #fff;
+            font-size: 1.2rem;
+            color: var(--text-muted);
             margin-bottom: 2rem;
-            max-width: 800px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         .bet-button {
             display: inline-block;
-            padding: 1.2rem 3rem;
-            font-size: 1.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #fff;
-            background: linear-gradient(45deg, #7928CA, #FF0080);
+            color: var(--text);
+            background: var(--primary);
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
         }
         .bet-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.3);
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
         .faq-section {
-            max-width: 900px;
+            max-width: 800px;
             margin: 4rem auto;
             padding: 2rem;
-            background: rgba(30, 41, 59, 0.8);
-            border-radius: 2rem;
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .faq-item {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         .faq-item:hover {
-            border-color: var(--primary);
-            transform: translateX(10px);
+            border-color: var(--primary-light);
         }
         .faq-item h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #fff;
+            color: var(--text);
         }
         .faq-item-content {
             display: none;
             margin-top: 1rem;
-            color: var(--muted);
-            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
             line-height: 1.7;
             padding-left: 1rem;
-            border-left: 3px solid var(--primary);
+            border-left: 2px solid var(--primary);
         }
         .footer {
             text-align: center;
             padding: 2rem;
-            background: rgba(0, 0, 0, 0.3);
+            background: var(--surface);
             margin-top: 4rem;
+            border-top: 1px solid var(--border);
         }
         .footer p {
-            color: var(--muted);
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
         @media (max-width: 768px) {
@@ -292,32 +263,49 @@
                 flex-direction: column;
                 width: 100%;
             }
-            .nav-button {
+            .nav-button, .nav-balance {
                 width: 100%;
                 text-align: center;
+                justify-content: center;
             }
             .section-title {
-                font-size: 2rem;
-            }
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            .bet-section {
-                padding: 2rem;
+                font-size: 1.8rem;
             }
             .bet-title {
                 font-size: 2rem;
             }
             .bet-description {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
+            .bet-section {
+                padding: 2rem 1rem;
+            }
+        }
+        .gaming-card {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .gaming-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 16px;
+        }
+        .gaming-card > * {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-content">
-            <div class="logo">RBXPRO</div>
+            <a href="/" class="logo">RBXPRO</a>
             <div class="nav-links">
                 <a href="https://rbxpro.site/withdraw" class="nav-button">Withdraw now!</a>
                 <div class="nav-balance" id="rbxbalance">
@@ -389,7 +377,6 @@
         </div>
     </div>
 </section>
-
    
         <section>
             <h2 class="section-title">Quick Actions</h2>
@@ -549,7 +536,6 @@ function openRevtoo() {
     </script>
 </body>
 </html>
-
 
 
 
