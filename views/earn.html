@@ -23,18 +23,21 @@
             --border: rgba(255, 255, 255, 0.1);
             --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
+
         body {
             background: var(--background);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
         }
+
         .navbar {
             background: rgba(10, 11, 15, 0.8);
             backdrop-filter: blur(20px);
@@ -45,6 +48,7 @@
             z-index: 100;
             padding: 1rem;
         }
+
         .navbar-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -53,6 +57,7 @@
             align-items: center;
             padding: 0 1.5rem;
         }
+
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
@@ -60,11 +65,13 @@
             text-decoration: none;
             letter-spacing: -0.5px;
         }
+
         .nav-links {
             display: flex;
             gap: 1.5rem;
             align-items: center;
         }
+
         .nav-button {
             padding: 0.7rem 1.4rem;
             border-radius: 12px;
@@ -76,10 +83,12 @@
             background: var(--card-gradient);
             border: 1px solid var(--border);
         }
+
         .nav-button:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-1px);
         }
+
         .nav-balance {
             background: var(--card-gradient);
             padding: 0.7rem 1.4rem;
@@ -92,15 +101,18 @@
             gap: 0.8rem;
             transition: all 0.3s ease;
         }
+
         .nav-balance:hover {
             transform: translateY(-1px);
             border-color: var(--primary);
         }
+
         .main-content {
             max-width: 1200px;
             margin: 7rem auto 2rem;
             padding: 0 1.5rem;
         }
+
         .section-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -109,12 +121,14 @@
             color: var(--text);
             letter-spacing: -0.5px;
         }
+
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 4rem;
         }
+
         .card {
             background: var(--card-gradient);
             border: 1px solid var(--border);
@@ -127,11 +141,13 @@
             overflow: hidden;
             backdrop-filter: blur(12px);
         }
+
         .card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-light);
             box-shadow: 0 8px 30px rgba(155, 135, 245, 0.1);
         }
+
         .card img {
             width: 56px;
             height: 56px;
@@ -139,20 +155,24 @@
             transition: transform 0.3s ease;
             filter: invert(1);
         }
+
         .card:hover img {
             transform: scale(1.1);
         }
+
         .card h3 {
             font-size: 1.3rem;
             margin-bottom: 0.8rem;
             color: var(--text);
             font-weight: 600;
         }
+
         .card p {
             font-size: 0.95rem;
             color: var(--text-muted);
             line-height: 1.5;
         }
+
         .tag {
             position: absolute;
             top: 1rem;
@@ -165,6 +185,7 @@
             color: var(--text);
             letter-spacing: 0.2px;
         }
+
         .bet-section {
             width: 100%;
             margin: 3rem 0;
@@ -176,10 +197,12 @@
             position: relative;
             overflow: hidden;
         }
+
         .bet-content {
             position: relative;
             z-index: 2;
         }
+
         .bet-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -187,6 +210,7 @@
             color: var(--text);
             letter-spacing: -0.5px;
         }
+
         .bet-description {
             font-size: 1.2rem;
             color: var(--text-muted);
@@ -195,6 +219,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .bet-button {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -208,15 +233,18 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
+
         .bet-button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
         }
+
         .faq-section {
             max-width: 800px;
             margin: 4rem auto;
             padding: 2rem;
         }
+
         .faq-item {
             background: var(--card-gradient);
             border: 1px solid var(--border);
@@ -226,14 +254,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+
         .faq-item:hover {
             border-color: var(--primary-light);
         }
+
         .faq-item h3 {
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--text);
         }
+
         .faq-item-content {
             display: none;
             margin-top: 1rem;
@@ -243,6 +274,7 @@
             padding-left: 1rem;
             border-left: 2px solid var(--primary);
         }
+
         .footer {
             text-align: center;
             padding: 2rem;
@@ -250,10 +282,12 @@
             margin-top: 4rem;
             border-top: 1px solid var(--border);
         }
+
         .footer p {
             color: var(--text-muted);
             font-size: 0.9rem;
         }
+
         @media (max-width: 768px) {
             .navbar-content {
                 flex-direction: column;
@@ -281,11 +315,21 @@
                 padding: 2rem 1rem;
             }
         }
+
         .gaming-card {
             background-size: cover;
             background-position: center;
             position: relative;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .gaming-card::before {
             content: '';
             position: absolute;
@@ -293,12 +337,70 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.95) 0%, 
+                rgba(0, 0, 0, 0.7) 50%, 
+                rgba(0, 0, 0, 0.4) 100%);
             border-radius: 16px;
+            z-index: 1;
         }
+
         .gaming-card > * {
             position: relative;
-            z-index: 1;
+            z-index: 2;
+        }
+
+        .gaming-card img {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            filter: brightness(1);
+        }
+
+        .gaming-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .gaming-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .gaming-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gaming-card .tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .gaming-card {
+                height: 240px;
+                padding: 1.5rem;
+            }
+
+            .gaming-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .gaming-card p {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -347,37 +449,35 @@
                 </div>
             </div>
         </section>
-<section>
-    </div>
-    <h2 class="section-title">Gaming Zone</h2>
-    <div class="cards-grid">
-        <div class="card gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM77u27hrsy9gpZNL-rDmrj7qBUFilbj37gw&s'); background-size: cover; background-position: center; cursor: pointer;">
-            <span class="tag">Popular</span>
-            <img src="https://img.icons8.com/fluency/96/coins.png" alt="Coinflip">
-            <h3>Coinflip</h3>
-            <p>Double your Robux with 50/50 chances!</p>
-        </div>
-        <div class="card gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE4oNBkcI5yd6PBBwt80jPMU4n2iu0IuokTA&s'); background-size: cover; background-position: center; cursor: pointer;">
-            <span class="tag">High Stakes</span>
-            <img src="https://img.icons8.com/fluency/96/roulette.png" alt="Roulette">
-            <h3>Roulette</h3>
-            <p>Spin the wheel of fortune!</p>
-        </div>
-        <div class="card gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://www.creativefabrica.com/wp-content/uploads/2022/11/02/Roblox-Background-44348657-1.png'); background-size: cover; background-position: center; cursor: pointer;">
-            <span class="tag">Strategy</span>
-            <img src="https://img.icons8.com/?size=100&id=8I9gsuIEbyvE&format=png&color=000000" alt="Cups">
-            <h3>Cups Battle</h3>
-            <p>Find the hidden prize!</p>
-        </div>
-        <div class="card gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop'); background-size: cover; background-position: center; cursor: pointer;">
-            <span class="tag">Daily</span>
-            <img src="https://img.icons8.com/fluency/96/gift.png" alt="Daily">
-            <h3>Daily Bonus</h3>
-            <p>Claim your free daily reward!</p>
-        </div>
-    </div>
-</section>
-   
+        <section>
+            <h2 class="section-title">Gaming Zone</h2>
+            <div class="cards-grid">
+                <div class="gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM77u27hrsy9gpZNL-rDmrj7qBUFilbj37gw&s');">
+                    <span class="tag">Popular</span>
+                    <img src="https://img.icons8.com/fluency/96/coins.png" alt="Coinflip">
+                    <h3>Coinflip</h3>
+                    <p>Double your Robux with 50/50 chances!</p>
+                </div>
+                <div class="gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE4oNBkcI5yd6PBBwt80jPMU4n2iu0IuokTA&s');">
+                    <span class="tag">High Stakes</span>
+                    <img src="https://img.icons8.com/fluency/96/roulette.png" alt="Roulette">
+                    <h3>Roulette</h3>
+                    <p>Spin the wheel of fortune!</p>
+                </div>
+                <div class="gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: url('https://www.creativefabrica.com/wp-content/uploads/2022/11/02/Roblox-Background-44348657-1.png');">
+                    <span class="tag">Strategy</span>
+                    <img src="https://img.icons8.com/?size=100&id=8I9gsuIEbyvE&format=png&color=000000" alt="Cups">
+                    <h3>Cups Battle</h3>
+                    <p>Find the hidden prize!</p>
+                </div>
+                <div class="gaming-card" onclick="location.href='https://discord.gg/9YFavvmJKc';" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop');">
+                    <span class="tag">Daily</span>
+                    <img src="https://img.icons8.com/fluency/96/gift.png" alt="Daily">
+                    <h3>Daily Bonus</h3>
+                    <p>Claim your free daily reward!</p>
+                </div>
+            </div>
+        </section>
         <section>
             <h2 class="section-title">Quick Actions</h2>
             <div class="cards-grid">
@@ -524,19 +624,18 @@
             const token = localStorage.getItem('sessionToken');
             window.open(`https://wall.cpx-research.com/index.php?app_id=21882&ext_user_id=${token}`, '_blank');
         }
-function openRevtoo() {
-    const token = localStorage.getItem('sessionToken');
-    const userConfirmed = confirm("If Revtoo does not reward you, join our discord we will reward you manually (must show as credited in history) Press OK to continue.");
-    if (userConfirmed) {
-        window.open(`https://revtoo.com/offerwall/7qs77ssmyowsfwbw6uyd49zdxwob56/${token}`, '_blank');
-    }
-}
+        function openRevtoo() {
+            const token = localStorage.getItem('sessionToken');
+            const userConfirmed = confirm("If Revtoo does not reward you, join our discord we will reward you manually (must show as credited in history) Press OK to continue.");
+            if (userConfirmed) {
+                window.open(`https://revtoo.com/offerwall/7qs77ssmyowsfwbw6uyd49zdxwob56/${token}`, '_blank');
+            }
+        }
         setInterval(loadUserData, 1000);
         document.addEventListener('DOMContentLoaded', loadUserData);      
     </script>
 </body>
 </html>
-
 
 
 
