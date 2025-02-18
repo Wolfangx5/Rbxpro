@@ -17,6 +17,58 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+                /* Blur effect when popup is active */
+        .blurred {
+            filter: blur(8px);
+            pointer-events: none;
+        }
+        
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .popup-content {
+            background: #222;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            color: #fff;
+        }
+        
+        .popup-content h2 {
+            color: #8B5CF6;
+            margin-bottom: 15px;
+        }
+        
+        .popup-content button {
+            background: linear-gradient(135deg, #8B5CF6, #D946EF);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        
+        .popup-content button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4);
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #2609e0, #e80c9f);
@@ -331,6 +383,15 @@
         </div>
     </nav>
 
+        <!-- Withdrawal Restriction Popup -->
+    <div id="withdrawPopup" class="popup-overlay">
+        <div class="popup-content">
+            <h2>Action Required!</h2>
+            <p>You must complete a daily offer or survey before withdrawing your Robux funds. Please check our server for more information.</p>
+            <button onclick="closeWithdrawPopup()">I Understand</button>
+        </div>
+    </div>
+
     <div class="container mb-4 mt-4"></div>
     <div class="columns is-centered mb-4 mt-4">
         <div class="column is-half">
@@ -410,6 +471,16 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('page-content').classList.add('blurred');
+            document.getElementById('withdrawPopup').style.display = 'flex';
+        });
+
+        function closeWithdrawPopup() {
+            document.getElementById('withdrawPopup').style.display = 'none';
+            document.getElementById('page-content').classList.remove('blurred');
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
