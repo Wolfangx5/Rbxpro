@@ -8,73 +8,16 @@
     <meta name="theme-color" content="#8B5CF6">
     <meta name="keywords" content="free robux, robux, roblox, earn robux, roblox free robux">
     
-    <script src="//code.tidio.co/xg5um94pucph8hrtivyqjwwjthqxs0bk.js" async></script>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
-    
-    
-    <div class="hero">
-    <div class="overlay"></div> <!-- Add this line -->
-    <div class="hero-content">
-        <div class="typewriter" id="typewriter"></div>
-        <a href="https://rbxpro.site/earn" class="cta-button">Start Earning R$ Now!</a>
-    </div>
-</div>
-    
-    
-    
-    
-    
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-    .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
-    z-index: 1; /* Ensure it's above the background but below the content */
-}
-    
-    
-    
-    
-    
-    
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding-top: 80px;
-    background-image: url('https://i.pinimg.com/736x/89/a0/9d/89a09d41838a9dd3235fc5c4aefca79b.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3); /* Dark overlay */
-    z-index: 1; /* Ensure it's above the background but below the content */
-    filter: blur(5px); /* Optional: blur effect for softer edges */
-}
-    
-    
-    
-    
-    
       * {
         margin: 0;
         padding: 0;
@@ -82,51 +25,11 @@
       }
 
       body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Playfair Display', serif;
         background-color: black;
         color: #ffffff;
         line-height: 1.6;
         overflow-x: hidden;
-        position: relative;
-      }
-
-      /* Animated Background */
-      .particles {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .particle {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        background-image: url('https://i.pinimg.com/736x/89/a0/9d/89a09d41838a9dd3235fc5c4aefca79b.jpg');
-        background-size: contain;
-        background-repeat: no-repeat;
-        opacity: 0.15;
-        animation: float 15s linear infinite;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translate(var(--start-x), var(--start-y)) rotate(0deg);
-          opacity: 0;
-        }
-        10% {
-          opacity: 0.15;
-        }
-        90% {
-          opacity: 0.15;
-        }
-        100% {
-          transform: translate(var(--end-x), var(--end-y)) rotate(360deg);
-          opacity: 0;
-        }
       }
 
       .navbar {
@@ -135,35 +38,27 @@
         left: 0;
         right: 0;
         padding: 1.2rem;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(12px);
         display: flex;
         justify-content: space-between;
         align-items: center;
         z-index: 1000;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .nav-logo {
-        font-family: 'Poppins', sans-serif;
-        font-size: 2rem;
-        font-weight: 700;
-        color: #ffffff;
-        text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-        letter-spacing: 1px;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
       }
 
-      .nav-logo::before {
-        content: '';
-        display: inline-block;
+      .nav-logo img {
         width: 32px;
         height: 32px;
-        background-image: url('https://cdn.discordapp.com/icons/1196478872150097990/5a4e9f646dd92bd9562e2bf37f86ebb1.png?size=4096');
-        background-size: contain;
-        background-repeat: no-repeat;
       }
 
       .nav-links {
@@ -173,51 +68,17 @@
 
       .nav-button {
         padding: 0.8rem 1.8rem;
-        border: 2px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 50px;
         color: #fff;
         background: rgba(255, 255, 255, 0.1);
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        font-weight: 600;
-        letter-spacing: 0.5px;
         text-decoration: none;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .nav-button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: 0.5s;
-      }
-
-      .nav-button:hover::before {
-        left: 100%;
+        transition: all 0.3s ease;
       }
 
       .nav-button:hover {
         background: rgba(255, 255, 255, 0.2);
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 1;
       }
 
       .hero {
@@ -227,216 +88,131 @@
         justify-content: center;
         position: relative;
         padding-top: 80px;
+        background-image: url('https://i.pinimg.com/736x/89/a0/9d/89a09d41838a9dd3235fc5c4aefca79b.jpg');
+        background-size: cover;
+        background-position: center;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
+        backdrop-filter: blur(8px);
       }
 
       .hero-content {
-        text-align: center;
+        position: relative;
         z-index: 2;
-        animation: fadeIn 1s ease-out;
+        text-align: center;
+        max-width: 800px;
+        padding: 0 20px;
       }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .typewriter {
-        font-family: 'Poppins', sans-serif;
-        font-size: 4.5rem;
+      .hero-title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
         font-weight: 800;
-        margin-bottom: 2.5rem;
-        min-height: 150px;
+        margin-bottom: 1.5rem;
         background: linear-gradient(to right, #ffffff, #8B5CF6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        position: relative;
-        animation: glow 2s ease-in-out infinite alternate;
-        letter-spacing: -1px;
-        line-height: 1.2;
+        animation: fadeIn 1s ease-out;
       }
 
-      @keyframes glow {
-        from {
-          text-shadow: 0 0 20px rgba(139, 92, 246, 0.5),
-                       0 0 30px rgba(139, 92, 246, 0.5);
-        }
-        to {
-          text-shadow: 0 0 30px rgba(139, 92, 246, 0.8),
-                       0 0 40px rgba(139, 92, 246, 0.8),
-                       0 0 50px rgba(139, 92, 246, 0.4);
-        }
+      .hero-subtitle {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+        color: #e0e0e0;
+        margin-bottom: 2rem;
+        animation: fadeIn 1s ease-out 0.3s backwards;
       }
 
       .cta-button {
         display: inline-block;
         padding: 1.2rem 2.8rem;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: bold;
         color: white;
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid rgba(255, 255, 255, 0.4);
+        background: linear-gradient(135deg, #8B5CF6, #6366F1);
+        border: none;
         border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         text-decoration: none;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cta-button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.3),
-          transparent
-        );
-        transition: 0.5s;
-      }
-
-      .cta-button:hover::before {
-        left: 100%;
+        transition: all 0.3s ease;
+        animation: fadeIn 1s ease-out 0.6s backwards;
       }
 
       .cta-button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        background: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
       }
 
       .features-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
-        margin-top: 4rem;
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
       .feature-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        padding: 2.5rem;
-        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2rem;
         text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .feature-card.premium {
-        background: rgba(255, 255, 255, 0.15);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-      }
-
-      .feature-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: 0.5s;
-      }
-
-      .feature-card:hover::before {
-        left: 100%;
+        transition: all 0.3s ease;
       }
 
       .feature-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.1);
       }
 
       .feature-icon {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
-        position: relative;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
       }
 
-      .feature-icon::after {
-        content: '';
-        position: absolute;
-        width: 80px;
-        height: 80px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: -1;
-      }
-
-      .premium-tag {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: linear-gradient(135deg, #8B5CF6, #e80c9f);
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+      .feature-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #8B5CF6;
       }
 
       .stats-container {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 2rem;
-        margin: 4rem auto;
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
       }
 
       .stat-box {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        padding: 2.5rem;
-        border-radius: 24px;
         text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .stat-box:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
       }
 
       .stat-number {
-        font-family: 'Poppins', sans-serif;
-        font-size: 2.8rem;
+        font-size: 2.5rem;
         font-weight: 700;
-        background: linear-gradient(to right, #ffffff, #8B5CF6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #8B5CF6;
         margin-bottom: 0.5rem;
       }
 
       .testimonials {
-        margin: 4rem auto;
+        padding: 4rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
       .testimonials-title {
         text-align: center;
-        font-family: 'Poppins', sans-serif;
-        font-size: 2.8rem;
-        font-weight: 700;
+        font-size: 2.5rem;
         margin-bottom: 3rem;
         background: linear-gradient(to right, #ffffff, #8B5CF6);
         -webkit-background-clip: text;
@@ -450,84 +226,58 @@
       }
 
       .testimonial-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        padding: 2.5rem;
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .testimonial-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 2rem;
       }
 
       .testimonial-content {
         font-style: italic;
-        margin-bottom: 1.5rem;
-        font-size: 1.1rem;
-        line-height: 1.7;
+        margin-bottom: 1rem;
       }
 
       .testimonial-author {
-        font-weight: 600;
         color: #8B5CF6;
-        font-size: 1.1rem;
+        font-weight: 600;
       }
 
-      .testimonial-rating {
-        color: #FFD700;
-        margin-top: 0.8rem;
-        font-size: 1.2rem;
+      .rating {
+        color: gold;
+        margin-top: 0.5rem;
       }
 
       .footer {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        padding: 3rem 0;
-        margin-top: 4rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 2rem;
         text-align: center;
-      }
-
-      .footer-text {
-        color: #ffffff;
-        opacity: 0.9;
-        font-size: 1rem;
-        margin: 0.8rem 0;
+        margin-top: 4rem;
       }
 
       .disclaimer {
-        color: #ffffff;
-        opacity: 0.7;
+        color: rgba(255, 255, 255, 0.5);
         font-size: 0.9rem;
-        margin-top: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @media (max-width: 768px) {
-        .navbar {
-          padding: 1rem;
-        }
-
         .nav-links {
           display: none;
         }
 
-        .typewriter {
-          font-size: 2.5rem;
-          min-height: 100px;
-        }
-
-        .cta-button {
-          padding: 1rem 2rem;
-          font-size: 1.2rem;
+        .hero-content {
+          padding: 0 1rem;
         }
 
         .features-grid,
@@ -535,179 +285,96 @@
         .testimonials-grid {
           grid-template-columns: 1fr;
         }
-
-        .stat-number {
-          font-size: 2.2rem;
-        }
-
-        .testimonials-title {
-          font-size: 2.2rem;
-        }
       }
     </style>
   </head>
   <body>
-    <!-- Animated Background -->
-    <div class="particles" id="particles"></div>
-
     <nav class="navbar">
-      <div class="nav-logo">RBXPRO</div>
+      <div class="nav-logo">
+        <img src="https://files.oaiusercontent.com/file-2nBpTAzjoeucU81aSsJTXV?se=2025-02-19T17%3A01%3A40Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Drbxpro%2520original.png&sig=LQiuqYjtodr/GJei5N50Pj0hd%2B7G7SLq/sx07cG3vvc%3D" alt="RBXPRO Logo">
+        RBXPRO
+      </div>
       <div class="nav-links">
-        <a href="https://rbxpro.site/login" class="nav-button">Login</a>
-        <a href="https://youtu.be/rzxks5rFCEw" class="nav-button">Learn About Us</a>
-        <a href="https://rbxpro.site/terms.html" class="nav-button">Terms of Service</a>
+        <a href="/login" class="nav-button">Login</a>
+        <a href="/about" class="nav-button">Learn About Us</a>
+        <a href="/terms" class="nav-button">Terms of Service</a>
       </div>
     </nav>
 
-  
-
-    <div class="container">
-      <div class="features-grid">
-        <div class="feature-card premium">
-          <div class="premium-tag">MOST POPULAR</div>
-          <div class="feature-icon">🎮</div>
-          <h3>Play games</h3>
-          <p>Challenge others in thrilling minigames with massive payouts in our discord!</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💰</div>
-          <h3>Download games</h3>
-          <p>Double your earnings instantly by downloading games and getting robux from doing so!</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🔥</div>
-          <h3>Survey Rewards</h3>
-          <p>Complete quick surveys for instant Robux rewards.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌟</div>
-          <h3>Daily Bonuses</h3>
-          <p>Claim increasing rewards every day you log in!</p>
-        </div>
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">
+    Earn Robux for doing SIMPLE tasks
+    <img src="https://img.icons8.com/?size=100&id=pEs9fON9hq9x&format=png&color=000000" alt="Logo" style="width: 110px; vertical-align: middle; margin-right: 10px;">
+</h1>
+</h1>
+        <p class="hero-subtitle">Complete surveys, play games, and more to earn Robux instantly!</p>
+        <a href="/earn" class="cta-button">Start Earning R$ Now!</a>
       </div>
+    </section>
 
-      <div class="stats-container">
-        <div class="stat-box">
-          <div class="stat-number">40k R$</div>
-          <div class="stat-label">Total Paid Out</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">1k+</div>
-          <div class="stat-label">Active Users</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">200 R$</div>
-          <div class="stat-label">Daily Earnings</div>
-        </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3 class="feature-title">Play games</h3>
+        <p>Challenge others in thrilling minigames with massive payouts in our discord!</p>
       </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3 class="feature-title">Download games</h3>
+        <p>Double your earnings instantly by downloading games and getting robux from doing so!</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3 class="feature-title">Survey Rewards</h3>
+        <p>Complete quick surveys for instant Robux rewards.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌟</div>
+        <h3 class="feature-title">Daily Bonuses</h3>
+        <p>Claim increasing rewards every day you log in!</p>
+      </div>
+    </div>
 
-      <div class="testimonials">
-        <h2 class="testimonials-title">What Our Users Say</h2>
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <p class="testimonial-content">"Won like 200 Robux in my first day! The surveys are super easy to do and payouts are instant!"</p>
-            <div class="testimonial-author">@Dadawgonefr34</div>
-            <div class="testimonial-rating">★★★★★</div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-content">"Best platform I've used. Made around 400 so far"</p>
-            <div class="testimonial-author">@bestypricncess</div>
-            <div class="testimonial-rating">★★★★★</div>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-content">"Started with free points and withdrew them into real Robux. thing is legit"</p>
-            <div class="testimonial-author">@Red label1</div>
-            <div class="testimonial-rating">★★★★★</div>
-          </div>
+    <div class="stats-container">
+      <div class="stat-box">
+        <div class="stat-number">40k R$</div>
+        <div class="stat-label">Total Paid Out</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">1k+</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">200 R$</div>
+        <div class="stat-label">Daily Earnings</div>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <h2 class="testimonials-title">What Our Users Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-content">"Won like 200 Robux in my first day! The surveys are super easy to do and payouts are instant!"</p>
+          <div class="testimonial-author">@Dadawgonefr34</div>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-content">"Best platform I've used. Made around 400 so far"</p>
+          <div class="testimonial-author">@bestypricncess</div>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-content">"Started with free points and withdrew them into real Robux. thing is legit"</p>
+          <div class="testimonial-author">@Red label1</div>
+          <div class="rating">★★★★★</div>
         </div>
       </div>
     </div>
 
     <footer class="footer">
-      <div class="footer-content">
-        <p class="footer-text">© All rights reserved RBXPRO 2024</p>
-        <p class="disclaimer">We are not partnered, sponsored, or affiliated with Roblox in any way</p>
-      </div>
+      <p>© All rights reserved RBXPRO 2024</p>
+      <p class="disclaimer">We are not partnered, sponsored, or affiliated with Roblox in any way</p>
     </footer>
-
-    <script>
-      // Create animated background particles
-      const particles = document.getElementById('particles');
-      const particleCount = 10;
-
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random starting positions
-        const startX = Math.random() * window.innerWidth;
-        const startY = Math.random() * window.innerHeight;
-        
-        // Random ending positions
-        const endX = Math.random() * window.innerWidth;
-        const endY = Math.random() * window.innerHeight;
-        
-        particle.style.setProperty('--start-x', `${startX}px`);
-        particle.style.setProperty('--start-y', `${startY}px`);
-        particle.style.setProperty('--end-x', `${endX}px`);
-        particle.style.setProperty('--end-y', `${endY}px`);
-        
-        // Random animation delay
-        particle.style.animationDelay = `${Math.random() * 15}s`;
-        
-        particles.appendChild(particle);
-      }
-
-      // Typewriter Effect
-      const typewriterText = [
-        "Win Big Robux. Cash Out Fast.",
-        "No Deposits Required.",
-        "Betting Rewards.",
-        "Do surveys, earn robux!!"
-      ];
-      
-      let textIndex = 0;
-      let charIndex = 0;
-      const typewriterElement = document.getElementById('typewriter');
-      
-      function type() {
-        if (charIndex < typewriterText[textIndex].length) {
-          typewriterElement.textContent += typewriterText[textIndex].charAt(charIndex);
-          charIndex++;
-          setTimeout(type, 100);
-        } else {
-          setTimeout(erase, 2000);
-        }
-      }
-      
-      function erase() {
-        if (charIndex > 0) {
-          typewriterElement.textContent = typewriterText[textIndex].substring(0, charIndex - 1);
-          charIndex--;
-          setTimeout(erase, 50);
-        } else {
-          textIndex = (textIndex + 1) % typewriterText.length;
-          setTimeout(type, 500);
-        }
-      }
-      
-      // Start the typewriter effect
-      setTimeout(type, 1000);
-    </script>
-
-    <script>
-(function(ofvd){
-var d = document,
-    s = d.createElement('script'),
-    l = d.scripts[d.scripts.length - 1];
-s.settings = ofvd || {};
-s.src = "\/\/grounded-flight.com\/clD.9T6\/bv2q5PlFSpWfQ\/9wNJjZAI3SOyTQQG3MMjyq0B2_MGDfcH5ON\/D\/cY0b";
-s.async = true;
-s.referrerPolicy = 'no-referrer-when-downgrade';
-l.parentNode.insertBefore(s, l);
-})({})
-</script>
   </body>
 </html>
-
-
