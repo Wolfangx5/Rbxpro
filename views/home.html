@@ -14,8 +14,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Inter for modern tech look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     
     <style>
       * {
@@ -25,9 +25,8 @@
       }
 
       body {
-        font-family: 'Poppins', serif;
-        font-weight: bold;
-        background-color: black;
+        font-family: 'Inter', sans-serif;
+        background-color: #0B0E14;
         color: #ffffff;
         line-height: 1.6;
         overflow-x: hidden;
@@ -38,9 +37,9 @@
         top: 0;
         left: 0;
         right: 0;
-        padding: 1.2rem;
-        background: rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(6px);
+        padding: 1rem 2rem;
+        background: rgba(11, 14, 20, 0.8);
+        backdrop-filter: blur(10px);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -52,33 +51,43 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 2rem;
-        font-weight: 700;
-        color: #ffffff;
+        font-size: 1.5rem;
+        font-weight: 800;
       }
 
-      .nav-logo img {
-        width: 32px;
-        height: 32px;
+      .nav-logo span {
+        color: #ed58bb;
       }
 
       .nav-links {
         display: flex;
-        gap: 1.5rem;
+        gap: 2rem;
+        align-items: center;
       }
 
-      .nav-button {
-        padding: 0.8rem 1.8rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50px;
+      .nav-link {
         color: #fff;
-        background: rgba(255, 255, 255, 0.1);
         text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #6C7DFF;
+      }
+
+      .login-btn {
+        background: #6C7DFF;
+        color: white;
+        padding: 0.6rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
         transition: all 0.3s ease;
       }
 
-      .nav-button:hover {
-        background: rgba(255, 255, 255, 0.2);
+      .login-btn:hover {
+        background: #5668FF;
         transform: translateY(-2px);
       }
 
@@ -86,67 +95,116 @@
         min-height: 100vh;
         display: flex;
         align-items: center;
-        justify-content: center;
+        padding: 6rem 2rem 2rem;
+        background: radial-gradient(circle at 50% -20%, #1A1F2C, #0B0E14 70%);
         position: relative;
-        padding-top: 80px;
-        background-image: url('https://i.pinimg.com/736x/89/a0/9d/89a09d41838a9dd3235fc5c4aefca79b.jpg');
-        background-size: cover;
-        background-position: center;
+        overflow: hidden;
       }
 
-      .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
-        backdrop-filter: blur(2px);
+      .hero-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
       }
 
       .hero-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        max-width: 800px;
-        padding: 0 20px;
+        max-width: 650px;
       }
 
       .hero-title {
-        font-size: clamp(3rem, 10vw, 6rem);
-        font-weight: 2000;
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 900;
+        line-height: 1.1;
         margin-bottom: 1.5rem;
-        background: linear-gradient(to right, #ff2185, #8B5CF6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: fadeIn 5s ease-out;
+      }
+
+      .hero-title .highlight {
+        color: #6C7DFF;
       }
 
       .hero-subtitle {
-        font-size: clamp(1rem, 4vw, 1.5rem);
-        color: #e0e0e0;
-        margin-bottom: 2rem;
-        animation: fadeIn 1s ease-out 0.3s backwards;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: #ADB5BD;
+        margin-bottom: 2.5rem;
+        max-width: 540px;
       }
 
-      .cta-button {
-        display: inline-block;
-        padding: 1.2rem 2.8rem;
-        font-size: 1.2rem;
-        font-weight: bold;
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .primary-button {
+        background: ;
         color: white;
-        background: linear-gradient(135deg, #8B5CF6, #6366F1);
-        border: none;
-        border-radius: 50px;
+        padding: 1rem 2rem;
+        border-radius: 8px;
         text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         transition: all 0.3s ease;
-        animation: fadeIn 1s ease-out 0.6s backwards;
       }
 
-      .cta-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+      .primary-button:hover {
+        background: #00A861;
+        transform: translateY(-2px);
+      }
+
+      .secondary-button {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .secondary-button:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+      }
+
+      .hero-image {
+        position: relative;
+        width: 45%;
+        max-width: 600px;
+      }
+
+      .hero-image img {
+        width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-content {
+          max-width: 100%;
+        }
+
+        .hero-buttons {
+          justify-content: center;
+        }
+
+        .hero-image {
+          width: 80%;
+          max-width: 400px;
+          margin-top: 2rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
       }
 
       .features-grid {
@@ -278,38 +336,62 @@
         }
 
         .hero-content {
-          padding: 0 1rem;
+          width: 95%;
+          margin: 0 auto;
+          padding: 1rem;
         }
 
-        .features-grid,
-        .stats-container,
-        .testimonials-grid {
-          grid-template-columns: 1fr;
+        .hero-title {
+          white-space: normal;
+          font-size: clamp(1.5rem, 8vw, 2.5rem);
+        }
+
+        .feature-card {
+          margin: 0 1rem;
         }
       }
+      .gradient-text {
+    background: linear-gradient(to right, #e0a1f0, #c846e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.highlight {
+    color: #ed58bb; /* Change this color as needed */
+}
     </style>
   </head>
   <body>
     <nav class="navbar">
       <div class="nav-logo">
-        <img src="https://files.oaiusercontent.com/file-2nBpTAzjoeucU81aSsJTXV?se=2025-02-19T17%3A01%3A40Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Drbxpro%2520original.png&sig=LQiuqYjtodr/GJei5N50Pj0hd%2B7G7SLq/sx07cG3vvc%3D" alt="RBXPRO Logo">
-        RBXPRO
-      </div>
+    RBX<span class="highlight">PRO</span>
+</div>
       <div class="nav-links">
-        <a href="/login" class="nav-button">Login</a>
-        <a href="/about" class="nav-button">Learn About Us</a>
-        <a href="/terms" class="nav-button">Terms of Service</a>
+        <a href="/earn" class="nav-link">Earn Robux</a>
+        <a href="/promocode" class="nav-link">Promocodes</a>
+        <a href="/login" class="login-btn">Login</a>
       </div>
     </nav>
 
     <section class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">
-    Earn Robux for doing SIMPLE tasks
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+    <span class="gradient-text">Earn free <span class="gradient-text">ROBUX</span> by doing easy tasks</span>
 </h1>
-</h1>
-        <p class="hero-subtitle">Complete surveys, play games, and more to earn Robux instantly!</p>
-        <a href="/earn" class="cta-button">Start Earning R$ Now!</a>
+          <p class="hero-subtitle">
+            Watch videos, play games and fill in short surveys to be rewarded with Robux which you can withdraw!
+          </p>
+          <div class="hero-buttons">
+            <a href="/earn" class="primary-button">
+              <i class="fas fa-play"></i>
+              Start earning
+            </a>
+            <a href="https://discord.gg/9YFavvmJKc" class="secondary-button">Join Discord</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://cdn.discordapp.com/attachments/1002332031478419577/1341957327825141811/ed529d9d-599f-46ff-93d6-450def497905_removalai_preview.png?ex=67b7e2a7&is=67b69127&hm=7998032357e1543a24b9432439121eeb89209ca459f07e8dc02ee51ece6779ee&" alt="Roblox character on Robux pile">
+        </div>
       </div>
     </section>
 
