@@ -157,9 +157,9 @@ router.post('/withdraw', async (req, res) => {
   const userID = req.headers.authorization;
   //const gpLink = req.query.gpLink; // Accept gamepass link instead of ID
   const withAm = Math.round(req.query.withAmount);
-  const gpAm = Math.round(req.query.withAmount / 0.70); // Assuming same calculation as before
+  //const gpAm = Math.round(req.query.withAmount / 0.70); // Assuming same calculation as before
 
-  console.log('Withdrawal Request:', userID, withAm, gpAm);
+  console.log('Withdrawal Request:', userID, withAm);
 
   if (!userID) {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
@@ -198,7 +198,7 @@ router.post('/withdraw', async (req, res) => {
       fields: [
         { name: "Username", value: userData.username, inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-        { name: "Gamepass Link", value: gpLink, inline: true }
+  =
       ],
       timestamp: new Date()
     }]
