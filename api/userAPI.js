@@ -155,14 +155,19 @@ router.post('/user', async (req, res) => {
 // Updated Route to handle withdrawals with webhook using axios
 router.post('/withdraw', async (req, res) => {
   const userID = req.headers.authorization;
-  //const gpLink = req.query.gpLink; // Accept gamepass link instead of ID
+  const gpLink = req.query.gpLink; // Accept gamepass link instead of ID
   const withAm = Math.round(req.query.withAmount);
-  //const gpAm = Math.round(req.query.withAmount / 0.70); // Assuming same calculation as before
+  const gpAm = Math.round(req.query.withAmount / 0.70); // Assuming same calculation as before
 
-  console.log('Withdrawal Request:', userID, withAm);
+  console.log('Withdrawal Request:', userID, gpLink, withAm, gpAm);
 
-  if (!userID) {
+  if (!userID || !gpLink) {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
+  }
+
+  // Validate the gamepass link format
+  if (!gpLink.startsWith("https://www.roblox.com/")) {
+    return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
   }
 
   // Check if user exists
@@ -198,6 +203,7 @@ router.post('/withdraw', async (req, res) => {
       fields: [
         { name: "Username", value: userData.username, inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
+        { name: "Gamepass Link", value: gpLink, inline: true }
       ],
       timestamp: new Date()
     }]
@@ -289,6 +295,9 @@ router.post('/redeem', async (req, res) => {
             });
 
 module.exports = router;
+
+
+
 
 
 
