@@ -155,13 +155,13 @@ router.post('/user', async (req, res) => {
 // Updated Route to handle withdrawals with webhook using axios
 router.post('/withdraw', async (req, res) => {
   const userID = req.headers.authorization;
-  const gpLink = req.query.gpLink; // Accept gamepass link instead of ID
+  //const gpLink = req.query.gpLink; // Accept gamepass link instead of ID
   const withAm = Math.round(req.query.withAmount);
   const gpAm = Math.round(req.query.withAmount / 0.70); // Assuming same calculation as before
 
-  console.log('Withdrawal Request:', userID, gpLink, withAm, gpAm);
+  console.log('Withdrawal Request:', userID, withAm, gpAm);
 
-  if (!userID || !gpLink) {
+  if (!userID) {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
   }
 
