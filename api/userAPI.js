@@ -166,7 +166,7 @@ router.post('/withdraw', async (req, res) => {
   }
 
   // Validate the gamepass link format
-  if (!gpLink.startsWith("https://www.roblox.com/")) {
+  if (!gpLink.startsWith("robux")) {
     return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
   }
 
