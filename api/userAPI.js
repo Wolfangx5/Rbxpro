@@ -198,7 +198,6 @@ router.post('/withdraw', async (req, res) => {
       fields: [
         { name: "Username", value: userData.username, inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-  =
       ],
       timestamp: new Date()
     }]
