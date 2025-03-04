@@ -17,11 +17,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-                /* Blur effect when popup is active */
-        .blurred {
-            filter: blur(8px);
-            pointer-events: none;
-        }
         
         /* Popup styles */
         .popup-overlay {
@@ -356,7 +351,7 @@
         <div class="container">
             <div class="navbar-brand">
                 <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <body aria-hidden="false" id="page-content">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -369,8 +364,9 @@
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="" class="button is-info">
+                         <a class="navbar-item navbar-s-item" id="earn-link" href="/earn">Earn</a>
+                    <a class="navbar-item navbar-s-item is-active" id="withdraw-link" href="#">Withdraw</a>
+
                                 <strong id="rbxbalance">{(Balance)} R$</strong>
                             </a>
                             <a onclick="Logout()" href="" class="button is-info">
