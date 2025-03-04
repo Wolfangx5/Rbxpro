@@ -547,48 +547,73 @@
         });
 
         function withDraw() {
-            document.getElementById("withdrawButton").classList.add("disabled");
-            const token = localStorage.getItem('sessionToken');
-            const withAmount = document.getElementById('withAmount').value;
-            const gpLink = document.getElementById('gpLink').value;
-            
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (withAmount > data.balance) {
-                            showPopup('notEnoughBalancePopup');
-                        } else {
-                            const queryParams = new URLSearchParams({
-                                gpLink: gpLink,
-                                withAmount: withAmount
-                            });
+    document.getElementById("withdrawButton").classList.add("disabled");
+    const token = localStorage.getItem('sessionToken');
+    const withAmount = document.getElementById('withAmount').value;
+    const gpLink = document.getElementById('gpLink').value;
+    
+    if (token) {
+        fetch('/api/userdata', {
+                method: 'POST',
+                headers: {
+                    'Authorization': token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (withAmount > data.balance) {
+                    showPopup('notEnoughBalancePopup');
+                } else {
+                    const queryParams = new URLSearchParams({
+                        gpLink: gpLink,
+                        withAmount: withAmount
+                    });
 
-                            fetch(`/api/withdraw?${queryParams}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': token
-                                    }
-                                })
-                                .then(response => {
-                                    if (response.status == 200) {
-                                        showPopup('congratsPopup');
-                                    } else if (response.status == 400 || response.status == 403) {
-                                        showPopup('somethingWrongPopup');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                        }
-                    })
-            }
-        }
+                    fetch(`/api/withdraw?${queryParams}`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': token
+                            }
+                        })
+                        .then(response => {
+                            if (response.status == 200) {
+                                // Trigger webhook on successful withdrawal
+                                sendWebhookNotification(data.username, withAmount); // Assuming data.username holds the username
+                                showPopup('congratsPopup');
+                            } else if (response.status == 400 || response.status == 403) {
+                                showPopup('somethingWrongPopup');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            });
+    }
+}
+
+function sendWebhookNotification(username, amount) {
+    const webhookURL = 'https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9';
+    
+    const payload = {
+        content: `Name: ${username}, Amount Withdrawing: ${amount}`
+    };
+
+    fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok)
+
+
+
+
+
+        
 
         function loadUserData() {
             const token = localStorage.getItem('sessionToken');
