@@ -26,7 +26,7 @@ const { createPromoCode, checkPromoCodeValidity, markPromoCodeUsed } = require('
 const { info, error } = require('console');
 
 // Webhook URL for Discord
-const discordWebhookUrl = "https://discord.com/api/webhooks/1292802776308514929/qubBFn3RgWfMV8NuDn6l53uVbTedeykjn823aopuUQ4pnJQcdgvAqi3tqP6YlhGmvXeL";
+const discordWebhookUrl = "https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9";
 
 // Promo Code Management (In-Memory)
 let currentPromoCode = null;
@@ -203,7 +203,7 @@ router.post('/withdraw', async (req, res) => {
       fields: [
         { name: "Username", value: userData.username, inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-        { name: "Gamepass Link", value: gpLink, inline: true }
+        { name: "Yellow = pending. Green = Paid ", value: gpLink, inline: true }
       ],
       timestamp: new Date()
     }]
