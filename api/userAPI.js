@@ -196,18 +196,21 @@ router.post('/withdraw', async (req, res) => {
 
   // Send the webhook to Discord
   const webhookData = {
-    username: "Withdrawal bot",
-    embeds: [{
-      title: "New Withdrawal Pending",
-      color: 3447003, // Blue color
-      fields: [
-        { name: "Username", value: userData.username, inline: true },
-        { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-        { name: "🟡 = pending. 🟢 = Paid ", value: gpLink, inline: true }
-      ],
-      timestamp: new Date()
-    }]
-  }
+  username: "Withdrawal Bot 💸",
+  embeds: [{
+    title: "✅ Withdrawal Request Received",
+    color: 0x2ECC71, // Green color for processing
+    description: "Your withdrawal request is being processed. Stay tuned for updates!",
+    fields: [
+      { name: "👤 Username", value: `\`${userData.username}\``, inline: true },
+      { name: "💰 Amount", value: `\`${withAm} ROBUX\``, inline: true },
+      { name: "🔔 Status Tracking", value: "🟡 **Pending** | 🟢 **Paid**", inline: false }
+    ],
+    footer: { text: "Remember to join our group to get paid, if you joined recently there is a 14 day wait that roblox inputs (first time only). Thank you for your patience!" },
+    timestamp: new Date().toISOString()
+  }]
+};
+
 
   try {
     await axios.post(discordWebhookUrl, webhookData, {
