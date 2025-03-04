@@ -196,18 +196,18 @@ router.post('/withdraw', async (req, res) => {
 
   // Send the webhook to Discord
   const webhookData = {
-    username: "Withdrawal Bot",
+    username: "Withdrawal bot",
     embeds: [{
-      title: "New Withdrawal Request",
+      title: "New Withdrawal Pending",
       color: 3447003, // Blue color
       fields: [
         { name: "Username", value: userData.username, inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-        { name: "Yellow = pending. Green = Paid ", value: gpLink, inline: true }
+        { name: "🟡 = pending. 🟢 = Paid ", value: gpLink, inline: true }
       ],
       timestamp: new Date()
     }]
-  };
+  }
 
   try {
     await axios.post(discordWebhookUrl, webhookData, {
