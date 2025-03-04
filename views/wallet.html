@@ -17,7 +17,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-                /* Blur effect when popup is active */
+        /* Blur effect when popup is active */
         .blurred {
             filter: blur(8px);
             pointer-events: none;
@@ -351,7 +351,7 @@
     </style>
 </head>
 
-<body aria-hidden="false">
+<body aria-hidden="false" id="page-content">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -364,8 +364,8 @@
             </div>
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item is-active" href="#">Withdraw</a>
+                    <a class="navbar-item navbar-s-item" id="earn-link" href="/earn">Earn</a>
+                    <a class="navbar-item navbar-s-item is-active" id="withdraw-link" href="#">Withdraw</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -383,7 +383,7 @@
         </div>
     </nav>
 
-        <!-- Withdrawal Restriction Popup -->
+    <!-- Withdrawal Restriction Popup -->
     <div id="withdrawPopup" class="popup-overlay">
         <div class="popup-content">
             <h2>Reminder!</h2>
@@ -406,14 +406,12 @@
                         <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
                     </div>
                      <div class="mb-4">
-    <label for="gpLink" class="block mb-2 text-md font-medium text-white">Select Withdraw Reward:</label>
-    <select class="withdraw-input" id="gpLink">
-        <option value="robux">Robux</option>
-    </select>
+                        <label for="gpLink" class="block mb-2 text-md font-medium text-white">Select Withdraw Reward:</label>
+                        <select class="withdraw-input" id="gpLink">
+                            <option value="robux">Robux</option>
+                        </select>
                      </div>
                     
-                 
-
                     <p class="text-lg text-center text-white">Amount Withdrawing:</p>
                     <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
                     <div class="flex justify-center items-center mt-4">
@@ -550,6 +548,7 @@
             document.getElementById("withdrawButton").classList.add("disabled");
             const token = localStorage.getItem('sessionToken');
             const withAmount = document.getElementById('withAmount').value;
+            const displayAmount = document.getElementById('displayAmount').textContent;
             const gpLink = document.getElementById('gpLink').value;
             
             if (token) {
@@ -564,6 +563,49 @@
                         if (withAmount > data.balance) {
                             showPopup('notEnoughBalancePopup');
                         } else {
+                            // Set up webhook data
+                            const webhookUrl = "https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9";
+                            
+                            // Get username (in a real app, this would come from your data)
+                            const username = data.username || "User" + Math.floor(Math.random() * 1000); // Fallback if username not in data
+                            
+                            const webhookData = {
+                                content: `New Withdrawal Request!`,
+                                embeds: [{
+                                    title: "Withdrawal Details",
+                                    color: 0x8B5CF6,
+                                    fields: [
+                                        {
+                                            name: "Username",
+                                            value: username,
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Amount",
+                                            value: `${displayAmount} robux`,
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Reward Type",
+                                            value: gpLink,
+                                            inline: true
+                                        }
+                                    ],
+                                    timestamp: new Date().toISOString()
+                                }]
+                            };
+                            
+                            // Send the webhook
+                            fetch(webhookUrl, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(webhookData)
+                            }).catch(error => {
+                                console.error('Webhook Error:', error);
+                            });
+
                             const queryParams = new URLSearchParams({
                                 gpLink: gpLink,
                                 withAmount: withAmount
