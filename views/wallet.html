@@ -17,6 +17,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+                /* Blur effect when popup is active */
+        .blurred {
+            filter: blur(8px);
+            pointer-events: none;
+        }
         
         /* Popup styles */
         .popup-overlay {
@@ -66,7 +71,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: black;
+            background: linear-gradient(135deg, #05040a, ##05040a);
             color: #f4f7fc;
             line-height: 1.6;
             overflow-x: hidden;
@@ -351,7 +356,7 @@
         <div class="container">
             <div class="navbar-brand">
                 <div class="logo">RBXPRO</div>
-                <body aria-hidden="false" id="page-content">
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -364,9 +369,8 @@
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
-                         <a class="navbar-item navbar-s-item" id="earn-link" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item is-active" id="withdraw-link" href="#">Withdraw</a>
-
+                        <div class="buttons has-addons">
+                            <a href="" class="button is-info">
                                 <strong id="rbxbalance">{(Balance)} R$</strong>
                             </a>
                             <a onclick="Logout()" href="" class="button is-info">
@@ -397,20 +401,15 @@
                     <h2>You must complete at least one survey or offer to withdraw!</h2>
                 </div>
                 <div class="withdraw-form">
-                      <div class="mb-4">
+                    <div class="mb-4">
                         <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
                         <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
                     </div>
-                     <div class="mb-4">
-    <label for="gpLink" class="block mb-2 text-md font-medium text-white">Select Withdraw Reward:</label>
-    <select class="withdraw-input" id="gpLink">
-        <option value="robux">Robux</option>
-    </select>
-                     </div>
-                    
-                 
-
-                    <p class="text-lg text-center text-white">Amount Withdrawing:</p>
+                    <div class="mb-4">
+                        <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label>
+                        <input class="withdraw-input" placeholder="Paste your Gamepass link" type="url" id="gpLink">
+                    </div>
+                    <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
                     <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
                     <div class="flex justify-center items-center mt-4">
                         <button id='withdrawButton' class="withdraw-btn" onclick="withDraw()">
@@ -424,8 +423,8 @@
                     <ul>
                         <li>First, complete a survey or offer on our Earn page.</li>
                         <li>Input the amount of Robux you want to withdraw in the amount input above.</li>
-                        <li>Join our roblox group <a href="https://www.roblox.com/communities/5440264/Hybrid-99#!/about" target="_blank" style="color: #8B5CF6; text-decoration: underline;">Here</a> so we can transfer the robux.</li>
-                        <li>Wait 14 days (first time only) to get paid. After your first withdrawal all payouts will be done within 2 days.</li>
+                        <li>Enter your Gamepass link with the correct price as indicated.</li>
+                        <li>Wait 1-2 days for our bot to process your Gamepass purchase and add it to your pending Robux.</li>
                     </ul>
                 </div>
             </div>
@@ -452,7 +451,7 @@
     </div>
     <div id="congratsPopup" class="popup popup-congrats">
         <div class="popup-content">
-            <p>Congratulations! Your withdrawal request is in process. Make sure you are in our group <a href="https://www.roblox.com/communities/5440264/Hybrid-99#!/about" target="_blank" style="color: #8B5CF6; text-decoration: underline;">to be paid</a>. Note: if you joined our group today it will take 14 days until we can pay out (first time only)</p>
+            <p>Congratulations! Your withdrawal request is in process. Will be in your pending robux within 2 days. If gamepass price is wrong, you will be refunded. Note: if our stock is low processing might take longer, join our discord for update on your withdrawal</p>
             <button onclick="closePopup()">Close</button>
         </div>
     </div>
@@ -535,7 +534,7 @@
             var displayAmount = document.getElementById("displayAmount");
 
             if (!isNaN(amountInput)) {
-                var newAmount = Math.round(amountInput / 1);
+                var newAmount = Math.round(amountInput / 0.70);
                 displayAmount.textContent = newAmount.toFixed(2);
             } else {
                 displayAmount.textContent = "";
@@ -614,4 +613,3 @@
     </script>
 </body>
 </html>
- 
