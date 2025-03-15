@@ -165,10 +165,6 @@ router.post('/withdraw', async (req, res) => {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
   }
 
-  // Validate the gamepass link format
-  if (!gpLink.startsWith("robux")) {
-    return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
-  }
 
   // Check if user exists
   const userData = await checkUserExists(userID);
@@ -196,21 +192,18 @@ router.post('/withdraw', async (req, res) => {
 
   // Send the webhook to Discord
   const webhookData = {
-  username: "Withdrawal Bot 💸",
-  embeds: [{
-    title: "✅ Withdrawal Request Received",
-    color: 0x2ECC71, // Green color for processing
-    description: "Your withdrawal request is being processed. Stay tuned for updates!",
-    fields: [
-      { name: "👤 Username", value: `\`${userData.username}\``, inline: true },
-      { name: "💰 Amount", value: `\`${withAm} ROBUX\``, inline: true },
-      { name: "🔔 Status Tracking", value: "🟡 **Pending** | 🟢 **Paid**", inline: false }
-    ],
-    footer: { text: "Remember to join our group to get paid, if you joined recently there is a 14 day wait that roblox inputs (first time only). Thank you for your patience!" },
-    timestamp: new Date().toISOString()
-  }]
-};
-
+    username: "Withdrawal Bot",
+    embeds: [{
+      title: "New Withdrawal Request",
+      color: 3447003, // Blue color
+      fields: [
+        { name: "Username", value: userData.username, inline: true },
+        { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
+        { name: "Gamepass Link", value: gpLink, inline: true }
+      ],
+      timestamp: new Date()
+    }]
+  };
 
   try {
     await axios.post(discordWebhookUrl, webhookData, {
@@ -298,9 +291,5 @@ router.post('/redeem', async (req, res) => {
             });
 
 module.exports = router;
-
-
-
-
 
 
