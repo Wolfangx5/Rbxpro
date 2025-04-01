@@ -85,52 +85,60 @@ async function getUserData(sessionToken) {
     return null;
   }
 }
-async function canUseDailyCommand(id) {
+async function canWithdraw(id) {
   try {
     const database = client.db('UserInfo');
     const collection = database.collection('surveyDailyReset');
     const user = await collection.findOne({ id: id });
 
-    if (user) {
-      const lastUsage = user.date;
-      const now = new Date();
-      if ((now - new Date(lastUsage)) > 24 * 60 * 60 * 1000) {
-        // More than 24 hours passed
-        return false;
-      }else{
-        return true;
-      }
-    } else {
-      // No record found, user can use the command
-      return false;
+    if (user && user.turns > 0) {
+      return true; // User has at least one turn to withdraw
     }
-    return false;
+    return false; // No turns available
   } catch (error) {
     console.error('An error occurred:', error);
     return false;
   }
 }
-async function addOrUpdateDailyUsage(id) {
+
+async function addSurveyCompletion(id) {
   try {
     const database = client.db('UserInfo');
     const collection = database.collection('surveyDailyReset');
-    const now = new Date();
 
     const result = await collection.updateOne(
       { id: id },
-      { $set: { date: now } },
-      { upsert: true } // Create a new document if it doesn't exist
+      { $inc: { turns: 1 } }, // Increment turns by 1
+      { upsert: true }
     );
 
-    if (result.upsertedCount > 0) {
-      console.log('New daily usage record added:', result);
-    } else if (result.modifiedCount > 0) {
-      console.log('Daily usage record updated:', result);
+    console.log('Survey completion recorded:', result);
+  } catch (error) {
+    console.error('Error updating survey completion:', error);
+  }
+}
+
+async function withdraw(id) {
+  try {
+    const database = client.db('UserInfo');
+    const collection = database.collection('surveyDailyReset');
+
+    const user = await collection.findOne({ id: id });
+
+    if (user && user.turns > 0) {
+      const result = await collection.updateOne(
+        { id: id },
+        { $inc: { turns: -1 } } // Decrease turns by 1
+      );
+      console.log('Withdrawal successful:', result);
+      return true;
     } else {
-      console.log('No changes made to the daily usage record.');
+      console.log('No turns available for withdrawal.');
+      return false;
     }
   } catch (error) {
-    console.error('Error adding or updating daily usage:', error);
+    console.error('Error processing withdrawal:', error);
+    return false;
   }
 }
 
@@ -141,6 +149,7 @@ async function addOrUpdateDailyUsage(id) {
     getUserData,
     checkUserExists,
     addnewUser,
-    addOrUpdateDailyUsage,
-    canUseDailyCommand
+    withdraw,
+    canWithdraw,
+    addSurveyCompletion,
   };

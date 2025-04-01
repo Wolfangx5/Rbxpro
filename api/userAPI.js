@@ -18,8 +18,7 @@ const {
   getUserData,
   checkUserExists,
   addnewUser,
-  addOrUpdateDailyUsage,
-  canUseDailyCommand,
+  addSurveyCompletion, canWithdraw, withdraw 
 } = require('../utils/dbChange');
 const { createPromoCode, checkPromoCodeValidity, markPromoCodeUsed } = require('../utils/promocodeDB.js');
 
@@ -186,7 +185,7 @@ router.post('/withdraw', async (req, res) => {
   }
 
   // Check if user completed the survey
-  const validSurvey = await canUseDailyCommand(userID);
+  const validSurvey = await canWithdraw(userID);
   if (!validSurvey) {
     return res.status(400).json({ error: 'Must complete a survey before withdraw' });
   }
@@ -210,7 +209,7 @@ router.post('/withdraw', async (req, res) => {
       timestamp: new Date()
     }]
   };
-
+  await withdraw(userID)
   try {
     await axios.post(discordWebhookUrl, webhookData, {
       headers: { 'Content-Type': 'application/json' },

@@ -20,7 +20,7 @@ const server = app.listen(port, "0.0.0.0", () => {
 socketService.initSocket(server);
 
 //-----------Utils---------------//
-const { connect, changeUserBalance, checkUserExists, addOrUpdateDailyUsage, canUseDailyCommand } = require('./utils/dbChange');
+const { connect, changeUserBalance, checkUserExists, addSurveyCompletion, canWithdraw, withdraw } = require('./utils/dbChange');
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
 
 //-----------Route Links---------------//
@@ -87,7 +87,7 @@ app.get('/callback/bitlab', async (req, res) => {
   // Handle different types of callbacks
   if (type === 'COMPLETE' || type === 'START_BONUS' || type === 'RECONCILIATION' || type === 'SCREENOUT') {
     if (type === "COMPLETE"){
-      await addOrUpdateDailyUsage(uid)
+      await addSurveyCompletion(uid)
     }
     try {
       const userData = await checkUserExists(uid);
@@ -139,7 +139,7 @@ app.get('/callback/cpx', async (req, res) => {
   // Handle different types of callbacks
   if (type === '1' || type === '2') {
     if (type === '1'){
-      await addOrUpdateDailyUsage(uid)
+      await addSurveyCompletion(uid)
     }
     try {
       const userData = await checkUserExists(uid);
@@ -183,7 +183,7 @@ app.get('/callback/kiwi', async (req, res) => {
   const { uid, val, type } = req.query;
   console.log("Kiwiwall:" ,uid, val, type);
   if (type === '1'){
-    await addOrUpdateDailyUsage(uid)
+    await addSurveyCompletion(uid)
   }
 
   try {
