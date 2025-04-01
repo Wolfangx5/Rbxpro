@@ -108,8 +108,13 @@ async function addSurveyCompletion(id) {
 
     const result = await collection.updateOne(
       { id: id },
-      { $inc: { turns: 1 } }, // Increment turns by 1
+      { $setOnInsert: { turns: 0 } }, // Ensure turns is always initialized as a number
       { upsert: true }
+    );
+
+    await collection.updateOne(
+      { id: id },
+      { $inc: { turns: 1 } } // Increment turns by 1
     );
 
     console.log('Survey completion recorded:', result);
@@ -125,22 +130,28 @@ async function withdraw(id) {
 
     const user = await collection.findOne({ id: id });
 
-    if (user && user.turns > 0) {
-      const result = await collection.updateOne(
-        { id: id },
-        { $inc: { turns: -1 } } // Decrease turns by 1
-      );
-      console.log('Withdrawal successful:', result);
-      return true;
-    } else {
-      console.log('No turns available for withdrawal.');
-      return false;
+    if (user) {
+      // Ensure turns is a number before decrementing
+      const turns = Number(user.turns) || 0;
+
+      if (turns > 0) {
+        const result = await collection.updateOne(
+          { id: id },
+          { $inc: { turns: -1 } } // Decrease turns by 1
+        );
+        console.log('Withdrawal successful:', result);
+        return true;
+      }
     }
+
+    console.log('No turns available for withdrawal.');
+    return false;
   } catch (error) {
     console.error('Error processing withdrawal:', error);
     return false;
   }
 }
+
 
 
   module.exports = {
