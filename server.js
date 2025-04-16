@@ -1,3 +1,4 @@
+// -----------Imports--------------------- //
 const express = require('express');
 const fs = require('fs');
 const app = express();
@@ -10,20 +11,18 @@ const axios = require('axios');
 const uuidv4 = require('uuid').v4;
 const bodyParser = require('body-parser');
 
-//-----------Server-----------------------//
-
+// -----------Server---------------------- //
 const port = process.env.PORT || 3000;
-
 const server = app.listen(port, "0.0.0.0", () => {
   console.log(`Server is up and running on port ${port}`);
 });
 socketService.initSocket(server);
 
-//-----------Utils---------------//
+// -----------Utils----------------------- //
 const { connect, changeUserBalance, checkUserExists, addSurveyCompletion, canWithdraw, withdraw } = require('./utils/dbChange');
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
 
-//-----------Route Links---------------//
+// -----------Route Links----------------- //
 const loginRoute = require('./routes/login.js');
 const promoRoute = require('./routes/promocode.js');
 const homeRoute = require('./routes/homepage.js');
@@ -31,7 +30,7 @@ const earnRoute = require('./routes/earn.js');
 const walletRoute = require('./routes/wallet.js');
 const userAPI = require('./api/userAPI.js');
 
-//-----------Middleware---------------//
+// -----------Middleware------------------ //
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-//-----------Routes---------------//
+// -----------Routes---------------------- //
 app.get('/404', (req, res) => {
   res.sendFile(path.join(__dirname, './views/404page.html'));
 });
@@ -56,79 +55,57 @@ app.use('/', homeRoute);
 
 connect();
 
-//--------------Config------------------//
-
-const clientId = '1122511630123663431';
-const clientSecret = 'Qq9ce92VU9lbrlVXawfsDri6Ze0oQbxS';
-const redirectUri = 'http://127.0.0.1:3000/callback';
-const discordApiBaseUrl = 'https://discord.com/api';
-
-// Discord webhook URL
+// -----------Discord Webhook------------- //
 const discordWebhookUrl = 'https://discord.com/api/webhooks/1259268256351649822/3538y4__KKC6z_iwX3s-WFhd3R8N6zNp5CO00ubHvpdrCfo_rzC_MJWb7S8Qclb2UX9J';
 
-// Function to send a message to the Discord webhook
 const sendDiscordWebhook = async (username, amount) => {
   try {
     await axios.post(discordWebhookUrl, {
-      content: `${username} Just earned ${amount} R$! 💸`
+      embeds: [
+        {
+          title: "💰 New Survey Completion!",
+          description: `**${username}** just earned **${amount} R$** from a survey!`,
+          color: 0x57F287, // green
+          footer: {
+            text: "RBXPro • Survey System",
+            icon_url: "https://media.discordapp.net/attachments/1002332031478419577/1326641651812143144/5a4e9f646dd92bd9562e2bf37f86ebb1.png?ex=6800b511&is=67ff6391&hm=b1112f199e0527e1100d507e0622b0d00251f785d8c8f4b37315ff52b738c74c&=&format=webp&quality=lossless"
+          },
+          timestamp: new Date().toISOString()
+        }
+      ]
     });
-    console.log('Discord webhook message sent successfully');
+    console.log('✅ Discord embed sent!');
   } catch (error) {
-    console.error('Error sending Discord webhook message:', error);
+    console.error('❌ Error sending embed:', error.message);
   }
 };
 
-//-----------Callback Routes---------------//
-
+// -----------Callbacks------------------- //
 app.get('/callback/bitlab', async (req, res) => {
   const { uid, val, usd, type, tx } = req.query;
   console.log("Bitlab:" ,uid, val, usd, type, tx);
 
-  // Handle different types of callbacks
-  if (type === 'COMPLETE' || type === 'START_BONUS' || type === 'RECONCILIATION' || type === 'SCREENOUT') {
-    if (type === "COMPLETE"){
-      await addSurveyCompletion(uid)
-    }
+  if (["COMPLETE", "START_BONUS", "RECONCILIATION", "SCREENOUT"].includes(type)) {
+    if (type === "COMPLETE") await addSurveyCompletion(uid);
     try {
       const userData = await checkUserExists(uid);
       if (userData) {
-        let newBal;
-        if (type === 'RECONCILIATION') {
-          newBal = userData.balance - Math.abs(parseFloat(val) * 2);
-        } else {
-          newBal = userData.balance + parseFloat(val) * 2;
-        }
+        const newBal = type === 'RECONCILIATION'
+          ? userData.balance - Math.abs(parseFloat(val) * 2)
+          : userData.balance + parseFloat(val) * 2;
         await changeUserBalance(uid, newBal);
-
-        // Send Discord webhook message
         await sendDiscordWebhook(userData.username, parseFloat(val) * 2);
-
-        res.status(200).json({
-          status: 'success',
-          message: 'API request successful',
-          data: {
-            msg: 'Good'
-          },
-        });
+        res.status(200).json({ status: 'success', message: 'OK' });
       } else {
-        console.log('User does not exist');
-        res.status(404).json({
-          status: 'error',
-          message: 'User does not exist'
-        });
+        console.log('User not found');
+        res.status(404).json({ status: 'error', message: 'User not found' });
       }
-    } catch (error) {
-      console.error('Error processing callback:', error);
-      res.status(500).json({
-        status: 'error',
-        message: 'Internal server error'
-      });
+    } catch (err) {
+      console.error('Callback error:', err);
+      res.status(500).json({ status: 'error', message: 'Server error' });
     }
   } else {
-    res.status(400).json({
-      status: 'error',
-      message: 'Invalid callback type'
-    });
+    res.status(400).json({ status: 'error', message: 'Invalid callback type' });
   }
 });
 
@@ -136,114 +113,65 @@ app.get('/callback/cpx', async (req, res) => {
   const { uid, val, type } = req.query;
   console.log("CPX", uid, val, type);
 
-  // Handle different types of callbacks
-  if (type === '1' || type === '2') {
-    if (type === '1'){
-      await addSurveyCompletion(uid)
-    }
+  if (["1", "2"].includes(type)) {
+    if (type === "1") await addSurveyCompletion(uid);
     try {
       const userData = await checkUserExists(uid);
       if (userData) {
-        const newBal = type === '1' ? userData.balance + parseFloat(val) * 2 : userData.balance - Math.abs(parseFloat(val) * 2);
+        const newBal = type === '1'
+          ? userData.balance + parseFloat(val) * 2
+          : userData.balance - Math.abs(parseFloat(val) * 2);
         await changeUserBalance(uid, newBal);
-
-        // Send Discord webhook message
         await sendDiscordWebhook(userData.username, parseFloat(val) * 2);
-
-        res.status(200).json({
-          status: 'success',
-          message: 'API request successful',
-          data: {
-            msg: 'Good'
-          },
-        });
+        res.status(200).json({ status: 'success', message: 'OK' });
       } else {
-        console.log('User does not exist');
-        res.status(404).json({
-          status: 'error',
-          message: 'User does not exist'
-        });
+        res.status(404).json({ status: 'error', message: 'User not found' });
       }
-    } catch (error) {
-      console.error('Error processing callback:', error);
-      res.status(500).json({
-        status: 'error',
-        message: 'Internal server error'
-      });
+    } catch (err) {
+      console.error('Callback error:', err);
+      res.status(500).json({ status: 'error', message: 'Server error' });
     }
   } else {
-    res.status(400).json({
-      status: 'error',
-      message: 'Invalid callback type'
-    });
+    res.status(400).json({ status: 'error', message: 'Invalid callback type' });
   }
 });
 
 app.get('/callback/kiwi', async (req, res) => {
   const { uid, val, type } = req.query;
-  console.log("Kiwiwall:" ,uid, val, type);
-  if (type === '1'){
-    await addSurveyCompletion(uid)
-  }
+  console.log("Kiwiwall:", uid, val, type);
+  if (type === '1') await addSurveyCompletion(uid);
 
   try {
     const userData = await checkUserExists(uid);
     if (userData) {
       const newBal = userData.balance + parseFloat(val);
       await changeUserBalance(uid, newBal);
-
-      // Send Discord webhook message
       await sendDiscordWebhook(userData.username, parseFloat(val));
-
-      res.status(200).json({
-        status: 'success',
-        message: 'API request successful',
-        data: {
-          msg: 'Good'
-        },
-      });
+      res.status(200).json({ status: 'success', message: 'OK' });
     } else {
-      console.log('User does not exist');
-      res.status(404).json({
-        status: 'error',
-        message: 'User does not exist'
-      });
+      res.status(404).json({ status: 'error', message: 'User not found' });
     }
-  } catch (error) {
-    console.error('Error processing callback:', error);
-    res.status(500).json({
-      status: 'error',
-      message: 'Internal server error'
-    });
+  } catch (err) {
+    console.error('Callback error:', err);
+    res.status(500).json({ status: 'error', message: 'Server error' });
   }
 });
+
 app.get('/callback/revtoo', async (req, res) => {
-    const { uid, val } = req.query;
+  const { uid, val } = req.query;
+  if (!uid || !val) return res.status(400).send('ERROR: Missing parameters');
 
-    // Validate required parameters
-    if (!uid || !val) {
-        return res.status(400).send('ERROR: Missing parameters');
-    }
+  try {
+    const userData = await checkUserExists(uid);
+    if (!userData) return res.status(404).send('ERROR: User not found');
 
-    try {
-        // Check if user exists
-        const userData = await checkUserExists(uid);
-        if (!userData) {
-            console.log('User does not exist');
-            return res.status(404).send('ERROR: User not found');
-        }
-
-        // Update user balance
-        const newBal = userData.balance + parseFloat(val);
-        console.log(`New balance for UID ${uid}: ${newBal}`);
-        await changeUserBalance(uid, newBal);
-
-        // Respond with success
-        return res.status(200).send('ok');
-    } catch (error) {
-        console.error('Error processing postback:', error);
-        return res.status(500).send('ERROR: Server error');
-    }
+    const newBal = userData.balance + parseFloat(val);
+    await changeUserBalance(uid, newBal);
+    await sendDiscordWebhook(userData.username, parseFloat(val));
+    return res.status(200).send('ok');
+  } catch (error) {
+    console.error('Callback error:', error);
+    return res.status(500).send('ERROR: Server error');
+  }
 });
-// Add other callback routes here if needed
 
