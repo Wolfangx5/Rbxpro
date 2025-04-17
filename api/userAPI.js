@@ -165,10 +165,7 @@ router.post('/withdraw', async (req, res) => {
   }
 
 
-    // Validate the gamepass link format
-  if (!gpLink.startsWith("https")) {
-    return res.status(400).json({ error: 'Invalid Gamepass link. It must start with https://www.roblox.com/' });
-  }
+
 
   
   // Check if user exists
