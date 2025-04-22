@@ -717,31 +717,28 @@
             }
         }
         function loadUserData() {
-    const token = localStorage.getItem('sessionToken');
-    if (token) {
-        fetch('/api/userdata', {
-            method: 'POST',
-            headers: {
-                'Authorization': token
+            const token = localStorage.getItem('sessionToken');
+            if (token) {
+                fetch('/api/userdata', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
+                    balance.innerHTML = `<i class="fas fa-coins"></i><span>${data.balance} R$</span>`;
+                    nameDisplay.textContent = `Welcome, ${data.username}! 👋`;
+                })
+                .catch(error => {
+                    window.location.href = '/login';
+                });
+            } else {
+                window.location.href = '/login';
             }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const navBalance = document.getElementById("rbxbalance");
-            const dashboardBalance = document.getElementById("dashboardBalance");
-            const nameDisplay = document.getElementById("usernameDisplay");
-            
-            navBalance.innerHTML = `<i class="fas fa-coins"></i><span>${data.balance} R$</span>`;
-            dashboardBalance.innerHTML = `<i class="fas fa-coins"></i><span>${data.balance} R$</span>`;
-            nameDisplay.textContent = `Welcome, ${data.username}! 👋`;
-        })
-        .catch(error => {
-            window.location.href = '/login';
-        });
-    } else {
-        window.location.href = '/login';
-    }
-}
+        }
         function openBitlab() {
             const token = localStorage.getItem('sessionToken');
             window.open(`https://web.bitlabs.ai/?uid=${token}&token=c3ed1ee8-3d7c-4d82-a477-53c920424f04`, '_blank');
