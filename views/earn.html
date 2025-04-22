@@ -129,24 +129,43 @@
             margin-bottom: 4rem;
         }
 
-        .card {
-            background: var(--card-gradient);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.8rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-        }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-light);
-            box-shadow: 0 8px 30px rgba(155, 135, 245, 0.1);
-        }
+        
+        .card {
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.25) 0%, rgba(10, 11, 15, 0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(155, 135, 245, 0.1);
+}
+
+
+
+ .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-light);
+    box-shadow: 0 8px 30px rgba(155, 135, 245, 0.15);
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.3) 0%, rgba(10, 11, 15, 0.85) 100%);
+}
+
+        .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(155, 135, 245, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    pointer-events: none;
+}
 
         .card img {
             width: 56px;
