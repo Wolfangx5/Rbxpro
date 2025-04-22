@@ -422,7 +422,7 @@
             }
         }
 
-        .dashboard-panel {
+ .dashboard-panel {
     background: linear-gradient(135deg, rgba(155, 135, 245, 0.15) 0%, rgba(10, 11, 15, 0.9) 100%);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -447,9 +447,6 @@
 }
 
 .dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 1rem;
 }
 
@@ -461,40 +458,11 @@
     margin: 0;
 }
 
-.dashboard-balance {
-    background: rgba(155, 135, 245, 0.2);
-    padding: 0.8rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--text);
-    border: 1px solid rgba(155, 135, 245, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.dashboard-balance i {
-    color: var(--primary);
-}
-
 .dashboard-subtitle {
     font-size: 1.1rem;
     color: var(--text-muted);
 }
 
-@media (max-width: 768px) {
-    .dashboard-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-    }
-    
-    .dashboard-balance {
-        width: 100%;
-        justify-content: center;
-    }
-}
     </style>
 </head>
 <body>
@@ -515,8 +483,9 @@
 <div class="dashboard-panel">
     <div class="dashboard-header">
         <h1 id="usernameDisplay">Welcome back!</h1>
-        <p class="dashboard-subtitle">Complete offers, play or bet to earn ROBUX! Click withdraw now when you get enough points! 💰</p>
-        </div>
+    </div>
+    <p class="dashboard-subtitle">Complete offers, play or bet to earn ROBUX! Start earning now! 💰</p>
+</div>
     </div>
 </div>
         <section>
