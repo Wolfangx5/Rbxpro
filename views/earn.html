@@ -822,6 +822,9 @@
     </style>
 </head>
 <body>
+  <button class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-arrow-right"></i>
+</button>
 
     <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -1117,6 +1120,14 @@
         <p>© 2024 RBXPRO. All rights reserved. RBXPRO is not affiliated with, endorsed by, or sponsored by Roblox Corporation.</p>
     </footer>
     <script>
+      
+      
+      // Toggle Button Functionality
+const sidebarToggle = document.getElementById('sidebarToggle');
+
+sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+});
 
         // Close button functionality
 const sidebarClose = document.getElementById('sidebarClose');
@@ -1317,7 +1328,3 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
 </body>
 </html>
-
-
-
-
