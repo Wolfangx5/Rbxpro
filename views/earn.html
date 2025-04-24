@@ -12,9 +12,7 @@
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <style>
 
-
-
-
+        
         /* Section Dividers and Enhanced Sections */
 .section-container {
     margin-bottom: 4rem;
@@ -132,13 +130,9 @@
 .p-3 { padding: 1.5rem; }
 .p-4 { padding: 2rem; }
 .p-5 { padding: 3rem; }
-    
 
 
-
-
-
-/* Bottom Navigation for Mobile */
+        /* Bottom Navigation for Mobile */
 .bottom-nav {
     display: none;
     position: fixed;
@@ -712,82 +706,464 @@
     color: var(--text-muted);
 }
 
+
+        
+        :root {
+            --primary: #9b87f5;
+            --primary-light: #b8a4ff;
+            --primary-dark: #7E69AB;
+            --accent: #E5DEFF;
+            --background: #0a0b0f;
+            --surface: #151722;
+            --text: #ffffff;
+            --text-muted: #a0a5b1;
+            --border: rgba(255, 255, 255, 0.1);
+            --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(10, 11, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            padding: 1rem;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-button {
+            padding: 0.7rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-balance {
+            background: var(--card-gradient);
+            padding: 0.7rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-balance:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 7rem auto 2rem;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+
+        
+        .card {
+    background: linear-gradient(135deg, rgba(210, 82, 255, 0.25) 0%, rgba(10, 11, 15, 0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(155, 135, 245, 0.1);
+}
+
+
+
+ .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-light);
+    box-shadow: 0 8px 30px rgba(155, 135, 245, 0.15);
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.3) 0%, rgba(10, 11, 15, 0.85) 100%);
+}
+
+        .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(210, 82, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    pointer-events: none;
+}
+
+        .card img {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+            filter: invert(1);
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: var(--primary);
+            color: var(--text);
+            letter-spacing: 0.2px;
+        }
+
+        .bet-section {
+            width: 100%;
+            margin: 3rem 0;
+            padding: 4rem 2rem;
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bet-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bet-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        .bet-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bet-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .bet-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .faq-item {
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary-light);
+        }
+
+        .faq-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .faq-item-content {
+            display: none;
+            margin-top: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            padding-left: 1rem;
+            border-left: 2px solid var(--primary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--surface);
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            .nav-button, .nav-balance {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .bet-title {
+                font-size: 2rem;
+            }
+            .bet-description {
+                font-size: 1.1rem;
+            }
+            .bet-section {
+                padding: 2rem 1rem;
+            }
+        }
+
+        .gaming-card {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gaming-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, 
+                rgba(0, 0, 0, 0.95) 0%, 
+                rgba(0, 0, 0, 0.7) 50%, 
+                rgba(0, 0, 0, 0.4) 100%);
+            border-radius: 16px;
+            z-index: 1;
+        }
+
+        .gaming-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .gaming-card img {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            filter: brightness(1);
+        }
+
+        .gaming-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .gaming-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .gaming-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gaming-card .tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .gaming-card {
+                height: 240px;
+                padding: 1.5rem;
+            }
+
+            .gaming-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .gaming-card p {
+                font-size: 0.9rem;
+            }
+        }
+
+ .dashboard-panel {
+    background: linear-gradient(135deg, rgba(210, 82, 255, 0.15) 0%, rgba(10, 11, 15, 0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(210, 82, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    pointer-events: none;
+}
+
+.dashboard-header {
+    margin-bottom: 1rem;
+}
+
+.dashboard-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+
+.dashboard-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
     </style>
 </head>
 <body>
-  <button class="sidebar-toggle" id="sidebarToggle">
-    <i class="fas fa-arrow-right"></i>
-</button>
-
-    <div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <a href="/" class="logo">RBXPRO</a>
-    </div>
-     <button class="sidebar-close" id="sidebarClose">
-        <i class="fas fa-times"></i>
-    </button>
-    <div class="sidebar-links">
-        <a href="/" class="sidebar-link active">
-            <i class="fas fa-home"></i>
-            <span>Dashboard</span>
-        </a>
-        <a href="/withdraw" class="sidebar-link">
-            <i class="fas fa-coins"></i>
-            <span>Withdraw</span>
-        </a>
-        <a href="/promocode" class="sidebar-link">
-            <i class="fas fa-gift"></i>
-            <span>Promocodes</span>
-        </a>
-        <a href="/tips.html" class="sidebar-link">
-            <i class="fas fa-lightbulb"></i>
-            <span>Earning Tips</span>
-        </a>
-        <a href="https://discord.gg/9YFavvmJKc" class="sidebar-link">
-            <i class="fas fa-gamepad"></i>
-            <span>Betting Games</span>
-        </a>
-        <a href="https://discord.gg/BhDtmRDsWp" class="sidebar-link">
-            <i class="fab fa-discord"></i>
-            <span>Join Discord</span>
-        </a>
-    </div>
-   
-    </div>
-</div>
-
-<button class="sidebar-toggle" id="sidebarToggle">
-    <i class="fas fa-bars"></i>
-</button>
-
-<div class="bottom-nav">
-    <div class="bottom-nav-links">
-        <a href="/" class="bottom-nav-link active">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="/withdraw" class="bottom-nav-link">
-            <i class="fas fa-coins"></i>
-            <span>Withdraw</span>
-        </a>
-        <a href="/promocode" class="bottom-nav-link">
-            <i class="fas fa-gift"></i>
-            <span>Promocodes</span>
-        </a>
-        <a href="https://discord.gg/9YFavvmJKc" class="bottom-nav-link">
-            <i class="fas fa-gamepad"></i>
-            <span>Games</span>
-        </a>
-    </div>
-</div>
-
-
-
-
-
-
-    
-     <nav class="navbar">
+    <nav class="navbar">
         <div class="navbar-content">
             <a href="/" class="logo">RBXPRO</a>
             <div class="nav-links">
@@ -800,12 +1176,6 @@
         </div>
     </nav>
     <main class="main-content">
-
-        <div class="breadcrumb">
-    <a href="/">Home</a>
-    <span class="separator">/</span>
-    <span class="current">Dashboard</span>
-</div>
         
 <div class="dashboard-panel">
     <div class="dashboard-header">
@@ -816,53 +1186,34 @@
     </div>
 </div>
         <section>
-            <section class="section-container">
-    <div class="section-header">
-        <div class="section-icon">
-            <i class="fas fa-list"></i>
-        </div>
-        <div class="section-title-container">
             <h2 class="section-title">Featured Offerwalls</h2>
-            <p class="section-subtitle">Complete surveys and tasks to earn Robux</p>
-        </div>
-    </div>
-    
-    <div class="grid-container">
-        <div class="col-3 col-md-6 col-sm-12">
-            <div class="card fade-in" onclick="openAytS()">
-                <span class="tag">Long Offers</span>
-                <img src="https://img.icons8.com/?size=100&id=69981&format=png&color=000000" alt="Kiwiwall">
-                <h3>Kiwiwall</h3>
-                <p>Offers might be longer and harder.</p>
+            <div class="cards-grid">
+                <div class="card" onclick="openAytS()">
+                    <span class="tag">Long Offers</span>
+                    <img src="https://img.icons8.com/?size=100&id=69981&format=png&color=000000" alt="Kiwiwall">
+                    <h3>Kiwiwall</h3>
+                    <p>Offers might be longer and harder.</p>
+                </div>
+                <div class="card" onclick="openBitlab()">
+                    <span class="tag">Fast</span>
+                    <img src="https://img.icons8.com/?size=100&id=TQ2B1MLc1acK&format=png&color=000000" alt="Bitlabs">
+                    <h3>Bitlabs</h3>
+                    <p>Quick & easy surveys for instant Robux</p>
+                </div>
+                <div class="card" onclick="openCPX()">
+                    <span class="tag">Reliable</span>
+                    <img src="https://img.icons8.com/fluency/96/speed.png" alt="CPX">
+                    <h3>CPX Research</h3>
+                    <p>Trusted research surveys with high robux rates.</p>
+                </div>
+                <div class="card" onclick="openRevtoo()">
+                    <span class="tag">Popular</span>
+                    <img src="https://img.icons8.com/?size=100&id=64114&format=png&color=000000" alt="Revtoo">
+                    <h3>Revtoo</h3>
+                    <p>Play games and earn while having fun</p>
+                </div>
             </div>
-        </div>
-        <div class="col-3 col-md-6 col-sm-12">
-            <div class="card fade-in" onclick="openBitlab()">
-                <span class="tag">Fast</span>
-                <img src="https://img.icons8.com/?size=100&id=TQ2B1MLc1acK&format=png&color=000000" alt="Bitlabs">
-                <h3>Bitlabs</h3>
-                <p>Quick & easy surveys for instant Robux</p>
-            </div>
-        </div>
-        <div class="col-3 col-md-6 col-sm-12">
-            <div class="card fade-in" onclick="openCPX()">
-                <span class="tag">Reliable</span>
-                <img src="https://img.icons8.com/fluency/96/speed.png" alt="CPX">
-                <h3>CPX Research</h3>
-                <p>Trusted research surveys with high robux rates.</p>
-            </div>
-        </div>
-        <div class="col-3 col-md-6 col-sm-12">
-            <div class="card fade-in" onclick="openRevtoo()">
-                <span class="tag">Popular</span>
-                <img src="https://img.icons8.com/?size=100&id=64114&format=png&color=000000" alt="Revtoo">
-                <h3>Revtoo</h3>
-                <p>Play games and earn while having fun</p>
-            </div>
-        </div>
-    </div>
-</section>
-           
+        </section>
         
      <section>
     <h2 class="section-title">Social</h2>
@@ -1010,31 +1361,27 @@
     </footer>
     <script>
 
-// Add scroll animations
-document.addEventListener('DOMContentLoaded', () => {
-    // Add animation to cards
-    const animateElements = document.querySelectorAll('.card, .gaming-card, .dashboard-panel');
+
+            // Update breadcrumb based on current page
+    const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
+    if (breadcrumbCurrent) {
+        if (currentPath === '/') {
+            breadcrumbCurrent.textContent = 'Dashboard';
+        } else if (currentPath === '/withdraw') {
+            breadcrumbCurrent.textContent = 'Withdraw';
+        } else if (currentPath === '/promocode') {
+            breadcrumbCurrent.textContent = 'Promocodes';
+        } else if (currentPath === '/tips.html') {
+            breadcrumbCurrent.textContent = 'Earning Tips';
+        }
+    }
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    animateElements.forEach(element => {
-        observer.observe(element);
-    });
-    
-    // Add pulse animation to important buttons
-    const importantButtons = document.querySelectorAll('.bet-button');
-    importantButtons.forEach(button => {
-        button.classList.add('pulse-animation');
-    });
-    
-    // Set active links based on current page
+    loadUserData();
+});
+
+
+
+           // Set active links based on current page
     const currentPath = window.location.pathname;
     
     const sidebarLinks = document.querySelectorAll('.sidebar-link');
@@ -1054,25 +1401,30 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
         }
     });
-    
-    // Update breadcrumb based on current page
-    const breadcrumbCurrent = document.querySelector('.breadcrumb .current');
-    if (breadcrumbCurrent) {
-        if (currentPath === '/') {
-            breadcrumbCurrent.textContent = 'Dashboard';
-        } else if (currentPath === '/withdraw') {
-            breadcrumbCurrent.textContent = 'Withdraw';
-        } else if (currentPath === '/promocode') {
-            breadcrumbCurrent.textContent = 'Promocodes';
-        } else if (currentPath === '/tips.html') {
-            breadcrumbCurrent.textContent = 'Earning Tips';
-        }
-    }
-    
-    loadUserData();
-});
+          // Add pulse animation to important buttons
+    const importantButtons = document.querySelectorAll('.bet-button');
+    importantButtons.forEach(button => {
+        button.classList.add('pulse-animation');
+    });
 
-
+        // Add scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    // Add animation to cards
+    const animateElements = document.querySelectorAll('.card, .gaming-card, .dashboard-panel');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
+    
         function toggleFaq(element) {
             const content = element.querySelector('.faq-item-content');
             const allContent = document.querySelectorAll('.faq-item-content');
@@ -1141,4 +1493,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </html>
 
 
-   
+
