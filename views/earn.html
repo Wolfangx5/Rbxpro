@@ -13,34 +13,7 @@
     <style>
 
 
-        /* Close button for the sidebar */
-.sidebar-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(155, 135, 245, 0.2);
-    border: none;
-    color: var(--text);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
 
-.sidebar-close:hover {
-    background: var(--primary);
-    transform: rotate(90deg);
-}
-
-@media (min-width: 992px) {
-    .sidebar-close {
-        display: none; /* Hide close button on desktop as sidebar is always visible */
-    }
-}
 
         /* Section Dividers and Enhanced Sections */
 .section-container {
@@ -161,89 +134,9 @@
 .p-5 { padding: 3rem; }
     
 
-        
-        /* Sidebar Navigation */
 
-        
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 240px;
-    background: linear-gradient(180deg, var(--background) 0%, var(--surface) 100%);
-    border-right: 1px solid var(--border);
-    z-index: 100;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    overflow-y: auto;
-    padding: 2rem 0;
-    display: flex;
-    flex-direction: column;
-}
 
-.sidebar.active {
-    transform: translateX(0);
-}
 
-.sidebar-header {
-    padding: 0 1.5rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1.5rem;
-}
-
-.sidebar-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0 1rem;
-}
-
-.sidebar-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.8rem 1rem;
-    border-radius: 10px;
-    color: var(--text);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    font-weight: 500;
-}
-
-.sidebar-link:hover, .sidebar-link.active {
-    background: var(--primary-dark);
-}
-
-.sidebar-link i {
-    width: 20px;
-    text-align: center;
-}
-
-.sidebar-footer {
-    margin-top: auto;
-    padding: 1.5rem;
-    border-top: 1px solid var(--border);
-    text-align: center;
-}
-
-.sidebar-toggle {
-    display: none;
-    background: var(--primary);
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 101;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    align-items: center;
-    justify-content: center;
-}
 
 /* Bottom Navigation for Mobile */
 .bottom-nav {
@@ -1116,83 +1009,6 @@
         <p>© 2024 RBXPRO. All rights reserved. RBXPRO is not affiliated with, endorsed by, or sponsored by Roblox Corporation.</p>
     </footer>
     <script>
-      
-      
-      // Toggle Button Functionality
-const sidebarToggle = document.getElementById('sidebarToggle');
-
-sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-});
-
-        // Close button functionality
-const sidebarClose = document.getElementById('sidebarClose');
-
-if (sidebarClose) {
-    sidebarClose.addEventListener('click', () => {
-        sidebar.classList.remove('active');
-    });
-}
-
-// Optional: Close sidebar when clicking outside of it
-document.addEventListener('click', (event) => {
-    // Check if sidebar is active and click is outside sidebar and toggle button
-    if (sidebar.classList.contains('active') && 
-        !sidebar.contains(event.target) && 
-        event.target !== sidebarToggle &&
-        !sidebarToggle.contains(event.target)) {
-        sidebar.classList.remove('active');
-    }
-});
-
-        // Sidebar Toggle Functionality
-const sidebar = document.getElementById('sidebar');
-const sidebarToggle = document.getElementById('sidebarToggle');
-const mainContent = document.querySelector('.main-content');
-
-sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-});
-
-// Update both balances
-function updateBalances(balanceValue) {
-    const navBalance = document.getElementById("rbxbalance");
-    const sidebarBalance = document.getElementById("sidebar-balance");
-    
-    if (navBalance) {
-        navBalance.innerHTML = `<i class="fas fa-coins"></i><span>${balanceValue} R$</span>`;
-    }
-    
-    if (sidebarBalance) {
-        sidebarBalance.innerHTML = `<i class="fas fa-coins"></i><span>${balanceValue} R$</span>`;
-    }
-}
-
-// Update loadUserData function
-function loadUserData() {
-    const token = localStorage.getItem('sessionToken');
-    if (token) {
-        fetch('/api/userdata', {
-            method: 'POST',
-            headers: {
-                'Authorization': token
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            updateBalances(data.balance);
-            const nameDisplay = document.getElementById("usernameDisplay");
-            if (nameDisplay) {
-                nameDisplay.textContent = `Welcome, ${data.username}! 👋`;
-            }
-        })
-        .catch(error => {
-            window.location.href = '/login';
-        });
-    } else {
-        window.location.href = '/login';
-    }
-}
 
 // Add scroll animations
 document.addEventListener('DOMContentLoaded', () => {
@@ -1257,7 +1073,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-        
         function toggleFaq(element) {
             const content = element.querySelector('.faq-item-content');
             const allContent = document.querySelectorAll('.faq-item-content');
@@ -1326,23 +1141,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </html>
 
 
-
-
-
-
-
-  .then(response => response.json())
-                .then(data => {
-                    const balance = document.getElementById("rbxbalance");
-                    const nameDisplay = document.getElementById("usernameDisplay");
-                    balance.innerHTML = `<i class="fas fa-coins"></i><span>${data.balance} R$</span>`;
-                    nameDisplay.textContent = `Welcome, ${data.username}! 👋`;
-                })
-                .catch(error => {
-                    window.location.href = '/login';
-                });
-            } else {
-                window.location.href = '/login';
-            }
-        }
    
