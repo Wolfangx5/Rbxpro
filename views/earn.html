@@ -1324,3 +1324,25 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+  .then(response => response.json())
+                .then(data => {
+                    const balance = document.getElementById("rbxbalance");
+                    const nameDisplay = document.getElementById("usernameDisplay");
+                    balance.innerHTML = `<i class="fas fa-coins"></i><span>${data.balance} R$</span>`;
+                    nameDisplay.textContent = `Welcome, ${data.username}! 👋`;
+                })
+                .catch(error => {
+                    window.location.href = '/login';
+                });
+            } else {
+                window.location.href = '/login';
+            }
+        }
+   
