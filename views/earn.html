@@ -11,104 +11,6 @@
     <script src="//code.tidio.co/xg5um94pucph8hrtivyqjwwjthqxs0bk.js" async></script>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <style>
-
-        /* Sidebar Styles */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: var(--sidebar-width);
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    z-index: 200;
-    transition: all var(--transition-speed);
-    transform: translateX(0);
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.sidebar.collapsed {
-    width: var(--sidebar-collapsed-width);
-}
-
-.sidebar-header {
-    padding: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-}
-
-.sidebar-header .logo {
-    font-size: 1.5rem;
-}
-
-.sidebar-toggle {
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.sidebar-menu {
-    padding: 1rem 0;
-}
-
-.sidebar-menu-item {
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 1.5rem;
-    color: var(--text);
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.sidebar-menu-item:hover {
-    background: rgba(155, 135, 245, 0.1);
-    border-left: 3px solid var(--primary);
-}
-
-.sidebar-menu-item i {
-    margin-right: 1rem;
-    font-size: 1.2rem;
-    transition: margin 0.3s;
-    min-width: 20px;
-    text-align: center;
-}
-
-.sidebar.collapsed .sidebar-menu-item span {
-    display: none;
-}
-
-.sidebar.collapsed .sidebar-menu-item i {
-    margin-right: 0;
-}
-
-body.sidebar-expanded {
-    padding-left: var(--sidebar-width);
-}
-
-body.sidebar-collapsed {
-    padding-left: var(--sidebar-collapsed-width);
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    
-    .sidebar.mobile-visible {
-        transform: translateX(0);
-    }
-    
-    body.sidebar-expanded,
-    body.sidebar-collapsed {
-        padding-left: 0;
-    }
-}
-        
         :root {
             --primary: #9b87f5;
             --primary-light: #b8a4ff;
@@ -561,232 +463,6 @@ body.sidebar-collapsed {
     color: var(--text-muted);
 }
 
-
-
-        /* Micro-interactions */
-.card, .gaming-card, .nav-button, .bet-button, .sidebar-menu-item {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.card:active, .gaming-card:active, .nav-button:active, .bet-button:active {
-    transform: scale(0.96);
-}
-
-.pulse-effect {
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(155, 135, 245, 0.4);
-    }
-    70% {
-        box-shadow: 0 0 0 10px rgba(155, 135, 245, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(155, 135, 245, 0);
-    }
-}
-
-.btn-hover-effect:hover {
-    animation: btn-glow 0.8s ease-in-out;
-}
-
-@keyframes btn-glow {
-    0% {
-        box-shadow: 0 0 5px var(--primary-light);
-    }
-    50% {
-        box-shadow: 0 0 15px var(--primary);
-    }
-    100% {
-        box-shadow: 0 0 5px var(--primary-light);
-    }
-}
-
-
-
-        /* Carousel Styles */
-.carousel-container {
-    position: relative;
-    padding: 2rem 0;
-    overflow: hidden;
-}
-
-.carousel-nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(10, 11, 15, 0.7);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 5;
-    transition: all 0.3s ease;
-}
-
-.carousel-nav-button:hover {
-    background: var(--primary);
-}
-
-.carousel-prev {
-    left: 10px;
-}
-
-.carousel-next {
-    right: 10px;
-}
-
-.tns-controls {
-    display: none;
-}
-
-.tns-nav {
-    text-align: center;
-    margin: 1rem 0;
-}
-
-.tns-nav button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--text-muted);
-    border: none;
-    margin: 0 5px;
-    padding: 0;
-    cursor: pointer;
-}
-
-.tns-nav button.tns-nav-active {
-    background: var(--primary);
-}
-
-.carousel-item {
-    padding: 0 10px;
-}
-
-
-
-        /* Breadcrumb navigation */
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-}
-
-.breadcrumb-item {
-    display: flex;
-    align-items: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-.breadcrumb-item a {
-    color: var(--text);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.breadcrumb-item a:hover {
-    color: var(--primary);
-}
-
-.breadcrumb-separator {
-    margin: 0 0.5rem;
-    color: var(--text-muted);
-}
-
-.breadcrumb-item:last-child {
-    color: var(--primary);
-    font-weight: 500;
-}
-
-
-        /* Quick access toolbar */
-.quick-access-toolbar {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    z-index: 90;
-}
-
-.quick-action-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: var(--text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: none;
-    font-size: 1.2rem;
-}
-
-.quick-action-btn:hover {
-    transform: translateY(-3px);
-    background: var(--primary-dark);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-.quick-action-btn.main-btn {
-    background: linear-gradient(135deg, var(--primary) 0%, #7e69ab 100%);
-    z-index: 91;
-}
-
-.quick-action-tooltip {
-    position: absolute;
-    right: 70px;
-    background: var(--surface);
-    color: var(--text);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
-    border: 1px solid var(--border);
-}
-
-.quick-action-btn:hover .quick-action-tooltip {
-    opacity: 1;
-    transform: translateX(-5px);
-}
-
-.action-menu {
-    position: absolute;
-    bottom: 70px;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(10px);
-    transition: all 0.3s;
-}
-
-.action-menu.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
     </style>
 </head>
 <body>
@@ -801,42 +477,8 @@ body.sidebar-collapsed {
                 </div>
             </div>
         </div>
-        
-    <div class="sidebar-menu">
-        <a href="/" class="sidebar-menu-item">
-            <i class="fas fa-home"></i>
-            <span>Home</span>
-        </a>
-        <a href="/withdraw" class="sidebar-menu-item">
-            <i class="fas fa-coins"></i>
-            <span>Withdraw</span>
-        </a>
-        <a href="/promocode" class="sidebar-menu-item">
-            <i class="fas fa-gift"></i>
-            <span>Promocodes</span>
-        </a>
-        <a href="/tips.html" class="sidebar-menu-item">
-            <i class="fas fa-lightbulb"></i>
-            <span>Survey Tips</span>
-        </a>
-        <a href="https://discord.gg/9YFavvmJKc" class="sidebar-menu-item">
-            <i class="fab fa-discord"></i>
-            <span>Discord</span>
-        </a>
-    </div>
-</div>
-        
     </nav>
     <main class="main-content">
-        <div class="breadcrumb">
-    <div class="breadcrumb-item">
-        <a href="/">Home</a>
-    </div>
-    <div class="breadcrumb-separator">
-        <i class="fas fa-chevron-right"></i>
-    </div>
-    <div class="breadcrumb-item">Dashboard</div>
-</div>
         
 <div class="dashboard-panel">
     <div class="dashboard-header">
@@ -846,58 +488,27 @@ body.sidebar-collapsed {
 </div>
     </div>
 </div>
-
-        <div class="quick-access-toolbar">
-    <div class="action-menu" id="actionMenu">
-        <button class="quick-action-btn" onclick="location.href='/withdraw';">
-            <i class="fas fa-wallet"></i>
-            <span class="quick-action-tooltip">Withdraw</span>
-        </button>
-        <button class="quick-action-btn" onclick="location.reload();">
-            <i class="fas fa-sync-alt"></i>
-            <span class="quick-action-tooltip">Refresh</span>
-        </button>
-        <button class="quick-action-btn" onclick="window.open('https://discord.gg/9YFavvmJKc', '_blank')">
-            <i class="fas fa-headset"></i>
-            <span class="quick-action-tooltip">Support</span>
-        </button>
-    </div>
-    <button class="quick-action-btn main-btn" id="menuToggle">
-        <i class="fas fa-plus"></i>
-    </button>
-</div>
         <section>
-    <h2 class="section-title">Featured Offerwalls</h2>
-    <div class="carousel-container">
-        <button class="carousel-nav-button carousel-prev">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div class="featured-carousel">
-            <div class="carousel-item">
+            <h2 class="section-title">Featured Offerwalls</h2>
+            <div class="cards-grid">
                 <div class="card" onclick="openAytS()">
                     <span class="tag">Long Offers</span>
                     <img src="https://img.icons8.com/?size=100&id=69981&format=png&color=000000" alt="Kiwiwall">
                     <h3>Kiwiwall</h3>
                     <p>Offers might be longer and harder.</p>
                 </div>
-            </div>
-            <div class="carousel-item">
                 <div class="card" onclick="openBitlab()">
                     <span class="tag">Fast</span>
                     <img src="https://img.icons8.com/?size=100&id=TQ2B1MLc1acK&format=png&color=000000" alt="Bitlabs">
                     <h3>Bitlabs</h3>
                     <p>Quick & easy surveys for instant Robux</p>
                 </div>
-            </div>
-            <div class="carousel-item">
                 <div class="card" onclick="openCPX()">
                     <span class="tag">Reliable</span>
                     <img src="https://img.icons8.com/fluency/96/speed.png" alt="CPX">
                     <h3>CPX Research</h3>
                     <p>Trusted research surveys with high robux rates.</p>
                 </div>
-            </div>
-            <div class="carousel-item">
                 <div class="card" onclick="openRevtoo()">
                     <span class="tag">Popular</span>
                     <img src="https://img.icons8.com/?size=100&id=64114&format=png&color=000000" alt="Revtoo">
@@ -905,20 +516,7 @@ body.sidebar-collapsed {
                     <p>Play games and earn while having fun</p>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="card" onclick="openAytS()">
-                    <span class="tag">New</span>
-                    <img src="https://img.icons8.com/?size=100&id=87332&format=png&color=000000" alt="Special Offer">
-                    <h3>Special Offers</h3>
-                    <p>Limited-time offers with premium rewards</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-nav-button carousel-next">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-</section>
+        </section>
         
      <section>
     <h2 class="section-title">Social</h2>
@@ -1065,114 +663,6 @@ body.sidebar-collapsed {
         <p>© 2024 RBXPRO. All rights reserved. RBXPRO is not affiliated with, endorsed by, or sponsored by Roblox Corporation.</p>
     </footer>
     <script>
-        // Sidebar functionality
-const sidebar = document.querySelector('.sidebar');
-const sidebarToggle = document.querySelector('.sidebar-toggle');
-const body = document.body;
-
-// Initialize sidebar state from localStorage or default to expanded
-if (localStorage.getItem('sidebarCollapsed') === 'true') {
-    sidebar.classList.add('collapsed');
-    body.classList.add('sidebar-collapsed');
-    body.classList.remove('sidebar-expanded');
-    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-} else {
-    sidebar.classList.remove('collapsed');
-    body.classList.add('sidebar-expanded');
-    body.classList.remove('sidebar-collapsed');
-}
-
-sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-    
-    if (sidebar.classList.contains('collapsed')) {
-        body.classList.add('sidebar-collapsed');
-        body.classList.remove('sidebar-expanded');
-        sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        localStorage.setItem('sidebarCollapsed', 'true');
-    } else {
-        body.classList.add('sidebar-expanded');
-        body.classList.remove('sidebar-collapsed');
-        sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        localStorage.setItem('sidebarCollapsed', 'false');
-    }
-});
-
-// Mobile sidebar toggle
-const mobileMenuToggle = document.createElement('button');
-mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-mobileMenuToggle.classList.add('nav-button');
-mobileMenuToggle.style.display = 'none';
-
-const navbarContent = document.querySelector('.navbar-content');
-navbarContent.prepend(mobileMenuToggle);
-
-mobileMenuToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('mobile-visible');
-});
-
-// Handle mobile view
-function handleMobileView() {
-    if (window.innerWidth <= 768) {
-        mobileMenuToggle.style.display = 'block';
-        body.classList.remove('sidebar-expanded', 'sidebar-collapsed');
-    } else {
-        mobileMenuToggle.style.display = 'none';
-        if (sidebar.classList.contains('collapsed')) {
-            body.classList.add('sidebar-collapsed');
-        } else {
-            body.classList.add('sidebar-expanded');
-        }
-    }
-}
-
-window.addEventListener('resize', handleMobileView);
-handleMobileView();
-
-// Initialize carousel
-document.addEventListener('DOMContentLoaded', function() {
-    const slider = tns({
-        container: '.featured-carousel',
-        items: 1,
-        slideBy: 1,
-        autoplay: false,
-        controls: false,
-        nav: true,
-        responsive: {
-            640: {
-                items: 2
-            },
-            900: {
-                items: 3
-            },
-            1200: {
-                items: 4
-            }
-        }
-    });
-    
-    document.querySelector('.carousel-prev').addEventListener('click', () => slider.goTo('prev'));
-    document.querySelector('.carousel-next').addEventListener('click', () => slider.goTo('next'));
-    
-    // Quick access toolbar functionality
-    const menuToggle = document.getElementById('menuToggle');
-    const actionMenu = document.getElementById('actionMenu');
-    
-    menuToggle.addEventListener('click', () => {
-        actionMenu.classList.toggle('active');
-        menuToggle.innerHTML = actionMenu.classList.contains('active') ? 
-            '<i class="fas fa-times"></i>' : '<i class="fas fa-plus"></i>';
-    });
-    
-    // Add pulse effect to withdraw button
-    const withdrawButton = document.querySelector('a[href="/withdraw"]');
-    if (withdrawButton) {
-        withdrawButton.classList.add('pulse-effect', 'btn-hover-effect');
-    }
-});
-
-
-        
         function toggleFaq(element) {
             const content = element.querySelector('.faq-item-content');
             const allContent = document.querySelectorAll('.faq-item-content');
@@ -1229,7 +719,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         function openRevtoo() {
             const token = localStorage.getItem('sessionToken');
-            const userConfirmed = confirm("If Revtoo does not reward you, join our discord we will reward you manually (must show as credited in history) Press OK to continue.");
+            const userConfirmed = confirm("Revtoo is one of our best offerwalls yet! we recommend using them the most");
             if (userConfirmed) {
                 window.open(`https://revtoo.com/offerwall/7qs77ssmyowsfwbw6uyd49zdxwob56/${token}`, '_blank');
             }
@@ -1239,6 +729,5 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
-
 
 
