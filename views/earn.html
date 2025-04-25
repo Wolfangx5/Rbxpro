@@ -11,6 +11,510 @@
     <script src="//code.tidio.co/xg5um94pucph8hrtivyqjwwjthqxs0bk.js" async></script>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <style>
+        /* Add these styles to your existing stylesheet */
+
+/* Modern Layout Variables */
+:root {
+    --primary: #9b87f5;
+    --primary-light: #b8a4ff;
+    --primary-dark: #7E69AB;
+    --accent: #E5DEFF;
+    --background: #0a0b0f;
+    --surface: #151722;
+    --text: #ffffff;
+    --text-muted: #a0a5b1;
+    --border: rgba(255, 255, 255, 0.1);
+    --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --sidebar-width: 280px;
+    --header-height: 70px;
+    --glow-color: rgba(155, 135, 245, 0.5);
+}
+
+/* Modern Body Updates */
+body {
+    background-image: radial-gradient(circle at top right, rgba(155, 135, 245, 0.15) 0%, transparent 30%),
+                      radial-gradient(circle at bottom left, rgba(210, 82, 255, 0.1) 0%, transparent 30%);
+    background-color: var(--background);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    height: 100%;
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, var(--surface) 0%, rgba(21, 23, 34, 0.95) 100%);
+    border-right: 1px solid var(--border);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none;
+    backdrop-filter: blur(5px);
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.sidebar-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.sidebar-close:hover {
+    color: var(--text);
+}
+
+.sidebar-balance {
+    background: rgba(155, 135, 245, 0.15);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 4px 15px rgba(155, 135, 245, 0.1);
+    border: 1px solid rgba(155, 135, 245, 0.3);
+}
+
+.sidebar-menu {
+    padding: 1rem 0;
+    flex: 1;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    gap: 1rem;
+}
+
+.sidebar-item:hover, .sidebar-item.active {
+    background: rgba(155, 135, 245, 0.1);
+    color: var(--text);
+    border-left: 3px solid var(--primary);
+}
+
+.sidebar-item i {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-divider {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--primary);
+    color: var(--text);
+    padding: 0.8rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sidebar-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Updated Navbar */
+.navbar {
+    background: rgba(10, 11, 15, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    padding: 0;
+    height: var(--header-height);
+}
+
+.navbar-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    height: 100%;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+/* Main Content Updates */
+.main-content {
+    max-width: 1400px;
+    margin: calc(var(--header-height) + 2rem) auto 2rem;
+    padding: 0 1.5rem;
+    transition: margin-left 0.3s ease;
+}
+
+/* Modern Card Updates */
+.card {
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.2) 0%, rgba(10, 11, 15, 0.95) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-light);
+    box-shadow: 0 15px 40px rgba(155, 135, 245, 0.2);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(155, 135, 245, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Enhanced Dashboard Panel */
+.dashboard-panel {
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.2) 0%, rgba(10, 11, 15, 0.9) 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(155, 135, 245, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    pointer-events: none;
+}
+
+.dashboard-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(210, 82, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Improved Gaming Cards */
+.gaming-card {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    overflow: hidden;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+}
+
+.gaming-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, 
+        rgba(0, 0, 0, 0.95) 0%, 
+        rgba(0, 0, 0, 0.7) 50%, 
+        rgba(0, 0, 0, 0.4) 100%);
+    border-radius: 20px;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+.gaming-card:hover::before {
+    opacity: 0.8;
+}
+
+.gaming-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Enhanced Betting Section */
+.bet-section {
+    width: 100%;
+    margin: 4rem 0;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.2) 0%, rgba(10, 11, 15, 0.95) 100%);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.bet-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(155, 135, 245, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.bet-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(210, 82, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.bet-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--primary);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(155, 135, 245, 0.3);
+}
+
+.bet-button:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(155, 135, 245, 0.4);
+}
+
+/* Modern FAQ Section */
+.faq-section {
+    max-width: 900px;
+    margin: 5rem auto;
+    padding: 2rem;
+}
+
+.faq-item {
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.1) 0%, rgba(10, 11, 15, 0.95) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.faq-item:hover {
+    border-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(155, 135, 245, 0.15);
+}
+
+.faq-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.faq-item-content {
+    display: none;
+    margin-top: 1.2rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    padding: 1rem;
+    border-left: 3px solid var(--primary);
+    background: rgba(155, 135, 245, 0.05);
+    border-radius: 0 12px 12px 0;
+}
+
+/* Responsive Design for Sidebar */
+@media (min-width: 1024px) {
+    body.sidebar-expanded .main-content {
+        margin-left: var(--sidebar-width);
+        max-width: calc(100% - var(--sidebar-width));
+    }
+    
+    body.sidebar-expanded .sidebar {
+        left: 0;
+    }
+    
+    body.sidebar-expanded .navbar-content {
+        max-width: calc(1400px - var(--sidebar-width));
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-content {
+        padding: 0 1rem;
+    }
+    
+    .menu-toggle {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .logo {
+        font-size: 1.5rem;
+    }
+    
+    .main-content {
+        padding: 0 1rem;
+    }
+    
+    .sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .dashboard-panel {
+        padding: 1.5rem;
+    }
+    
+    .bet-section {
+        padding: 2rem 1rem;
+    }
+}
+
+        
         :root {
             --primary: #9b87f5;
             --primary-light: #b8a4ff;
@@ -464,10 +968,132 @@
 }
 
     </style>
+
+    <!-- Add CSS for these components -->
+<style>
+.stats-section {
+    padding: 2rem 0;
+    margin: 3rem 0;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(155, 135, 245, 0.15) 0%, rgba(10, 11, 15, 0.95) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--primary-light);
+    box-shadow: 0 10px 30px rgba(155, 135, 245, 0.15);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(155, 135, 245, 0.15);
+    border-radius: 12px;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.stat-content h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.stat-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>  
 </head>
 <body>
+    <!-- Add this HTML right after your <body> tag, before the navbar -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">RBXPRO</a>
+        <button class="sidebar-close" onclick="toggleSidebar()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="sidebar-menu">
+        <a href="/" class="sidebar-item active">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="/withdraw" class="sidebar-item">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Withdraw</span>
+        </a>
+        <a href="/promocode" class="sidebar-item">
+            <i class="fas fa-gift"></i>
+            <span>Promocodes</span>
+        </a>
+        <a href="/tips.html" class="sidebar-item">
+            <i class="fas fa-lightbulb"></i>
+            <span>Earning Tips</span>
+        </a>
+        <div class="sidebar-divider">Social Media</div>
+        <a href="https://discord.com/invite/BhDtmRDsWp" class="sidebar-item" target="_blank">
+            <i class="fab fa-discord"></i>
+            <span>Discord</span>
+        </a>
+        <a href="https://www.youtube.com/@RBXPRO360" class="sidebar-item" target="_blank">
+            <i class="fab fa-youtube"></i>
+            <span>YouTube</span>
+        </a>
+        <a href="https://www.instagram.com/a_kevin2009/" class="sidebar-item" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+        </a>
+    </div>
+    <div class="sidebar-footer">
+        <a href="https://discord.gg/9YFavvmJKc" class="sidebar-button">
+            <i class="fas fa-gamepad"></i>
+            <span>Play & Earn</span>
+        </a>
+    </div>
+</div>
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>   
+
+    
     <nav class="navbar">
         <div class="navbar-content">
+            <div class="navbar-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+                           
             <a href="/" class="logo">RBXPRO</a>
             <div class="nav-links">
                 <a href="https://rbxpro.site/withdraw" class="nav-button">Withdraw now!</a>
@@ -659,6 +1285,53 @@
             </div>
         </div>
     </main>
+    <!-- Add these new components right before the footer section -->
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content">
+                <h3>50,000+</h3>
+                <p>Active Users</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-coins"></i>
+            </div>
+            <div class="stat-content">
+                <h3>1,000,000+</h3>
+                <p>Robux Paid</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-content">
+                <h3>24/7</h3>
+                <p>Support</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="stat-content">
+                <h3>Instant</h3>
+                <p>Payouts</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    
     <footer class="footer">
         <p>© 2024 RBXPRO. All rights reserved. RBXPRO is not affiliated with, endorsed by, or sponsored by Roblox Corporation.</p>
     </footer>
@@ -725,7 +1398,42 @@
             }
         }
         setInterval(loadUserData, 1000);
-        document.addEventListener('DOMContentLoaded', loadUserData);      
+        document.addEventListener('DOMContentLoaded', loadUserData);   
+
+        // Add this JavaScript at the end of your script section
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const body = document.body;
+    
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    // For desktop layout (optional auto-expansion)
+    if (window.innerWidth >= 1024) {
+        body.classList.toggle('sidebar-expanded');
+    }
+}          
+                    
+
+// Check window size on load to determine sidebar state
+document.addEventListener('DOMContentLoaded', function() {
+    loadUserData();
+    if (window.innerWidth >= 1024) {
+        // Auto-expand sidebar on desktop (optional)
+        // toggleSidebar(); // Uncomment if you want sidebar expanded by default on desktop
+    }
+});
+
+// Detect window resize for responsive adjustments
+window.addEventListener('resize', function() {
+    const body = document.body;
+    if (window.innerWidth < 1024 && body.classList.contains('sidebar-expanded')) {
+        body.classList.remove('sidebar-expanded');
+        document.getElementById('sidebar').classList.remove('active');
+        document.getElementById('sidebar-overlay').classList.remove('active');
+    }
+});      
     </script>
 </body>
 </html>
