@@ -24,11 +24,11 @@ body { background-color: #black; }
     --primary: #8B5CF6;
     --primary-dark: #7048e8;
     --secondary: #D946EF;
-    --bg-dark: #1a103d;  /* Changed from #05040a */
-    --bg-card: rgba(38, 38, 77, 0.95);  /* Changed for better contrast */
-    --text-light: #f4f7fc;
-    --text-muted: #aaa;
-    --border-light: rgba(255, 255, 255, 0.1);
+    --bg-dark: #0f0f1a;
+    --bg-card: rgba(26, 26, 46, 0.95);
+    --text-light: #ffffff;
+    --text-muted: #cccccc;
+    --border-light: rgba(255, 255, 255, 0.15);
     --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.2);
     --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.3);
@@ -43,8 +43,8 @@ body { background-color: #black; }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1a103d, #2d1b69);
-    color: var(--text-light);
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+    color: #ffffff;
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
@@ -56,7 +56,7 @@ body {
 
         /* Navbar Styles */
 .navbar {
-    background: rgba(26, 26, 46, 0.98);
+    background: rgba(15, 15, 30, 0.95);
     backdrop-filter: blur(10px);
     padding: 1rem 2rem;
     color: #fff;
@@ -65,8 +65,10 @@ body {
     width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease;
+}
+
 }
 
 .navbar .container {
