@@ -33,23 +33,19 @@ body { background-color: #black; }
 }
 
 body {
-  background-color: var(--primary-bg);
-  color: var(--text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.6;
+    background: linear-gradient(to bottom, #000000, #4a148c); /* Gradient from black to purplish */
+    color: var(--text-primary);
+    font-family: 'Poppins', sans-serif; /* Use a consistent font */
+    line-height: 1.6;
 }
 
-        /* Navbar Styles */
+
+/* Navbar Styles */
 .navbar {
     background: rgba(15, 15, 30, 0.95);
     backdrop-filter: blur(10px);
     padding: 1rem 2rem;
     color: #fff;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease;
 }
@@ -101,25 +97,24 @@ body {
 }
 
 /* Buttons */
+/* Button Styles */
 .btn {
-  background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-weight: 500;
-  padding: 10px 20px;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
+    background: linear-gradient(135deg, #9c27b0, #e91e63); /* Purple to pink gradient */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: all 0.2s ease;
 }
 
 .btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
 }
+
 
 .btn-secondary {
   background: transparent;
@@ -196,16 +191,12 @@ body {
 }
 
 /* Card container */
+/* Improved Card Styles */
 .card {
-  background: linear-gradient(145deg, var(--card-bg), #242424);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px var(--shadow-color);
-  margin: 24px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    background: linear-gradient(145deg, var(--card-bg), #242424);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0,
 
 .card:hover {
   transform: translateY(-5px);
