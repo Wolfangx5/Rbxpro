@@ -18,299 +18,528 @@
         <style>
 body { background-color: #black; }
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-                /* Blur effect when popup is active */
-        .blurred {
-            filter: blur(8px);
-            pointer-events: none;
-        }
-        
-        /* Popup styles */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        
-        .popup-content {
-            background: #222;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            max-width: 500px;
-            color: #fff;
-        }
-        
-        .popup-content h2 {
-            color: #8B5CF6;
-            margin-bottom: 15px;
-        }
-        
-        .popup-content button {
-            background: linear-gradient(135deg, #8B5CF6, #D946EF);
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-        }
-        
-        .popup-content button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4);
-        }
+:root {
+    --primary: #8B5CF6;
+    --primary-dark: #7048e8;
+    --secondary: #D946EF;
+    --bg-dark: #05040a;
+    --bg-card: rgba(26, 26, 46, 0.95);
+    --text-light: #f4f7fc;
+    --text-muted: #aaa;
+    --border-light: rgba(255, 255, 255, 0.1);
+    --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #05040a, #05040a);
-            color: #f4f7fc;
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .navbar {
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1.2rem;
-            color: #fff;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #05040a, #090713);
+    color: var(--text-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-        .navbar-brand .logo {
-            font-weight: 700;
-            font-size: 28px;
-            color: #fff;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(to right, #fff, #8B5CF6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* Navbar Styles */
+.navbar {
+    background: rgba(26, 26, 46, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+}
 
-        .navbar-menu a {
-            color: #fff;
-            padding: 0.7rem 2rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-        }
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .navbar-menu a:hover {
-            background: rgba(139, 92, 246, 0.2);
-            color: #fff;
-            transform: translateY(-2px);
-        }
+.navbar-brand .logo {
+    font-weight: 800;
+    font-size: 28px;
+    background: linear-gradient(to right, #fff, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+}
 
-        .buttons .button {
-            background: linear-gradient(135deg, #050408, #050408);
-            color: #fff;
-            font-weight: 600;
-            border-radius: 8px;
-            padding: 0.7rem 2rem;
-            transition: all 0.3s ease;
-            border: none;
-        }
+.navbar-menu {
+    display: flex;
+    align-items: center;
+}
 
-        .buttons .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
-        }
+.navbar-item {
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0 5px;
+}
 
-        .withdraw-container {
-            max-width: 900px;
-            margin: 120px auto 50px;
-            background: rgba(26, 26, 46, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+.navbar-item:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-2px);
+}
 
-        .withdraw-header {
-            background: linear-gradient(135deg, #8B5CF6, #D946EF);
-            color: #fff;
-            padding: 30px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin: -40px -40px 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
+.navbar-item.is-active {
+    background: rgba(139, 92, 246, 0.3);
+    color: var(--primary);
+}
 
-        .withdraw-form {
-            padding: 20px;
-        }
+.buttons .button {
+    background: rgba(26, 26, 46, 0.8);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0.7rem 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-light);
+    margin-left: 10px;
+    cursor: pointer;
+}
 
-        .withdraw-input {
-            width: 100%;
-            padding: 18px;
-            margin-bottom: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            background: rgba(68, 68, 68, 0.4);
-            color: #fff;
-            font-size: 18px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
+.buttons .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    border-color: var(--primary);
+}
 
-        .withdraw-input:focus {
-            border-color: #8B5CF6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-            outline: none;
-        }
+.button.is-info {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+}
 
-        .withdraw-price {
-            background: rgba(51, 51, 51, 0.6);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            font-weight: bold;
-            text-align: center;
-            border-radius: 12px;
-            margin: 20px auto;
-            font-size: 24px;
-            width: 90%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
 
-        .withdraw-btn {
-            background: linear-gradient(135deg, #8B5CF6, #D946EF);
-            color: #fff;
-            padding: 20px;
-            width: 100%;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-        }
 
-        .withdraw-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-        }
+        /* Withdraw Options Button/Card */
+.withdraw-options-container {
+    max-width: 1000px;
+    margin: 120px auto 50px;
+    padding: 20px;
+}
 
-        .instructions {
-            margin-top: 40px;
-            color: #f4f7fc;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 12px;
-        }
+.withdraw-options-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .instructions h3 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #8B5CF6;
-            font-weight: 700;
-        }
+.withdraw-options-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+}
 
-        .popup {
-            border: 3px solid #8B5CF6;
-            border-radius: 15px;
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(51, 51, 51, 0.95);
-            padding: 40px;
-            z-index: 1000;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            max-width: 90%;
-            width: 500px;
-        }
+.withdraw-options-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-        .popup-content {
-            margin-bottom: 25px;
-            color: #fff;
-            font-size: 18px;
-        }
+.withdraw-options-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
 
-        .popup button {
-            margin-top: 20px;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #8B5CF6, #D946EF);
-            border: none;
-            border-radius: 10px;
-            color: #fff;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+.withdraw-option-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-light);
+    padding: 30px;
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
 
-        .popup button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-        }
+.withdraw-option-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+}
 
+.withdraw-option-card:hover .card-bg {
+    opacity: 0.1;
+}
+
+.card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    opacity: 0.05;
+    transition: all 0.3s ease;
+    z-index: 0;
+}
+
+.withdraw-option-card .emoji {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.withdraw-option-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.withdraw-option-card p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+
+        /* Improved Withdrawal Form */
+.withdraw-container {
+    max-width: 900px;
+    margin: 40px auto 50px;
+    background: var(--bg-card);
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    padding: 40px;
+    border: 1px solid var(--border-light);
+    display: none; /* Initially hidden, will be shown when option is selected */
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.withdraw-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: -40px -40px 30px;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.withdraw-form {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.withdraw-input {
+    width: 100%;
+    padding: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(68, 68, 68, 0.4);
+    color: #fff;
+    font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.withdraw-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+    outline: none;
+}
+
+.withdraw-price {
+    background: rgba(51, 51, 51, 0.6);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 12px;
+    margin: 20px auto;
+    font-size: 24px;
+    width: 100%;
+    box-shadow: var(--shadow-sm);
+}
+
+.withdraw-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.withdraw-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+}
+
+.withdraw-btn:active {
+    transform: translateY(1px);
+}
+
+.withdraw-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    pointer-events: none;
+}
+
+        /* Improved Instructions */
+.instructions {
+    margin-top: 40px;
+    color: var(--text-light);
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--border-light);
+}
+
+.instructions h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.instructions ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.instructions li {
+    padding: 12px 0 12px 35px;
+    position: relative;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.instructions li:last-child {
+    border-bottom: none;
+}
+
+.instructions li::before {
+    content: '✓';
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+  
+
+       
+
+       /* Improved Popups */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.popup-content {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 500px;
+    color: #fff;
+    border: 1px solid var(--border-light);
+    animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.popup-content h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.popup-content p {
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.popup-content button {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 12px 30px;
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    font-family: 'Poppins', sans-serif;
+}
+
+.popup-content button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.popup {
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-card);
+    padding: 40px;
+    z-index: 2000;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    max-width: 90%;
+    width: 500px;
+    animation: popIn 0.3s ease;
+}
         .popup-congrats {
             border-color: #8B5CF6;
         }
+        
 
-        footer {
-            background: rgba(26, 26, 46, 0.95);
-            color: #fff;
-            padding: 30px;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: auto;
-            backdrop-filter: blur(10px);
-        }
+       /* Improved Footer */
+footer {
+    background: var(--bg-card);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-light);
+}
 
-        .footer-nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
+.footer-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
 
-        .footer-nav li a {
-            font-size: 16px;
-            color: #fff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 8px 20px;
-            border-radius: 8px;
-        }
+.footer-nav li a {
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+}
 
-        .footer-nav li a:hover {
-            color: #8B5CF6;
-            background: rgba(255, 255, 255, 0.1);
-        }
+.footer-nav li a:hover {
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.rbxpro-disclaimer {
+    color: var(--text-muted);
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-logo {
+    font-weight: 700;
+    font-size: 24px;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    display: inline-block;
+}
 
         .rbxpro-disclaimer {
             color: #aaa;
@@ -319,38 +548,60 @@ body { background-color: #black; }
             line-height: 1.6;
         }
 
-        @media (max-width: 768px) {
-            .withdraw-container {
-                margin: 80px 20px 40px;
-                padding: 20px;
-            }
+       /* Responsive Styles */
+@media (max-width: 768px) {
+    .withdraw-options-container {
+        margin-top: 80px;
+    }
+    
+    .withdraw-container {
+        margin: 20px;
+        padding: 20px;
+    }
 
-            .withdraw-header {
-                margin: -20px -20px 20px;
-                padding: 20px;
-                font-size: 20px;
-            }
+    .withdraw-header {
+        margin: -20px -20px 20px;
+        padding: 20px;
+        font-size: 20px;
+    }
 
-            .withdraw-input {
-                padding: 15px;
-                font-size: 16px;
-            }
+    .withdraw-input {
+        padding: 15px;
+        font-size: 16px;
+    }
 
-            .withdraw-btn {
-                padding: 15px;
-                font-size: 18px;
-            }
+    .withdraw-btn {
+        padding: 15px;
+        font-size: 16px;
+    }
 
-            .popup {
-                padding: 25px;
-                width: 90%;
-            }
+    .popup, .popup-content {
+        padding: 25px;
+        width: 90%;
+    }
 
-            .footer-nav ul {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
+    .footer-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .navbar-menu {
+        display: none;
+    }
+    
+    .navbar-menu.is-active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        padding: 20px;
+        box-shadow: var(--shadow-md);
+        border-bottom: 1px solid var(--border-light);
+    }
+}
     </style>
 </head>
 
@@ -385,6 +636,23 @@ body { background-color: #black; }
             </div>
         </div>
     </nav>
+
+    <!-- Add this before your existing withdraw-container div -->
+<div class="withdraw-options-container" id="withdraw-options">
+    <div class="withdraw-options-header">
+        <h1>Withdraw Options</h1>
+        <p>Choose how you want to receive your Robux</p>
+    </div>
+    <div class="withdraw-options-grid">
+        <div class="withdraw-option-card" id="robux-option" onclick="showWithdrawForm()">
+            <div class="card-bg"></div>
+            <div class="emoji">💰</div>
+            <h3>Robux</h3>
+            <p>Withdraw your earnings as Robux through gamepass</p>
+        </div>
+        <!-- You can add more options in the future -->
+    </div>
+</div>
 
         <!-- Withdrawal Restriction Popup -->
     <div id="withdrawPopup" class="popup-overlay">
@@ -474,6 +742,27 @@ body { background-color: #black; }
     </footer>
 
     <script>
+
+        // Add this to your existing JavaScript
+function showWithdrawForm() {
+    document.getElementById('withdraw-options').style.display = 'none';
+    document.querySelector('.withdraw-container').style.display = 'block';
+    
+    // Smooth scroll to the form
+    window.scrollTo({
+        top: document.querySelector('.withdraw-container').offsetTop - 100,
+        behavior: 'smooth'
+    });
+}
+
+// Update your existing popup handling to ensure smooth transitions
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code...
+    
+    // Ensure withdraw form is hidden initially
+    document.querySelector('.withdraw-container').style.display = 'none';
+});
+        
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('page-content').classList.add('blurred');
             document.getElementById('withdrawPopup').style.display = 'flex';
@@ -612,7 +901,7 @@ body { background-color: #black; }
             }
         }
 
-        setInterval(loadUserData, 1000);
+        setInterval(loadUserData, 1000);      
     </script>
 </body>
 </html>
