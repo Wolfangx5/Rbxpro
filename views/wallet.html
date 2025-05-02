@@ -20,38 +20,23 @@ body { background-color: #black; }
 <style>
        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+/* Base styles and resets */
 :root {
-    --primary: #8B5CF6;
-    --primary-dark: #7048e8;
-    --secondary: #D946EF;
-    --bg-dark: #0f0f1a;
-    --bg-card: rgba(26, 26, 46, 0.95);
-    --text-light: #ffffff;
-    --text-muted: #cccccc;
-    --border-light: rgba(255, 255, 255, 0.15);
-    --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.2);
-    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.3);
-}
-   
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  --primary-bg: #121212;
+  --card-bg: #1e1e1e;
+  --card-border: #2d2d2d;
+  --text-primary: #f5f5f5;
+  --text-secondary: #b3b3b3;
+  --accent-purple: #9c27b0;
+  --accent-pink: #e91e63;
+  --shadow-color: rgba(0, 0, 0, 0.5);
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
-    color: #ffffff;
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
 }
 
         /* Navbar Styles */
@@ -115,28 +100,39 @@ body {
     color: var(--primary);
 }
 
-.buttons .button {
-    background: rgba(26, 26, 46, 0.8);
-    color: #fff;
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 0.7rem 1.5rem;
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-light);
-    margin-left: 10px;
-    cursor: pointer;
+/* Buttons */
+.btn {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
 }
 
-.buttons .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
-    border-color: var(--primary);
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
 }
 
-.button.is-info {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    border: none;
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(156, 39, 176, 0.5);
+  color: var(--accent-purple);
+  margin-right: 10px;
 }
+
+.btn-secondary:hover {
+  background: rgba(156, 39, 176, 0.1);
+  box-shadow: none;
+}
+ 
 
 
 
@@ -199,18 +195,82 @@ body {
     opacity: 0.1;
 }
 
-.card-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    opacity: 0.05;
-    transition: all 0.3s ease;
-    z-index: 0;
+/* Card container */
+.card {
+  background: linear-gradient(145deg, var(--card-bg), #242424);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  margin: 24px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px var(--shadow-color);
+}
+
+        /* Purple/pink gradient accent */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-pink));
+  background-size: 200% 100%;
+  animation: gradientShift 8s ease infinite;
+}
+
+        /* Card header */
+.card-header {
+  padding: 24px 24px 16px;
+  position: relative;
+}
+
+.card-title {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.card-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Card body */
+.card-body {
+  padding: 0 24px 24px;
+}
+
+.card-text {
+  color: var(--text-primary);
+  opacity: 0.9;
+  margin: 0 0 16px;
+}
+
+/* Card footer */
+.card-footer {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--card-border);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+        
 .withdraw-option-card .emoji {
     font-size: 3.5rem;
     margin-bottom: 20px;
@@ -550,6 +610,37 @@ footer {
             font-size: 14px;
             line-height: 1.6;
         }
+
+
+        /* Animations */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+        /* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    margin: 16px;
+  }
+  
+  .card-header, .card-body {
+    padding: 16px;
+  }
+  
+  .card-footer {
+    padding: 12px 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
 
        /* Responsive Styles */
 @media (max-width: 768px) {
