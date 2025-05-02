@@ -8,989 +8,1167 @@
     <link rel="icon" href="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" type="image/png">
     <meta name="description" content="Visit RbxPro and earn your free robux now! Earn robux from completing simple tasks and joining our frequent giveaways! What're you waiting for?">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#17b823">
+    <meta name="theme-color" content="#9c27b0">
     <meta name="author" content="RbxPro">
     <meta name="keywords" content="free robux,robux,roblox,free roblox">
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/bulma.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="//code.tidio.co/xg5um94pucph8hrtivyqjwwjthqxs0bk.js" async></script>
     <style>
-        <style>
-body { background-color: #black; }
-<style>
-       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        /* Base styles and resets */
+        :root {
+            --primary-bg: #121212;
+            --card-bg: #1e1e1e;
+            --card-border: #2d2d2d;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b3b3b3;
+            --accent-purple: #9c27b0;
+            --accent-pink: #e91e63;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
 
-/* Base styles and resets */
-:root {
-  --primary-bg: #121212;
-  --card-bg: #1e1e1e;
-  --card-border: #2d2d2d;
-  --text-primary: #f5f5f5;
-  --text-secondary: #b3b3b3;
-  --accent-purple: #9c27b0;
-  --accent-pink: #e91e63;
-  --shadow-color: rgba(0, 0, 0, 0.5);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    background: linear-gradient(to bottom, #000000, #4a148c); /* Gradient from black to purplish */
-    color: var(--text-primary);
-    font-family: 'Poppins', sans-serif; /* Use a consistent font */
-    line-height: 1.6;
-}
+        body {
+            background: linear-gradient(to bottom, #000000, #4a148c); /* Gradient from black to purplish */
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
 
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-/* Navbar Styles */
-.navbar {
-    background: rgba(15, 15, 30, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 1rem 2rem;
-    color: #fff;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.3s ease;
-}
+        ::-webkit-scrollbar-track {
+            background: rgba(45, 45, 45, 0.5);
+        }
 
-}
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 39, 176, 0.6);
+            border-radius: 5px;
+        }
 
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 39, 176, 0.8);
+        }
 
-.navbar-brand .logo {
-    font-weight: 800;
-    font-size: 28px;
-    background: linear-gradient(to right, #fff, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    letter-spacing: 1px;
-}
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.navbar-menu {
-    display: flex;
-    align-items: center;
-}
+        /* Navbar styles */
+        .navbar {
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            color: #fff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
 
-.navbar-item {
-    color: #fff;
-    padding: 0.7rem 1.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border-radius: 8px;
-    margin: 0 5px;
-}
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.navbar-item:hover {
-    background: rgba(139, 92, 246, 0.2);
-    transform: translateY(-2px);
-}
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
 
-.navbar-item.is-active {
-    background: rgba(139, 92, 246, 0.3);
-    color: var(--primary);
-}
+        .navbar-brand img {
+            width: 38px;
+            height: 38px;
+            margin-right: 10px;
+        }
 
-/* Buttons */
-/* Button Styles */
-.btn {
-      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-weight: 500;
-  padding: 10px 20px;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.9rem;
+        .navbar-brand .logo {
+            font-weight: 800;
+            font-size: 28px;
+            background: linear-gradient(to right, #fff, var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
 
-}
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+        }
 
-.btn:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
-}
+        .navbar-item {
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0 5px;
+        }
 
+        .navbar-item:hover {
+            background: rgba(139, 92, 246, 0.2);
+            transform: translateY(-2px);
+        }
 
-.btn-secondary {
-  background: transparent;
-  border: 1px solid rgba(156, 39, 176, 0.5);
-  color: var(--accent-purple);
-  margin-right: 10px;
-}
+        .navbar-item.is-active {
+            background: rgba(139, 92, 246, 0.3);
+            color: var(--accent-purple);
+        }
 
-.btn-secondary:hover {
-  background: rgba(156, 39, 176, 0.1);
-  box-shadow: none;
-}
- 
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
 
+        @media (max-width: 768px) {
+            .navbar-menu, .navbar-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 30, 0.98);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 1rem;
+                display: flex;
+                flex-direction: column;
+                z-index: 999;
+                animation: slideDown 0.3s ease;
+            }
+            
+            @keyframes slideDown {
+                from { transform: translateY(-20px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            
+            .mobile-menu .navbar-item {
+                padding: 12px 16px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .mobile-menu .navbar-item:last-child {
+                border-bottom: none;
+            }
+            
+            .mobile-menu .btn-container {
+                display: flex;
+                padding: 16px 0 8px;
+                gap: 10px;
+            }
+            
+            .mobile-menu .btn-container button {
+                flex: 1;
+            }
+        }
 
+        /* Button styles */
+        .btn {
+            background: linear-gradient(135deg, #9c27b0, #e91e63); /* Purple to pink gradient */
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
 
-        /* Withdraw Options Button/Card */
-.withdraw-options-container {
-    max-width: 1000px;
-    margin: 120px auto 50px;
-    padding: 20px;
-}
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.3);
+        }
 
-.withdraw-options-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(156, 39, 176, 0.5);
+            color: #f5f5f5;
+            margin-right: 10px;
+        }
 
-.withdraw-options-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(to right, #fff, var(--primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 15px;
-}
+        .btn-secondary:hover {
+            background: rgba(156, 39, 176, 0.1);
+            box-shadow: none;
+        }
 
-.withdraw-options-header p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-.withdraw-options-grid {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
+        /* Spacing for the navbar */
+        .content-container {
+            padding-top: 80px;
+        }
 
-.withdraw-option-card {
-    background: var(--bg-card);
-    border-radius: 16px;
-    border: 1px solid var(--border-light);
-    padding: 30px;
-    width: 280px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-md);
-    position: relative;
-    overflow: hidden;
-}
+        /* Withdraw Options Container */
+        .withdraw-options-container {
+            max-width: 1000px;
+            margin: 120px auto 50px;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
 
-.withdraw-option-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--primary);
-    box-shadow: var(--shadow-lg);
-}
+        .withdraw-options-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-.withdraw-option-card:hover .card-bg {
-    opacity: 0.1;
-}
+        .withdraw-options-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
 
-/* Card container */
-/* Improved Card Styles */
-.card {
-    background: linear-gradient(145deg, var(--card-bg), #242424);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0,
+        .withdraw-options-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px var(--shadow-color);
-}
+        .withdraw-options-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
 
-        /* Purple/pink gradient accent */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-pink));
-  background-size: 200% 100%;
-  animation: gradientShift 8s ease infinite;
-}
+        .withdraw-option-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            width: 280px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
 
-        /* Card header */
-.card-header {
-  padding: 24px 24px 16px;
-  position: relative;
-}
+        .withdraw-option-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+            box-shadow: var(--shadow-lg);
+        }
 
-.card-title {
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 8px;
-  letter-spacing: -0.02em;
-}
+        .withdraw-option-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-pink));
+            background-size: 200% 100%;
+            animation: gradientShift 8s ease infinite;
+        }
 
-.card-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin: 0;
-  opacity: 0.8;
-}
+        .withdraw-option-card .emoji {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-/* Card body */
-.card-body {
-  padding: 0 24px 24px;
-}
+        .withdraw-option-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
 
-.card-text {
-  color: var(--text-primary);
-  opacity: 0.9;
-  margin: 0 0 16px;
-}
+        .withdraw-option-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-/* Card footer */
-.card-footer {
-  background-color: rgba(0, 0, 0, 0.1);
-  border-top: 1px solid var(--card-border);
-  padding: 16px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
+        /* Animation for fade in */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-
-
-        
-.withdraw-option-card .emoji {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.withdraw-option-card h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    color: #fff;
-    position: relative;
-    z-index: 1;
-}
-
-.withdraw-option-card p {
-    color: var(--text-muted);
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-}
-
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
 
         /* Improved Withdrawal Form */
-.withdraw-container {
-    max-width: 900px;
-    margin: 40px auto 50px;
-    background: var(--bg-card);
-    border-radius: 20px;
-    box-shadow: var(--shadow-lg);
-    overflow: hidden;
-    padding: 40px;
-    border: 1px solid var(--border-light);
-    display: none; /* Initially hidden, will be shown when option is selected */
-    animation: fadeIn 0.5s ease;
-}
+        .withdraw-container {
+            max-width: 900px;
+            margin: 40px auto 50px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            padding: 40px;
+            border: 1px solid var(--card-border);
+            display: none; /* Initially hidden, will be shown when option is selected */
+            animation: fadeIn 0.5s ease;
+        }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        .withdraw-header {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: #fff;
+            padding: 30px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: -40px -40px 30px;
+            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-.withdraw-header {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #fff;
-    padding: 30px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin: -40px -40px 30px;
-    box-shadow: var(--shadow-sm);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
+        .withdraw-form {
+            padding: 20px;
+        }
 
-.withdraw-form {
-    padding: 20px;
-}
+        .form-group {
+            margin-bottom: 25px;
+        }
 
-.form-group {
-    margin-bottom: 25px;
-}
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 1rem;
+        }
 
-.form-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: #fff;
-    font-size: 1rem;
-}
+        .withdraw-input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(68, 68, 68, 0.4);
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
 
-.withdraw-input {
-    width: 100%;
-    padding: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    background: rgba(68, 68, 68, 0.4);
-    color: #fff;
-    font-size: 1rem;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-    font-family: 'Poppins', sans-serif;
-}
+        .withdraw-input:focus {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+            outline: none;
+        }
 
-.withdraw-input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
-    outline: none;
-}
+        .withdraw-price {
+            background: rgba(51, 51, 51, 0.6);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 12px;
+            margin: 20px auto;
+            font-size: 24px;
+            width: 100%;
+            box-shadow: var(--shadow-md);
+        }
 
-.withdraw-price {
-    background: rgba(51, 51, 51, 0.6);
-    color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 12px;
-    margin: 20px auto;
-    font-size: 24px;
-    width: 100%;
-    box-shadow: var(--shadow-sm);
-}
+        .withdraw-btn {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: #fff;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
 
-.withdraw-btn {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #fff;
-    padding: 20px;
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-md);
-    position: relative;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-}
+        .withdraw-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(156, 39, 176, 0.4);
+        }
 
-.withdraw-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
-}
+        .withdraw-btn:active {
+            transform: translateY(1px);
+        }
 
-.withdraw-btn:active {
-    transform: translateY(1px);
-}
-
-.withdraw-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-    pointer-events: none;
-}
+        .withdraw-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+            pointer-events: none;
+        }
 
         /* Improved Instructions */
-.instructions {
-    margin-top: 40px;
-    color: var(--text-light);
-    font-size: 16px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid var(--border-light);
-}
-
-.instructions h3 {
-    font-size: 22px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: var(--primary);
-    font-weight: 700;
-}
-
-.instructions ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.instructions li {
-    padding: 12px 0 12px 35px;
-    position: relative;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.instructions li:last-child {
-    border-bottom: none;
-}
-
-.instructions li::before {
-    content: '✓';
-    color: var(--primary);
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-
-  
-
-       
-
-       /* Improved Popups */
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
-}
-
-.popup-content {
-    background: var(--bg-card);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    text-align: center;
-    max-width: 500px;
-    color: #fff;
-    border: 1px solid var(--border-light);
-    animation: popIn 0.3s ease;
-}
-
-@keyframes popIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.popup-content h2 {
-    color: var(--primary);
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-}
-
-.popup-content p {
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
-.popup-content button {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    padding: 12px 30px;
-    border: none;
-    border-radius: 12px;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow-sm);
-    font-family: 'Poppins', sans-serif;
-}
-
-.popup-content button:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-}
-
-.popup {
-    border: 2px solid var(--primary);
-    border-radius: 16px;
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--bg-card);
-    padding: 40px;
-    z-index: 2000;
-    text-align: center;
-    box-shadow: var(--shadow-lg);
-    backdrop-filter: blur(10px);
-    max-width: 90%;
-    width: 500px;
-    animation: popIn 0.3s ease;
-}
-        .popup-congrats {
-            border-color: #8B5CF6;
+        .instructions {
+            margin-top: 40px;
+            color: var(--text-primary);
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
         }
-        
 
-       /* Improved Footer */
-footer {
-    background: var(--bg-card);
-    color: #fff;
-    padding: 40px 20px;
-    text-align: center;
-    width: 100%;
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
-    margin-top: auto;
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border-light);
-}
+        .instructions h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
 
-.footer-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0 0 30px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
+        .instructions ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-.footer-nav li a {
-    font-size: 16px;
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-weight: 500;
-}
+        .instructions li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            border-bottom: 1px solid var(--card-border);
+        }
 
-.footer-nav li a:hover {
-    color: var(--primary);
-    background: rgba(255, 255, 255, 0.1);
-}
+        .instructions li:last-child {
+            border-bottom: none;
+        }
 
-.rbxpro-disclaimer {
-    color: var(--text-muted);
-    margin-top: 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
+        .instructions li::before {
+            content: '✓';
+            color: var(--accent-purple);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
 
-.footer-logo {
-    font-weight: 700;
-    font-size: 24px;
-    background: linear-gradient(to right, #fff, var(--primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
-    display: inline-block;
-}
+        /* Improved Popups */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
 
-        .rbxpro-disclaimer {
-            color: #aaa;
-            margin-top: 20px;
-            font-size: 14px;
+        .popup-content {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            max-width: 500px;
+            color: #fff;
+            border: 1px solid var(--card-border);
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .popup-content h2 {
+            color: var(--accent-purple);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .popup-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
             line-height: 1.6;
         }
 
+        .popup-content button {
+            width: 100%;
+            padding: 15px;
+        }
 
-        /* Animations */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+        /* Footer */
+        .footer {
+            background: rgba(15, 15, 30, 0.95);
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
 
-        /* Responsive adjustments */
-@media (max-width: 768px) {
-  .card {
-    margin: 16px;
-  }
-  
-  .card-header, .card-body {
-    padding: 16px;
-  }
-  
-  .card-footer {
-    padding: 12px 16px;
-    flex-direction: column;
-    gap: 10px;
-  }
-}
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
 
-       /* Responsive Styles */
-@media (max-width: 768px) {
-    .withdraw-options-container {
-        margin-top: 80px;
-    }
-    
-    .withdraw-container {
-        margin: 20px;
-        padding: 20px;
-    }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
 
-    .withdraw-header {
-        margin: -20px -20px 20px;
-        padding: 20px;
-        font-size: 20px;
-    }
+        .footer-logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
 
-    .withdraw-input {
-        padding: 15px;
-        font-size: 16px;
-    }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
 
-    .withdraw-btn {
-        padding: 15px;
-        font-size: 16px;
-    }
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
 
-    .popup, .popup-content {
-        padding: 25px;
-        width: 90%;
-    }
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
 
-    .footer-nav ul {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .navbar-menu {
-        display: none;
-    }
-    
-    .navbar-menu.is-active {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: var(--bg-card);
-        padding: 20px;
-        box-shadow: var(--shadow-md);
-        border-bottom: 1px solid var(--border-light);
-    }
-}
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: var(--text-secondary);
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .withdraw-options-container {
+                margin-top: 100px;
+            }
+            
+            .withdraw-options-header h1 {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                justify-content: center;
+            }
+            
+            .withdraw-container {
+                padding: 25px;
+                margin: 30px 15px;
+            }
+            
+            .withdraw-header {
+                padding: 20px;
+                margin: -25px -25px 20px;
+                font-size: 20px;
+            }
+            
+            .instructions {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .withdraw-options-grid {
+                gap: 15px;
+            }
+            
+            .withdraw-option-card {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
-
-<body aria-hidden="false">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
         <div class="container">
             <div class="navbar-brand">
-                <div class="logo">RBXPRO</div>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+                <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RBXPRO Logo">
+                <span class="logo">RBXPRO</span>
             </div>
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end is-centered">
-                    <a class="navbar-item navbar-s-item" href="/earn">Earn</a>
-                    <a class="navbar-item navbar-s-item is-active" href="#">Withdraw</a>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons has-addons">
-                            <a href="" class="button is-info">
-                                <strong id="rbxbalance">{(Balance)} R$</strong>
-                            </a>
-                            <a onclick="Logout()" href="" class="button is-info">
-                                <strong>Logout</strong>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="navbar-menu">
+                <a href="/" class="navbar-item">Home</a>
+                <a href="/earn" class="navbar-item">Earn Robux</a>
+                <a href="/withdraw" class="navbar-item is-active">Withdraw</a>
+                <a href="/leaderboards" class="navbar-item">Leaderboards</a>
+                <a href="/giveaways" class="navbar-item">Giveaways</a>
+            </div>
+            
+            <div class="navbar-buttons">
+                <button class="btn-secondary">Log In</button>
+                <button class="btn">Sign Up</button>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu (hidden by default) -->
+        <div class="mobile-menu" id="mobileMenu" style="display: none;">
+            <a href="/" class="navbar-item">Home</a>
+            <a href="/earn" class="navbar-item">Earn Robux</a>
+            <a href="/withdraw" class="navbar-item is-active">Withdraw</a>
+            <a href="/leaderboards" class="navbar-item">Leaderboards</a>
+            <a href="/giveaways" class="navbar-item">Giveaways</a>
+            <div class="btn-container">
+                <button class="btn-secondary">Log In</button>
+                <button class="btn">Sign Up</button>
             </div>
         </div>
     </nav>
 
-    <!-- Add this before your existing withdraw-container div -->
-<div class="withdraw-options-container" id="withdraw-options">
-    <div class="withdraw-options-header">
-        <h1>Withdraw Options</h1>
-        <p>Choose how you want to receive your Robux</p>
-    </div>
-    <div class="withdraw-options-grid">
-        <div class="withdraw-option-card" id="robux-option" onclick="showWithdrawForm()">
-            <div class="card-bg"></div>
-            <div class="emoji">💰</div>
-            <h3>Robux</h3>
-            <p>Withdraw your earnings as Robux through gamepass</p>
-        </div>
-        <!-- You can add more options in the future -->
-    </div>
-</div>
-
-        <!-- Withdrawal Restriction Popup -->
-    <div id="withdrawPopup" class="popup-overlay">
-        <div class="popup-content">
-            <h2>Reminder!</h2>
-            <p>You must complete a daily offer or survey before withdrawing your Robux. if you have done so your withdrawal request will be processed and sent.</p>
-            <button onclick="closeWithdrawPopup()">Got it!</button>
-        </div>
-    </div>
-
-    <div class="container mb-4 mt-4"></div>
-    <div class="columns is-centered mb-4 mt-4">
-        <div class="column is-half">
-            <div class="withdraw-container">
-                <div class="withdraw-header">
-                    <h2>Withdraw Your Robux!</h2>
-                    <h2>You must complete at least one survey or offer to withdraw!</h2>
+    <div class="content-container">
+        <!-- Withdraw Options Section -->
+        <div class="withdraw-options-container" id="withdrawOptions">
+            <div class="withdraw-options-header">
+                <h1 class="gradient-text">Choose Withdrawal Method</h1>
+                <p>Select how you'd like to receive your earnings. Choose from Robux, gift cards, or exclusive Roblox items.</p>
+            </div>
+            
+            <div class="withdraw-options-grid">
+                <!-- Robux Option -->
+                <div class="withdraw-option-card" data-option="robux">
+                    <div class="emoji">💰</div>
+                    <h3>Robux</h3>
+                    <p>Withdraw your earnings to your Roblox account.</p>
+                    <button class="btn">
+                        Select
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
                 </div>
-                <div class="withdraw-form">
-                    <div class="mb-4">
-                        <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
-                        <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
-                    </div>
-                    <div class="mb-4">
-                        <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label>
-                        <input class="withdraw-input" placeholder="Paste your Gamepass link" type="url" id="gpLink">
-                    </div>
-                    <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
-                    <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
-                    <div class="flex justify-center items-center mt-4">
-                        <button id='withdrawButton' class="withdraw-btn" onclick="withDraw()">
-                            <p>Withdraw</p>
-                        </button>
-                    </div>
+                
+                <!-- Gift Card Option -->
+                <div class="withdraw-option-card" data-option="giftcard">
+                    <div class="emoji">🎁</div>
+                    <h3>Gift Card</h3>
+                    <p>Get a Roblox gift card code delivered to your email.</p>
+                    <button class="btn">
+                        Select
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
                 </div>
-
-                <div class="instructions">
-                    <h3>How do I withdraw?</h3>
-                    <ul>
-                        <li>First, complete a survey or offer on our Earn page.</li>
-                        <li>Input the amount of Robux you want to withdraw in the amount input above.</li>
-                        <li>Enter your Gamepass link with the correct price as indicated.</li>
-                        <li>Wait 1-2 days for our bot to process your Gamepass purchase and add it to your pending Robux.</li>
-                    </ul>
+                
+                <!-- Roblox Item Option -->
+                <div class="withdraw-option-card" data-option="item">
+                    <div class="emoji">🧢</div>
+                    <h3>Roblox Item</h3>
+                    <p>Redeem for special limited items on Roblox.</p>
+                    <button class="btn">
+                        Select
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <p id="popup-message">Warning message goes here...</p>
-            <button onclick="closePopup()">Close</button>
+        
+        <!-- Withdraw Form Section (for Robux) -->
+        <div class="withdraw-container" id="robuxForm" style="display: none;">
+            <div class="withdraw-header">
+                <h2>Withdraw Robux</h2>
+            </div>
+            
+            <form class="withdraw-form" id="robuxWithdrawForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">Roblox Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        class="withdraw-input"
+                        placeholder="Enter your Roblox username"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount" class="form-label">Amount (Points)</label>
+                    <input
+                        type="number"
+                        id="amount"
+                        class="withdraw-input"
+                        placeholder="Enter amount of points to withdraw"
+                        min="100"
+                        max="5000"
+                        required
+                    >
+                    <p style="font-size: 14px; color: #b3b3b3; margin-top: 8px;">Available: 5000 points</p>
+                </div>
+                
+                <div class="withdraw-price">
+                    <span>You will receive:</span>
+                    <div class="gradient-text" style="font-size: 26px; font-weight: bold; margin-top: 5px;">
+                        <span id="robuxAmount">0</span> Robux
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <button type="button" class="btn-secondary" style="flex: 1;" id="backBtn">
+                        <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+                        Go Back
+                    </button>
+                    
+                    <button type="submit" class="withdraw-btn" style="flex: 1;" id="withdrawBtn">
+                        Withdraw Now
+                    </button>
+                </div>
+            </form>
+            
+            <div class="instructions">
+                <h3>Important Information</h3>
+                <ul>
+                    <li>Your withdrawal will be processed within 24 hours.</li>
+                    <li>Make sure your username is correct - we can't refund incorrect withdrawals.</li>
+                    <li>You must be in our Roblox group to receive Robux.</li>
+                    <li>Minimum withdrawal amount is 100 points.</li>
+                    <li>Contact support if you don't receive your withdrawal within 48 hours.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Withdraw Form Section (for Gift Card) -->
+        <div class="withdraw-container" id="giftcardForm" style="display: none;">
+            <div class="withdraw-header">
+                <h2>Redeem Gift Card</h2>
+            </div>
+            
+            <form class="withdraw-form" id="giftcardWithdrawForm">
+                <div class="form-group">
+                    <label for="giftcardUsername" class="form-label">Roblox Username</label>
+                    <input
+                        type="text"
+                        id="giftcardUsername"
+                        class="withdraw-input"
+                        placeholder="Enter your Roblox username"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        class="withdraw-input"
+                        placeholder="Where should we send your gift card?"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="giftcardAmount" class="form-label">Amount (Points)</label>
+                    <input
+                        type="number"
+                        id="giftcardAmount"
+                        class="withdraw-input"
+                        placeholder="Enter amount of points to withdraw"
+                        min="100"
+                        max="5000"
+                        required
+                    >
+                    <p style="font-size: 14px; color: #b3b3b3; margin-top: 8px;">Available: 5000 points</p>
+                </div>
+                
+                <div class="withdraw-price">
+                    <span>You will receive:</span>
+                    <div class="gradient-text" style="font-size: 26px; font-weight: bold; margin-top: 5px;">
+                        <span id="giftcardValue">0</span> Robux Gift Card
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <button type="button" class="btn-secondary" style="flex: 1;" id="giftcardBackBtn">
+                        <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+                        Go Back
+                    </button>
+                    
+                    <button type="submit" class="withdraw-btn" style="flex: 1;" id="giftcardWithdrawBtn">
+                        Redeem Now
+                    </button>
+                </div>
+            </form>
+            
+            <div class="instructions">
+                <h3>Important Information</h3>
+                <ul>
+                    <li>Your gift card code will be sent to your email within 24 hours.</li>
+                    <li>Make sure your email address is correct.</li>
+                    <li>Gift cards are available in $10, $25, and $50 denominations.</li>
+                    <li>Minimum withdrawal amount is 1000 points for gift cards.</li>
+                    <li>Contact support if you don't receive your code within 48 hours.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Withdraw Form Section (for Roblox Item) -->
+        <div class="withdraw-container" id="itemForm" style="display: none;">
+            <div class="withdraw-header">
+                <h2>Get Roblox Item</h2>
+            </div>
+            
+            <form class="withdraw-form" id="itemWithdrawForm">
+                <div class="form-group">
+                    <label for="itemUsername" class="form-label">Roblox Username</label>
+                    <input
+                        type="text"
+                        id="itemUsername"
+                        class="withdraw-input"
+                        placeholder="Enter your Roblox username"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="item" class="form-label">Select Item</label>
+                    <select id="item" class="withdraw-input" required>
+                        <option value="" disabled selected>Choose an item</option>
+                        <option value="1">Purple Valkyrie Helm (2500 points)</option>
+                        <option value="2">Limited Edition RBX Hat (1000 points)</option>
+                        <option value="3">RBX Pro Hoodie (500 points)</option>
+                    </select>
+                </div>
+                
+                <div class="withdraw-price">
+                    <span>You will receive:</span>
+                    <div class="gradient-text" style="font-size: 26px; font-weight: bold; margin-top: 5px;">
+                        <span id="selectedItem">Select an item</span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <button type="button" class="btn-secondary" style="flex: 1;" id="itemBackBtn">
+                        <i class="fas fa-arrow-left" style="margin-right: 8px;"></i>
+                        Go Back
+                    </button>
+                    
+                    <button type="submit" class="withdraw-btn" style="flex: 1;" id="itemWithdrawBtn">
+                        Get Item
+                    </button>
+                </div>
+            </form>
+            
+            <div class="instructions">
+                <h3>Important Information</h3>
+                <ul>
+                    <li>Your item will be delivered to your Roblox account within 24-48 hours.</li>
+                    <li>Make sure your username is correct - we can't refund incorrect deliveries.</li>
+                    <li>You must be in our Roblox group to receive items.</li>
+                    <li>Limited items may vary in availability.</li>
+                    <li>Contact support if you don't receive your item within 72 hours.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Success Popup (hidden by default) -->
+        <div class="popup-overlay" id="successPopup" style="display: none;">
+            <div class="popup-content">
+                <i class="fas fa-check-circle" style="color: #4CAF50; font-size: 60px; margin-bottom: 20px;"></i>
+                <h2>Withdrawal Successful!</h2>
+                <p id="successMessage">
+                    Your withdrawal has been submitted successfully. Please allow up to 24 hours for processing.
+                </p>
+                <button class="btn" id="closePopupBtn">
+                    Return to Dashboard
+                </button>
+            </div>
         </div>
     </div>
-    <div class="popup" id="notEnoughBalancePopup">
-        <div class="popup-content">
-            <p>You do not have enough Robux!</p>
-            <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
-        </div>
-    </div>
-    <div class="popup" id="somethingWrongPopup">
-        <div class="popup-content">
-            <p>There's something wrong. Double-check everything, ensure the survey/offer is completed, and try again later!</p>
-            <button onclick="hidePopup('somethingWrongPopup')">Close</button>
-        </div>
-    </div>
-    <div id="congratsPopup" class="popup popup-congrats">
-        <div class="popup-content">
-            <p>Congratulations! Your withdrawal request is in process. Will be in your pending robux within 2 days. If gamepass price is wrong, you will be refunded. Note: if our stock is low processing might take longer, join our discord for update on your withdrawal</p>
-            <button onclick="closePopup()">Close</button>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-nav">
-            <ul>
-                <li><a id="footer-earn-link" href="/earn">Earn</a></li>
-                <li><a id="footer-withdraw-link" href="#">Withdraw</a></li>
-            </ul>
-        </div>
-        <div class="rbxpro-disclaimer">
-            <p>RBXPRO | All Rights Reserved.</p>
-            <p>RBXPRO is not affiliated with Roblox Corporation.</p>
-            <p>© Copyright RBXPRO 2025</p>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://media.discordapp.net/attachments/1070301457087209602/1219633648664445098/RBXPRO_Logo1.png?ex=663ccad9&is=663b7959&hm=aeace6f74131b4ee8dfae6181138267153062bd3212423a29292afdca06c8f82&format=webp&quality=lossless" alt="RBXPRO Logo">
+                <span class="gradient-text">RBXPRO</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="/faq">FAQ</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/support">Support</a>
+            </div>
+            
+            <div class="footer-social">
+                <a href="https://discord.gg/rbxpro"><i class="fab fa-discord"></i></a>
+                <a href="https://twitter.com/rbxpro"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/rbxpro"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/rbxpro"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
     </footer>
 
     <script>
-
-        // Add this to your existing JavaScript
-function showWithdrawForm() {
-    document.getElementById('withdraw-options').style.display = 'none';
-    document.querySelector('.withdraw-container').style.display = 'block';
-    
-    // Smooth scroll to the form
-    window.scrollTo({
-        top: document.querySelector('.withdraw-container').offsetTop - 100,
-        behavior: 'smooth'
-    });
-}
-
-// Update your existing popup handling to ensure smooth transitions
-document.addEventListener('DOMContentLoaded', function() {
-    // Your existing code...
-    
-    // Ensure withdraw form is hidden initially
-    document.querySelector('.withdraw-container').style.display = 'none';
-});
-        
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('page-content').classList.add('blurred');
-            document.getElementById('withdrawPopup').style.display = 'flex';
-        });
-
-        function closeWithdrawPopup() {
-            document.getElementById('withdrawPopup').style.display = 'none';
-            document.getElementById('page-content').classList.remove('blurred');
-        }
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-            if ($navbarBurgers.length > 0) {
-                $navbarBurgers.forEach(function($el) {
-                    $el.addEventListener('click', function() {
-                        var target = $el.dataset.target;
-                        var $target = document.getElementById(target);
-                        $el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                if (mobileMenu.style.display === 'none') {
+                    mobileMenu.style.display = 'flex';
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    mobileMenu.style.display = 'none';
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            
+            // Withdraw options
+            const withdrawOptions = document.getElementById('withdrawOptions');
+            const robuxForm = document.getElementById('robuxForm');
+            const giftcardForm = document.getElementById('giftcardForm');
+            const itemForm = document.getElementById('itemForm');
+            const successPopup = document.getElementById('successPopup');
+            
+            // Option selection
+            document.querySelectorAll('.withdraw-option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const option = this.getAttribute('data-option');
+                    
+                    withdrawOptions.style.display = 'none';
+                    
+                    if (option === 'robux') {
+                        robuxForm.style.display = 'block';
+                    } else if (option === 'giftcard') {
+                        giftcardForm.style.display = 'block';
+                    } else if (option === 'item') {
+                        itemForm.style.display = 'block';
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
                     });
                 });
-            }
-
-            var path = window.location.pathname;
-            if (path === '/' || path.includes('earn')) {
-                document.getElementById('earn-link').classList.add('is-active');
-                document.getElementById('footer-earn-link').classList.add('is-active');
-            } else if (path.includes('withdraw')) {
-                document.getElementById('withdraw-link').classList.add('is-active');
-                document.getElementById('footer-withdraw-link').classList.add('is-active');
-            }
-        });
-
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("congratsPopup").style.display = "none";
-        }
-
-        function hidePopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'none';
-            }
-        }
-
-        function showPopup(popupId) {
-            var popup = document.getElementById(popupId);
-            if (popup) {
-                popup.style.display = 'block';
-            }
-        }
-
-        function Logout() {
-            localStorage.removeItem('sessionToken');
-            window.location.href = '/login';
-        }
-
-        document.getElementById("withAmount").addEventListener("input", function() {
-            var amountInput = parseFloat(this.value);
-            var displayAmount = document.getElementById("displayAmount");
-
-            if (!isNaN(amountInput)) {
-                var newAmount = Math.round(amountInput / 0.70);
-                displayAmount.textContent = newAmount.toFixed(2);
-            } else {
-                displayAmount.textContent = "";
-            }
-        });
-
-        function withDraw() {
-            document.getElementById("withdrawButton").classList.add("disabled");
-            const token = localStorage.getItem('sessionToken');
-            const withAmount = document.getElementById('withAmount').value;
-            const gpLink = document.getElementById('gpLink').value;
+            });
             
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (withAmount > data.balance) {
-                            showPopup('notEnoughBalancePopup');
-                        } else {
-                            const queryParams = new URLSearchParams({
-                                gpLink: gpLink,
-                                withAmount: withAmount
-                            });
-
-                            fetch(`/api/withdraw?${queryParams}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': token
-                                    }
-                                })
-                                .then(response => {
-                                    if (response.status == 200) {
-                                        showPopup('congratsPopup');
-                                    } else if (response.status == 400 || response.status == 403) {
-                                        showPopup('somethingWrongPopup');
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                        }
-                    })
+            // Back buttons
+            document.getElementById('backBtn').addEventListener('click', function() {
+                robuxForm.style.display = 'none';
+                withdrawOptions.style.display = 'block';
+            });
+            
+            document.getElementById('giftcardBackBtn').addEventListener('click', function() {
+                giftcardForm.style.display = 'none';
+                withdrawOptions.style.display = 'block';
+            });
+            
+            document.getElementById('itemBackBtn').addEventListener('click', function() {
+                itemForm.style.display = 'none';
+                withdrawOptions.style.display = 'block';
+            });
+            
+            // Close popup button
+            document.getElementById('closePopupBtn').addEventListener('click', function() {
+                successPopup.style.display = 'none';
+                withdrawOptions.style.display = 'block';
+                robuxForm.style.display = 'none';
+                giftcardForm.style.display = 'none';
+                itemForm.style.display = 'none';
+                
+                // Reset forms
+                document.getElementById('robuxWithdrawForm').reset();
+                document.getElementById('giftcardWithdrawForm').reset();
+                document.getElementById('itemWithdrawForm').reset();
+            });
+            
+            // Calculate Robux for points
+            function calculateRobux(points) {
+                // Example calculation: 100 points = 10 Robux
+                return Math.floor(points / 10);
             }
-        }
-
-        function loadUserData() {
-            const token = localStorage.getItem('sessionToken');
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        const balance = document.getElementById("rbxbalance");
-                        balance.textContent = `${data.balance} robux`;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        window.location.href = '/login';
-                        return;
-                    });
-            } else {
-                window.location.href = '/login';
-            }
-        }
-
-        setInterval(loadUserData, 1000);      
+            
+            // Update Robux display as user types
+            document.getElementById('amount').addEventListener('input', function() {
+                const points = parseInt(this.value) || 0;
+                document.getElementById('robuxAmount').textContent = calculateRobux(points);
+            });
+            
+            document.getElementById('giftcardAmount').addEventListener('input', function() {
+                const points = parseInt(this.value) || 0;
+                const robux = calculateRobux(points);
+                
+                // Convert to gift card denomination
+                let giftCardValue;
+                if (robux >= 1000) {
+                    giftCardValue = '$10';
+                } else if (robux >= 2500) {
+                    giftCardValue = '$25';
+                } else if (robux >= 5000) {
+                    giftCardValue = '$50';
+                } else {
+                    giftCardValue = 'Insufficient points';
+                }
+                
+                document.getElementById('giftcardValue').textContent = giftCardValue;
+            });
+            
+            // Update selected item display
+            document.getElementById('item').addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                document.getElementById('selectedItem').textContent = selectedOption.text;
+            });
+            
+            // Form submissions
+            document.getElementById('robuxWithdrawForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const withdrawBtn = document.getElementById('withdrawBtn');
+                const originalText = withdrawBtn.innerHTML;
+                withdrawBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                withdrawBtn.disabled = true;
+                
+                // Simulate API request
+                setTimeout(() => {
+                    // Reset button
+                    withdrawBtn.innerHTML = originalText;
+                    withdrawBtn.disabled = false;
+                    
+                    // Show success popup
+                    document.getElementById('successMessage').textContent = 
+                        `Your Robux withdrawal has been submitted successfully. Please allow up to 24 hours for processing.`;
+                    successPopup.style.display = 'flex';
+                }, 1500);
+            });
+            
+            document.getElementById('giftcardWithdrawForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const withdrawBtn = document.getElementById('giftcardWithdrawBtn');
+                const originalText = withdrawBtn.innerHTML;
+                withdrawBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                withdrawBtn.disabled = true;
+                
+                // Simulate API request
+                setTimeout(() => {
+                    // Reset button
+                    withdrawBtn.innerHTML = originalText;
+                    withdrawBtn.disabled = false;
+                    
+                    // Show success popup
+                    document.getElementById('successMessage').textContent = 
+                        `Your Gift Card redemption has been submitted successfully. The code will be sent to your email within 24 hours.`;
+                    successPopup.style.display = 'flex';
+                }, 1500);
+            });
+            
+            document.getElementById('itemWithdrawForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const withdrawBtn = document.getElementById('itemWithdrawBtn');
+                const originalText = withdrawBtn.innerHTML;
+                withdrawBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                withdrawBtn.disabled = true;
+                
+                // Simulate API request
+                setTimeout(() => {
+                    // Reset button
+                    withdrawBtn.innerHTML = originalText;
+                    withdrawBtn.disabled = false;
+                    
+                    // Get the selected item name
+                    const itemSelect = document.getElementById('item');
+                    const selectedItemText = itemSelect.options[itemSelect.selectedIndex].text;
+                    
+                    // Show success popup
+                    document.getElementById('successMessage').textContent = 
+                        `Your item request (${selectedItemText}) has been submitted successfully. It will be delivered to your Roblox account within 24-48 hours.`;
+                    successPopup.style.display = 'flex';
+                }, 1500);
+            });
+        });
     </script>
 </body>
 </html>
