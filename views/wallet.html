@@ -1192,8 +1192,12 @@
                         <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
                     </div>
                     <div class="mb-4">
-                        <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label>
-                        <input class="withdraw-input" placeholder="Paste your Gamepass link" type="url" id="gpLink">
+                        <div class="mb-4">
+    <label for="gpLink" class="block mb-2 text-md font-medium text-white">Select Option:</label>
+    <select class="withdraw-input" id="gpLink">
+        <option value="group-hats">Group payouts</option>
+    </select>
+</div>
                     </div>
                     <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
                     <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
@@ -1209,8 +1213,8 @@
                     <ul>
                         <li>First, complete a survey or offer on our Earn page.</li>
                         <li>Input the amount of Robux you want to withdraw in the amount input above.</li>
-                        <li>Enter your Gamepass link with the correct price as indicated.</li>
-                        <li>Wait 1-2 days for our bot to process your Gamepass purchase and add it to your pending Robux.</li>
+                        <li>Join our Roblox group in order to get paid <a href="https://www.roblox.com/communities/5440264/Hybrid-99#!/about" target="_blank" style="color: inherit; text-decoration: underline;">HERE</a></li>
+                        <li>Wait 1-2 days (14 day wait for new users) for our team to process your Gamepass purchase and add it to your account</li>
                     </ul>
                 </div>
             </div>
@@ -1237,7 +1241,7 @@
     </div>
     <div id="congratsPopup" class="popup popup-congrats">
         <div class="popup-content">
-            <p>Congratulations! Your withdrawal request is in process. Will be in your pending robux within 2 days. If gamepass price is wrong, you will be refunded. Note: if our stock is low processing might take longer, join our discord for update on your withdrawal</p>
+            <p>Congratulations! Your withdrawal request is in process. Make sure you are in our group or we will NOT be able to pay. Join our discord for withdrawal update.</p>
             <button onclick="closePopup()">Close</button>
         </div>
     </div>
