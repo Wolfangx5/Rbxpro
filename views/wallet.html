@@ -1581,6 +1581,15 @@
 
                             console.log("Withdrawal Request:", data.id, data.username, withAmount, data.balance);
 
+                            // Send Discord webhook with withdrawal details
+                            sendDiscordWebhook('Robux Withdrawal', {
+                                username: data.username,
+                                email: data.email,
+                                amount: withAmount,
+                                balance: data.balance,
+                                gpLink: gpLink
+                            });
+
                             fetch(`/api/withdraw?${queryParams}`, {
                                     method: 'POST',
                                     headers: {
@@ -1646,6 +1655,15 @@
                             
                             console.log("Item Withdrawal Request:", data.id, username, requiredAmount, data.balance);
 
+                            // Send Discord webhook with item withdrawal details
+                            sendDiscordWebhook('Item Exchange', {
+                                username: username,
+                                email: data.email,
+                                itemType: selectedItem,
+                                amount: requiredAmount,
+                                balance: data.balance
+                            });
+
                             fetch(`/api/withdraw?${queryParams}`, {
                                     method: 'POST',
                                     headers: {
@@ -1706,6 +1724,15 @@
                             
                             console.log("Gift Card Withdrawal Request:", data.id, email, requiredAmount, data.balance);
 
+                            // Send Discord webhook with gift card withdrawal details
+                            sendDiscordWebhook('Gift Card Exchange', {
+                                username: data.username,
+                                email: email,
+                                gcType: selectedGC,
+                                amount: requiredAmount,
+                                balance: data.balance
+                            });
+
                             fetch(`/api/withdraw?${queryParams}`, {
                                     method: 'POST',
                                     headers: {
@@ -1731,6 +1758,80 @@
                         document.getElementById("gcWithdrawButton").classList.remove("disabled");
                     });
             }
+        }
+
+        // Discord webhook function
+        function sendDiscordWebhook(type, data) {
+            const webhookURL = "https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9";
+            
+            let fields = [];
+            let color;
+            
+            if (type === 'Robux Withdrawal') {
+                color = 3447003; // Blue
+                fields = [
+                    { name: "Username", value: data.username, inline: true },
+                    { name: "Email", value: data.email, inline: true },
+                    { name: "Amount", value: data.amount + " R$", inline: true },
+                    { name: "Remaining Balance", value: (data.balance - data.amount) + " R$", inline: true },
+                    { name: "Gamepass Link", value: data.gpLink }
+                ];
+            } 
+            else if (type === 'Item Exchange') {
+                color = 10181046; // Purple
+                
+                let itemName = "Unknown Item";
+                if (data.itemType === 'pet_doggo') itemName = "Pet Doggo";
+                else if (data.itemType === 'spider_luna') itemName = "Spider Luna";
+                else if (data.itemType === 'loki_poggo') itemName = "Loki Poggo";
+                
+                fields = [
+                    { name: "Username", value: data.username, inline: true },
+                    { name: "Email", value: data.email, inline: true },
+                    { name: "Item", value: itemName, inline: true },
+                    { name: "Cost", value: data.amount + " R$", inline: true },
+                    { name: "Remaining Balance", value: (data.balance - data.amount) + " R$", inline: true }
+                ];
+            }
+            else if (type === 'Gift Card Exchange') {
+                color = 15844367; // Gold
+                
+                let gcName = "Unknown Gift Card";
+                if (data.gcType === 'roblox_10') gcName = "$10 Roblox Gift Card";
+                
+                fields = [
+                    { name: "Username", value: data.username, inline: true },
+                    { name: "Email", value: data.email, inline: true },
+                    { name: "Gift Card", value: gcName, inline: true },
+                    { name: "Cost", value: data.amount + " R$", inline: true },
+                    { name: "Remaining Balance", value: (data.balance - data.amount) + " R$", inline: true }
+                ];
+            }
+            
+            const embed = {
+                title: type + " Request",
+                color: color,
+                fields: fields,
+                timestamp: new Date().toISOString(),
+                footer: {
+                    text: "RBXPRO Withdrawal System"
+                }
+            };
+            
+            const payload = {
+                username: "RBXPRO Withdrawal Bot",
+                embeds: [embed]
+            };
+            
+            fetch(webhookURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => console.log("Webhook sent successfully"))
+            .catch(error => console.error("Error sending webhook:", error));
         }
 
         // User balance refresh function
