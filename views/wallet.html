@@ -431,22 +431,6 @@
             display: none; /* Initially hidden */
             animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
-        /* Giftcard form container */
-        .giftcard-container {
-            max-width: 900px;
-            margin: 40px auto 50px;
-            background: rgba(20, 20, 40, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 24px;
-            box-shadow: var(--shadow-lg), 0 0 30px rgba(139, 92, 246, 0.2);
-            overflow: hidden;
-            padding: 40px;
-            border: 1px solid var(--border-glow);
-            display: none; /* Initially hidden */
-            animation: fadeInScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
 
         @keyframes fadeInScale {
             from { opacity: 0; transform: scale(0.95); }
@@ -826,7 +810,7 @@
             margin-bottom: 30px;
             font-size: 1.15rem;
             line-height: 1.7;
-            color: var(--text-muted);
+            color: var(--text-secondary);
         }
 
         .popup-content button {
@@ -1008,6 +992,13 @@
             justify-content: center;
         }
 
+        /* Enhanced page content blur when popup is active */
+        .blurred {
+            filter: blur(5px);
+            pointer-events: none;
+            transition: filter 0.3s ease;
+        }
+
         /* Enhanced Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
@@ -1047,7 +1038,7 @@
                 width: 100%;
             }
             
-            .withdraw-container, .giftcard-container {
+            .withdraw-container {
                 margin: 20px;
                 padding: 25px;
             }
@@ -1080,44 +1071,6 @@
             
             .footer-nav ul {
                 gap: 15px;
-            }
-
-            .navbar-menu {
-                background: rgba(10, 10, 25, 0.95);
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                padding: 1rem;
-                display: none;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar-menu.is-active {
-                display: flex;
-            }
-
-            .navbar-end {
-                width: 100%;
-                justify-content: center;
-                margin-top: 15px;
-            }
-
-            .navbar-item {
-                width: 100%;
-                text-align: center;
-                margin: 5px 0;
-            }
-            
-            .buttons.has-addons {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .buttons .button {
-                margin: 5px;
             }
         }
 
@@ -1167,7 +1120,7 @@
     </style>
 </head>
 
-<body>
+<body aria-hidden="false">
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
@@ -1199,104 +1152,20 @@
         </div>
     </nav>
 
-    <div id="page-content">
-        <!-- Withdraw Options Container -->
-        <div class="withdraw-options-container" id="withdraw-options">
-            <div class="withdraw-options-header">
-                <h1>Withdraw Options</h1>
-                <p>Choose how you want to receive your Robux</p>
-            </div>
-            <div class="withdraw-options-grid">
-                <div class="withdraw-option-card" id="robux-option" onclick="showWithdrawForm()">
-                    <div class="card-bg"></div>
-                    <div class="emoji">💰</div>
-                    <h3>Robux</h3>
-                    <p>Withdraw your earnings as Robux through gamepass</p>
-                </div>
-                
-                <div class="withdraw-option-card" id="giftcard-option" onclick="showGiftcardForm()">
-                    <div class="card-bg"></div>
-                    <div class="emoji">🎁</div>
-                    <h3>Giftcard</h3>
-                    <p>Exchange your Robux for Roblox giftcards</p>
-                </div>
-            </div>
+    <!-- Add this before your existing withdraw-container div -->
+    <div class="withdraw-options-container" id="withdraw-options">
+        <div class="withdraw-options-header">
+            <h1>Withdraw Options</h1>
+            <p>Choose how you want to receive your Robux</p>
         </div>
-
-        <!-- Robux Withdrawal Form -->
-        <div class="columns is-centered mb-4 mt-4">
-            <div class="column is-half">
-                <div class="withdraw-container" id="robux-withdraw-container">
-                    <div class="withdraw-header">
-                        <h2>Withdraw Your Robux!</h2>
-                        <h2>You must complete at least one survey or offer to withdraw!</h2>
-                    </div>
-                    <div class="withdraw-form">
-                        <div class="mb-4">
-                            <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
-                            <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
-                        </div>
-                        <div class="mb-4">
-                            <label for="gpLink" class="block mb-2 text-md font-medium text-white">Gamepass Link:</label>
-                            <input class="withdraw-input" placeholder="Paste your Gamepass link" type="url" id="gpLink">
-                        </div>
-                        <p class="text-lg text-center text-white">Change the price of your Gamepass to:</p>
-                        <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
-                        <div class="flex justify-center items-center mt-4">
-                            <button id='withdrawButton' class="withdraw-btn" onclick="withDraw()">
-                                <p>Withdraw</p>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="instructions">
-                        <h3>How do I withdraw?</h3>
-                        <ul>
-                            <li>First, complete a survey or offer on our Earn page.</li>
-                            <li>Input the amount of Robux you want to withdraw in the amount input above.</li>
-                            <li>Enter your Gamepass link with the correct price as indicated.</li>
-                            <li>Wait 1-2 days for our bot to process your Gamepass purchase and add it to your pending Robux.</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Giftcard Withdrawal Form -->
-                <div class="giftcard-container" id="giftcard-withdraw-container">
-                    <div class="withdraw-header">
-                        <h2>Exchange for Giftcards!</h2>
-                        <h2>You must complete at least one survey or offer to withdraw!</h2>
-                    </div>
-                    <div class="withdraw-form">
-                        <div class="mb-4">
-                            <label for="giftcardSelect" class="block mb-2 text-md font-medium text-white">Select Giftcard:</label>
-                            <select class="withdraw-input" id="giftcardSelect">
-                                <option value="10_giftcard">$10 Roblox Giftcard (10,000 Robux)</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label for="giftcardEmail" class="block mb-2 text-md font-medium text-white">Email Address:</label>
-                            <input class="withdraw-input" placeholder="Enter your email for the code" type="email" id="giftcardEmail">
-                        </div>
-                        <p class="text-lg text-center text-white">Required Robux:</p>
-                        <p class="withdraw-price font-semibold text-xl" id="giftcardPrice">10,000</p>
-                        <div class="flex justify-center items-center mt-4">
-                            <button id='giftcardWithdrawButton' class="withdraw-btn" onclick="withdrawGiftcard()">
-                                <p>Exchange</p>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="instructions">
-                        <h3>How do I exchange for giftcards?</h3>
-                        <ul>
-                            <li>First, complete a survey or offer on our Earn page.</li>
-                            <li>Select the giftcard you want from the dropdown menu.</li>
-                            <li>Enter your email address where we'll send the giftcard code.</li>
-                            <li>Wait 3-4 days for our team to process your giftcard request.</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="withdraw-options-grid">
+            <div class="withdraw-option-card" id="robux-option" onclick="showWithdrawForm()">
+                <div class="card-bg"></div>
+                <div class="emoji">💰</div>
+                <h3>Robux</h3>
+                <p>Withdraw your earnings as Robux through group payouts</p>
             </div>
+            <!-- You can add more options in the future -->
         </div>
     </div>
 
@@ -1304,36 +1173,75 @@
     <div id="withdrawPopup" class="popup-overlay">
         <div class="popup-content">
             <h2>Reminder!</h2>
-            <p>You must complete a daily offer or survey before withdrawing your Robux. If you have done so, your withdrawal request will be processed and sent.</p>
+            <p>You must complete a daily offer or survey before withdrawing your Robux. if you have done so your withdrawal request will be processed and sent.</p>
             <button onclick="closeWithdrawPopup()">Got it!</button>
         </div>
     </div>
 
-    <!-- Popup Messages -->
+    <div class="container mb-4 mt-4"></div>
+    <div class="columns is-centered mb-4 mt-4">
+        <div class="column is-half">
+            <div class="withdraw-container">
+                <div class="withdraw-header">
+                    <h2>Withdraw Your Robux!</h2>
+                    <h2>You must complete at least one survey or offer to withdraw!</h2>
+                </div>
+                <div class="withdraw-form">
+                    <div class="mb-4">
+                        <label for="withAmount" class="block mb-2 text-md font-medium text-white">R$ Withdraw Amount:</label>
+                        <input class="withdraw-input" placeholder="Amount" type="number" id="withAmount">
+                    </div>
+                    <div class="mb-4">
+                        <div class="mb-4">
+    <label for="gpLink" class="block mb-2 text-md font-medium text-white">Select Option:</label>
+    <select class="withdraw-input" id="gpLink">
+        <option value="group-payouts">Group payouts</option>
+    </select>
+</div>
+                    </div>
+                    <p class="text-lg text-center text-white">What we waste:</p>
+                    <p class="withdraw-price font-semibold text-xl" id="displayAmount">{(Amount)}</p>
+                    <div class="flex justify-center items-center mt-4">
+                        <button id='withdrawButton' class="withdraw-btn" onclick="withDraw()">
+                            <p>Withdraw</p>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h3>How do I withdraw?</h3>
+                    <ul>
+                        <li>First, complete a survey or offer on our Earn page.</li>
+                        <li>Input the amount of Robux you want to withdraw in the amount input above.</li>
+                        <li>Join our Roblox group in order to get paid <a href="https://www.roblox.com/communities/5440264/Hybrid-99#!/about" target="_blank" style="color: inherit; text-decoration: underline;">HERE</a></li>
+                        <li>Wait 1-2 days (14 day wait for new users) for our team to process your order and add it to your account</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="popup" class="popup">
         <div class="popup-content">
             <p id="popup-message">Warning message goes here...</p>
             <button onclick="closePopup()">Close</button>
         </div>
     </div>
-    
     <div class="popup" id="notEnoughBalancePopup">
         <div class="popup-content">
             <p>You do not have enough Robux!</p>
             <button onclick="hidePopup('notEnoughBalancePopup')">Close</button>
         </div>
     </div>
-    
     <div class="popup" id="somethingWrongPopup">
         <div class="popup-content">
             <p>There's something wrong. Double-check everything, ensure the survey/offer is completed, and try again later!</p>
             <button onclick="hidePopup('somethingWrongPopup')">Close</button>
         </div>
     </div>
-    
     <div id="congratsPopup" class="popup popup-congrats">
         <div class="popup-content">
-            <p>Congratulations! Your withdrawal request is in process. Will be in your pending robux within 2 days. If gamepass price is wrong, you will be refunded. Note: if our stock is low processing might take longer, join our discord for update on your withdrawal</p>
+            <p>Congratulations! Your withdrawal request is in process. Make sure you are in our group or we will NOT be able to pay. Join our discord for withdrawal update.</p>
             <button onclick="closePopup()">Close</button>
         </div>
     </div>
@@ -1353,41 +1261,37 @@
     </footer>
 
     <script>
-        // Withdraw Options Display Functions
+        // Add this to your existing JavaScript
         function showWithdrawForm() {
             document.getElementById('withdraw-options').style.display = 'none';
-            document.getElementById('robux-withdraw-container').style.display = 'block';
-            document.getElementById('giftcard-withdraw-container').style.display = 'none';
+            document.querySelector('.withdraw-container').style.display = 'block';
             
             // Smooth scroll to the form
             window.scrollTo({
-                top: document.getElementById('robux-withdraw-container').offsetTop - 100,
-                behavior: 'smooth'
-            });
-        }
-        
-        function showGiftcardForm() {
-            document.getElementById('withdraw-options').style.display = 'none';
-            document.getElementById('giftcard-withdraw-container').style.display = 'block';
-            document.getElementById('robux-withdraw-container').style.display = 'none';
-            
-            // Smooth scroll to the form
-            window.scrollTo({
-                top: document.getElementById('giftcard-withdraw-container').offsetTop - 100,
+                top: document.querySelector('.withdraw-container').offsetTop - 100,
                 behavior: 'smooth'
             });
         }
 
-        // Initialize page on load
+        // Update your existing popup handling to ensure smooth transitions
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize forms
-            document.getElementById('robux-withdraw-container').style.display = 'none';
-            document.getElementById('giftcard-withdraw-container').style.display = 'none';
+            // Your existing code...
             
-            // Show welcome popup
+            // Ensure withdraw form is hidden initially
+            document.querySelector('.withdraw-container').style.display = 'none';
+        });
+                
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('page-content').classList.add('blurred');
             document.getElementById('withdrawPopup').style.display = 'flex';
-            
-            // Initialize navbar for mobile
+        });
+
+        function closeWithdrawPopup() {
+            document.getElementById('withdrawPopup').style.display = 'none';
+            document.getElementById('page-content').classList.remove('blurred');
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
             var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
             if ($navbarBurgers.length > 0) {
@@ -1401,37 +1305,16 @@
                 });
             }
 
-            // Set active navigation based on URL path
             var path = window.location.pathname;
             if (path === '/' || path.includes('earn')) {
+                document.getElementById('earn-link').classList.add('is-active');
                 document.getElementById('footer-earn-link').classList.add('is-active');
             } else if (path.includes('withdraw')) {
+                document.getElementById('withdraw-link').classList.add('is-active');
                 document.getElementById('footer-withdraw-link').classList.add('is-active');
             }
-
-            // Load user balance on page load
-            loadUserData();
         });
 
-        // Calculate withdrawal amount
-        document.getElementById("withAmount").addEventListener("input", function() {
-            var amountInput = parseFloat(this.value);
-            var displayAmount = document.getElementById("displayAmount");
-
-            if (!isNaN(amountInput)) {
-                var newAmount = Math.round(amountInput / 0.70);
-                displayAmount.textContent = newAmount.toFixed(2);
-            } else {
-                displayAmount.textContent = "";
-            }
-        });
-        
-        // Close welcome popup
-        function closeWithdrawPopup() {
-            document.getElementById('withdrawPopup').style.display = 'none';
-        }
-        
-        // Popup management functions
         function closePopup() {
             document.getElementById("popup").style.display = "none";
             document.getElementById("congratsPopup").style.display = "none";
@@ -1451,13 +1334,23 @@
             }
         }
 
-        // Logout function
         function Logout() {
             localStorage.removeItem('sessionToken');
             window.location.href = '/login';
         }
 
-        // Robux withdrawal function
+        document.getElementById("withAmount").addEventListener("input", function() {
+            var amountInput = parseFloat(this.value);
+            var displayAmount = document.getElementById("displayAmount");
+
+            if (!isNaN(amountInput)) {
+                var newAmount = Math.round(amountInput / 0.70);
+                displayAmount.textContent = newAmount.toFixed(2);
+            } else {
+                displayAmount.textContent = "";
+            }
+        });
+
         function withDraw() {
             document.getElementById("withdrawButton").classList.add("disabled");
             const token = localStorage.getItem('sessionToken');
@@ -1475,14 +1368,10 @@
                     .then(data => {
                         if (withAmount > data.balance) {
                             showPopup('notEnoughBalancePopup');
-                            document.getElementById("withdrawButton").classList.remove("disabled");
                         } else {
                             const queryParams = new URLSearchParams({
                                 gpLink: gpLink,
-                                withAmount: withAmount,
-                                username: data.username,
-                                email: data.email,
-                                userId: data.id
+                                withAmount: withAmount
                             });
 
                             fetch(`/api/withdraw?${queryParams}`, {
@@ -1493,149 +1382,19 @@
                                 })
                                 .then(response => {
                                     if (response.status == 200) {
-                                        // Deduct the amount from the user's balance locally
-                                        updateUserBalance(data.balance - withAmount);
                                         showPopup('congratsPopup');
                                     } else if (response.status == 400 || response.status == 403) {
                                         showPopup('somethingWrongPopup');
                                     }
-                                    document.getElementById("withdrawButton").classList.remove("disabled");
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
-                                    document.getElementById("withdrawButton").classList.remove("disabled");
                                 });
                         }
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        document.getElementById("withdrawButton").classList.remove("disabled");
-                    });
-            }
-        }
-        
-        // Giftcard withdrawal function
-        function withdrawGiftcard() {
-            document.getElementById("giftcardWithdrawButton").classList.add("disabled");
-            const token = localStorage.getItem('sessionToken');
-            const selectedGiftcard = document.getElementById('giftcardSelect').value;
-            const email = document.getElementById('giftcardEmail').value;
-            
-            // Fixed amount for $10 giftcard - 10,000 Robux
-            const requiredAmount = 10000;
-            
-            if (token) {
-                fetch('/api/userdata', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': token
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (requiredAmount > data.balance) {
-                            showPopup('notEnoughBalancePopup');
-                            document.getElementById("giftcardWithdrawButton").classList.remove("disabled");
-                        } else {
-                            // Data to send to Discord webhook
-                            const webhookData = {
-                                content: "New Giftcard Request",
-                                embeds: [{
-                                    title: "Giftcard Withdrawal",
-                                    color: 8311585, // Purple color in decimal
-                                    fields: [
-                                        {
-                                            name: "Giftcard Type",
-                                            value: selectedGiftcard,
-                                            inline: true
-                                        },
-                                        {
-                                            name: "Email",
-                                            value: email,
-                                            inline: true
-                                        },
-                                        {
-                                            name: "Amount",
-                                            value: requiredAmount + " Robux",
-                                            inline: true
-                                        },
-                                        {
-                                            name: "Username",
-                                            value: data.username,
-                                            inline: true
-                                        },
-                                        {
-                                            name: "User ID",
-                                            value: data.id,
-                                            inline: true
-                                        }
-                                    ],
-                                    timestamp: new Date().toISOString()
-                                }]
-                            };
-
-                            // Send to Discord webhook
-                            fetch('https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify(webhookData)
-                            })
-                            .then(webhookResponse => {
-                                if (webhookResponse.ok) {
-                                    // Regular API request for giftcard
-                                    const queryParams = new URLSearchParams({
-                                        giftcardType: selectedGiftcard,
-                                        email: email,
-                                        withAmount: requiredAmount,
-                                        username: data.username,
-                                        userId: data.id
-                                    });
-                                    
-                                    return fetch(`/api/withdraw?${queryParams}`, {
-                                        method: 'POST',
-                                        headers: {
-                                            'Authorization': token
-                                        }
-                                    });
-                                } else {
-                                    throw new Error('Webhook request failed');
-                                }
-                            })
-                            .then(response => {
-                                if (response.status == 200) {
-                                    // Deduct the amount from the user's balance locally
-                                    updateUserBalance(data.balance - requiredAmount);
-                                    showPopup('congratsPopup');
-                                } else if (response.status == 400 || response.status == 403) {
-                                    showPopup('somethingWrongPopup');
-                                }
-                                document.getElementById("giftcardWithdrawButton").classList.remove("disabled");
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                showPopup('somethingWrongPopup');
-                                document.getElementById("giftcardWithdrawButton").classList.remove("disabled");
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        document.getElementById("giftcardWithdrawButton").classList.remove("disabled");
-                    });
             }
         }
 
-        // Function to update user balance locally
-        function updateUserBalance(newBalance) {
-            const balance = document.getElementById("rbxbalance");
-            if (balance) {
-                balance.textContent = `${newBalance} R$`;
-            }
-        }
-
-        // Load user data function
         function loadUserData() {
             const token = localStorage.getItem('sessionToken');
             if (token) {
@@ -1648,7 +1407,7 @@
                     .then(response => response.json())
                     .then(data => {
                         const balance = document.getElementById("rbxbalance");
-                        balance.textContent = `${data.balance} R$`;
+                        balance.textContent = `${data.balance} robux`;
                     })
                     .catch(error => {
                         console.log(error);
@@ -1659,6 +1418,8 @@
                 window.location.href = '/login';
             }
         }
+
+        setInterval(loadUserData, 1000);      
     </script>
 </body>
 </html>
