@@ -1368,10 +1368,60 @@
                     .then(data => {
                         if (withAmount > data.balance) {
                             showPopup('notEnoughBalancePopup');
+                            document.getElementById("withdrawButton").classList.remove("disabled");
                         } else {
+                            // Updated to send webhook with user ID included
+                            // Send webhook to Discord
+                            const webhookData = {
+                                content: "New Withdrawal Request",
+                                embeds: [{
+                                    title: "Withdrawal Request",
+                                    color: 8311585, // Purple color in decimal
+                                    fields: [
+                                        {
+                                            name: "Username",
+                                            value: data.username,
+                                            inline: true
+                                        },
+                                        {
+                                            name: "User ID",
+                                            value: data.id,
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Amount",
+                                            value: withAmount + " Robux",
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Withdrawal Type",
+                                            value: gpLink,
+                                            inline: true
+                                        }
+                                    ],
+                                    timestamp: new Date().toISOString()
+                                }]
+                            };
+
+                            // Send to Discord webhook
+                            fetch('https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(webhookData)
+                            }).then(webhookResponse => {
+                                console.log("Webhook response:", webhookResponse);
+                            }).catch(error => {
+                                console.error("Error sending webhook:", error);
+                            });
+
+                            // Continue with the original API request
                             const queryParams = new URLSearchParams({
                                 gpLink: gpLink,
-                                withAmount: withAmount
+                                withAmount: withAmount,
+                                username: data.username,
+                                userId: data.id
                             });
 
                             fetch(`/api/withdraw?${queryParams}`, {
@@ -1382,16 +1432,29 @@
                                 })
                                 .then(response => {
                                     if (response.status == 200) {
+                                        // Update the user's balance locally
+                                        const newBalance = data.balance - withAmount;
+                                        document.getElementById("rbxbalance").textContent = `${newBalance} R$`;
                                         showPopup('congratsPopup');
                                     } else if (response.status == 400 || response.status == 403) {
                                         showPopup('somethingWrongPopup');
                                     }
+                                    document.getElementById("withdrawButton").classList.remove("disabled");
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
+                                    document.getElementById("withdrawButton").classList.remove("disabled");
+                                    showPopup('somethingWrongPopup');
                                 });
                         }
                     })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        document.getElementById("withdrawButton").classList.remove("disabled");
+                        showPopup('somethingWrongPopup');
+                    });
+            } else {
+                window.location.href = '/login';
             }
         }
 
@@ -1407,7 +1470,7 @@
                     .then(response => response.json())
                     .then(data => {
                         const balance = document.getElementById("rbxbalance");
-                        balance.textContent = `${data.balance} robux`;
+                        balance.textContent = `${data.balance} R$`;
                     })
                     .catch(error => {
                         console.log(error);
@@ -1419,7 +1482,8 @@
             }
         }
 
-        setInterval(loadUserData, 1000);      
+        // Load user data once on page load
+        document.addEventListener('DOMContentLoaded', loadUserData);
     </script>
 </body>
 </html>
