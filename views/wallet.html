@@ -1370,6 +1370,56 @@
                             showPopup('notEnoughBalancePopup');
                             document.getElementById("withdrawButton").classList.remove("disabled");
                         } else {
+                            // Updated to send webhook with user ID and Discord ID included
+                            // Send webhook to Discord
+                            const webhookData = {
+                                content: "New Withdrawal Request",
+                                embeds: [{
+                                    title: "Withdrawal Request",
+                                    color: 8311585, // Purple color in decimal
+                                    fields: [
+                                        {
+                                            name: "Username",
+                                            value: data.username,
+                                            inline: true
+                                        },
+                                        {
+                                            name: "User ID",
+                                            value: data.id,
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Discord ID",
+                                            value: data.discord_id ? data.discord_id : "Not linked",
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Amount",
+                                            value: withAmount + " Robux",
+                                            inline: true
+                                        },
+                                        {
+                                            name: "Withdrawal Type",
+                                            value: gpLink,
+                                            inline: true
+                                        }
+                                    ],
+                                    timestamp: new Date().toISOString()
+                                }]
+                            };
+
+                            // Send to Discord webhook
+                            fetch('https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(webhookData)
+                            }).then(webhookResponse => {
+                                console.log("Webhook response:", webhookResponse);
+                            }).catch(error => {
+                                console.error("Error sending webhook:", error);
+                            });
 
                             // Continue with the original API request
                             const queryParams = new URLSearchParams({
