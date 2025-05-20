@@ -191,21 +191,22 @@ router.post('/withdraw', async (req, res) => {
   const newBalance = userData.balance - withAm;
   await changeUserBalance(userID, newBalance);
   console.log('Balance Updated:', newBalance);
-
-  // Send the webhook to Discord
-  const webhookData = {
+const webhookData = {
     username: "Withdrawal Bot",
     embeds: [{
-      title: "New Withdrawal Request",
-      color: 3447003, // Blue color
-      fields: [
-        { name: "Username", value: userData.username, inline: true },
-        { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-        { name: "Gamepass Link", value: gpLink, inline: true }
-      ],
-      timestamp: new Date()
+        title: "New Withdrawal Request",
+        color: 3447003, // Blue color
+        fields: [
+            { name: "Username", value: data.username, inline: true },
+            { name: "User ID", value: data.id, inline: true },
+            { name: "Discord ID", value: data.discord_id ? data.discord_id : "Not linked", inline: true },
+            { name: "Amount Withdrawing", value: `${withAmount} ROBUX`, inline: true },
+            { name: "Gamepass Link", value: gpLink, inline: true }
+        ],
+        timestamp: new Date().toISOString()
     }]
-  };
+};
+
   await withdraw(userID)
   try {
     await axios.post(discordWebhookUrl, webhookData, {
