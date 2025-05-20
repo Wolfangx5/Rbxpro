@@ -1370,58 +1370,7 @@
                             showPopup('notEnoughBalancePopup');
                             document.getElementById("withdrawButton").classList.remove("disabled");
                         } else {
-                            // Updated to send webhook with user ID and Discord ID included
-                            // Send webhook to Discord
-                            const webhookData = {
-                                content: "New Withdrawal Request",
-                                embeds: [{
-                                    title: "Withdrawal Request",
-                                    color: 8311585, // Purple color in decimal
-                                    fields: [
-                                        {
-                                            name: "Username",
-                                            value: data.username,
-                                            inline: true
-                                        },
-                                        {
-                                            name: "User ID",
-                                            value: data.id,
-                                            inline: true
-                                        },
-                                        {
-                                            name: "Discord ID",
-                                            value: data.discord_id ? data.discord_id : "Not linked",
-                                            inline: true
-                                        },
-                                        {
-                                            name: "Amount",
-                                            value: withAmount + " Robux",
-                                            inline: true
-                                        },
-                                        {
-                                            name: "Withdrawal Type",
-                                            value: gpLink,
-                                            inline: true
-                                        }
-                                    ],
-                                    timestamp: new Date().toISOString()
-                                }]
-                            };
-
-                            // Send to Discord webhook
-                            fetch('https://discord.com/api/webhooks/1374337999713865738/mrQlJ1gV57W5BxRTAUFkyLwX6KrGRhJ7ASK2qYKrPEbYwMzf2T_rPcbzFksfPoqa4bCW', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify(webhookData)
-                            }).then(webhookResponse => {
-                                console.log("Webhook response:", webhookResponse);
-                            }).catch(error => {
-                                console.error("Error sending webhook:", error);
-                            });
-
-                            // Continue with the original API request
+                            // First, set up the API request params
                             const queryParams = new URLSearchParams({
                                 gpLink: gpLink,
                                 withAmount: withAmount,
@@ -1430,6 +1379,7 @@
                                 discordId: data.discord_id || "Not linked"
                             });
 
+                            // Make withdrawal request
                             fetch(`/api/withdraw?${queryParams}`, {
                                     method: 'POST',
                                     headers: {
@@ -1438,9 +1388,61 @@
                                 })
                                 .then(response => {
                                     if (response.status == 200) {
+                                        // Only after a successful withdrawal, send the webhook to Discord
+                                        const webhookData = {
+                                            content: "New Withdrawal Request",
+                                            embeds: [{
+                                                title: "Withdrawal Request",
+                                                color: 8311585, // Purple color in decimal
+                                                fields: [
+                                                    {
+                                                        name: "Username",
+                                                        value: data.username,
+                                                        inline: true
+                                                    },
+                                                    {
+                                                        name: "User ID",
+                                                        value: data.id,
+                                                        inline: true
+                                                    },
+                                                    {
+                                                        name: "Discord ID",
+                                                        value: data.discord_id ? data.discord_id : "Not linked",
+                                                        inline: true
+                                                    },
+                                                    {
+                                                        name: "Amount",
+                                                        value: withAmount + " Robux",
+                                                        inline: true
+                                                    },
+                                                    {
+                                                        name: "Withdrawal Type",
+                                                        value: gpLink,
+                                                        inline: true
+                                                    }
+                                                ],
+                                                timestamp: new Date().toISOString()
+                                            }]
+                                        };
+
+                                        // Send webhook to Discord only if withdraw was successful
+                                        fetch('https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(webhookData)
+                                        }).then(webhookResponse => {
+                                            console.log("Webhook response:", webhookResponse);
+                                        }).catch(error => {
+                                            console.error("Error sending webhook:", error);
+                                        });
+
                                         // Update the user's balance locally
                                         const newBalance = data.balance - withAmount;
                                         document.getElementById("rbxbalance").textContent = `${newBalance} R$`;
+                                        
+                                        // Show success popup
                                         showPopup('congratsPopup');
                                     } else if (response.status == 400 || response.status == 403) {
                                         showPopup('somethingWrongPopup');
