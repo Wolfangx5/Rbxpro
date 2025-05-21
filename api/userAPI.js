@@ -32,6 +32,25 @@ let currentPromoCode = null;
 let currentPromoReward = 0;
 const redeemedPromoCodes = {}; // Track users who have redeemed the promo code
 
+
+// GET /api/leaderboard
+router.get('/leaderboard', async (req, res) => {
+  try {
+    const topUsers = await User.find({})
+      .sort({ balance: -1 }) // or .sort({ totalEarned: -1 }) if available
+      .limit(10)
+      .select('username balance'); // adjust if using totalEarned
+
+    res.json(topUsers);
+  } catch (err) {
+    console.error('Leaderboard error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+module.exports = router;
+
+
 // Function to obtain CSRF token
 async function getGeneralToken(cookie) {
   const httpOpt = {
