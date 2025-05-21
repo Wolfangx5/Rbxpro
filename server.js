@@ -29,6 +29,9 @@ const homeRoute = require('./routes/homepage.js');
 const earnRoute = require('./routes/earn.js');
 const walletRoute = require('./routes/wallet.js');
 const userAPI = require('./api/userAPI.js');
+const leaderboardAPI = require('./api/leaderboard'); // adjust path if needed
+app.use('/api', leaderboardAPI);
+
 
 // -----------Middleware------------------ //
 app.use(cors());
