@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Leaderboard</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fcd34d;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      background-color: #222;
+      box-shadow: 0 0 10px #000;
+    }
+
+    th, td {
+      border: 1px solid #444;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #333;
+      color: #fcd34d;
+    }
+
+    tr:nth-child(even) {
+      background-color: #1c1c1c;
+    }
+
+    tr:hover {
+      background-color: #2a2a2a;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Top Earners</h1>
+  <table id="leaderboard">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Username</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    fetch('/api/leaderboard')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector('#leaderboard tbody');
+        data.forEach((user, index) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>#${index + 1}</td>
+            <td>${user.username}</td>
+            <td>${user.balance.toFixed(2)}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      });
+  </script>
+</body>
+</html>
