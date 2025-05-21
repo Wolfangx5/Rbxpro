@@ -19,7 +19,14 @@ const server = app.listen(port, "0.0.0.0", () => {
 socketService.initSocket(server);
 
 // -----------Utils----------------------- //
-const { connect, changeUserBalance, checkUserExists, addSurveyCompletion, canWithdraw, withdraw } = require('./utils/dbChange');
+const {
+  connect,
+  changeUserBalance,
+  checkUserExists,
+  addSurveyCompletion,
+  canWithdraw,
+  withdraw
+} = require('./utils/dbChange');
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
 
 // -----------Route Links----------------- //
@@ -65,7 +72,7 @@ const sendDiscordWebhook = async (username, amount) => {
         {
           title: "💰 New Survey Completion!",
           description: `**${username}** just earned **${amount} R$** from a survey!`,
-          color: 0x57F287, // green
+          color: 0x57F287,
           footer: {
             text: "RBXPro • Survey System",
             icon_url: "https://media.discordapp.net/attachments/1002332031478419577/1326641651812143144/5a4e9f646dd92bd9562e2bf37f86ebb1.png?ex=6800b511&is=67ff6391&hm=b1112f199e0527e1100d507e0622b0d00251f785d8c8f4b37315ff52b738c74c&=&format=webp&quality=lossless"
@@ -83,23 +90,25 @@ const sendDiscordWebhook = async (username, amount) => {
 // -----------Callbacks------------------- //
 app.get('/callback/bitlab', async (req, res) => {
   const { uid, val, usd, type, tx } = req.query;
-  console.log("Bitlab:" ,uid, val, usd, type, tx);
+  console.log("Bitlab:", uid, val, usd, type, tx);
 
   if (["COMPLETE", "START_BONUS", "RECONCILIATION", "SCREENOUT"].includes(type)) {
     if (type === "COMPLETE") await addSurveyCompletion(uid);
+
     try {
       const userData = await checkUserExists(uid);
-      if (userData) {
-        const newBal = type === 'RECONCILIATION'
-          ? userData.balance - Math.abs(parseFloat(val) * 2)
-          : userData.balance + parseFloat(val) * 2;
-        await changeUserBalance(uid, newBal);
-        await sendDiscordWebhook(userData.username, parseFloat(val) * 2);
-        res.status(200).json({ status: 'success', message: 'OK' });
-      } else {
-        console.log('User not found');
-        res.status(404).json({ status: 'error', message: 'User not found' });
-      }
+      if (!userData) return res.status(404).json({ status: 'error', message: 'User not found' });
+
+      // raw val, no *2 multiplier
+      const delta = parseFloat(val);
+      const newBal = type === 'RECONCILIATION'
+        ? userData.balance - Math.abs(delta)
+        : userData.balance + delta;
+
+      await changeUserBalance(uid, newBal);
+      await sendDiscordWebhook(userData.username, delta);
+
+      res.status(200).json({ status: 'success', message: 'OK' });
     } catch (err) {
       console.error('Callback error:', err);
       res.status(500).json({ status: 'error', message: 'Server error' });
@@ -115,18 +124,20 @@ app.get('/callback/cpx', async (req, res) => {
 
   if (["1", "2"].includes(type)) {
     if (type === "1") await addSurveyCompletion(uid);
+
     try {
       const userData = await checkUserExists(uid);
-      if (userData) {
-        const newBal = type === '1'
-          ? userData.balance + parseFloat(val) * 2
-          : userData.balance - Math.abs(parseFloat(val) * 2);
-        await changeUserBalance(uid, newBal);
-        await sendDiscordWebhook(userData.username, parseFloat(val) * 2);
-        res.status(200).json({ status: 'success', message: 'OK' });
-      } else {
-        res.status(404).json({ status: 'error', message: 'User not found' });
-      }
+      if (!userData) return res.status(404).json({ status: 'error', message: 'User not found' });
+
+      const delta = parseFloat(val);
+      const newBal = type === '1'
+        ? userData.balance + delta
+        : userData.balance - Math.abs(delta);
+
+      await changeUserBalance(uid, newBal);
+      await sendDiscordWebhook(userData.username, delta);
+
+      res.status(200).json({ status: 'success', message: 'OK' });
     } catch (err) {
       console.error('Callback error:', err);
       res.status(500).json({ status: 'error', message: 'Server error' });
@@ -143,14 +154,15 @@ app.get('/callback/kiwi', async (req, res) => {
 
   try {
     const userData = await checkUserExists(uid);
-    if (userData) {
-      const newBal = userData.balance + parseFloat(val);
-      await changeUserBalance(uid, newBal);
-      await sendDiscordWebhook(userData.username, parseFloat(val));
-      res.status(200).json({ status: 'success', message: 'OK' });
-    } else {
-      res.status(404).json({ status: 'error', message: 'User not found' });
-    }
+    if (!userData) return res.status(404).json({ status: 'error', message: 'User not found' });
+
+    const delta = parseFloat(val);
+    const newBal = userData.balance + delta;
+
+    await changeUserBalance(uid, newBal);
+    await sendDiscordWebhook(userData.username, delta);
+
+    res.status(200).json({ status: 'success', message: 'OK' });
   } catch (err) {
     console.error('Callback error:', err);
     res.status(500).json({ status: 'error', message: 'Server error' });
@@ -165,13 +177,16 @@ app.get('/callback/revtoo', async (req, res) => {
     const userData = await checkUserExists(uid);
     if (!userData) return res.status(404).send('ERROR: User not found');
 
-    const newBal = userData.balance + parseFloat(val);
+    await addSurveyCompletion(uid);
+
+    const delta = parseFloat(val);
+    const newBal = userData.balance + delta;
     await changeUserBalance(uid, newBal);
-    await sendDiscordWebhook(userData.username, parseFloat(val));
+    await sendDiscordWebhook(userData.username, delta);
+
     return res.status(200).send('ok');
   } catch (error) {
     console.error('Callback error:', error);
     return res.status(500).send('ERROR: Server error');
   }
 });
-
