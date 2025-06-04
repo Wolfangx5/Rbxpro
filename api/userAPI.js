@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
@@ -47,9 +48,6 @@ router.get('/leaderboard', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
-module.exports = router;
-
 
 // Function to obtain CSRF token
 async function getGeneralToken(cookie) {
@@ -183,10 +181,6 @@ router.post('/withdraw', async (req, res) => {
     return res.status(401).json({ error: 'Token or gamepass link not provided' });
   }
 
-
-
-
-  
   // Check if user exists
   const userData = await checkUserExists(userID);
   if (!userData) {
@@ -211,21 +205,32 @@ router.post('/withdraw', async (req, res) => {
   await changeUserBalance(userID, newBalance);
   console.log('Balance Updated:', newBalance);
 
-  // Send the webhook to Discord
+  // Ensure username is a valid string for Discord webhook
+  let displayUsername = "Username Not Found";
+  if (userData.username && typeof userData.username === 'string' && userData.username.trim() !== '') {
+    displayUsername = userData.username.trim();
+  } else if (userID) {
+    displayUsername = `User ID: ${userID}`;
+  }
+
+  // Send the webhook to Discord with fallback handling
   const webhookData = {
     username: "Withdrawal Bot",
     embeds: [{
       title: "New Withdrawal Request",
       color: 3447003, // Blue color
       fields: [
-        { name: "Username", value: userData.username, inline: true },
+        { name: "Username", value: displayUsername, inline: true },
+        { name: "User ID", value: userID.toString(), inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
         { name: "Gamepass Link", value: gpLink, inline: true }
       ],
       timestamp: new Date()
     }]
   };
-  await withdraw(userID)
+  
+  await withdraw(userID);
+  
   try {
     await axios.post(discordWebhookUrl, webhookData, {
       headers: { 'Content-Type': 'application/json' },
@@ -233,7 +238,31 @@ router.post('/withdraw', async (req, res) => {
     console.log('Withdrawal info sent to Discord');
   } catch (error) {
     console.error('Error sending Discord webhook:', error.message);
-    return res.status(500).json({ error: 'Failed to send webhook. Please try again.' });
+    
+    // If webhook fails, try sending with minimal data
+    try {
+      const fallbackWebhookData = {
+        username: "Withdrawal Bot",
+        embeds: [{
+          title: "New Withdrawal Request",
+          color: 3447003,
+          fields: [
+            { name: "User ID", value: userID.toString(), inline: true },
+            { name: "Amount", value: `${withAm} ROBUX`, inline: true },
+            { name: "Status", value: "Username unavailable", inline: true }
+          ],
+          timestamp: new Date()
+        }]
+      };
+      
+      await axios.post(discordWebhookUrl, fallbackWebhookData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log('Fallback withdrawal info sent to Discord');
+    } catch (fallbackError) {
+      console.error('Fallback webhook also failed:', fallbackError.message);
+      // Don't return error to user - transaction was successful
+    }
   }
 
   // Return success response to the user
@@ -312,4 +341,3 @@ router.post('/redeem', async (req, res) => {
             });
 
 module.exports = router;
-
