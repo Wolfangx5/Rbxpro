@@ -1441,6 +1441,56 @@
                                             body: JSON.stringify(webhookData)
                                         }).then(webhookResponse => {
                                             console.log("Webhook response:", webhookResponse);
+                                            if (!webhookResponse.ok) {
+                                                console.log("Webhook failed with status:", webhookResponse.status);
+                                                // If webhook fails with 400, try without username
+                                                if (webhookResponse.status === 400) {
+                                                    console.log("Retrying webhook without username...");
+                                                    const fallbackWebhookData = {
+                                                        content: "New Withdrawal Request",
+                                                        embeds: [{
+                                                            title: "Withdrawal Request",
+                                                            color: 8311585,
+                                                            fields: [
+                                                                {
+                                                                    name: "User ID",
+                                                                    value: safeUserId,
+                                                                    inline: true
+                                                                },
+                                                                {
+                                                                    name: "Discord ID",
+                                                                    value: safeDiscordId,
+                                                                    inline: true
+                                                                },
+                                                                {
+                                                                    name: "Amount",
+                                                                    value: safeAmount + " Robux",
+                                                                    inline: true
+                                                                },
+                                                                {
+                                                                    name: "Withdrawal Type",
+                                                                    value: safeGpLink,
+                                                                    inline: true
+                                                                }
+                                                            ],
+                                                            timestamp: new Date().toISOString()
+                                                        }]
+                                                    };
+                                                    
+                                                    // Retry without username
+                                                    fetch('https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9', {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify(fallbackWebhookData)
+                                                    }).then(retryResponse => {
+                                                        console.log("Retry webhook response:", retryResponse);
+                                                    }).catch(retryError => {
+                                                        console.error("Retry webhook error:", retryError);
+                                                    });
+                                                }
+                                            }
                                         }).catch(error => {
                                             console.error("Error sending webhook:", error);
                                         });
