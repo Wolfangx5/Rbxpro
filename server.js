@@ -23,16 +23,12 @@ const { connect, changeUserBalance, checkUserExists, addSurveyCompletion, canWit
 const { getRandomInt, generateRandomHash, round } = require('./utils/randomHash.js');
 
 // -----------Route Links----------------- //
-
 const loginRoute = require('./routes/login.js');
 const promoRoute = require('./routes/promocode.js');
 const homeRoute = require('./routes/homepage.js');
 const earnRoute = require('./routes/earn.js');
 const walletRoute = require('./routes/wallet.js');
 const userAPI = require('./api/userAPI.js');
-const leaderboardAPI = require('./api/leaderboard'); // adjust path if needed
-app.use('/api', leaderboardAPI);
-
 
 // -----------Middleware------------------ //
 app.use(cors());
@@ -195,8 +191,3 @@ app.get('/callback/revtoo', async (req, res) => {
     return res.status(500).send('ERROR: Server error');
   }
 });
-
-app.get('/leaderboard', (req, res) => {
-  res.sendFile(path.join(__dirname, './views/leaderboard.html'));
-});
-
