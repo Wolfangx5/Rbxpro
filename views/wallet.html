@@ -1389,35 +1389,42 @@
                                 .then(response => {
                                     if (response.status == 200) {
                                         // Only after a successful withdrawal, send the webhook to Discord
+                                        // Ensure all values are strings to prevent Discord 400 errors
+                                        const safeUsername = data.username ? String(data.username) : "Unknown User";
+                                        const safeUserId = data.id ? String(data.id) : "Unknown ID";
+                                        const safeDiscordId = data.discord_id ? String(data.discord_id) : "Not linked";
+                                        const safeAmount = withAmount ? String(withAmount) : "0";
+                                        const safeGpLink = gpLink ? String(gpLink) : "group-payouts";
+
                                         const webhookData = {
                                             content: "New Withdrawal Request",
                                             embeds: [{
                                                 title: "Withdrawal Request",
-                                                color: 8311585, // Purple color in decimal
+                                                color: 8311585,
                                                 fields: [
                                                     {
                                                         name: "Username",
-                                                        value: data.username || "Unknown User",
+                                                        value: safeUsername,
                                                         inline: true
                                                     },
                                                     {
                                                         name: "User ID",
-                                                        value: data.id,
+                                                        value: safeUserId,
                                                         inline: true
                                                     },
                                                     {
                                                         name: "Discord ID",
-                                                        value: data.discord_id ? data.discord_id : "Not linked",
+                                                        value: safeDiscordId,
                                                         inline: true
                                                     },
                                                     {
                                                         name: "Amount",
-                                                        value: withAmount + " Robux",
+                                                        value: safeAmount + " Robux",
                                                         inline: true
                                                     },
                                                     {
                                                         name: "Withdrawal Type",
-                                                        value: gpLink,
+                                                        value: safeGpLink,
                                                         inline: true
                                                     }
                                                 ],
@@ -1426,7 +1433,7 @@
                                         };
 
                                         // Send webhook to Discord only if withdraw was successful
-                                        fetch('https://discord.com/api/webhooks/1374337999713865738/mrQlJ1gV57W5BxRTAUFkyLwX6KrGRhJ7ASK2qYKrPEbYwMzf2T_rPcbzFksfPoqa4bCW', {
+                                        fetch('https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9', {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json',
