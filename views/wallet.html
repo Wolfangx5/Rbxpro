@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en" class="dark-theme">
 <head>
@@ -1352,34 +1351,6 @@
             }
         });
 
-        // Enhanced webhook sending function with multiple fallback strategies
-        function sendDiscordWebhook(data, retryCount = 0) {
-            const webhookUrl = 'https://discord.com/api/webhooks/1346131307029332059/5w2u3TErjh1eC6wI4puvR_m6yVTeYEgdQNay0r87JuyGRM0NDGswUaduXsNTF3eFIyz9';
-            
-            console.log(`Attempting webhook send (attempt ${retryCount + 1}):`, data);
-            
-            return fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                console.log(`Webhook response (attempt ${retryCount + 1}):`, response.status, response.statusText);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                return response;
-            })
-            .catch(error => {
-                console.error(`Webhook error (attempt ${retryCount + 1}):`, error);
-                throw error;
-            });
-        }
-
         function withDraw() {
             document.getElementById("withdrawButton").classList.add("disabled");
             const token = localStorage.getItem('sessionToken');
@@ -1417,51 +1388,36 @@
                                 })
                                 .then(response => {
                                     if (response.status == 200) {
-                                        // Only after a successful withdrawal, send the webhook to Discord with multiple fallbacks
-                                        
-                                        // Helper function to clean and ensure string values
-                                        const cleanString = (value) => {
-                                            if (value === null || value === undefined) return "Unknown";
-                                            const str = String(value).trim();
-                                            return str === "" || str === "null" ? "Unknown" : str;
-                                        };
-
-                                        const safeUsername = cleanString(data.username);
-                                        const safeUserId = cleanString(data.id);
-                                        const safeDiscordId = cleanString(data.discord_id);
-                                        const safeAmount = cleanString(withAmount);
-                                        const safeGpLink = cleanString(gpLink);
-
-                                        // Strategy 1: Full webhook with all fields
-                                        const fullWebhookData = {
+                                        // Only after a successful withdrawal, send the webhook to Discord
+                                        const webhookData = {
                                             content: "New Withdrawal Request",
                                             embeds: [{
                                                 title: "Withdrawal Request",
-                                                color: 8311585,
+                                                color: 8311585, // Purple color in decimal
                                                 fields: [
                                                     {
                                                         name: "Username",
-                                                        value: safeUsername,
+                                                        value: data.username,
                                                         inline: true
                                                     },
                                                     {
                                                         name: "User ID",
-                                                        value: safeUserId,
+                                                        value: data.id,
                                                         inline: true
                                                     },
                                                     {
                                                         name: "Discord ID",
-                                                        value: safeDiscordId,
+                                                        value: data.discord_id ? data.discord_id : "Not linked",
                                                         inline: true
                                                     },
                                                     {
                                                         name: "Amount",
-                                                        value: safeAmount + " Robux",
+                                                        value: withAmount + " Robux",
                                                         inline: true
                                                     },
                                                     {
                                                         name: "Withdrawal Type",
-                                                        value: safeGpLink,
+                                                        value: gpLink,
                                                         inline: true
                                                     }
                                                 ],
@@ -1469,86 +1425,18 @@
                                             }]
                                         };
 
-                                        // Try full webhook first
-                                        sendDiscordWebhook(fullWebhookData, 0)
-                                            .catch(error => {
-                                                console.warn("Full webhook failed, trying without username...");
-                                                
-                                                // Strategy 2: Webhook without username
-                                                const noUsernameWebhookData = {
-                                                    content: "New Withdrawal Request",
-                                                    embeds: [{
-                                                        title: "Withdrawal Request",
-                                                        color: 8311585,
-                                                        fields: [
-                                                            {
-                                                                name: "User ID",
-                                                                value: safeUserId,
-                                                                inline: true
-                                                            },
-                                                            {
-                                                                name: "Discord ID",
-                                                                value: safeDiscordId,
-                                                                inline: true
-                                                            },
-                                                            {
-                                                                name: "Amount",
-                                                                value: safeAmount + " Robux",
-                                                                inline: true
-                                                            },
-                                                            {
-                                                                name: "Withdrawal Type",
-                                                                value: safeGpLink,
-                                                                inline: true
-                                                            }
-                                                        ],
-                                                        timestamp: new Date().toISOString()
-                                                    }]
-                                                };
-
-                                                return sendDiscordWebhook(noUsernameWebhookData, 1);
-                                            })
-                                            .catch(error => {
-                                                console.warn("No username webhook failed, trying minimal...");
-                                                
-                                                // Strategy 3: Minimal webhook with just essential info
-                                                const minimalWebhookData = {
-                                                    content: "New Withdrawal Request",
-                                                    embeds: [{
-                                                        title: "Withdrawal Request",
-                                                        color: 8311585,
-                                                        fields: [
-                                                            {
-                                                                name: "User ID",
-                                                                value: safeUserId,
-                                                                inline: true
-                                                            },
-                                                            {
-                                                                name: "Amount",
-                                                                value: safeAmount + " Robux",
-                                                                inline: true
-                                                            }
-                                                        ],
-                                                        timestamp: new Date().toISOString()
-                                                    }]
-                                                };
-
-                                                return sendDiscordWebhook(minimalWebhookData, 2);
-                                            })
-                                            .catch(error => {
-                                                console.warn("Minimal webhook failed, trying simple text...");
-                                                
-                                                // Strategy 4: Simple text message only
-                                                const simpleWebhookData = {
-                                                    content: `Withdrawal Request: User ${safeUserId} requested ${safeAmount} Robux at ${new Date().toISOString()}`
-                                                };
-
-                                                return sendDiscordWebhook(simpleWebhookData, 3);
-                                            })
-                                            .catch(error => {
-                                                console.error("All webhook strategies failed:", error);
-                                                // Don't throw error here - let the withdrawal succeed even if webhook fails
-                                            });
+                                        // Send webhook to Discord only if withdraw was successful
+                                        fetch('https://discord.com/api/webhooks/1374337999713865738/mrQlJ1gV57W5BxRTAUFkyLwX6KrGRhJ7ASK2qYKrPEbYwMzf2T_rPcbzFksfPoqa4bCW', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(webhookData)
+                                        }).then(webhookResponse => {
+                                            console.log("Webhook response:", webhookResponse);
+                                        }).catch(error => {
+                                            console.error("Error sending webhook:", error);
+                                        });
 
                                         // Update the user's balance locally
                                         const newBalance = data.balance - withAmount;
@@ -1607,4 +1495,3 @@
     </script>
 </body>
 </html>
-
