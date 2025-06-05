@@ -1388,43 +1388,53 @@
                                 })
                                 .then(response => {
                                     if (response.status == 200) {
-                                        // Only after a successful withdrawal, send the webhook to Discord
                                         const webhookData = {
-                                            content: "New Withdrawal Request",
-                                            embeds: [{
-                                                title: "Withdrawal Request",
-                                                color: 8311585, // Purple color in decimal
-                                                fields: [
-                                                    {
-                                                        name: "Username",
-                                                        value: data.username,
-                                                        inline: true
-                                                    },
-                                                    {
-                                                        name: "User ID",
-                                                        value: data.id,
-                                                        inline: true
-                                                    },
-                                                    {
-                                                        name: "Discord ID",
-                                                        value: data.discord_id ? data.discord_id : "Not linked",
-                                                        inline: true
-                                                    },
-                                                    {
-                                                        name: "Amount",
-                                                        value: withAmount + " Robux",
-                                                        inline: true
-                                                    },
-                                                    {
-                                                        name: "Withdrawal Type",
-                                                        value: gpLink,
-                                                        inline: true
-                                                    }
-                                                ],
-                                                timestamp: new Date().toISOString()
-                                            }]
-                                        };
-
+                                             content: null, // No plain text message
+    embeds: [{
+        title: "💸 New Withdrawal Request",
+        color: 0x5865F2, // More professional blue (Discord brand color)
+        author: {
+            name: "RBXPro System",
+            icon_url: "https://imgur.com/a/ycuMzTK" // Replace with your logo URL
+        },
+        thumbnail: {
+            url: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdevforum.roblox.com%2Ft%2Ftheres-a-new-robux-icon%2F391639%3Fpage%3D7&psig=AOvVaw1Zz8M_HqQDMFCaxCQHT0J3&ust=1749208852978000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNj-7PWU2o0DFQAAAAAdAAAAABAT" // Optional visual touch
+        },
+        fields: [
+            {
+                name: "👤 Username",
+                value: `\`${data.username}\``,
+                inline: true
+            },
+            {
+                name: "🆔 User ID",
+                value: `\`${data.id}\``,
+                inline: true
+            },
+            {
+                name: "🔗 Discord ID",
+                value: data.discord_id ? `<@${data.discord_id}>` : "*Not linked*",
+                inline: true
+            },
+            {
+                name: "💰 Amount",
+                value: `**${withAmount} Robux**`,
+                inline: true
+            },
+            {
+                name: "🏦 Withdrawal Type",
+                value: gpLink,
+                inline: true
+            }
+        ],
+        footer: {
+            text: "RBXPro • Withdrawal System",
+            icon_url: "https://imgur.com/a/ycuMzTK" // Optional
+        },
+        timestamp: new Date().toISOString()
+    }]
+};
+                                  
                                         // Send webhook to Discord only if withdraw was successful
                                         fetch('https://discord.com/api/webhooks/1374337999713865738/mrQlJ1gV57W5BxRTAUFkyLwX6KrGRhJ7ASK2qYKrPEbYwMzf2T_rPcbzFksfPoqa4bCW', {
                                             method: 'POST',
