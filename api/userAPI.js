@@ -204,44 +204,33 @@ router.post('/withdraw', async (req, res) => {
   await changeUserBalance(userID, newBalance);
   console.log('Balance Updated:', newBalance);
 
-  // Check if username is null, undefined, or empty - if so, send intentionally bad webhook data to trigger 400 error
+  // Check if username is null, undefined, or empty - if so, return error immediately
   const username = userData.username;
-  let webhookData;
   
   if (!username || username === null || username === undefined || username.trim() === '') {
-    console.log('Username is null/empty, sending invalid webhook data to trigger 400 error');
-    // Send invalid webhook data that will cause Discord to return 400 error
-    webhookData = {
-      username: "Withdrawal Bot",
-      embeds: [{
-        title: "New Withdrawal Request",
-        color: 3447003,
-        fields: [
-          { name: "Username", value: null, inline: true }, // This will cause 400 error
-          { name: "User ID", value: userID.toString(), inline: true },
-          { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-          { name: "Gamepass Link", value: gpLink, inline: true }
-        ],
-        timestamp: new Date()
-      }]
-    };
-  } else {
-    // Send normal webhook data
-    webhookData = {
-      username: "Withdrawal Bot",
-      embeds: [{
-        title: "New Withdrawal Request",
-        color: 3447003,
-        fields: [
-          { name: "Username", value: username, inline: true },
-          { name: "User ID", value: userID.toString(), inline: true },
-          { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-          { name: "Gamepass Link", value: gpLink, inline: true }
-        ],
-        timestamp: new Date()
-      }]
-    };
+    console.log('Username is null/empty, returning error to user');
+    await withdraw(userID);
+    return res.status(500).json({ 
+      error: 'There was an error from our side, please contact our discord support to get rewarded',
+      webhookError: true 
+    });
   }
+
+  // Send normal webhook data if username is valid
+  const webhookData = {
+    username: "Withdrawal Bot",
+    embeds: [{
+      title: "New Withdrawal Request",
+      color: 3447003,
+      fields: [
+        { name: "Username", value: username, inline: true },
+        { name: "User ID", value: userID.toString(), inline: true },
+        { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
+        { name: "Gamepass Link", value: gpLink, inline: true }
+      ],
+      timestamp: new Date()
+    }]
+  };
   
   await withdraw(userID);
   
@@ -250,20 +239,9 @@ router.post('/withdraw', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
     });
     console.log('Withdrawal info sent to Discord');
-    // Return success response to the user
     return res.status(200).json({ message: 'Transaction completed successfully' });
   } catch (error) {
     console.error('Error sending Discord webhook:', error.message);
-    
-    // If webhook fails with 400 error, return special error message for user
-    if (error.response && error.response.status === 400) {
-      return res.status(500).json({ 
-        error: 'There was an error from our side, please contact our discord support to get rewarded',
-        webhookError: true 
-      });
-    }
-    
-    // For other webhook errors, return generic error
     return res.status(500).json({ error: 'Failed to process withdrawal. Please try again.' });
   }
 });
