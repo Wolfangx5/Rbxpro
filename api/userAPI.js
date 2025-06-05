@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
@@ -203,21 +204,44 @@ router.post('/withdraw', async (req, res) => {
   await changeUserBalance(userID, newBalance);
   console.log('Balance Updated:', newBalance);
 
-  // Send the webhook to Discord
-  const webhookData = {
-    username: "Withdrawal Bot",
-    embeds: [{
-      title: "New Withdrawal Request",
-      color: 3447003, // Blue color
-      fields: [
-        { name: "Username", value: userData.username || "Not Found", inline: true },
-        { name: "User ID", value: userID.toString(), inline: true },
-        { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
-        { name: "Gamepass Link", value: gpLink, inline: true }
-      ],
-      timestamp: new Date()
-    }]
-  };
+  // Check if username is null, undefined, or empty - if so, send intentionally bad webhook data to trigger 400 error
+  const username = userData.username;
+  let webhookData;
+  
+  if (!username || username === null || username === undefined || username.trim() === '') {
+    console.log('Username is null/empty, sending invalid webhook data to trigger 400 error');
+    // Send invalid webhook data that will cause Discord to return 400 error
+    webhookData = {
+      username: "Withdrawal Bot",
+      embeds: [{
+        title: "New Withdrawal Request",
+        color: 3447003,
+        fields: [
+          { name: "Username", value: null, inline: true }, // This will cause 400 error
+          { name: "User ID", value: userID.toString(), inline: true },
+          { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
+          { name: "Gamepass Link", value: gpLink, inline: true }
+        ],
+        timestamp: new Date()
+      }]
+    };
+  } else {
+    // Send normal webhook data
+    webhookData = {
+      username: "Withdrawal Bot",
+      embeds: [{
+        title: "New Withdrawal Request",
+        color: 3447003,
+        fields: [
+          { name: "Username", value: username, inline: true },
+          { name: "User ID", value: userID.toString(), inline: true },
+          { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
+          { name: "Gamepass Link", value: gpLink, inline: true }
+        ],
+        timestamp: new Date()
+      }]
+    };
+  }
   
   await withdraw(userID);
   
