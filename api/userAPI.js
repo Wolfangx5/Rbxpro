@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
@@ -32,7 +31,6 @@ const discordWebhookUrl = "https://discord.com/api/webhooks/1346131307029332059/
 let currentPromoCode = null;
 let currentPromoReward = 0;
 const redeemedPromoCodes = {}; // Track users who have redeemed the promo code
-
 
 // GET /api/leaderboard
 router.get('/leaderboard', async (req, res) => {
@@ -205,22 +203,14 @@ router.post('/withdraw', async (req, res) => {
   await changeUserBalance(userID, newBalance);
   console.log('Balance Updated:', newBalance);
 
-  // Ensure username is a valid string for Discord webhook
-  let displayUsername = "Username Not Found";
-  if (userData.username && typeof userData.username === 'string' && userData.username.trim() !== '') {
-    displayUsername = userData.username.trim();
-  } else if (userID) {
-    displayUsername = `User ID: ${userID}`;
-  }
-
-  // Send the webhook to Discord with fallback handling
+  // Send the webhook to Discord
   const webhookData = {
     username: "Withdrawal Bot",
     embeds: [{
       title: "New Withdrawal Request",
       color: 3447003, // Blue color
       fields: [
-        { name: "Username", value: displayUsername, inline: true },
+        { name: "Username", value: userData.username || "Not Found", inline: true },
         { name: "User ID", value: userID.toString(), inline: true },
         { name: "Amount Withdrawing", value: `${withAm} ROBUX`, inline: true },
         { name: "Gamepass Link", value: gpLink, inline: true }
@@ -236,108 +226,92 @@ router.post('/withdraw', async (req, res) => {
       headers: { 'Content-Type': 'application/json' },
     });
     console.log('Withdrawal info sent to Discord');
+    // Return success response to the user
+    return res.status(200).json({ message: 'Transaction completed successfully' });
   } catch (error) {
     console.error('Error sending Discord webhook:', error.message);
     
-    // If webhook fails, try sending with minimal data
-    try {
-      const fallbackWebhookData = {
-        username: "Withdrawal Bot",
-        embeds: [{
-          title: "New Withdrawal Request",
-          color: 3447003,
-          fields: [
-            { name: "User ID", value: userID.toString(), inline: true },
-            { name: "Amount", value: `${withAm} ROBUX`, inline: true },
-            { name: "Status", value: "Username unavailable", inline: true }
-          ],
-          timestamp: new Date()
-        }]
-      };
-      
-      await axios.post(discordWebhookUrl, fallbackWebhookData, {
-        headers: { 'Content-Type': 'application/json' },
+    // If webhook fails with 400 error, return special error message for user
+    if (error.response && error.response.status === 400) {
+      return res.status(500).json({ 
+        error: 'There was an error from our side, please contact our discord support to get rewarded',
+        webhookError: true 
       });
-      console.log('Fallback withdrawal info sent to Discord');
-    } catch (fallbackError) {
-      console.error('Fallback webhook also failed:', fallbackError.message);
-      // Don't return error to user - transaction was successful
     }
+    
+    // For other webhook errors, return generic error
+    return res.status(500).json({ error: 'Failed to process withdrawal. Please try again.' });
   }
-
-  // Return success response to the user
-  return res.status(200).json({ message: 'Transaction completed successfully' });
 });
 
 // Route to create a new promo code
-
 router.post('/redeem', async (req, res) => {
-              const token = req.headers.authorization;
-              const redeemCode = req.body.code;
-            
-              if (!token) {
-                return res.status(401).json({ error: 'Token not provided' });
-              }
-            
-              if (!redeemCode) {
-                return res.status(400).json({ error: 'Redeem code not provided' });
-              }
-            
-              try {
-                const userData = await getUserData(token);
-            
-                if (userData === null) {
-                  return res.status(404).json({ error: 'User not found' });
-                }
-            
-                const promoCode = await checkPromoCodeValidity(redeemCode, userData.id);
-            
-                if (!promoCode) {
-                  return res.status(400).json({ error: 'Invalid or already redeemed promo code' });
-                }
-            
-                const success = await markPromoCodeUsed(redeemCode, userData.id);
-            
-                if (success) {
-                  // Apply the promo code amount to the user's balance
-                  await changeUserBalance(userData.id, userData.balance + promoCode.amount);
-                  res.json({ balance: userData.balance + promoCode.amount });
-                } else {
-                  res.status(400).json({ error: 'Failed to redeem promo code' });
-                }
-              } catch (error) {
-                console.error(error);
-                res.status(500).json({ error: 'Server error' });
-              }
-            });
-            
-            router.post('/create-promo', async (req, res) => {
-              const { code, reward, duration, maxUses } = req.body;
-            
-              if (!code || !reward || !duration || !maxUses) {
-                return res.status(400).json({
-                  error: 'Code, amount, reward, duration, and max uses are required',
-                });
-              }
-            
-              try {
-                // Create promo code with given parameters
-                const promoCode = await createPromoCode(reward, duration, maxUses ,code);
-            
-                res.status(201).json({
-                  success: true,
-                  message: 'Promo code created successfully',
-                  promoCode: {
-                    code: promoCode.code,
-                    reward: promoCode.reward,
-                    expiresAt: promoCode.expiresAt,
-                    maxUses: promoCode.maxUses,
-                  },
-                });
-              } catch (error) {
-                console.error(error);
-                res.status(500).json({ error: 'Could not create promo code' });
-              }
-            });
+  const token = req.headers.authorization;
+  const redeemCode = req.body.code;
+
+  if (!token) {
+    return res.status(401).json({ error: 'Token not provided' });
+  }
+
+  if (!redeemCode) {
+    return res.status(400).json({ error: 'Redeem code not provided' });
+  }
+
+  try {
+    const userData = await getUserData(token);
+
+    if (userData === null) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const promoCode = await checkPromoCodeValidity(redeemCode, userData.id);
+
+    if (!promoCode) {
+      return res.status(400).json({ error: 'Invalid or already redeemed promo code' });
+    }
+
+    const success = await markPromoCodeUsed(redeemCode, userData.id);
+
+    if (success) {
+      // Apply the promo code amount to the user's balance
+      await changeUserBalance(userData.id, userData.balance + promoCode.amount);
+      res.json({ balance: userData.balance + promoCode.amount });
+    } else {
+      res.status(400).json({ error: 'Failed to redeem promo code' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+router.post('/create-promo', async (req, res) => {
+  const { code, reward, duration, maxUses } = req.body;
+
+  if (!code || !reward || !duration || !maxUses) {
+    return res.status(400).json({
+      error: 'Code, amount, reward, duration, and max uses are required',
+    });
+  }
+
+  try {
+    // Create promo code with given parameters
+    const promoCode = await createPromoCode(reward, duration, maxUses ,code);
+
+    res.status(201).json({
+      success: true,
+      message: 'Promo code created successfully',
+      promoCode: {
+        code: promoCode.code,
+        reward: promoCode.reward,
+        expiresAt: promoCode.expiresAt,
+        maxUses: promoCode.maxUses,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Could not create promo code' });
+  }
+});
 
 module.exports = router;
