@@ -17,6 +17,9 @@ const server = app.listen(port, "0.0.0.0", () => {
   console.log(`Server is up and running on port ${port}`);
 });
 socketService.initSocket(server);
+const { File } = require('fetch-blob/from.js'); // ✅ adds browser-like File to Node
+global.File = File;
+
 
 // -----------Utils----------------------- //
 const { connect, changeUserBalance, checkUserExists, addSurveyCompletion, canWithdraw, withdraw } = require('./utils/dbChange');
