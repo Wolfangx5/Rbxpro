@@ -44,14 +44,6 @@
         }
 
         body {
-
-            <div id="popup">
-  <div class="popup-content">
-    <p>⚠️ If your username appears as <strong>"null"</strong>, please join our Discord for support.</p>
-    <button id="close-popup">OK</button>
-  </div>
-</div>
-
             background: var(--background);
             background-image: 
                 radial-gradient(circle at top right, rgba(139, 92, 246, 0.15) 0%, transparent 30%),
@@ -311,42 +303,6 @@
         .sidebar-button:hover i {
             transform: translateX(3px);
         }
-
-
-        #popup {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.popup-content {
-  background: #111;
-  color: #fff;
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-.popup-content button {
-  background: #1e90ff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin-top: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
 
         /* Navbar Styles */
         .navbar {
@@ -1735,12 +1691,7 @@
                  toggleSidebar(); 
             }
         });
-
-        <script>
-  document.getElementById('close-popup').addEventListener('click', function () {
-    document.getElementById('popup').style.display = 'none';
-  });
-  
+        
         // Detect window resize for responsive adjustments
         window.addEventListener('resize', function() {
             const body = document.body;
